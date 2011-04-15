@@ -1,0 +1,52 @@
+# comment 1
+# othercomment
+a.b.c=1;
+a.b.c.d=2;
+a.b.c.e=3;
+a.b.c.d.e.f.g.h.i=1;
+
+bool.true.v_1=true;
+bool.true.v_2=oN;
+bool.true.v_3=YES;
+bool.false.v_1=faLse;
+bool.false.v_2=OFF;
+bool.false.v_3=no;
+
+name.other.other='value'; # comment 2
+name.other.qq   = '\\\\value # \nnon-commen\tt' ;# comment 3
+name.other.q    = "  value # non-comment  "; # comment 4
+name.other.multi= "
+\tmultistring value \"myvalue\" 
+\tmultistring value 'myvalue'
+";
+#------------------------------
+othername
+{
+  new { v1=1; v2=2; }
+  new1
+  {
+    var.v1="value";
+    var.v2=1024;
+  }
+  other="other value";
+}
+# is equvivalent
+othername_.new.v1=1;
+othername_.new.v2=2;
+othername_.new1.var1="value";
+othername_.new1.var2=1024;
+othername_.other="other value";
+# -------------------------------
+# types
+
+types
+{
+  int.underzero    = -1024;
+  int.overzero    = 1024;
+  float.underzero = 10.24;
+  float.overzero = -10,24;
+  string.s0 = 'mystring';
+  string.s1 = "my1024,24";
+  string.s2 = "1024";
+  string.s3 = '2048.1024';
+}

@@ -1,0 +1,66 @@
+digraph G
+{
+
+  set_current_dir;
+  read_character;
+  eq_0 [label="= ?"];
+  eq_1 [label=".{ ?"];
+  eq_2 [label="} ?"];
+  buffer_pp [label="Buffer += char"];
+  set_par_dir [label="parent_dir = curr_dir, cur_dir=buffer"];
+  res_par_dir [label="curr_dir = parent_di, paren_dir=prev par dir"];
+  read_value [label="curr_dir.file(buffer).content.set(read_value)"];
+  
+  set_current_dir->read_character;
+  read_character->eq_1;
+  eq_1->eq_0 [label="no"];
+  eq_0->eq_2 [label="no"];
+  eq_2->buffer_pp [label="no"];
+  buffer_pp->read_character;
+  eq_1->set_par_dir [label="yes"];
+  eq_2->res_par_dir [label="yes"];
+  set_par_dir->set_current_dir;
+  res_par_dir->set_current_dir;
+  eq_0->read_value [label="yes"];
+  read_value->read_character;
+
+//    node [shape=octagon, color=cornflowerblue];
+//    mon_server [label="Server"];
+//    node [shape=Mcircle, color=darkgreen];
+//    mon_node [label="Node"];
+//    node [shape=Msquare, color=coral3];
+//    mon_client [label="Client"];
+//    node [shape=component, color=goldenrod3];
+//    mon_plugin [label="Plugin"];
+//    node [shape=doublecircle, color=lightblue4];
+//    database [label="Database"];
+//
+//    // server to nodes
+//    edge [color=green, style=filled];
+//    mon_server -> mon_node;
+//    mon_node -> mon_plugin;
+//    edge [style=dashed];
+//    mon_plugin -> mon_node;
+//    mon_node -> mon_server;
+//    mon_server -> database;
+//
+//    // client to server
+//    edge [color=magenta, style=filled];
+//    mon_client -> mon_server;
+//    mon_server -> database;
+//    edge [style=dashed];
+//    database -> mon_server;
+//    mon_server -> mon_client;
+//
+//    // description
+//    node [color=black, shape=none, label=""];
+//    edge [color=black, style=filled];
+//    b->c [label="Request"];
+//    edge [style=dashed];
+//    c->d [label="Answer"];
+//    edge [color=green, style=filled];
+//    a->b [label="Server <-> Node"];
+//    edge [color=magenta, style=filled];
+//    d->e [label="Client <-> Server"];
+    
+}

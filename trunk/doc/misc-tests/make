@@ -1,0 +1,3 @@
+#!/bin/bash
+
+g++ -o limits limits.cpp

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+dot -Tpng -o graph.png graph.dot
+dot -Tpng -o topology.png topology.dot

@@ -1,0 +1,72 @@
+# comment
+# object
+object cpu
+{
+  label: "CPU"; # must exists
+  exemplars: 2; # default 1 exemplar
+  maxStatisticalUpdateFrequency: 10Hz;    # default
+  maxInformationUpdateFrequency: 0.001Hz; # default
+  flags: # must exists, flag enabled if exists, minimum 1 field, and 1 'provide...' field
+  {
+    provideStatistics,
+    provideInformation,
+    canBeAggregated
+  };
+  tags: # must exists, minimum 1 tag
+  {
+    system,
+    hardware,
+    baseResources
+  };
+  statisticalFields: # order same in statistical data!!!, minimum 1 field, must exists if exists provideStatistics flag
+  {
+    idle: 
+    {
+      label: "idle";
+      type: %; # integer, long, short, float; signed/unsigned, string, bool
+      description: "CPU idle";
+    };
+    app
+    {
+      label: "application"; # must exists
+      type: %; # must exists
+      description: "Application usage"; # default ""
+    };
+  };
+  informationFields: # order same in information data!!!, minimum 1 field, must exists if exists provideInformation flag
+  {
+    vendor:
+    {
+      label: "Vendor";
+      type: string;
+      description: "Processor vendor";
+    };
+    model:
+    {
+      label: "Model";
+      type: string;
+      description: "Model name";
+    };
+  };
+};
+
+# statistical 
+cpu!1#90:10|2#70:30
+object!exemplar1#fld1:fld2:fld3|exemplar2#fld1:fld2:fld3|exemplar3#fld1:fld2:fld3
+obj1!exemplar1#fld1:fld2:fld3|exemplar2#fld1:fld2:fld3
+
+# information
+cpu!1#'AuthenticAMD':'AMD Athlon(tm) II X2 240 Processor'|2#'AuthenticAMD':'AMD Athlon(tm) II X2 240 Processor'
+
+
+types:
+%: [0..100]
+bool: [0,1]
+short: [-..]
+ushort: [0..]
+integer:
+uinteger:
+long:
+ulong:
+float:
+string: "str" || 'str'

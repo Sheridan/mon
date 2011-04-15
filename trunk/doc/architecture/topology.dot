@@ -1,0 +1,90 @@
+digraph G
+{
+    overlap=false;
+    splines=true;
+    normalize=true;
+    node [shape=octagon, color=cornflowerblue];
+    mon_server_0 [label="Server 0"];
+    mon_server_1 [label="Server 1"];
+    mon_server_2 [label="Server 2"];
+    
+    node [shape=Mcircle, color=darkgreen];
+    mon_node_0 [label="Node 0"];
+    mon_node_1 [label="Node 1"];
+    mon_node_2 [label="Node 2"];
+    mon_node_3 [label="Node 3"];
+    mon_node_4 [label="Node 4"];
+    mon_node_5 [label="Node 5"];
+
+    node [shape=Msquare, color=coral3];
+    mon_client_0 [label="Client 0"];
+    mon_client_1 [label="Client 1"];
+    mon_client_2 [label="Client 2"];
+    
+    node [shape=component, color=goldenrod3, label="Plugin"];
+    mon_plugin_00;
+    mon_plugin_01;
+    mon_plugin_02;
+    mon_plugin_03;
+    mon_plugin_04;
+    mon_plugin_05;
+    mon_plugin_06;
+    mon_plugin_07;
+    mon_plugin_08;
+    mon_plugin_09;
+    mon_plugin_10;
+    mon_plugin_11;
+    mon_plugin_12;
+    mon_plugin_13;
+    mon_plugin_14;
+    mon_plugin_15;
+    mon_plugin_16;
+    mon_plugin_17;
+    mon_plugin_18;
+    mon_plugin_19;
+    
+    node [shape=doublecircle, color=lightblue4];
+    database_0 [label="Database 0"];
+    database_1 [label="Database 1"];
+
+    edge [color=brown, style=filled];
+    mon_server_1 -> mon_node_0;
+    mon_server_1 -> mon_node_1;
+    mon_server_1 -> mon_node_3;
+    mon_server_0 -> mon_node_3;
+    mon_server_0 -> mon_node_4;
+    mon_server_0 -> mon_node_5;
+    mon_server_2 -> mon_node_2;
+    
+    mon_server_0 -> database_0;
+    mon_server_1 -> database_0;
+    mon_server_2 -> database_1;
+
+    mon_client_0 -> mon_server_0;
+    mon_client_1 -> mon_server_1;
+    mon_client_1 -> mon_server_0;
+    mon_client_2 -> mon_server_2;
+    mon_client_2 -> mon_server_1;
+    mon_client_2 -> mon_server_0;
+
+    mon_node_0 -> mon_plugin_18;
+    mon_node_0 -> mon_plugin_00;
+    mon_node_0 -> mon_plugin_01;
+    mon_node_0 -> mon_plugin_02;
+    mon_node_1 -> mon_plugin_03;
+    mon_node_1 -> mon_plugin_04;
+    mon_node_1 -> mon_plugin_05;
+    mon_node_2 -> mon_plugin_06;
+    mon_node_2 -> mon_plugin_07;
+    mon_node_2 -> mon_plugin_08;
+    mon_node_3 -> mon_plugin_09;
+    mon_node_3 -> mon_plugin_10;
+    mon_node_3 -> mon_plugin_11;
+    mon_node_4 -> mon_plugin_12;
+    mon_node_4 -> mon_plugin_13;
+    mon_node_4 -> mon_plugin_14;
+    mon_node_5 -> mon_plugin_15;
+    mon_node_5 -> mon_plugin_16;
+    mon_node_5 -> mon_plugin_17;
+    mon_node_5 -> mon_plugin_19;
+}

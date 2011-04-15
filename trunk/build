@@ -1,0 +1,47 @@
+#!/bin/bash
+
+function run_cmd
+{
+  name=$1
+  cmd=$2
+  echo "---------------------------------------> $name ($cmd) <----------------------------------------"
+  $cmd
+  if (($?>0))
+  then
+    exit 1
+  fi
+}
+
+function build()
+{
+  name=$1
+  path=$2
+  relative_path="../../$path"
+  echo "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||> Building $name ($path) <|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+  mkdir -p $name
+  cd $name
+  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='../../_package' -DBUILD_SERVER=ON -DBUILD_DEBUG=ON $relative_path"
+  run_cmd "make" "make -j2"
+  run_cmd "install" "make install"
+  cd ..
+}
+
+function build_app()
+{
+  build "application" "application"
+}
+
+function build_sensor()
+{
+  name=$1
+  build "sensor-$name" "sensors/$name"
+}
+
+mkdir -p _build
+mkdir -p _package
+cd _build
+build_app
+build_sensor "cpu"
+build_sensor "memory"
+cd ..
+#rm -rf _build

@@ -1,0 +1,42 @@
+digraph G
+{
+    node [shape=octagon, color=cornflowerblue];
+    mon_server [label="Server"];
+    node [shape=Mcircle, color=darkgreen];
+    mon_node [label="Node"];
+    node [shape=Msquare, color=coral3];
+    mon_client [label="Client"];
+    node [shape=component, color=goldenrod3];
+    mon_plugin [label="Plugin"];
+    node [shape=doublecircle, color=lightblue4];
+    database [label="Database"];
+
+    // server to nodes
+    edge [color=green, style=filled];
+    mon_server -> mon_node;
+    mon_node -> mon_plugin;
+    edge [style=dashed];
+    mon_plugin -> mon_node;
+    mon_node -> mon_server;
+    mon_server -> database;
+
+    // client to server
+    edge [color=magenta, style=filled];
+    mon_client -> mon_server;
+    mon_server -> database;
+    edge [style=dashed];
+    database -> mon_server;
+    mon_server -> mon_client;
+
+    // description
+    node [color=black, shape=none, label=""];
+    edge [color=black, style=filled];
+    b->c [label="Request"];
+    edge [style=dashed];
+    c->d [label="Answer"];
+    edge [color=green, style=filled];
+    a->b [label="Server <-> Node"];
+    edge [color=magenta, style=filled];
+    d->e [label="Client <-> Server"];
+    
+}
