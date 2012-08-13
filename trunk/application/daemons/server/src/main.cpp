@@ -24,7 +24,6 @@ int main (int argc, char* argv[])
   MON_DEFAULT_APPLICATION_INIT;
 
   MON_ST_APPEND_MEMBER(mon::daemons::server::CMonNodesManager);
-  MON_LOG_DBG("--------------");
   MON_SERVER_ST_NODES_MANAGER->load();
 
   MON_SIGNAL_LOOP;

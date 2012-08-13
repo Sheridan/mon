@@ -23,6 +23,7 @@ class CLogger
 
 public:
     CLogger();
+    ~CLogger();
     void setLogFilename    (const std::string &filename);
     void setMaxLogPriority (const EPriority   &priority);
 
@@ -40,7 +41,7 @@ private:
     bool m_outSyslog;
     EPriority m_maxPriority;
     char m_priorityesNames[MPN_PRIO_NUM][4];
-    pthread_mutex_t m_mutex_log_write;
+    pthread_mutex_t m_mutex_log;
 
     void logToFile   (const std::string &message, const EPriority &priority);
     void logToConsole(const std::string &message, const EPriority &priority);

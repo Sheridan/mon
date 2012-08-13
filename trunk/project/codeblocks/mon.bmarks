@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_layout_file>
+<BrowseTracker_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="../../application/CMakeLists.txt" open="0" top="0" tabpos="5">
 		<Cursor position="1343" topLine="62" />
 	</File>
-	<File name="../../application/daemons/node/src/main.cpp" open="0" top="0" tabpos="1">
+	<File name="../../application/daemons/node/src/main.cpp" open="1" top="0" tabpos="1">
 		<Cursor position="616" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/daemons/node/src/network/cmonnodesocketserver.cpp" open="0" top="0" tabpos="14">
 		<Cursor position="489" topLine="0" />
 	</File>
-	<File name="../../application/daemons/node/src/network/cmonnodesocketserver.h" open="0" top="0" tabpos="13">
+	<File name="../../application/daemons/node/src/network/cmonnodesocketserver.h" open="1" top="0" tabpos="14">
 		<Cursor position="174" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/daemons/node/src/node_st.h" open="0" top="0" tabpos="5">
-		<Cursor position="78" topLine="0" />
+		<Cursor position="98" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="../../application/daemons/server/src/main.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="612" topLine="0" />
+	<File name="../../application/daemons/server/src/main.cpp" open="1" top="0" tabpos="16">
+		<Cursor position="152" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/daemons/server/src/network/cmonnodesocketclient.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="292" topLine="0" />
@@ -27,45 +35,71 @@
 	</File>
 	<File name="../../application/daemons/server/src/nodes/cmonnode.cpp" open="1" top="0" tabpos="7">
 		<Cursor position="723" topLine="0" />
+		<BrowseMarks positions="105,431" />
+		<Book_Marks positions="0" />
 	</File>
 	<File name="../../application/daemons/server/src/nodes/cmonnode.h" open="1" top="0" tabpos="6">
-		<Cursor position="217" topLine="0" />
+		<Cursor position="181" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="../../application/daemons/server/src/nodes/cmonnodesmanager.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="579" topLine="0" />
+	<File name="../../application/daemons/server/src/nodes/cmonnodesmanager.cpp" open="1" top="1" tabpos="15">
+		<Cursor position="209" topLine="3" />
+		<BrowseMarks positions="91,746" />
+		<Book_Marks positions="0,0" />
 	</File>
-	<File name="../../application/daemons/server/src/nodes/cmonnodesmanager.h" open="0" top="0" tabpos="7">
+	<File name="../../application/daemons/server/src/nodes/cmonnodesmanager.h" open="1" top="0" tabpos="13">
 		<Cursor position="163" topLine="0" />
+		<BrowseMarks positions="291" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/daemons/server/src/server_st.h" open="0" top="0" tabpos="7">
 		<Cursor position="82" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/defines/default-application.h" open="1" top="0" tabpos="1">
-		<Cursor position="470" topLine="0" />
+		<Cursor position="685" topLine="0" />
+		<BrowseMarks positions="480,726" />
+		<Book_Marks positions="0" />
 	</File>
 	<File name="../../application/defines/signals-helper.h" open="0" top="0" tabpos="11">
 		<Cursor position="434" topLine="0" />
 	</File>
 	<File name="../../application/defines/st.h" open="0" top="0" tabpos="2">
-		<Cursor position="2273" topLine="7" />
+		<Cursor position="1033" topLine="15" />
+		<BrowseMarks positions="1113,1946,2477,2595" />
+		<Book_Marks positions="0,0,0,0,0,0,0,0,0,0,0" />
 	</File>
 	<File name="../../application/defines/threads-helper.h" open="0" top="0" tabpos="0">
-		<Cursor position="1664" topLine="0" />
+		<Cursor position="1664" topLine="19" />
+		<BrowseMarks positions="33,994" />
+		<Book_Marks positions="0" />
 	</File>
 	<File name="../../application/libraryes/base/src/csingleton.cpp" open="0" top="0" tabpos="9">
-		<Cursor position="495" topLine="0" />
+		<Cursor position="495" topLine="26" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/base/src/csingleton.h" open="0" top="0" tabpos="8">
-		<Cursor position="448" topLine="0" />
+		<Cursor position="81" topLine="2" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/base/src/csingletonmember.h" open="0" top="0" tabpos="0">
-		<Cursor position="164" topLine="0" />
+		<Cursor position="188" topLine="0" />
+		<BrowseMarks positions="120" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/config/src/cconfig.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="585" topLine="0" />
+		<Cursor position="585" topLine="13" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/config/src/cconfig.h" open="0" top="0" tabpos="12">
-		<Cursor position="546" topLine="0" />
+		<Cursor position="688" topLine="7" />
+		<BrowseMarks positions="350" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/config/src/cfile.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="173" topLine="0" />
@@ -75,15 +109,21 @@
 	</File>
 	<File name="../../application/libraryes/config/src/cfolder.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="1703" topLine="41" />
+		<BrowseMarks positions="1401" />
 	</File>
 	<File name="../../application/libraryes/config/src/cfolder.h" open="0" top="0" tabpos="4">
 		<Cursor position="791" topLine="0" />
+		<BrowseMarks positions="422" />
 	</File>
-	<File name="../../application/libraryes/config/src/cgenerator.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="915" topLine="27" />
+	<File name="../../application/libraryes/config/src/cgenerator.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="915" topLine="0" />
+		<BrowseMarks positions="537,1587,1635,1701,2724,2807" />
+		<Book_Marks positions="1975,1975" />
 	</File>
-	<File name="../../application/libraryes/config/src/cgenerator.h" open="1" top="0" tabpos="4">
+	<File name="../../application/libraryes/config/src/cgenerator.h" open="0" top="0" tabpos="4">
 		<Cursor position="472" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/config/src/cnode.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="252" topLine="0" />
@@ -93,53 +133,77 @@
 	</File>
 	<File name="../../application/libraryes/config/src/config.h" open="0" top="0" tabpos="7">
 		<Cursor position="55" topLine="0" />
+		<BrowseMarks positions="56" />
 	</File>
-	<File name="../../application/libraryes/config/src/cparcer.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="7555" topLine="139" />
+	<File name="../../application/libraryes/config/src/cparcer.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="7555" topLine="324" />
+		<BrowseMarks positions="6538,7041" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="../../application/libraryes/config/src/cparcer.h" open="1" top="0" tabpos="2">
-		<Cursor position="255" topLine="0" />
+	<File name="../../application/libraryes/config/src/cparcer.h" open="0" top="0" tabpos="2">
+		<Cursor position="255" topLine="16" />
+		<BrowseMarks positions="279" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/config/src/cvariant.cpp" open="0" top="0" tabpos="13">
 		<Cursor position="2174" topLine="72" />
+		<BrowseMarks positions="2805" />
 	</File>
 	<File name="../../application/libraryes/config/src/cvariant.h" open="0" top="0" tabpos="12">
-		<Cursor position="283" topLine="0" />
+		<Cursor position="283" topLine="25" />
 	</File>
 	<File name="../../application/libraryes/config/src/pathinterface.h" open="0" top="0" tabpos="0">
 		<Cursor position="545" topLine="0" />
 	</File>
 	<File name="../../application/libraryes/logger/src/clogger.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="757" topLine="12" />
+		<Cursor position="2504" topLine="72" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="228" />
 	</File>
 	<File name="../../application/libraryes/logger/src/clogger.h" open="1" top="0" tabpos="8">
-		<Cursor position="538" topLine="0" />
+		<Cursor position="433" topLine="14" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/logger/src/clogmessage.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1088" topLine="0" />
+		<Cursor position="1088" topLine="5" />
+		<BrowseMarks positions="1106" />
+		<Book_Marks positions="0" />
 	</File>
 	<File name="../../application/libraryes/logger/src/clogmessage.h" open="0" top="0" tabpos="1">
-		<Cursor position="690" topLine="0" />
+		<Cursor position="197" topLine="9" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/logger/src/logger.h" open="0" top="0" tabpos="5">
-		<Cursor position="80" topLine="0" />
+		<Cursor position="97" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/network/src/cclientsocket.cpp" open="0" top="0" tabpos="10">
 		<Cursor position="1504" topLine="38" />
+		<BrowseMarks positions="621,1229,1303" />
 	</File>
-	<File name="../../application/libraryes/network/src/cclientsocket.h" open="0" top="0" tabpos="9">
+	<File name="../../application/libraryes/network/src/cclientsocket.h" open="0" top="0" tabpos="11">
 		<Cursor position="139" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/network/src/cserversocket.cpp" open="0" top="0" tabpos="15">
 		<Cursor position="1465" topLine="33" />
+		<BrowseMarks positions="1423" />
 	</File>
-	<File name="../../application/libraryes/network/src/cserversocket.h" open="0" top="0" tabpos="14">
+	<File name="../../application/libraryes/network/src/cserversocket.h" open="0" top="0" tabpos="12">
 		<Cursor position="178" topLine="0" />
+		<BrowseMarks positions="305" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="../../application/libraryes/network/src/csocket.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1408" topLine="15" />
 	</File>
-	<File name="../../application/libraryes/network/src/csocket.h" open="0" top="0" tabpos="11">
-		<Cursor position="912" topLine="0" />
+	<File name="../../application/libraryes/network/src/csocket.h" open="0" top="0" tabpos="10">
+		<Cursor position="182" topLine="19" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-</CodeBlocks_layout_file>
+</BrowseTracker_layout_file>

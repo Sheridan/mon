@@ -23,7 +23,7 @@ void CMonNodesManager::load()
 {
   MON_LOG_DBG("load");
   TMonNodeID currentNodeID = 0;
-  MON_OPTION_FOREACH_FOLDER(fit, MON_ST_CONFIG->folder("nodes"))
+  MON_OPTION_FOREACH_FOLDER(fit, MON_ST_CONFIG->folder(MON_MODULE_NAME)->folder("nodes"))
   {
     MON_LOG_DBG(*fit);
     m_nodes[currentNodeID] = new CMonNode(*fit, currentNodeID);

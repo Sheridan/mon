@@ -36,7 +36,7 @@ CLogMessage::~CLogMessage()
 CLogMessage &CLogMessage::operator<<(const int           &val) { MON_LOGMESSAGE_SPRINTF("%d", val)  ; return *this; }
 CLogMessage &CLogMessage::operator<<(const unsigned int  &val) { MON_LOGMESSAGE_SPRINTF("%u", val)  ; return *this; }
 CLogMessage &CLogMessage::operator<<(const double        &val) { MON_LOGMESSAGE_SPRINTF("%f", val)  ; return *this; }
-CLogMessage &CLogMessage::operator<<(const char          *val) { m_message += std::string(val)      ;  ; return *this; }
+CLogMessage &CLogMessage::operator<<(const char          *val) { m_message += std::string(val)      ; return *this; }
 CLogMessage &CLogMessage::operator<<(const char          &val) { MON_LOGMESSAGE_SPRINTF("%c", val)  ; return *this; }
 CLogMessage &CLogMessage::operator<<(const unsigned char &val) { MON_LOGMESSAGE_SPRINTF("%c", val)  ; return *this; }
 CLogMessage &CLogMessage::operator<<(const bool          &val) { m_message += val ? "true" : "false"; return *this; }

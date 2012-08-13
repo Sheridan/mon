@@ -13,8 +13,8 @@ namespace logger
 
 CLogger::CLogger()
 {
-  pthread_mutex_init(&m_mutex_log_write, NULL);
-  pthread_mutex_lock(&m_mutex_log_write);
+  pthread_mutex_init(&m_mutex_log, NULL);
+  pthread_mutex_lock(&m_mutex_log);
   m_filename    = "";
   m_outFile     = false;
   m_outConsole  = true;
@@ -30,8 +30,12 @@ CLogger::CLogger()
 #ifdef MON_DEBUG
   strcpy(m_priorityesNames[pDebug  ], "dbg\0");
 #endif
-  //m_mutex_log_write = PTHREAD_MUTEX_INITIALIZER:
-  pthread_mutex_unlock(&m_mutex_log_write);
+  pthread_mutex_unlock(&m_mutex_log);
+}
+
+CLogger::~CLogger()
+{
+    pthread_mutex_destroy(&m_mutex_log);
 }
 
 void CLogger::log(const CLogMessage &message)
@@ -43,11 +47,11 @@ void CLogger::log(const std::string &message, EPriority priority)
 {
   if ( priority <= m_maxPriority && (m_outFile || m_outConsole || m_outSyslog))
   {
-    pthread_mutex_lock(&m_mutex_log_write);
+    pthread_mutex_lock(&m_mutex_log);
     if ( m_outFile &&  !m_filename.empty() ) { logToFile   (message, priority); }
     if ( m_outConsole                      ) { logToConsole(message, priority); }
     if ( m_outSyslog                       ) { logToSyslog (message, priority); }
-    pthread_mutex_unlock(&m_mutex_log_write);
+    pthread_mutex_unlock(&m_mutex_log);
   }
 }
 
@@ -86,44 +90,19 @@ void CLogger::logToStream (const std::string &message, const EPriority &priority
   time(&now);
   curtime = localtime(&now);
   strftime(time_buf, sizeof(time_buf), "%Y.%m.%d %H:%M:%S", curtime);
-
   fprintf(stream, "%s %s %s\n", time_buf, m_priorityesNames[priority], message.c_str());
 }
 
-void CLogger::setLogFilename    (const std::string &filename)
-{
-  pthread_mutex_lock(&m_mutex_log_write);
-  m_filename    = filename;
-  pthread_mutex_unlock(&m_mutex_log_write);
-}
+#define MON_SET_LOG_OPTION(_to,_from) \
+  pthread_mutex_lock(&m_mutex_log); \
+  _to = _from; \
+  pthread_mutex_unlock(&m_mutex_log);
 
-void CLogger::setMaxLogPriority (const EPriority   &priority)
-{
-  pthread_mutex_lock(&m_mutex_log_write);
-  m_maxPriority = priority;
-  pthread_mutex_unlock(&m_mutex_log_write);
-}
-
-void CLogger::enableOutToFile   (bool enable)
-{
-  pthread_mutex_lock(&m_mutex_log_write);
-  m_outFile    = enable;
-  pthread_mutex_unlock(&m_mutex_log_write);
-}
-
-void CLogger::enableOutToConsole(bool enable)
-{
-  pthread_mutex_lock(&m_mutex_log_write);
-  m_outConsole = enable;
-  pthread_mutex_unlock(&m_mutex_log_write);
-}
-
-void CLogger::enableOutToSyslog (bool enable)
-{
-  pthread_mutex_lock(&m_mutex_log_write);
-  m_outSyslog  = enable;
-  pthread_mutex_unlock(&m_mutex_log_write);
-}
+void CLogger::setLogFilename    (const std::string &filename) { MON_SET_LOG_OPTION(m_filename   , filename); }
+void CLogger::setMaxLogPriority (const EPriority &priority  ) { MON_SET_LOG_OPTION(m_maxPriority, priority); }
+void CLogger::enableOutToFile   (bool enable                ) { MON_SET_LOG_OPTION(m_outFile    , enable  ); }
+void CLogger::enableOutToConsole(bool enable                ) { MON_SET_LOG_OPTION(m_outConsole , enable  ); }
+void CLogger::enableOutToSyslog (bool enable                ) { MON_SET_LOG_OPTION(m_outSyslog  , enable  ); }
 
 }
 }
