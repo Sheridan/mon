@@ -17,15 +17,15 @@ public:
   void load(const std::string &filename);
   void save(const std::string &filename);
 
-  bool        containsFolder(const std::string & name);
-  CFolder   * folder        (const std::string & name);
-  int         foldersCount  ();
-  TStringList folders       ();
+  bool         containsFolder(const std::string & name);
+  CFolder    * folder        (const std::string & name);
+  int          foldersCount  ();
+  TFoldersList folders();
 
-  bool        containsFile(const std::string & name);
-  CFile     * file        (const std::string & name);
-  int         filesCount  ();
-  TStringList files       ();
+  bool       containsFile(const std::string & name);
+  CFile    * file        (const std::string & name);
+  int        filesCount  ();
+  TFilesList files       ();
 
   // `fs` operations :)
   void cd(CFolder *val);

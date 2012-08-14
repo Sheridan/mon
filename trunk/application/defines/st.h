@@ -50,13 +50,13 @@
 // config --------------------------------------------------------------------------------------------------------
 #define MON_CFOLDER mon::lib::config::CFolder
 #define MON_CFILE mon::lib::config::CFile
-#define MON_OPTION_FOREACH_OPTION(_name,_list) \
-   mon::lib::config::TStringList list_##_name = _list; \
-   for(mon::lib::config::TStringList::const_iterator _name = list_##_name.begin(); \
-    _name != list_##_name.end(); \
+#define MON_OPTION_FOREACH_OPTION(_name,_list,_type) \
+   mon::lib::config::_type h_list_##_name = _list; \
+   for(mon::lib::config::_type::iterator _name = h_list_##_name.begin(); \
+    _name != h_list_##_name.end(); \
     ++_name)
-#define MON_OPTION_FOREACH_FOLDER(_name,_folder) MON_OPTION_FOREACH_OPTION(_name, _folder->folders())
-#define MON_OPTION_FOREACH_FILE(_name,_folder)   MON_OPTION_FOREACH_OPTION(_name, _folder->files())
+#define MON_OPTION_FOREACH_FOLDER(_name,_folder) MON_OPTION_FOREACH_OPTION(_name, _folder->folders(), TFoldersList)
+#define MON_OPTION_FOREACH_FILE(_name,_folder)   MON_OPTION_FOREACH_OPTION(_name, _folder->files()  , TFilesList)
 
 
 // singleton members id ---------------------------------------------------------------------------------------------

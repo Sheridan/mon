@@ -8,6 +8,6 @@
 #define MON_SIGNAL_HANDLER(_signal) void MON_SIGNAL_HANDLER_NAME(_signal)(int signal)
 #define MON_HANDLE_SIGNAL(_signal) (void) signal(_signal, MON_SIGNAL_HANDLER_NAME(_signal));
 #define MON_SIGNAL_LOOP for(;;) { pause(); }
-#define MON_ABORT { if(raise(SIGTERM)) { abort(); } }
+#define MON_ABORT { if(raise(SIGTERM) != 0) { abort(); } }
 
 #endif // SIGHELP_H

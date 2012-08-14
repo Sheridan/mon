@@ -20,8 +20,8 @@ namespace base
 
 class CSingleton
 {
-  MON_ST_ATOMIC(mon::lib::config::CConfig, config);
-  MON_ST_ATOMIC(mon::lib::logger::CLogger, logger);
+  MON_ST_ATOMIC(mon::lib::config::CConfig, config)
+  MON_ST_ATOMIC(mon::lib::logger::CLogger, logger)
 private:
   CSingleton();
   ~CSingleton();

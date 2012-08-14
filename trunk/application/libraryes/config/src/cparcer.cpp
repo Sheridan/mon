@@ -6,7 +6,7 @@
 // MON_CONF_PARCER
 //#define MON_CONF_PARCER_PRINT_CURRENT_CHAR_ENABLED
 //#define MON_CONF_PARCER_PRINT_LOOP_STATUS_ENABLED
-//#define MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
+#define MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
 
 #ifdef MON_CONF_PARCER_PRINT_LOOP_STATUS_ENABLED
 #define MON_CONF_PARCER_PRINT_LOOP_STATUS(_name,_status) MON_LOG_DBG("Loop " #_name " " #_status);
@@ -34,7 +34,7 @@
 #define MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(_name, _err_message) MON_CONF_PARCER_CHECK_BUFFER(_name,!,_err_message)
 #define MON_CONF_PARCER_LOOP_BREAK_LABEL_NAME(_name) label_end___##_name
 #define MON_CONF_PARCER_LOOP_BEGIN_LABEL_NAME(_name) label_begin___##_name
-#define MON_CONF_PARCER_BREAK_LOOP(_name) goto MON_CONF_PARCER_LOOP_BREAK_LABEL_NAME(_name);
+#define MON_CONF_PARCER_BREAK_LOOP(_name)   goto MON_CONF_PARCER_LOOP_BREAK_LABEL_NAME(_name);
 #define MON_CONF_PARCER_RESTART_LOOP(_name) goto MON_CONF_PARCER_LOOP_BEGIN_LABEL_NAME(_name);
 #define MON_CONF_PARCER_LOOP_BEGIN(_name) \
   { \
@@ -129,19 +129,30 @@ void CParcer::parce()
   MON_LOG_NFO("Loading config from " << m_filename);
   while(!m_error && !m_eof)
   {
-    mineCurrentFolder(m_root, false);
+    readFolder(m_root/*, false*/);
   }
   MON_LOG_DBG("Loading config from " << m_filename << " done. Lines: " << m_linesCount + 2 << ", symbols: " << m_charactersCount);
 
 }
 
-void CParcer::mineCurrentFolder(CFolder *folder, const bool &parentBrackedIsOpen)
+void CParcer::readFolder(CFolder *folder/*, const bool &parentBrackedIsOpen*/)
 {
 #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
   MON_LOG_DBG("Enter folder " << folder->name());
 #endif
 
   MON_CONF_PARCER_LOOP_BEGIN(variable_name);
+  MON_CONF_PARCER_CASES_ALPHA:
+  {
+    MON_CONF_PARCER_BUFFER_APPEND(variable_name);
+    break;
+  }
+  MON_CONF_PARCER_CASES_NUMERIC:
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name must begin only with alpha symbols");
+    MON_CONF_PARCER_BUFFER_APPEND(variable_name);
+    break;
+  }
   MON_CONF_PARCER_CASES_WHITE:
     {
       //MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY("Variable name can't include whitespace");
@@ -157,39 +168,26 @@ void CParcer::mineCurrentFolder(CFolder *folder, const bool &parentBrackedIsOpen
   case  '#': skipComment(); break;
   case  ';':
     {
-      if(!parentBrackedIsOpen) { MON_CONF_PARCER_BREAK_LOOP(variable_name); }
-      MON_CONF_PARCER_RESTART_LOOP(variable_name);
-      break;
-    }
-  case  '}':
-    {
-      if(parentBrackedIsOpen) { MON_CONF_PARCER_BREAK_LOOP(variable_name); }
-      MON_CONF_PARCER_ERROR("Misplaced `}`");
+      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name canoot be without value")
+      MON_CONF_PARCER_BREAK_LOOP(variable_name)
     }
   case  '{':
     {
       MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
-      mineCurrentFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), true);
+      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)));
       MON_CONF_PARCER_BUFFER_RESET(variable_name);
       break;
+    }
+  case  '}':
+    {
+      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name canoot be without value")
+      MON_CONF_PARCER_BREAK_LOOP(variable_name)
     }
   case  '.':
     {
       MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
-      mineCurrentFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), false);
-      if(!parentBrackedIsOpen) { MON_CONF_PARCER_BREAK_LOOP(variable_name); }
-      MON_CONF_PARCER_BUFFER_RESET(variable_name);
-      break;
-    }
-  MON_CONF_PARCER_CASES_ALPHA:
-    {
-      MON_CONF_PARCER_BUFFER_APPEND(variable_name);
-      break;
-    }
-  MON_CONF_PARCER_CASES_NUMERIC:
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name must begin only with alpha symbols");
-      MON_CONF_PARCER_BUFFER_APPEND(variable_name);
+      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)));
+      MON_CONF_PARCER_BREAK_LOOP(variable_name);
       break;
     }
   default: MON_CONF_PARCER_ERROR("Variable name must contain only alpha, numeric and '_' symbols" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_name));
@@ -271,8 +269,8 @@ void CParcer::readValue(CFile *file)
   MON_CONF_PARCER_LOOP_END(variable_value);
 }
 
-MON_CONF_PARCER_BOOL_TRUE (v_true );
-MON_CONF_PARCER_BOOL_FALSE(v_false);
+MON_CONF_PARCER_BOOL_TRUE (v_true )
+MON_CONF_PARCER_BOOL_FALSE(v_false)
 bool CParcer::convertBool(const char *buffer)
 {
   for(int i = 0; i < MON_CONF_PARCER_BOOL_COUNT; i++)
@@ -307,10 +305,8 @@ std::string CParcer::readString(const TCFChar &stringOpenChar)
 void CParcer::skipComment()
 {
   MON_CONF_PARCER_LOOP_BEGIN(read_comment);
-
-case '\n': MON_CONF_PARCER_BREAK_LOOP(read_comment);
-default: break;
-
+  case '\n': MON_CONF_PARCER_BREAK_LOOP(read_comment);
+  default: break;
   MON_CONF_PARCER_LOOP_END(read_comment);
 }
 

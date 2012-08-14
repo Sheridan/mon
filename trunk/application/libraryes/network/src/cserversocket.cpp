@@ -17,11 +17,12 @@ CSocketServer::CSocketServer() : CSocket()
 
 CSocketServer::~CSocketServer()
 {
-  MON_THREADED_FUNCTION_ABORT(listen);
+    close();
 }
 
 MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
 {
+  MON_LOG_NFO("Server listening... ");
   sockaddr_in stSockAddr;
   m_socketDescriptor = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
   if(m_socketDescriptor == -1)
@@ -34,8 +35,6 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
   stSockAddr.sin_family      = PF_INET;
   stSockAddr.sin_port        = htons(portLocal());
   stSockAddr.sin_addr.s_addr = INADDR_ANY;
-
-  m_isOpen = true;
 
   if(bind(m_socketDescriptor, (const sockaddr *)(&stSockAddr), sizeof(stSockAddr)) == -1)
   {
@@ -51,7 +50,9 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
     MON_ABORT;
   }
 
-  MON_LOG_NFO("Node listen on " << stSockAddr.sin_addr.s_addr << ":" << portLocal());
+  MON_LOG_NFO("Server listen on " << stSockAddr.sin_addr.s_addr << ":" << portLocal());
+
+  m_isOpen = true;
 
   for(;;)
   {
@@ -66,10 +67,11 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
     }
     else
     {
-      MON_LOG_DBG("Incoming connection.");
+      MON_LOG_NFO("Incoming connection...");
       CSocketClient *client = new CSocketClient(clientDescriptor);
-      if(checkConnection(client))
+      if(checkConnection(client) && incommingConnection(client))
       {
+        MON_LOG_NFO("Incoming connection accepted from " << client->addrRemote() << ":" << client->portRemote());
         m_clients[client->descriptor()] = client;
       }
       else
@@ -87,6 +89,11 @@ void CSocketServer::listen(const unsigned short &port)
   listen();
 }
 
+void CSocketServer::close()
+{
+    MON_THREADED_FUNCTION_ABORT(listen);
+    CSocket::close();
+}
 
 }
 }

@@ -32,7 +32,7 @@ void CConfig::load(const std::string &filename)
 void CConfig::save(const std::string &filename)
 {
   m_run_filename = filename;
-  CGenerator g(m_run_filename, m_pwd);
+  CGenerator g(m_run_filename, m_root);
   g.generate();
 }
 
@@ -41,12 +41,12 @@ void CConfig::cdRoot(            ) { m_pwd = m_root; }
 
 bool          CConfig::containsFolder(const std::string & name) { return m_pwd->containsFolder(name); }
 int           CConfig::foldersCount  (                        ) { return m_pwd->foldersCount  (    ); }
-TStringList   CConfig::folders       (                        ) { return m_pwd->folders       (    ); }
+TFoldersList  CConfig::folders       (                        ) { return m_pwd->folders       (    ); }
 CFolder     * CConfig::folder        (const std::string & name) { return m_pwd->folder        (name); }
 
 bool          CConfig::containsFile  (const std::string & name) { return m_pwd->containsFile  (name); }
 int           CConfig::filesCount    (                        ) { return m_pwd->filesCount    (    ); }
-TStringList   CConfig::files         (                        ) { return m_pwd->files         (    ); }
+TFilesList    CConfig::files         (                        ) { return m_pwd->files         (    ); }
 CFile       * CConfig::file          (const std::string & name) { return m_pwd->file          (name); }
 
 }

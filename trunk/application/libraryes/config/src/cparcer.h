@@ -13,7 +13,6 @@ namespace config
 {
 
 typedef std::string::value_type TCFChar;
-//typedef std::queue<CFolder *> TFoldersQueue;
 
 class CParcer
 {
@@ -41,7 +40,7 @@ private:
   void skipComment();
   std::string readString(const TCFChar &stringOpenChar);
 
-  void mineCurrentFolder(CFolder *folder, const bool &parentBrackedIsOpen);
+  void readFolder(CFolder *folder/*, const bool &parentBrackedIsOpen*/);
   void readValue(CFile *file);
   bool convertBool(const char *buffer);
 };

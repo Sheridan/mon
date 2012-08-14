@@ -17,11 +17,11 @@ function build()
   name=$1
   path=$2
   relative_path="../../$path"
-  echo "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||> Building $name ($path) <|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+  echo "||||||||||||||||||||||||||||||||||||||||> Building $name ($path) <||||||||||||||||||||||||||||||||||||||||"
   mkdir -p $name
   cd $name
   run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='../../_package' -DBUILD_SERVER=ON -DBUILD_DEBUG=ON $relative_path"
-  run_cmd "make" "make -j2"
+  run_cmd "make" "make -j3"
   run_cmd "install" "make install"
   cd ..
 }

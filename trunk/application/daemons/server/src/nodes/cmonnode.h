@@ -16,7 +16,7 @@ typedef unsigned int TMonNodeID;
 
 class CMonNode
 {
-  MON_THREADED_FUNCTION_DECLARE(connect);
+  MON_THREADED_FUNCTION_DECLARE(connect)
 public:
   CMonNode(const std::string &confLeaf, const TMonNodeID &nodeID);
   virtual ~CMonNode();

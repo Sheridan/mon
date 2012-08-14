@@ -1,4 +1,5 @@
 #include "cfolder.h"
+#include "cfile.h"
 namespace mon
 {
 namespace lib
@@ -18,7 +19,7 @@ CFolder::CFolder(const std::string &nodeName, CNode *parentNode) : CNode(nodeNam
 
 CFolder::~CFolder()
 {
-  TFolders::iterator iFolder = m_folders.begin();
+  TFoldersMap::iterator iFolder = m_folders.begin();
   while (iFolder != m_folders.end())
   {
     delete iFolder->second;
@@ -26,7 +27,7 @@ CFolder::~CFolder()
   }
   m_folders.clear();
 
-  TFiles::iterator iFile = m_files.begin();
+  TFilesMap::iterator iFile = m_files.begin();
   while (iFile != m_files.end())
   {
     delete iFile->second;
@@ -45,16 +46,16 @@ int CFolder::foldersCount()
   return m_folders.size();
 }
 
-TStringList CFolder::folders()
+TFoldersList CFolder::folders()
 {
-  TStringList slist;
-  TFolders::iterator iFolder = m_folders.begin();
-  while (iFolder != m_folders.end())
+  TFoldersList t_list;
+  TFoldersMap::iterator t_folder = m_folders.begin();
+  while (t_folder != m_folders.end())
   {
-    slist.push_back(iFolder->first);
-    iFolder++;
+    t_list.push_back(t_folder->second);
+    t_folder++;
   }
-  return slist;
+  return t_list;
 }
 
 CFolder *CFolder::folder(const std::string & name)
@@ -76,16 +77,16 @@ int CFolder::filesCount()
   return m_files.size();
 }
 
-TStringList CFolder::files()
+TFilesList CFolder::files()
 {
-  TStringList slist;
-  TFiles::iterator iFile = m_files.begin();
-  while (iFile != m_files.end())
+  TFilesList t_list;
+  TFilesMap::iterator t_file = m_files.begin();
+  while (t_file != m_files.end())
   {
-    slist.push_back(iFile->first);
-    iFile++;
+    t_list.push_back(t_file->second);
+    t_file++;
   }
-  return slist;
+  return t_list;
 }
 
 CFile *CFolder::file(const std::string & name)

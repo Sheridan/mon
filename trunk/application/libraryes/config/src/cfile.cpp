@@ -1,4 +1,5 @@
 #include "cfile.h"
+#include "cfolder.h"
 
 namespace mon
 {
@@ -13,6 +14,11 @@ CFile::CFile(const std::string &nodeName, CNode *parentNode) : CNode(nodeName, p
 
 CFile::~CFile()
 {
+}
+
+CFolder * CFile::parent()
+{
+  return static_cast<CFolder *>(CNode::parent());
 }
 
 }

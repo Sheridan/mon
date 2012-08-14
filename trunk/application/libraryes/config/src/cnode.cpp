@@ -19,7 +19,13 @@ const std::string &CNode::name()
 
 CNode *CNode::parent()
 {
-    return m_parent;
+  return m_parent;
+}
+
+int CNode::level()
+{
+  if(m_parent) { return m_parent->level() + 1; }
+  return -1;
 }
 
 }

@@ -13,11 +13,12 @@ namespace network
 
 class CSocketServer : public CSocket
 {
-  MON_THREADED_FUNCTION_DECLARE(listen);
+  MON_THREADED_FUNCTION_DECLARE(listen)
 public:
   CSocketServer();
   ~CSocketServer();
   void listen(const unsigned short &port);
+  void close();
 
 protected:
   TClientSockets m_clients;

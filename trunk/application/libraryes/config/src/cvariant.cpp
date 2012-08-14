@@ -92,7 +92,7 @@ const bool CVariant::toBool() const
     case ctFloat:  return  m_value.m_float > 0;
     case ctString: return  m_value.m_string != NULL;
     case ctUnknown: MON_LOG_WRN("Undefined bool option, return default"); return true;
-  }
+  } return true;
 }
 
 const int CVariant::toInt() const
@@ -104,7 +104,7 @@ const int CVariant::toInt() const
     case ctFloat:  return static_cast<int>(m_value.m_float);
     case ctString: return strtol(m_value.m_string, NULL, 10);
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
-  }
+  } return 0;
 }
 
 const double CVariant::toFloat() const
@@ -116,7 +116,7 @@ const double CVariant::toFloat() const
     case ctBool:   return static_cast<double>(m_value.m_bool);
     case ctString: return strtod(m_value.m_string, NULL);
     case ctUnknown: MON_LOG_WRN("Undefined float option, return default"); return 0;
-  }
+  } return 0;
 }
 
 const std::string CVariant::toString() const

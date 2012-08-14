@@ -22,7 +22,7 @@ private:
   CFolder *m_root;
   bool     m_error;
 
-  void writeFolder(CFolder *folder, const int &indent, const bool &parentIsSingle);
+  void writeFolder(CFolder *folder);
   void writeFile  (CFile *file);
   void writeIndent(const int &indent);
   std::string replaceSpetial(const std::string &source);

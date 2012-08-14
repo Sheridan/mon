@@ -29,21 +29,22 @@ void CGenerator::generate()
   if(m_error) { return; }
 
   MON_LOG_NFO("Writing config to " << m_filename);
-  writeFolder(m_root, 0, true);
+  writeFolder(m_root);
   fprintf(m_file, "\n");
   MON_LOG_DBG("Writing config to " << m_filename << " done");
 }
 
-void CGenerator::writeFolder(CFolder *folder, const int &indent, const bool &parentIsSingle)
+void CGenerator::writeFolder(CFolder *folder)
 {
-  int childIndent = indent+1;
+  printf("folder: %s\n", folder->name().c_str());
   int childsCount = folder->filesCount() + folder->foldersCount();
   if(childsCount == 0) { return; }
-  bool isSingle = childsCount <= 1;
+
+  bool hasOneChild = childsCount == 1;
   if(!folder->name().empty())
   {
-    if(!parentIsSingle) { writeIndent(indent); }
-    if(isSingle)
+    writeIndent(folder->level());
+    if(hasOneChild)
     {
       fprintf(m_file, "%s.", folder->name().c_str());
     }
@@ -51,33 +52,42 @@ void CGenerator::writeFolder(CFolder *folder, const int &indent, const bool &par
     {
       fprintf(m_file, "%s", folder->name().c_str());
       fprintf(m_file, "\n");
-      writeIndent(indent);
+      writeIndent(folder->level());
       fprintf(m_file, "{");
       fprintf(m_file, "\n");
     }
 
   }
 
-  TStringList folders = folder->folders();
-  for(TStringList::iterator it = folders.begin(); it != folders.end(); it++)
+  MON_OPTION_FOREACH_FOLDER(child_folder, folder)
   {
-    writeFolder(folder->folder(*it), childIndent, isSingle);
+    writeFolder(*child_folder);
   }
 
-  TStringList files = folder->files();
-  for(TStringList::iterator it = files.begin(); it != files.end(); it++)
+  MON_OPTION_FOREACH_FILE(child_file, folder)
   {
-    if(!isSingle) { writeIndent(childIndent); }
-    writeFile(folder->file(*it));
-    fprintf(m_file, "\n");
+    writeFile(*child_file);
   }
 
-  if(!folder->name().empty() && !isSingle)
+  if(!folder->name().empty() && !hasOneChild)
   {
-    writeIndent(indent);
+    writeIndent(folder->level());
     fprintf(m_file, "}");
     fprintf(m_file, "\n");
   }
+}
+
+void CGenerator::writeFile(CFile *file)
+{
+  printf("file: %s\n", file->name().c_str());
+  writeIndent(file->level());
+  fprintf(m_file, "%s=", file->name().c_str());
+  switch(file->contentType())
+  {
+    case ctString: fprintf(m_file, "\"%s\";", replaceSpetial(file->toString()).c_str()); break;
+    default: fprintf(m_file, "%s;", file->toString().c_str()); break;
+  }
+  fprintf(m_file, "\n");
 }
 
 std::string CGenerator::replaceSpetial(const std::string &source)
@@ -99,16 +109,6 @@ std::string CGenerator::replaceSpetial(const std::string &source)
     }
   }
   return result;
-}
-
-void CGenerator::writeFile(CFile *file)
-{
-  fprintf(m_file, "%s=", file->name().c_str());
-  switch(file->contentType())
-  {
-    case ctString: fprintf(m_file, "\"%s\";", replaceSpetial(file->toString()).c_str()); break;
-    default: fprintf(m_file, "%s;", file->toString().c_str()); break;
-  }
 }
 
 #define MON_INDENT_CHARACTER " "
