@@ -84,7 +84,10 @@ void CGenerator::writeFolder(CFolder *folder)
 void CGenerator::writeFile(CFile *file)
 {
   MON_LOG_DBG("Enter file: " << file->name())
-  writeIndent(file->level());
+  if((file->parent()->filesCount()+file->parent()->foldersCount()) > 1)
+  {
+    writeIndent(file->level());
+  }
   fprintf(m_file, "%s=", file->name().c_str());
   switch(file->contentType())
   {

@@ -177,6 +177,7 @@ void CParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
     {
       MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty")
       readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
+      if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
       MON_CONF_PARCER_BUFFER_RESET(variable_name)
       break;
     }
@@ -189,7 +190,9 @@ void CParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
     {
       MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
       readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
-      MON_CONF_PARCER_BREAK_LOOP(variable_name)
+      if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
+      MON_CONF_PARCER_BUFFER_RESET(variable_name)
+      break;
     }
   default: MON_CONF_PARCER_ERROR("Variable name must contain only alpha, numeric and '_' symbols" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_name))
   MON_CONF_PARCER_LOOP_END(variable_name)
