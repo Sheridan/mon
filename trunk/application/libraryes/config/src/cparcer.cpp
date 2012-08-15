@@ -135,66 +135,67 @@ void CParcer::parce()
 
 }
 
-void CParcer::readFolder(CFolder *folder/*, const bool &parentBrackedIsOpen*/)
+void CParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
 {
 #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
   MON_LOG_DBG("Enter folder " << folder->name());
 #endif
 
-  MON_CONF_PARCER_LOOP_BEGIN(variable_name);
+  MON_CONF_PARCER_LOOP_BEGIN(variable_name)
   MON_CONF_PARCER_CASES_ALPHA:
-  {
-    MON_CONF_PARCER_BUFFER_APPEND(variable_name);
-    break;
-  }
+    {
+      MON_CONF_PARCER_BUFFER_APPEND(variable_name)
+      break;
+    }
   MON_CONF_PARCER_CASES_NUMERIC:
-  {
-    MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name must begin only with alpha symbols");
-    MON_CONF_PARCER_BUFFER_APPEND(variable_name);
-    break;
-  }
+    {
+      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name must begin only with alpha symbols")
+      MON_CONF_PARCER_BUFFER_APPEND(variable_name)
+      break;
+    }
   MON_CONF_PARCER_CASES_WHITE:
     {
-      //MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY("Variable name can't include whitespace");
+      //MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY("Variable name can't include whitespace")
       break;
     }
   case  '=':
     {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name can't be empty");
+      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name can't be empty")
       readValue(folder->file(MON_CONF_PARCER_BUFFER_NAME(variable_name)));
-      MON_CONF_PARCER_BUFFER_RESET(variable_name);
+      MON_CONF_PARCER_BUFFER_RESET(variable_name)
       break;
     }
   case  '#': skipComment(); break;
   case  ';':
     {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name canoot be without value")
-      MON_CONF_PARCER_BREAK_LOOP(variable_name)
+      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name cannot be without value")
+      if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
+      MON_CONF_PARCER_BUFFER_RESET(variable_name)
+      break;
     }
   case  '{':
     {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
-      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)));
-      MON_CONF_PARCER_BUFFER_RESET(variable_name);
+      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty")
+      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
+      MON_CONF_PARCER_BUFFER_RESET(variable_name)
       break;
     }
   case  '}':
     {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name canoot be without value")
+      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name cannot be without value")
       MON_CONF_PARCER_BREAK_LOOP(variable_name)
     }
   case  '.':
     {
       MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
-      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)));
-      MON_CONF_PARCER_BREAK_LOOP(variable_name);
-      break;
+      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
+      MON_CONF_PARCER_BREAK_LOOP(variable_name)
     }
-  default: MON_CONF_PARCER_ERROR("Variable name must contain only alpha, numeric and '_' symbols" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_name));
-  MON_CONF_PARCER_LOOP_END(variable_name);
+  default: MON_CONF_PARCER_ERROR("Variable name must contain only alpha, numeric and '_' symbols" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_name))
+  MON_CONF_PARCER_LOOP_END(variable_name)
 
 #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
-  MON_LOG_DBG("Leave folder " << folder->name());
+  MON_LOG_DBG("Leave folder " << folder->name())
 #endif
 }
 
@@ -204,7 +205,7 @@ void CParcer::readValue(CFile *file)
   bool underZero = false;
   MON_CONF_PARCER_LOOP_BEGIN(variable_value);
   MON_CONF_PARCER_CASES_WHITE:
-  case '`': break;
+  case '`':
   case '\'':
   case  '"':
     {
@@ -293,6 +294,7 @@ std::string CParcer::readString(const TCFChar &stringOpenChar)
   case '\\': { if(slash) { result += '\\'; } slash = !slash; break; }
   case '\'': { if(slash) { result += '\'';   slash =  false; break; } MON_STRING_LOOP_CHECK; }
   case  '"': { if(slash) { result +=  '"';   slash =  false; break; } MON_STRING_LOOP_CHECK; }
+  case  '`': { if(slash) { result +=  '`';   slash =  false; break; } MON_STRING_LOOP_CHECK; }
   case  'n': { if(slash) { result += '\n';   slash =  false; break; } }
   case  'r': { if(slash) { result += '\r';   slash =  false; break; } }
   case  'b': { if(slash) { result += '\b';   slash =  false; break; } }

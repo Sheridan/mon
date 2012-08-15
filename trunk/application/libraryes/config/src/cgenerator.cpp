@@ -36,14 +36,17 @@ void CGenerator::generate()
 
 void CGenerator::writeFolder(CFolder *folder)
 {
-  printf("folder: %s\n", folder->name().c_str());
+  MON_LOG_DBG("Enter folder: " << folder->name())
   int childsCount = folder->filesCount() + folder->foldersCount();
   if(childsCount == 0) { return; }
 
   bool hasOneChild = childsCount == 1;
   if(!folder->name().empty())
   {
-    writeIndent(folder->level());
+    if(folder->parent() && (folder->parent()->filesCount()+folder->parent()->foldersCount()) > 1)
+    {
+      writeIndent(folder->level());
+    }
     if(hasOneChild)
     {
       fprintf(m_file, "%s.", folder->name().c_str());
@@ -75,11 +78,12 @@ void CGenerator::writeFolder(CFolder *folder)
     fprintf(m_file, "}");
     fprintf(m_file, "\n");
   }
+  MON_LOG_DBG("Leave folder: " << folder->name())
 }
 
 void CGenerator::writeFile(CFile *file)
 {
-  printf("file: %s\n", file->name().c_str());
+  MON_LOG_DBG("Enter file: " << file->name())
   writeIndent(file->level());
   fprintf(m_file, "%s=", file->name().c_str());
   switch(file->contentType())
@@ -88,6 +92,7 @@ void CGenerator::writeFile(CFile *file)
     default: fprintf(m_file, "%s;", file->toString().c_str()); break;
   }
   fprintf(m_file, "\n");
+  MON_LOG_DBG("Leave file: " << file->name())
 }
 
 std::string CGenerator::replaceSpetial(const std::string &source)

@@ -40,7 +40,7 @@ private:
   void skipComment();
   std::string readString(const TCFChar &stringOpenChar);
 
-  void readFolder(CFolder *folder/*, const bool &parentBrackedIsOpen*/);
+  void readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter = 0);
   void readValue(CFile *file);
   bool convertBool(const char *buffer);
 };
