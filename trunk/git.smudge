@@ -1,4 +1,4 @@
 #!/bin/sh
 f=$1
 log=`git log --no-color --max-count=1 --pretty='[%h:%t,%p] %ad %an "%s"' ${f} | tr -d '\n'`
-sed -i "s/%Id%/%Id $log %/" $f
+sed "s/%Id%/%Id $log %/"
