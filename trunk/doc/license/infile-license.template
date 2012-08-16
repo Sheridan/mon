@@ -1,0 +1,8 @@
+%YEAR%: Year
+%MONTH%: Month
+%DAY%: Day of the month
+%DATE%: Date
+%USER%: User name
+%FILENAME%: File name
+%CLASS%: Class name (if applicable)
+%$VARIABLE%: Contents of environment variable VARIABLE.

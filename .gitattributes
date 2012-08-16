@@ -1,0 +1,5 @@
+*.txt filter=idter
+*.cpp filter=idter
+*.h filter=idter
+*.dot filter=idter
+/trunk/build filter=idter

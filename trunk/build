@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# %Id%
+
 function run_cmd
 {
   name=$1
