@@ -22,8 +22,3 @@ int main(void)
   show_limit(double);
   return 0 ;
 }
-
-char *test = 
-#include "test.data"
-
-std::cout << test << std::endl;
