@@ -24,7 +24,6 @@ CSocketServer::~CSocketServer()
 MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
 {
   MON_LOG_NFO("Server listening... ");
-  sockaddr_in stSockAddr;
   m_socketDescriptor = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
   if(m_socketDescriptor == -1)
   {
@@ -32,6 +31,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
     MON_ABORT;
   }
 
+  sockaddr_in stSockAddr;
   memset(&stSockAddr, 0, sizeof(stSockAddr));
   stSockAddr.sin_family      = PF_INET;
   stSockAddr.sin_port        = htons(portLocal());
@@ -53,7 +53,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
 
   MON_LOG_NFO("Server listen on " << stSockAddr.sin_addr.s_addr << ":" << portLocal());
 
-  m_isOpen = true;
+  m_isListen = true;
 
   for(;;)
   {

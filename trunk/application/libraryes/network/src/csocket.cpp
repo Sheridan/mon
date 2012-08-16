@@ -13,12 +13,12 @@ namespace network
 
 CSocket::CSocket()
 {
-  m_isOpen      = false;
+  m_isListen      = false;
   m_isConnected = false;
   m_portLocal   = 0;
   m_portRemote  = 0;
   m_socketDescriptor = 0;
-  m_timeout    = 30;
+  m_timeout    = MON_DEFAULT_CONNECT_TIMEOUT;
   m_addrLocal  = "";
   m_addrRemote = "";
 }
@@ -62,7 +62,7 @@ std::string CSocket::readAll()
 
 void CSocket::write(const std::string &data)
 {
-  if(m_isConnected or m_isOpen)
+  if(m_isConnected || m_isListen)
   {
     int t_send_bytes = send(m_socketDescriptor, data.c_str(), data.length(), MSG_CONFIRM);
     MON_LOG_DBG("Socket bytes send: " << t_send_bytes)
@@ -75,26 +75,23 @@ void CSocket::write(const std::string &data)
 
 void CSocket::close()
 {
-  if(m_isOpen)
+  if(m_isListen || m_isConnected)
   {
-    if(m_isConnected)
+    if(::shutdown(m_socketDescriptor, SHUT_RDWR) == -1)
     {
-      if(::shutdown(m_socketDescriptor, SHUT_RDWR) == -1)
-      {
-        MON_PRINT_ERRNO("Socket shutdown error")
-      }
-      m_isConnected = false;
+      MON_PRINT_ERRNO("Socket shutdown error")
     }
     if(::close(m_socketDescriptor) == -1)
     {
       MON_PRINT_ERRNO("Socket close error")
     }
-    m_isOpen = false;
+    m_isListen    = false;
+    m_isConnected = false;
   }
 }
 
 #define MON_SOCKET_OPTION_SET(_to,_from) \
-    if(!m_isOpen) { _to = _from; } \
+    if(!m_isListen || m_isConnected) { _to = _from; } \
     else { MON_LOG_WRN("Set option (" #_to ") on online socket (from `" << _to << "` to `" << _from <<"`)") }
 
 void                   CSocket::setPortLocal  (const unsigned short &port) { MON_SOCKET_OPTION_SET(m_portLocal,  port); }
@@ -109,7 +106,7 @@ const std::string    & CSocket::addrRemote () const { return m_addrRemote      ;
 const int            & CSocket::descriptor () const { return m_socketDescriptor; }
 const int            & CSocket::timeout    () const { return m_timeout         ; }
 const bool           & CSocket::isConnected() const { return m_isConnected     ; }
-const bool           & CSocket::isOpen     () const { return m_isOpen          ; }
+const bool           & CSocket::isListen   () const { return m_isListen        ; }
 }
 }
 }

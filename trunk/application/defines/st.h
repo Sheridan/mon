@@ -1,6 +1,7 @@
 /* %Id% */
 #ifndef MON_ST_H
 #define MON_ST_H
+#include "global.h"
 #include "csingleton.h"
 #include <errno.h>
 #include <string.h>

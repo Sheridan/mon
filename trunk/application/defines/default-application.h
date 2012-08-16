@@ -1,16 +1,7 @@
 /* %Id% */
 #ifndef defaulMonApplication
 #define defaulMonApplication
-
-#ifdef MON_DEBUG
-#define MON_CONF_FILE "/tmp/mon/conf." MON_MODULE_NAME ".conf"
-#define MON_RUN_FILE  "/tmp/mon/run."  MON_MODULE_NAME ".conf"
-#define MON_LOG_FILE  "/tmp/mon/log."  MON_MODULE_NAME ".log"
-#else
-#define MON_CONF_FILE "/etc/mon/"     MON_MODULE_NAME ".conf"
-#define MON_RUN_FILE  "/var/run/mon/" MON_MODULE_NAME ".conf"
-#define MON_LOG_FILE  "/var/log/mon/" MON_MODULE_NAME ".log"
-#endif
+#include "global.h"
 
 #ifdef MON_DEBUG
   #define MON_MAX_LOG_PRI mon::lib::logger::pDebug

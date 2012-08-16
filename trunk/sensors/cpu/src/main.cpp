@@ -1,5 +1,16 @@
 /* %Id% */
-int main (int argc, char* argv[])
+#include "sensor-defines.h"
+
+MON_SENSOR_BEGIN
+
+MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
 {
-	return 0;
+  return "";
 }
+
+MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION
+{
+  return "";
+}
+
+MON_SENSOR_END

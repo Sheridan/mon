@@ -1,6 +1,6 @@
 /* %Id% */
-#ifndef CMONNODE_H
-#define CMONNODE_H
+#ifndef CREMOTEMONNODE_H
+#define CREMOTEMONNODE_H
 #include "cclientsocket.h"
 #include "threads-helper.h"
 #include <map>
@@ -15,12 +15,12 @@ namespace server
 
 typedef unsigned int TMonNodeID;
 
-class CMonNode
+class CRemoteMonNode
 {
   MON_THREADED_FUNCTION_DECLARE(connect)
 public:
-  CMonNode(const std::string &confLeaf, const TMonNodeID &nodeID);
-  virtual ~CMonNode();
+  CRemoteMonNode(const std::string &confLeaf, const TMonNodeID &nodeID);
+  virtual ~CRemoteMonNode();
   const TMonNodeID &id() const;
 private:
   TMonNodeID m_id;
@@ -28,10 +28,10 @@ private:
   mon::lib::network::CSocketClient *m_socket;
 };
 
-typedef std::map<TMonNodeID, CMonNode *> TMonNodes;
+typedef std::map<TMonNodeID, CRemoteMonNode *> TRemoteMonNodes;
 
 }
 }
 }
 
-#endif // CMONNODE_H
+#endif // CREMOTEMONNODE_H

@@ -36,19 +36,19 @@ public:
   const int            & descriptor() const;
   const int            & timeout   () const;
   const bool &isConnected() const;
-  const bool &isOpen     () const;
+  const bool &isListen   () const;
 
 protected:
-  int m_socketDescriptor;
-  int m_timeout;
-  bool m_isOpen;
+  int  m_socketDescriptor;
+  int  m_timeout;
+  bool m_isListen;
   bool m_isConnected;
 
 private:
   unsigned short m_portLocal;
   unsigned short m_portRemote;
-  std::string m_addrLocal;
-  std::string m_addrRemote;
+  std::string    m_addrLocal;
+  std::string    m_addrRemote;
 };
 
 }

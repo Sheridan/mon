@@ -23,3 +23,7 @@ int main(void)
   return 0 ;
 }
 
+char *test = 
+#include "test.data"
+
+std::cout << test << std::endl;

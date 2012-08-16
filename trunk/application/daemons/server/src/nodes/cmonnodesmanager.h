@@ -2,7 +2,7 @@
 #ifndef CMONNODESMANAGER_H
 #define CMONNODESMANAGER_H
 #include "csingletonmember.h"
-#include "cmonnode.h"
+#include "cremotemonnode.h"
 
 namespace mon
 {
@@ -17,8 +17,9 @@ public:
   CMonNodesManager();
   virtual ~CMonNodesManager();
   void load();
+  void unload();
 private:
-  TMonNodes m_nodes;
+  TRemoteMonNodes m_nodes;
 };
 
 }

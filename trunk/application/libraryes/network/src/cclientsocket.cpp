@@ -18,8 +18,7 @@ CSocketClient::CSocketClient() : CSocket()
 CSocketClient::CSocketClient(const int &descriptor)
 {
   m_socketDescriptor = descriptor;
-  m_isOpen = true;
-  m_isConnected = true;
+  m_isConnected      = true;
 }
 void CSocketClient::connect(const std::string &addr, const unsigned short &port)
 {
@@ -48,9 +47,9 @@ void CSocketClient::connect()
 
 
   memset(&hints, 0, sizeof(struct addrinfo));
-  hints.ai_family = AF_UNSPEC;    /* Allow IPv4 or IPv6 */
+  hints.ai_family   = AF_UNSPEC;  /* Allow IPv4 or IPv6 */
   hints.ai_socktype = SOCK_DGRAM; /* Datagram socket */
-  hints.ai_flags = 0;
+  hints.ai_flags    = 0;
   hints.ai_protocol = 0;          /* Any protocol */
 
   std::string strPort = "";
@@ -77,9 +76,8 @@ void CSocketClient::connect()
     MON_ABORT;
   }
 
-  freeaddrinfo(result);           /* No longer needed */
+  freeaddrinfo(result);  /* No longer needed */
   MON_LOG_NFO("Connected to " << addrRemote() << ":" << portRemote());
-  m_isOpen = true;
   m_isConnected = true;
 }
 
