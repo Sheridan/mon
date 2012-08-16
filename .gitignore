@@ -1,4 +1,4 @@
 trunk/_*/
 _*/
 trunk/doc/architecture/*.png
-*.txt.user.*
+*.txt.user*

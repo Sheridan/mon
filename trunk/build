@@ -2,11 +2,15 @@
 
 # %Id%
 
+build_path="/tmp/mon/build"
+install_path="/tmp/mon/package"
+current_path=$PWD
+build_threads=$(($(cat /proc/cpuinfo| grep family | wc -l)+1))
 function run_cmd
 {
   name=$1
   cmd=$2
-  echo "---------------------------------------> $name ($cmd) <----------------------------------------"
+  echo "--> $name ($cmd)"
   $cmd
   if (($?>0))
   then
@@ -16,34 +20,21 @@ function run_cmd
 
 function build()
 {
-  name=$1
-  path=$2
-  relative_path="../../$path"
-  echo "||||||||||||||||||||||||||||||||||||||||> Building $name ($path) <||||||||||||||||||||||||||||||||||||||||"
-  mkdir -p $name
-  cd $name
-  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='../../_package' -DBUILD_SERVER=ON -DBUILD_DEBUG=ON $relative_path"
-  run_cmd "make" "make -j3"
+  path=$1
+  echo "-------------------> Building $path <-------------------"
+  object_build_path="$build_path/$path"
+  object_path="$current_path/$path"
+  mkdir -p $object_build_path
+  cd $object_build_path
+  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='$install_path' -DBUILD_SERVER=ON -DBUILD_DEBUG=ON $object_path"
+  run_cmd "make" "make -j$build_threads"
   run_cmd "install" "make install"
-  cd ..
+  cd $build_path
 }
 
-function build_app()
-{
-  build "application" "application"
-}
-
-function build_sensor()
-{
-  name=$1
-  build "sensor-$name" "sensors/$name"
-}
-
-mkdir -p _build
-mkdir -p _package
-cd _build
-build_app
-build_sensor "cpu"
-build_sensor "memory"
-cd ..
-#rm -rf _build
+mkdir -p $build_path
+mkdir -p $install_path
+build "application"
+build "sensors/cpu"
+build "sensors/memory"
+cd $current_path
