@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef SERVER_ST_H_INCLUDED
 #define SERVER_ST_H_INCLUDED
 

@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cfolder.h"
 #include "cfile.h"
 namespace mon

@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cclientsocket.h"
 #include "cserversocket.h"
 

@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef MON_ST_H
 #define MON_ST_H
 #include "csingleton.h"

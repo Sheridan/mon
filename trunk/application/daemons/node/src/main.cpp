@@ -1,3 +1,4 @@
+/* %Id% */
 #include "node_st.h"
 #include "default-application.h"
 #include "signals-helper.h"

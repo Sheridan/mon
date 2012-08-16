@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cgenerator.h"
 #include "st.h"
 #include <stdlib.h>

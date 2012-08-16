@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef defaulMonApplication
 #define defaulMonApplication
 

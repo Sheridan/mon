@@ -1,3 +1,4 @@
+# %Id%
 PROJECT(mon-sensor-memory)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 SET( EXECUTABLE_NAME memory )

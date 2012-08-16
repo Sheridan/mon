@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef NODE_ST_H_INCLUDED
 #define NODE_ST_H_INCLUDED
 

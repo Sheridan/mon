@@ -1,3 +1,4 @@
+/* %Id% */
 #include "clogmessage.h"
 #include <stdio.h>
 #include <stdlib.h>

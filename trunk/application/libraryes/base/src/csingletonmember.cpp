@@ -1,3 +1,4 @@
+/* %Id% */
 #include "csingletonmember.h"
 namespace mon
 {

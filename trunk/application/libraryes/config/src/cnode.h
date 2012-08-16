@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CNODE_H
 #define CNODE_H
 #include <map>

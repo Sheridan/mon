@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CLOGGER_H
 #define CLOGGER_H
 

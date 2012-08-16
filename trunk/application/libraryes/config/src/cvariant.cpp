@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cvariant.h"
 #include "st.h"
 #include <stdio.h>

@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cconfig.h"
 #include "cparcer.h"
 #include "cgenerator.h"

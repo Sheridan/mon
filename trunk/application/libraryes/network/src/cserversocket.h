@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CSERVERSOCKET_H
 #define CSERVERSOCKET_H
 #include "csocket.h"

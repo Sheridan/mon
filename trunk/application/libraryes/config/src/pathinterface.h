@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef PATHINTERFACE_H_INCLUDED
 #define PATHINTERFACE_H_INCLUDED
 #include "cnode.h"

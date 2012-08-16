@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CFOLDER_H
 #define CFOLDER_H
 #include "cnode.h"

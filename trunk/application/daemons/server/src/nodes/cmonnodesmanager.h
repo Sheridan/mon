@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CMONNODESMANAGER_H
 #define CMONNODESMANAGER_H
 #include "csingletonmember.h"

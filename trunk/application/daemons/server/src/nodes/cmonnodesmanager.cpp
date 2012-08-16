@@ -1,3 +1,4 @@
+/* %Id% */
 #include "../server_st.h"
 #include "cmonnodesmanager.h"
 

@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CVARIANT_H
 #define CVARIANT_H
 #include <string>

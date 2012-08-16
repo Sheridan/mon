@@ -1,15 +1,9 @@
+/* %Id% */
 #include <stdlib.h>
 
 #include "csocket.h"
 #include "st.h"
-//
 
-//
-//#include <arpa/inet.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//#include <unistd.h>
 namespace mon
 {
 namespace lib

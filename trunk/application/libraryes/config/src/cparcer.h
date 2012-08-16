@@ -1,7 +1,7 @@
+/* %Id% */
 #ifndef CPARCER_H
 #define CPARCER_H
 #include <string>
-//#include <queue>
 #include "cfolder.h"
 #include <stdio.h>
 

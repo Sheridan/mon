@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CSINGLETONMEMBER_H
 #define CSINGLETONMEMBER_H
 #include <map>

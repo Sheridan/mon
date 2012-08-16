@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef LIB_SINGLETON_H
 #define LIB_SINGLETON_H
 #include "config.h"

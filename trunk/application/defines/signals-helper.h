@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef SIGHELP_H
 #define SIGHELP_H
 #include <signal.h>

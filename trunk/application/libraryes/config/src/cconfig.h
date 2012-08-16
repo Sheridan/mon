@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CCONFIG_H
 #define CCONFIG_H
 #include "cfolder.h"

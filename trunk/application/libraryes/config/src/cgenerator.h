@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CGENERATOR_H
 #define CGENERATOR_H
 #include "cfolder.h"

@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cnode.h"
 namespace mon
 {

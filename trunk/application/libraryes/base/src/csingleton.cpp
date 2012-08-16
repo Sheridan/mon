@@ -1,3 +1,4 @@
+/* %Id% */
 #include "csingleton.h"
 #include "cconfig.h"
 #include "clogger.h"

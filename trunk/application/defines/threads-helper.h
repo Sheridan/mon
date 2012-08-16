@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef THREADSHELPER_H_INCLUDED
 #define THREADSHELPER_H_INCLUDED
 #include <pthread.h>

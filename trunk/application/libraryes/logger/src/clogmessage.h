@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CLOGMESSAGE_H
 #define CLOGMESSAGE_H
 #include <string>

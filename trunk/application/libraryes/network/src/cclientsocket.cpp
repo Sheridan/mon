@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cclientsocket.h"
 #include "st.h"
 #include "signals-helper.h"

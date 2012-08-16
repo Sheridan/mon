@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CMONNODESOCKETSERVER_H
 #define CMONNODESOCKETSERVER_H
 #include "cserversocket.h"

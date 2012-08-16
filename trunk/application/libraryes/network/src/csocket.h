@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CSOCKET_H
 #define CSOCKET_H
 
