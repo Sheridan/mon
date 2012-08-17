@@ -1,29 +1,30 @@
 /* %Id% */
 #include "cparcer.h"
 #include "st.h"
+#include "signals-helper.h"
 #include <stdlib.h>
 #include <string.h>
-#include "signals-helper.h"
+
 // MON_CONF_PARCER
 //#define MON_CONF_PARCER_PRINT_CURRENT_CHAR_ENABLED
 //#define MON_CONF_PARCER_PRINT_LOOP_STATUS_ENABLED
 //#define MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
 
 #ifdef MON_CONF_PARCER_PRINT_LOOP_STATUS_ENABLED
-#define MON_CONF_PARCER_PRINT_LOOP_STATUS(_name,_status) MON_LOG_DBG("Loop " #_name " " #_status);
-#define MON_CONF_PARCER_PRINT_LOOP_STATUS_STARTED(_name) MON_CONF_PARCER_PRINT_LOOP_STATUS(_name, started); bool breaked##_name = false;
-#define MON_CONF_PARCER_PRINT_LOOP_STATUS_STOPPED(_name) if(!breaked##_name) { MON_CONF_PARCER_PRINT_LOOP_STATUS(_name, stopped) }
-#define MON_CONF_PARCER_PRINT_LOOP_STATUS_BREAKED(_name) MON_CONF_PARCER_PRINT_LOOP_STATUS(_name, breaked); breaked##_name = true;
+  #define MON_CONF_PARCER_PRINT_LOOP_STATUS(_name,_status) MON_LOG_DBG("Loop " #_name " " #_status);
+  #define MON_CONF_PARCER_PRINT_LOOP_STATUS_STARTED(_name) MON_CONF_PARCER_PRINT_LOOP_STATUS(_name, started); bool breaked##_name = false;
+  #define MON_CONF_PARCER_PRINT_LOOP_STATUS_STOPPED(_name) if(!breaked##_name) { MON_CONF_PARCER_PRINT_LOOP_STATUS(_name, stopped) }
+  #define MON_CONF_PARCER_PRINT_LOOP_STATUS_BREAKED(_name) MON_CONF_PARCER_PRINT_LOOP_STATUS(_name, breaked); breaked##_name = true;
 #else
-#define MON_CONF_PARCER_PRINT_LOOP_STATUS_STARTED(_name)
-#define MON_CONF_PARCER_PRINT_LOOP_STATUS_STOPPED(_name)
-#define MON_CONF_PARCER_PRINT_LOOP_STATUS_BREAKED(_name)
+  #define MON_CONF_PARCER_PRINT_LOOP_STATUS_STARTED(_name)
+  #define MON_CONF_PARCER_PRINT_LOOP_STATUS_STOPPED(_name)
+  #define MON_CONF_PARCER_PRINT_LOOP_STATUS_BREAKED(_name)
 #endif
 
 #ifdef MON_CONF_PARCER_PRINT_CURRENT_CHAR_ENABLED
-#define MON_CONF_PARCER_PRINT_CURRENT_CHAR(_name) MON_LOG_DBG("Parcer (loop `" #_name "`) current character: " << MON_CONF_PARCER_CURRENT_CHARACTER(_name));
+  #define MON_CONF_PARCER_PRINT_CURRENT_CHAR(_name) MON_LOG_DBG("Parcer (loop `" #_name "`) current character: " << MON_CONF_PARCER_CURRENT_CHARACTER(_name));
 #else
-#define MON_CONF_PARCER_PRINT_CURRENT_CHAR(_name)
+  #define MON_CONF_PARCER_PRINT_CURRENT_CHAR(_name)
 #endif
 
 #define MON_CONF_PARCER_CURRENT_CHARACTER(_name) current_character___##_name
@@ -38,33 +39,32 @@
 #define MON_CONF_PARCER_BREAK_LOOP(_name)   goto MON_CONF_PARCER_LOOP_BREAK_LABEL_NAME(_name);
 #define MON_CONF_PARCER_RESTART_LOOP(_name) goto MON_CONF_PARCER_LOOP_BEGIN_LABEL_NAME(_name);
 #define MON_CONF_PARCER_LOOP_BEGIN(_name) \
+{ \
+  MON_CONF_PARCER_PRINT_LOOP_STATUS_STARTED(_name); \
+  TCFChar MON_CONF_PARCER_CURRENT_CHARACTER(_name); \
+  std::string MON_CONF_PARCER_BUFFER_NAME(_name) = ""; \
+  MON_CONF_PARCER_RESTART_LOOP(_name) \
+  MON_CONF_PARCER_LOOP_BEGIN_LABEL_NAME(_name): ; \
+  for(;;) \
   { \
-    MON_CONF_PARCER_PRINT_LOOP_STATUS_STARTED(_name); \
-    TCFChar MON_CONF_PARCER_CURRENT_CHARACTER(_name); \
-    std::string MON_CONF_PARCER_BUFFER_NAME(_name) = ""; \
-    MON_CONF_PARCER_RESTART_LOOP(_name) \
-    MON_CONF_PARCER_LOOP_BEGIN_LABEL_NAME(_name): ; \
-    for(;;) \
-    { \
-      MON_CONF_PARCER_CURRENT_CHARACTER(_name) = readChar(); \
-      if(m_eof || m_error) { MON_CONF_PARCER_BREAK_LOOP(_name); } \
-      MON_CONF_PARCER_PRINT_CURRENT_CHAR(_name) \
-      switch(MON_CONF_PARCER_CURRENT_CHARACTER(_name)) \
-      { \
-
+    MON_CONF_PARCER_CURRENT_CHARACTER(_name) = readChar(); \
+    if(m_eof || m_error) { MON_CONF_PARCER_BREAK_LOOP(_name); } \
+    MON_CONF_PARCER_PRINT_CURRENT_CHAR(_name) \
+    switch(MON_CONF_PARCER_CURRENT_CHARACTER(_name)) \
+    {
 #define MON_CONF_PARCER_LOOP_END(_name) \
-  } \
+    } \
   } \
   MON_CONF_PARCER_LOOP_BREAK_LABEL_NAME(_name): MON_CONF_PARCER_PRINT_LOOP_STATUS_BREAKED(_name); \
   MON_CONF_PARCER_PRINT_LOOP_STATUS_STOPPED(_name); \
-  }
+}
 
 #define MON_CONF_PARCER_BUFFER_ERROR_PART(_name) " (Buffer contains `" << MON_CONF_PARCER_BUFFER_NAME(_name) << "`)"
 
 #define MON_CONF_PARCER_ERROR(_message) \
-  { MON_LOG_ERR("Error in configuration ("<< m_filename <<"), line " \
-                << m_linesCount+1 << ", symbol " << m_currentLineCharactersCount-1 << ": " \
-                << _message); MON_ABORT; }
+{ MON_LOG_ERR("Error in configuration ("<< m_filename <<"), line " \
+  << m_linesCount+1 << ", symbol " << m_currentLineCharactersCount-1 << ": " \
+  << _message); MON_ABORT; }
 
 #define MON_CONF_PARCER_CASES_WHITE \
   case  ' ':  case '\t':  case '\r': case '\n'
@@ -77,17 +77,13 @@
   case 'u': case 'U':  case 'v': case 'V':  case 'w': case 'W':  case 'x': case 'X':  case 'y': case 'Y': \
   case 'z': case 'Z':  case '_'
 
-#define MON_CONF_PARCER_BOOL_COUNT 3
-#define MON_CONF_PARCER_BOOL_TRUE(_var)  const char *_var[MON_CONF_PARCER_BOOL_COUNT] = {"on\0" , "true\0" , "yes\0"};
-#define MON_CONF_PARCER_BOOL_FALSE(_var) const char *_var[MON_CONF_PARCER_BOOL_COUNT] = {"off\0", "false\0", "no\0" };
+#define MON_CONF_PARCER_BOOL_COUNT 4
+#define MON_CONF_PARCER_BOOL_TRUE(_var)  const char *_var[MON_CONF_PARCER_BOOL_COUNT] = {"on\0" , "true\0" , "yes\0", "1\0"};
+#define MON_CONF_PARCER_BOOL_FALSE(_var) const char *_var[MON_CONF_PARCER_BOOL_COUNT] = {"off\0", "false\0", "no\0" , "0\0"};
 
 #define MON_CONF_PARCER_CASES_NUMERIC_DOT case '.': case ','
-
-#define MON_CONF_PARCER_CASES_NUMERIC \
-  case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9'
-
-#define MON_CONF_PARCER_CASES_DELIMITERS \
-  case '{': case '}': case '=': case '.'
+#define MON_CONF_PARCER_CASES_NUMERIC     case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9'
+#define MON_CONF_PARCER_CASES_DELIMITERS  case '{': case '}': case '=': case '.'
 
 #define MON_CONF_PARCER_CASES_AVIALABLE \
   MON_CONF_PARCER_CASES_WHITE: MON_CONF_PARCER_CASES_ALPHA: MON_CONF_PARCER_CASES_NUMERIC: MON_CONF_PARCER_CASES_DELIMITERS
@@ -110,7 +106,7 @@ CParcer::CParcer(const std::string &filename, CFolder *root) : m_filename(filena
   if(m_file == NULL)
   {
     m_error = true;
-    MON_PRINT_FILEOP_ERRNO(m_filename, "Open");
+    MON_PRINT_FILEOP_ERRNO(m_filename, "Open file error");
   }
 }
 
@@ -120,7 +116,7 @@ CParcer::~CParcer()
 
   if(fclose(m_file) == EOF)
   {
-    MON_PRINT_FILEOP_ERRNO(m_filename, "Close");
+    MON_PRINT_FILEOP_ERRNO(m_filename, "Close file error");
   }
 }
 
@@ -131,77 +127,72 @@ void CParcer::parce()
   MON_LOG_NFO("Loading config from " << m_filename);
   while(!m_error && !m_eof)
   {
-    readFolder(m_root/*, false*/);
+    readFolder(m_root);
   }
   MON_LOG_DBG("Loading config from " << m_filename << " done. Lines: " << m_linesCount + 2 << ", symbols: " << m_charactersCount);
-
 }
 
 void CParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
 {
-#ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
-  MON_LOG_DBG("Enter folder " << folder->name());
-#endif
+  #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
+    MON_LOG_DBG("Enter folder " << folder->name());
+  #endif
 
   MON_CONF_PARCER_LOOP_BEGIN(variable_name)
   MON_CONF_PARCER_CASES_ALPHA:
-    {
-      MON_CONF_PARCER_BUFFER_APPEND(variable_name)
-      break;
-    }
+  {
+    MON_CONF_PARCER_BUFFER_APPEND(variable_name)
+    break;
+  }
   MON_CONF_PARCER_CASES_NUMERIC:
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name must begin only with alpha symbols")
-      MON_CONF_PARCER_BUFFER_APPEND(variable_name)
-      break;
-    }
-  MON_CONF_PARCER_CASES_WHITE:
-    {
-      //MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY("Variable name can't include whitespace")
-      break;
-    }
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name must begin only with alpha symbols")
+    MON_CONF_PARCER_BUFFER_APPEND(variable_name)
+    break;
+  }
+  MON_CONF_PARCER_CASES_WHITE: { break; }
   case  '=':
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name can't be empty")
-      readValue(folder->file(MON_CONF_PARCER_BUFFER_NAME(variable_name)));
-      MON_CONF_PARCER_BUFFER_RESET(variable_name)
-      break;
-    }
-  case  '#': skipComment(); break;
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable name can't be empty")
+    readValue(folder->file(MON_CONF_PARCER_BUFFER_NAME(variable_name)));
+    MON_CONF_PARCER_BUFFER_RESET(variable_name)
+    break;
+  }
+  case  '#': { skipComment(); break; }
   case  ';':
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name cannot be without value")
-      if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
-      MON_CONF_PARCER_BUFFER_RESET(variable_name)
-      break;
-    }
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name cannot be without value")
+    if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
+    MON_CONF_PARCER_BUFFER_RESET(variable_name)
+    break;
+  }
   case  '{':
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty")
-      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
-      if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
-      MON_CONF_PARCER_BUFFER_RESET(variable_name)
-      break;
-    }
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty")
+    readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
+    if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
+    MON_CONF_PARCER_BUFFER_RESET(variable_name)
+    break;
+  }
   case  '}':
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name cannot be without value")
-      MON_CONF_PARCER_BREAK_LOOP(variable_name)
-    }
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_name, "Variable path name cannot be without value")
+    MON_CONF_PARCER_BREAK_LOOP(variable_name)
+  }
   case  '.':
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
-      readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
-      if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
-      MON_CONF_PARCER_BUFFER_RESET(variable_name)
-      break;
-    }
-  default: MON_CONF_PARCER_ERROR("Variable name must contain only alpha, numeric and '_' symbols" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_name))
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
+    readFolder(folder->folder(MON_CONF_PARCER_BUFFER_NAME(variable_name)), MON_CONF_PARCER_CURRENT_CHARACTER(variable_name));
+    if(lastFolderDelimiter == '.') { MON_CONF_PARCER_BREAK_LOOP(variable_name) }
+    MON_CONF_PARCER_BUFFER_RESET(variable_name)
+    break;
+  }
+  default: { MON_CONF_PARCER_ERROR("Variable name must contain only alpha, numeric and '_' symbols" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_name)) }
   MON_CONF_PARCER_LOOP_END(variable_name)
 
-#ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
-  MON_LOG_DBG("Leave folder " << folder->name())
-#endif
+  #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
+    MON_LOG_DBG("Leave folder " << folder->name())
+  #endif
 }
 
 void CParcer::readValue(CFile *file)
@@ -213,65 +204,65 @@ void CParcer::readValue(CFile *file)
   case '`':
   case '\'':
   case  '"':
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_value, "Junk before string");
-      MON_CONF_PARCER_BUFFER_NAME(variable_value) = readString(MON_CONF_PARCER_CURRENT_CHARACTER(variable_value));
-      c_type = ctString;
-      break;
-    }
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_value, "Junk before string");
+    MON_CONF_PARCER_BUFFER_NAME(variable_value) = readString(MON_CONF_PARCER_CURRENT_CHARACTER(variable_value));
+    c_type = ctString;
+    break;
+  }
   case ';':
+  {
+    #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
+    switch(c_type)
     {
-  #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
-      switch(c_type)
-      {
-        case ctBool   : MON_LOG_DBG("Value '" << file->name() << "', bool: `"   << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-        case ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-        case ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-        case ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-        case ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
-      }
-  #endif
-      switch(c_type)
-      {
-        case ctBool   : file->set(convertBool(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str())); break;
-        case ctString : file->set(MON_CONF_PARCER_BUFFER_NAME(variable_value)); break;
-        case ctInt    : file->set(static_cast<int>(strtol(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL, 10)) * (underZero?-1:1)); break;
-        case ctFloat  : file->set(strtod(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL) * (underZero?-1:1)); break;
-        case ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
-      }
-      stepBack();
-      MON_CONF_PARCER_BREAK_LOOP(variable_value);
+      case ctBool   : MON_LOG_DBG("Value '" << file->name() << "', bool: `"   << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
     }
+    #endif
+    switch(c_type)
+    {
+      case ctBool   : file->set(convertBool(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str())); break;
+      case ctString : file->set(MON_CONF_PARCER_BUFFER_NAME(variable_value)); break;
+      case ctInt    : file->set(static_cast<int>(strtol(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL, 10)) * (underZero?-1:1)); break;
+      case ctFloat  : file->set(strtod(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL) * (underZero?-1:1)); break;
+      case ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
+    }
+    stepBack();
+    MON_CONF_PARCER_BREAK_LOOP(variable_value);
+  }
   case '-':
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_value, "`-` must be before number");
-      underZero = true;
-      break;
-    }
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_value, "`-` must be before number");
+    underZero = true;
+    break;
+  }
   MON_CONF_PARCER_CASES_NUMERIC:
-    {
-      MON_CONF_PARCER_BUFFER_APPEND(variable_value);
-      if(c_type == ctUnknown)  { c_type = ctInt; }
-      break;
-    }
+  {
+    MON_CONF_PARCER_BUFFER_APPEND(variable_value);
+    if(c_type == ctUnknown)  { c_type = ctInt; }
+    break;
+  }
   MON_CONF_PARCER_CASES_NUMERIC_DOT:
-    {
-      MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_value, "Missing numeric before dot");
-      if(c_type == ctFloat) { MON_CONF_PARCER_ERROR("Double numeric dot?" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value)); }
-      MON_CONF_PARCER_BUFFER_RESET(variable_value)
-      c_type = ctFloat;
-      break;
-    }
+  {
+    MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_value, "Missing numeric before dot");
+    if(c_type == ctFloat) { MON_CONF_PARCER_ERROR("Double numeric dot?" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value)); }
+    MON_CONF_PARCER_BUFFER_RESET(variable_value)
+    c_type = ctFloat;
+    break;
+  }
   MON_CONF_PARCER_CASES_ALPHA:
-    {
-      MON_CONF_PARCER_BUFFER_APPEND(variable_value);
-      if(c_type == ctUnknown)  { c_type = ctBool; }
-      break;
-    }
+  {
+    MON_CONF_PARCER_BUFFER_APPEND(variable_value);
+    if(c_type == ctUnknown)  { c_type = ctBool; }
+    break;
+  }
   default:
-    {
-      MON_CONF_PARCER_ERROR("Misplaced character" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
-    }
+  {
+    MON_CONF_PARCER_ERROR("Misplaced character" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
+  }
   MON_CONF_PARCER_LOOP_END(variable_value);
 }
 
@@ -323,7 +314,7 @@ TCFChar CParcer::readChar()
   if(result == -1 && result != EOF)
   {
     m_error = true;
-    MON_PRINT_FILEOP_ERRNO(m_filename, "Read");
+    MON_PRINT_FILEOP_ERRNO(m_filename, "Read file error");
     return 0;
   }
 
@@ -333,16 +324,16 @@ TCFChar CParcer::readChar()
   switch(character)
   {
     case '\n':
-      {
-        m_linesCount++;
-        m_currentLineCharactersCount = 0;
-      }
+    {
+      m_linesCount++;
+      m_currentLineCharactersCount = 0;
+    }
     case '\r': break;
     default:
-      {
-        m_charactersCount++;
-        m_currentLineCharactersCount++;
-      }
+    {
+      m_charactersCount++;
+      m_currentLineCharactersCount++;
+    }
   }
   return character;
 }
