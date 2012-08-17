@@ -8,7 +8,7 @@ namespace mon
 {
 namespace lib
 {
-namespace protocol
+namespace sensor
 {
 
 enum EDataType

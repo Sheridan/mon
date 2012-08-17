@@ -15,7 +15,7 @@ include(CMakeDebug.cmake)
 install(FILES CMakeDebug.cmake DESTINATION include/mon)
 install(FILES CMakeSensor.cmake DESTINATION include/mon)
 
-MESSAGE ( STATUS "---> Configuring base" )
+MESSAGE ( STATUS "---> Processing base" )
 
 set( GEN_PATH "${PROJECT_BINARY_DIR}/mon_generated_sources" )
 file(MAKE_DIRECTORY ${GEN_PATH})
@@ -25,6 +25,7 @@ file(APPEND ${GEN_PATH}/generated.h "#define MON_GENERATED_SENSORS_PATH \"${CMAK
 file(APPEND ${GEN_PATH}/generated.h "\n#endif\n" )
 
 # +++++++++++++++++++ tools +++++++++++++++++++
+MESSAGE ( STATUS "---> Processing tools" )
 add_executable( mon-text-to-char-array tools/mon-text-to-char-array/main.cpp)
 install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 # +++++++++++++++++++ tools +++++++++++++++++++
@@ -33,6 +34,7 @@ install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 # +++++++++++++++++++ libaryes +++++++++++++++++++
 
 # --------- config library --------------
+MESSAGE ( STATUS "---> Processing `config` library" )
 SET(mon-config-headers
     libraryes/config/src/pathinterface.h
     libraryes/config/src/cvariant.h
@@ -57,6 +59,7 @@ install(FILES ${mon-config-headers} DESTINATION include/mon )
 install(TARGETS config LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- logger library --------------
+MESSAGE ( STATUS "---> Processing `logger` library" )
 SET(mon-logger-headers
     libraryes/logger/src/logger.h
     libraryes/logger/src/clogmessage.h
@@ -70,6 +73,7 @@ install(FILES ${mon-logger-headers} DESTINATION include/mon )
 install(TARGETS logger LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- network library --------------
+MESSAGE ( STATUS "---> Processing `network` library" )
 SET(mon-network-headers
     libraryes/network/src/csocket.h
     libraryes/network/src/cserversocket.h
@@ -84,27 +88,38 @@ target_link_libraries(network pthread)
 install(FILES ${mon-network-headers} DESTINATION include/mon )
 install(TARGETS network LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
+# --------- sensor library --------------
+MESSAGE ( STATUS "---> Processing `sensor` library" )
+SET(mon-sensor-headers
+    libraryes/sensor/src/data/cdefinition.h
+    libraryes/sensor/src/data/cinformation.h
+    libraryes/sensor/src/data/cstatistics.h
+    libraryes/sensor/src/parcers/cdefinitionparcer.h
+    libraryes/sensor/src/parcers/cinformationparcer.h
+    libraryes/sensor/src/parcers/cstatisticsparcer.h)
+SET(mon-sensor-sources
+    libraryes/sensor/src/data/cdefinition.cpp
+    libraryes/sensor/src/data/cinformation.cpp
+    libraryes/sensor/src/data/cstatistics.cpp
+    libraryes/sensor/src/parcers/cdefinitionparcer.cpp
+    libraryes/sensor/src/parcers/cinformationparcer.cpp
+    libraryes/sensor/src/parcers/cstatisticsparcer.cpp
+    libraryes/sensor/src/main.cpp )
+add_library(sensor SHARED ${mon-sensor-headers} ${mon-sensor-sources})
+install(TARGETS sensor LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
+
 # --------- protocol library --------------
+MESSAGE ( STATUS "---> Processing `protocol` library" )
 SET(mon-protocol-headers
-    libraryes/protocol/src/data/cdefinition.h
-    libraryes/protocol/src/data/cinformation.h
-    libraryes/protocol/src/data/cstatistics.h
-    libraryes/protocol/src/parcers/cdefinitionparcer.h
-    libraryes/protocol/src/parcers/cinformationparcer.h
-    libraryes/protocol/src/parcers/cstatisticsparcer.h)
+    libraryes/protocol/src/cprotocol.h)
 SET(mon-protocol-sources
-    libraryes/protocol/src/data/cdefinition.cpp
-    libraryes/protocol/src/data/cinformation.cpp
-    libraryes/protocol/src/data/cstatistics.cpp
-    libraryes/protocol/src/parcers/cdefinitionparcer.cpp
-    libraryes/protocol/src/parcers/cinformationparcer.cpp
-    libraryes/protocol/src/parcers/cstatisticsparcer.cpp
+    libraryes/protocol/src/cprotocol.cpp
     libraryes/protocol/src/main.cpp )
 add_library(protocol SHARED ${mon-protocol-headers} ${mon-protocol-sources})
-#install(FILES ${mon-protocol-headers} DESTINATION include/mon )
 install(TARGETS protocol LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- base library --------------
+MESSAGE ( STATUS "---> Processing `base` library" )
 SET(mon-base-headers
     libraryes/base/src/csingletonmember.h
     libraryes/base/src/csingleton.h )
@@ -120,16 +135,17 @@ install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 install(FILES defines/sensor-defines.h DESTINATION include/mon )
 # +++++++++++++++++++ install for sensors +++++++++++++++++++
 # +++++++++++++++++++ applications +++++++++++++++++++
-add_dependencies(base config logger network protocol)
-target_link_libraries(base config logger network protocol)
+add_dependencies(base config logger network sensor)
+target_link_libraries(base config logger network sensor)
 include_directories( ${GEN_PATH}
                      libraryes/base/src
                      libraryes/network/src
                      libraryes/logger/src
                      libraryes/config/src
+                     libraryes/sensor/src
+                     libraryes/sensor/src/data
+                     libraryes/sensor/src/parcers
                      libraryes/protocol/src
-                     libraryes/protocol/src/data
-                     libraryes/protocol/src/parcers
                      defines )
 
 function(add_run target_name)
@@ -150,7 +166,7 @@ function(add_daemon target_name)
 endfunction(add_daemon)
 
 IF( BUILD_SERVER )
-  MESSAGE ( STATUS "---> Configuring server" )
+  MESSAGE ( STATUS "---> Processing server" )
   SET(mon-server-headers
         daemons/server/src/server_st.h
         daemons/server/src/nodes/cremotemonnode.h
@@ -166,7 +182,7 @@ IF( BUILD_SERVER )
 ENDIF( BUILD_SERVER )
 
 IF( BUILD_NODE )
-  MESSAGE ( STATUS "---> Configuring node" )
+  MESSAGE ( STATUS "---> Processing node" )
   SET(mon-node-headers
       daemons/node/src/node_st.h
       daemons/node/src/network/cmonnodesocketserver.h

@@ -1,5 +1,5 @@
 # %Id%
-
+include (${CMAKE_INSTALL_PREFIX}/include/mon/CMakeDebug.cmake)
 set( GEN_PATH "${PROJECT_BINARY_DIR}/mon_generated_sources" )
 set( SENSOR_DEFINITION "${GEN_PATH}/definition.h" )
 file(MAKE_DIRECTORY ${GEN_PATH})
@@ -8,6 +8,7 @@ file(APPEND ${GEN_PATH}/generated.h "#include \"${SENSOR_DEFINITION}\"\n"  )
 file(APPEND ${GEN_PATH}/generated.h "\n#endif\n" )
 
 function(add_sensor sources headers include_paths)
+  MESSAGE ( STATUS "---------- Processing `${EXECUTABLE_NAME}` sensor ----------" )
   add_custom_command(
     OUTPUT    ${GEN_PATH}/definition.h
     COMMAND   ${CMAKE_INSTALL_PREFIX}/bin/mon-text-to-char-array

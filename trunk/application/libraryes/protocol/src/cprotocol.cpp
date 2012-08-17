@@ -1,4 +1,4 @@
-#include "cinformation.h"
+#include "cprotocol.h"
 namespace mon
 {
 namespace lib
@@ -6,7 +6,7 @@ namespace lib
 namespace protocol
 {
 
-CInformation::CInformation()
+CProtocol::CProtocol()
 {
 }
 

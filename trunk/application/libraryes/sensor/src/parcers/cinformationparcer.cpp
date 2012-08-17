@@ -3,7 +3,7 @@ namespace mon
 {
 namespace lib
 {
-namespace protocol
+namespace sensor
 {
 
 CInformationParcer::CInformationParcer()

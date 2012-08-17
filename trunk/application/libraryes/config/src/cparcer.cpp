@@ -42,6 +42,7 @@
     MON_CONF_PARCER_PRINT_LOOP_STATUS_STARTED(_name); \
     TCFChar MON_CONF_PARCER_CURRENT_CHARACTER(_name); \
     std::string MON_CONF_PARCER_BUFFER_NAME(_name) = ""; \
+    MON_CONF_PARCER_RESTART_LOOP(_name) \
     MON_CONF_PARCER_LOOP_BEGIN_LABEL_NAME(_name): ; \
     for(;;) \
     { \
