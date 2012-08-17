@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CLOGMESSAGE_H
 #define CLOGMESSAGE_H
-#include <string>
+#include "cstringbuilder.h"
 
 namespace mon
 {
@@ -21,28 +21,17 @@ enum EPriority
 };
 
 
-class CLogMessage
+class CLogMessage : public mon::lib::base::CStringBuilder
 {
+    MON_STRING_BUILDER(CLogMessage)
 public:
   CLogMessage(const EPriority &priority);
   ~CLogMessage();
 
-  CLogMessage &operator<<(const int           &val);
-  CLogMessage &operator<<(const unsigned int  &val);
-  CLogMessage &operator<<(const double        &val);
-  CLogMessage &operator<<(const float         &val);
-  CLogMessage &operator<<(const bool          &val);
-  CLogMessage &operator<<(const std::string   &val);
-  CLogMessage &operator<<(const char          *val);
-  CLogMessage &operator<<(const char          &val);
-  CLogMessage &operator<<(const unsigned char &val);
-
-  const std::string &msg() const;
   const EPriority   &pri() const;
 
 private:
   EPriority m_priority;
-  std::string m_message;
 };
 
 }

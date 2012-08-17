@@ -37,7 +37,6 @@ install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 MESSAGE ( STATUS "---> Processing `config` library" )
 SET(mon-config-headers
     libraryes/config/src/pathinterface.h
-    libraryes/config/src/cvariant.h
     libraryes/config/src/cparcer.h
     libraryes/config/src/cgenerator.h
     libraryes/config/src/cconfig.h
@@ -47,7 +46,6 @@ SET(mon-config-headers
     libraryes/config/src/config.h )
 SET(mon-config-sources
     libraryes/config/src/main.cpp
-    libraryes/config/src/cvariant.cpp
     libraryes/config/src/cparcer.cpp
     libraryes/config/src/cgenerator.cpp
     libraryes/config/src/cconfig.cpp
@@ -111,9 +109,11 @@ install(TARGETS sensor LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 # --------- protocol library --------------
 MESSAGE ( STATUS "---> Processing `protocol` library" )
 SET(mon-protocol-headers
-    libraryes/protocol/src/cprotocol.h)
+    libraryes/protocol/src/cprotocol.h
+    libraryes/protocol/src/cmessage.h)
 SET(mon-protocol-sources
     libraryes/protocol/src/cprotocol.cpp
+    libraryes/protocol/src/cmessage.cpp
     libraryes/protocol/src/main.cpp )
 add_library(protocol SHARED ${mon-protocol-headers} ${mon-protocol-sources})
 install(TARGETS protocol LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
@@ -122,11 +122,15 @@ install(TARGETS protocol LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 MESSAGE ( STATUS "---> Processing `base` library" )
 SET(mon-base-headers
     libraryes/base/src/csingletonmember.h
-    libraryes/base/src/csingleton.h )
+    libraryes/base/src/csingleton.h
+    libraryes/base/src/cvariant.h
+    libraryes/base/src/cstringbuilder.h )
 SET(mon-base-sources
     libraryes/base/src/main.cpp
     libraryes/base/src/csingletonmember.cpp
-    libraryes/base/src/csingleton.cpp )
+    libraryes/base/src/csingleton.cpp
+    libraryes/base/src/cvariant.cpp
+    libraryes/base/src/cstringbuilder.cpp )
 add_library(base SHARED ${mon-base-headers} ${mon-base-sources})
 install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 

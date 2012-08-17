@@ -3,7 +3,6 @@ object memory
   label: "Memory";
   exemplars: 1;
   maxStatisticalUpdateFrequency: 10Hz;
-  maxInformationUpdateFrequency: 0.001Hz;
   flags:
   {
     provideStatistics

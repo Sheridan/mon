@@ -1,22 +1,28 @@
 /* %Id% */
 #include "cvariant.h"
 #include "st.h"
-#include <stdio.h>
+#include <sstream>
 #include <stdlib.h>
-#include <string.h>
 namespace mon
 {
 namespace lib
 {
-namespace config
+namespace base
 {
 
-CVariant::CVariant(                       ) { m_contentType = ctUnknown; reset();  }
-CVariant::CVariant(const bool         &val) { m_contentType = ctUnknown; set(val); }
-CVariant::CVariant(const int          &val) { m_contentType = ctUnknown; set(val); }
-CVariant::CVariant(const double       &val) { m_contentType = ctUnknown; set(val); }
-CVariant::CVariant(const std::string  &val) { m_contentType = ctUnknown; set(val); }
-CVariant::CVariant(const CVariant     &val) { m_contentType = ctUnknown; set(val); }
+#define MON_VARIANT_FROM_STRING(_type) _type res; std::istringstream(val) >> res; return res;
+#define MON_VARIANT_TO_STRING std::string res; std::stringstream buf; buf << val; buf >> res; return res;
+
+int    toInt   (const std::string &val) { MON_VARIANT_FROM_STRING(int)   ; }
+bool   toBool  (const std::string &val) { MON_VARIANT_FROM_STRING(bool)  ; }
+float  toFloat (const std::string &val) { MON_VARIANT_FROM_STRING(float) ; }
+double toDouble(const std::string &val) { MON_VARIANT_FROM_STRING(double); }
+std::string toString(const int    &val) { MON_VARIANT_TO_STRING }
+std::string toString(const bool   &val) { MON_VARIANT_TO_STRING }
+std::string toString(const float  &val) { MON_VARIANT_TO_STRING }
+std::string toString(const double &val) { MON_VARIANT_TO_STRING }
+unsigned int toUInt (const std::string &val) { MON_VARIANT_FROM_STRING(unsigned int); }
+
 
 CVariant::~CVariant()
 {
@@ -62,7 +68,7 @@ void CVariant::set(const double &val)
 void CVariant::set(const std::string &val)
 {
   reset();
-  m_contentType = ctString;
+  m_contentType = mon::lib::base::ctString;
   m_value.m_string = static_cast<char *>(malloc(strlen(val.c_str()) + 1));
   strcpy(m_value.m_string, val.c_str());
 }
@@ -71,18 +77,13 @@ void CVariant::set(const CVariant &val)
 {
   switch(val.contentType())
   {
-    case ctBool:   set(val.toBool  ()); break;
-    case ctInt:    set(val.toInt   ()); break;
-    case ctFloat:  set(val.toFloat ()); break;
-    case ctString: set(val.toString()); break;
+    case ctBool:    set(val.toBool  ()); break;
+    case ctInt:     set(val.toInt   ()); break;
+    case ctFloat:   set(val.toFloat ()); break;
+    case ctString:  set(val.toString()); break;
     case ctUnknown: reset(); break;
   }
 }
-
-bool        CVariant::get(const bool        &def) { if(m_contentType != ctBool)   { set(def); } return m_value.m_bool  ; }
-int         CVariant::get(const int         &def) { if(m_contentType != ctInt)    { set(def); } return m_value.m_int   ; }
-double      CVariant::get(const double      &def) { if(m_contentType != ctFloat)  { set(def); } return m_value.m_float ; }
-std::string CVariant::get(const std::string &def) { if(m_contentType != ctString) { set(def); } return m_value.m_string; }
 
 const bool CVariant::toBool() const
 {
@@ -122,40 +123,18 @@ const double CVariant::toFloat() const
 
 const std::string CVariant::toString() const
 {
-  char *val = NULL;
-  int len = 0;
+
   switch(m_contentType)
   {
-    case ctString:
-      return m_value.m_string;
-    case ctFloat:
-      {
-        len = snprintf(val, 0, "%f", m_value.m_float);
-        if(len > 0)
-        {
-          val = static_cast<char *>(malloc(sizeof(char) * len));
-          snprintf(val, len + 1, "%f", m_value.m_float);
-        }
-      }
-      break;
-    case ctInt:
-      {
-        len = snprintf(val, 0, "%d", m_value.m_int);
-        if(len > 0)
-        {
-          val = static_cast<char *>(malloc(sizeof(char) * len));
-          snprintf(val, len + 1, "%d", m_value.m_int);
-        }
-      }
-      break;
-    case ctBool:
-      return m_value.m_bool ? "true" : "false";
+    case ctString:return m_value.m_string;
+    case ctFloat: return mon::lib::base::toString(m_value.m_float);
+    case ctInt:   return mon::lib::base::toString(m_value.m_int);
+    case ctBool:  return m_value.m_bool ? "true" : "false";
     case ctUnknown: MON_LOG_WRN("Undefined string option, return default"); return "undef";
-  }
-  return std::string(val);
+  } return "undef";
 }
 
-const EContenType &CVariant::contentType() const
+const EContentType &CVariant::contentType() const
 {
   return m_contentType;
 }

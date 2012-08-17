@@ -197,7 +197,7 @@ void CParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
 
 void CParcer::readValue(CFile *file)
 {
-  EContenType c_type = ctUnknown;
+  mon::lib::base::EContentType c_type = mon::lib::base::ctUnknown;
   bool underZero = false;
   MON_CONF_PARCER_LOOP_BEGIN(variable_value);
   MON_CONF_PARCER_CASES_WHITE:
@@ -207,7 +207,7 @@ void CParcer::readValue(CFile *file)
   {
     MON_CONF_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_value, "Junk before string");
     MON_CONF_PARCER_BUFFER_NAME(variable_value) = readString(MON_CONF_PARCER_CURRENT_CHARACTER(variable_value));
-    c_type = ctString;
+    c_type = mon::lib::base::ctString;
     break;
   }
   case ';':
@@ -215,20 +215,20 @@ void CParcer::readValue(CFile *file)
     #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
     switch(c_type)
     {
-      case ctBool   : MON_LOG_DBG("Value '" << file->name() << "', bool: `"   << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-      case ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-      case ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-      case ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
-      case ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
+      case mon::lib::base::ctBool   : MON_LOG_DBG("Value '" << file->name() << "', bool: `"   << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case mon::lib::base::ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case mon::lib::base::ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case mon::lib::base::ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_CONF_PARCER_BUFFER_NAME(variable_value) << "`"); break;
+      case mon::lib::base::ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
     }
     #endif
     switch(c_type)
     {
-      case ctBool   : file->set(convertBool(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str())); break;
-      case ctString : file->set(MON_CONF_PARCER_BUFFER_NAME(variable_value)); break;
-      case ctInt    : file->set(static_cast<int>(strtol(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL, 10)) * (underZero?-1:1)); break;
-      case ctFloat  : file->set(strtod(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL) * (underZero?-1:1)); break;
-      case ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
+      case mon::lib::base::ctBool   : file->set(convertBool(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str())); break;
+      case mon::lib::base::ctString : file->set(MON_CONF_PARCER_BUFFER_NAME(variable_value)); break;
+      case mon::lib::base::ctInt    : file->set(static_cast<int>(strtol(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL, 10)) * (underZero?-1:1)); break;
+      case mon::lib::base::ctFloat  : file->set(strtod(MON_CONF_PARCER_BUFFER_NAME(variable_value).c_str(), NULL) * (underZero?-1:1)); break;
+      case mon::lib::base::ctUnknown: MON_CONF_PARCER_ERROR("Value '" << file->name() << "', Unknown value type" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value));
     }
     stepBack();
     MON_CONF_PARCER_BREAK_LOOP(variable_value);
@@ -242,21 +242,21 @@ void CParcer::readValue(CFile *file)
   MON_CONF_PARCER_CASES_NUMERIC:
   {
     MON_CONF_PARCER_BUFFER_APPEND(variable_value);
-    if(c_type == ctUnknown)  { c_type = ctInt; }
+    if(c_type == mon::lib::base::ctUnknown)  { c_type = mon::lib::base::ctInt; }
     break;
   }
   MON_CONF_PARCER_CASES_NUMERIC_DOT:
   {
     MON_CONF_PARCER_ERROR_IF_BUFFER_EMPTY(variable_value, "Missing numeric before dot");
-    if(c_type == ctFloat) { MON_CONF_PARCER_ERROR("Double numeric dot?" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value)); }
+    if(c_type == mon::lib::base::ctFloat) { MON_CONF_PARCER_ERROR("Double numeric dot?" << MON_CONF_PARCER_BUFFER_ERROR_PART(variable_value)); }
     MON_CONF_PARCER_BUFFER_RESET(variable_value)
-    c_type = ctFloat;
+    c_type = mon::lib::base::ctFloat;
     break;
   }
   MON_CONF_PARCER_CASES_ALPHA:
   {
     MON_CONF_PARCER_BUFFER_APPEND(variable_value);
-    if(c_type == ctUnknown)  { c_type = ctBool; }
+    if(c_type == mon::lib::base::ctUnknown)  { c_type = mon::lib::base::ctBool; }
     break;
   }
   default:

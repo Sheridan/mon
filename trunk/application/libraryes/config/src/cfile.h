@@ -11,12 +11,17 @@ namespace lib
 namespace config
 {
 
-class CFile : public CNode, public CVariant
+class CFile : public CNode, public mon::lib::base::CVariant
 {
 public:
   CFile(const std::string &nodeName, CNode *parentNode);
   ~CFile();
   CFolder *parent();
+
+  bool        get(const bool        &def);
+  int         get(const int         &def);
+  double      get(const double      &def);
+  std::string get(const std::string &def);
 };
 
 }
