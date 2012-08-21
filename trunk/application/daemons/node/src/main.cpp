@@ -2,7 +2,7 @@
 #include "node_st.h"
 #include "default-application.h"
 #include "signals-helper.h"
-#include "network/cmonnodesocketserver.h"
+#include "ccollectorsmanager.h"
 
 void mon_exit(int returnValue)
 {
@@ -24,8 +24,8 @@ int main (int argc, char* argv[])
 
   MON_DEFAULT_APPLICATION_INIT;
 
-  MON_ST_APPEND_MEMBER(mon::daemons::node::CMonNodeSocketServer);
-  MON_ST_NODE_SERVER_SOCKET->listen();
+  MON_ST_APPEND_MEMBER(mon::daemons::node::CCollectorsManager);
+  MON_ST_NODE_COLLECTOR_SOCKET->listen();
 
   MON_SIGNAL_LOOP;
   mon_exit(EXIT_SUCCESS);

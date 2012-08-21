@@ -1,7 +1,7 @@
 digraph G
 {
     node [shape=octagon, color=cornflowerblue];
-    mon_server [label="Server"];
+    mon_collector [label="Server"];
     node [shape=Mcircle, color=darkgreen];
     mon_node [label="Node"];
     node [shape=Msquare, color=coral3];
@@ -11,22 +11,22 @@ digraph G
     node [shape=doublecircle, color=lightblue4];
     database [label="Database"];
 
-    // server to nodes
+    // collector to nodes
     edge [color=green, style=filled];
-    mon_server -> mon_node;
+    mon_collector -> mon_node;
     mon_node -> mon_plugin;
     edge [style=dashed];
     mon_plugin -> mon_node;
-    mon_node -> mon_server;
-    mon_server -> database;
+    mon_node -> mon_collector;
+    mon_collector -> database;
 
-    // client to server
+    // client to collector
     edge [color=magenta, style=filled];
-    mon_client -> mon_server;
-    mon_server -> database;
+    mon_client -> mon_collector;
+    mon_collector -> database;
     edge [style=dashed];
-    database -> mon_server;
-    mon_server -> mon_client;
+    database -> mon_collector;
+    mon_collector -> mon_client;
 
     // description
     node [color=black, shape=none, label=""];

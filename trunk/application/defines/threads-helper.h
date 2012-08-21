@@ -5,11 +5,15 @@
 #include "st.h"
 #include "signals-helper.h"
 
+#define MON_THREADED_FUNCTION_DISABLE_CANCEL pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
+#define MON_THREADED_FUNCTION_ENABLE_CANCEL  pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+
 #define MON_THREADED_FUNCTION_DECLARE(_name) \
+    friend void * thread_##_name(void *data); \
   public: \
     void _name(); \
-    void run_thread##_name(); \
   private: \
+    void run_thread##_name(); \
     bool thread_is_active##_name; \
     pthread_t thread_id_##_name; \
     void abort_thread_##_name();
@@ -19,6 +23,7 @@
 #define MON_THREADED_FUNCTION_IMPLEMENT(_class,_name) \
 void * thread_##_name(void *data) \
 { \
+  MON_THREADED_FUNCTION_ENABLE_CANCEL \
   MON_LOG_DBG("Thread " #_name " started..."); \
   (reinterpret_cast<_class *>(data))->run_thread##_name(); \
   return NULL; \

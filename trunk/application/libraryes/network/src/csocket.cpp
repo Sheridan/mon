@@ -1,6 +1,6 @@
 /* %Id% */
 #include <stdlib.h>
-
+#include "infinity-cycle-helper.h"
 #include "csocket.h"
 #include "st.h"
 
@@ -21,54 +21,71 @@ CSocket::CSocket()
   m_timeout    = MON_DEFAULT_CONNECT_TIMEOUT;
   m_addrLocal  = "";
   m_addrRemote = "";
+  MON_THREADED_FUNCTION_INIT(waitRecv);
 }
 
 CSocket::~CSocket()
 {
+  MON_THREADED_FUNCTION_ABORT(waitRecv);
   close();
 }
-
 #define MON_SOCKET_RECV_BUFFER_LENGTH 512
-std::string CSocket::readAll()
+MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
 {
-  std::string data = "";
-  char* t_recv_buffer = static_cast<char*>(malloc(sizeof(char)*MON_SOCKET_RECV_BUFFER_LENGTH));
-  int t_recv_bytes = 0;
-  while(true)
-  {
-    memset(t_recv_buffer, 0, MON_SOCKET_RECV_BUFFER_LENGTH * sizeof(char));
-    t_recv_bytes = recv(m_socketDescriptor, t_recv_buffer, MON_SOCKET_RECV_BUFFER_LENGTH, MSG_WAITALL);
-
-    MON_LOG_DBG("Socket bytes received: " << t_recv_bytes)
-
-    if (t_recv_bytes > 0)
+  std::string t_message = "";
+  INFINITY_CYCLE_BEGIN(read_or_wait)
+    if(m_isConnected || m_isListen)
     {
-      data += t_recv_buffer;
-      continue;
+      char t_recv_buffer[MON_SOCKET_RECV_BUFFER_LENGTH]; // = static_cast<char*>(malloc(sizeof(char)*MON_SOCKET_RECV_BUFFER_LENGTH));
+      int  t_recv_bytes = 0;
+      INFINITY_CYCLE_BEGIN(read_all)
+        ::memset(t_recv_buffer, 0, sizeof(t_recv_buffer));
+        t_recv_bytes = ::recv(m_socketDescriptor, t_recv_buffer, sizeof(t_recv_buffer), 0);
+        if (t_recv_bytes > 0)
+        {
+          MON_LOG_DBG("Socket bytes received: " << t_recv_bytes)
+          t_message += std::string(t_recv_buffer, t_recv_bytes);
+          INFINITY_CYCLE_RESTART(read_all)
+        }
+        if (t_recv_bytes == 0)
+        {
+          if(!t_message.empty())
+          {
+            MON_LOG_DBG(t_message)
+            incommingMessage(t_message);
+          }
+          INFINITY_CYCLE_RESTART(read_all)
+        }
+        if (t_recv_bytes < 0)
+        {
+          MON_PRINT_ERRNO("Socket recieve error")
+          INFINITY_CYCLE_BREAK(read_all)
+        }
+      INFINITY_CYCLE_END(read_all)
     }
-    if (t_recv_bytes == 0)
+    else
     {
-      break;
+      sleep(1);
     }
-    if (t_recv_bytes < 0)
-    {
-      MON_PRINT_ERRNO("Socket recieve error")
-      break;
-    }
-  }
-  free(t_recv_buffer);
-  return data;
+  INFINITY_CYCLE_END(read_or_wait)
 }
 
 void CSocket::write(const std::string &data)
 {
   if(m_isConnected || m_isListen)
   {
-    int t_send_bytes = send(m_socketDescriptor, data.c_str(), data.length(), MSG_CONFIRM);
-    MON_LOG_DBG("Socket bytes send: " << t_send_bytes)
-    if (t_send_bytes >  0) { return; }
-    if (t_send_bytes == 0) { MON_LOG_WRN("Socket sent zero bytes...")   }
-    if (t_send_bytes <  0) { MON_PRINT_ERRNO("Error writing to socket") }
+    int t_msg_length = data.length();
+    int t_sent_bytes = 0;
+    int t_total_sent_bytes = 0;
+
+    while(t_total_sent_bytes < t_msg_length)
+    {
+       t_sent_bytes = ::send(m_socketDescriptor, data.c_str()+t_total_sent_bytes, t_msg_length-t_total_sent_bytes, 0);
+       if (t_sent_bytes == -1) { MON_PRINT_ERRNO("Error writing to socket"); break; }
+       t_total_sent_bytes += t_sent_bytes;
+    }
+
+    MON_LOG_DBG("Socket bytes send: " << t_total_sent_bytes)
   }
   else { MON_LOG_ERR("Write on offline socket") }
 }
@@ -91,7 +108,7 @@ void CSocket::close()
 }
 
 #define MON_SOCKET_OPTION_SET(_to,_from) \
-    if(!m_isListen || m_isConnected) { _to = _from; } \
+    if(!(m_isListen || m_isConnected)) { _to = _from; } \
     else { MON_LOG_WRN("Set option (" #_to ") on online socket (from `" << _to << "` to `" << _from <<"`)") }
 
 void                   CSocket::setPortLocal  (const unsigned short &port) { MON_SOCKET_OPTION_SET(m_portLocal,  port); }

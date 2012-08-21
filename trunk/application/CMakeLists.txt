@@ -2,7 +2,7 @@
 PROJECT(mon)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-OPTION ( BUILD_SERVER         "Build server"                           OFF )
+OPTION ( BUILD_COLLECTOR      "Build collector"                           OFF )
 OPTION ( BUILD_NODE           "Build node"                             ON  )
 OPTION ( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
 OPTION ( BUILD_CLIENT_NCURSES "Build mon-client-qt"                    OFF )
@@ -139,8 +139,8 @@ install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 install(FILES defines/sensor-defines.h DESTINATION include/mon )
 # +++++++++++++++++++ install for sensors +++++++++++++++++++
 # +++++++++++++++++++ applications +++++++++++++++++++
-add_dependencies(base config logger network sensor)
-target_link_libraries(base config logger network sensor)
+add_dependencies(base config logger network sensor protocol)
+target_link_libraries(base config logger network sensor protocol)
 include_directories( ${GEN_PATH}
                      libraryes/base/src
                      libraryes/network/src
@@ -169,30 +169,36 @@ function(add_daemon target_name)
   add_run(${target_name})
 endfunction(add_daemon)
 
-IF( BUILD_SERVER )
-  MESSAGE ( STATUS "---> Processing server" )
-  SET(mon-server-headers
-        daemons/server/src/server_st.h
-        daemons/server/src/nodes/cremotemonnode.h
-        daemons/server/src/nodes/cmonnodesmanager.h
+IF( BUILD_COLLECTOR )
+  MESSAGE ( STATUS "---> Processing collector" )
+  SET(mon-collector-headers
+        daemons/collector/src/collector_st.h
+        daemons/collector/src/network/cremotenode.h
+        daemons/collector/src/network/cnodesmanager.h
+        daemons/collector/src/network/ccollectorprotocol.h
      )
-  SET(mon-server-sources
-      daemons/server/src/nodes/cremotemonnode.cpp
-      daemons/server/src/nodes/cmonnodesmanager.cpp
-      daemons/server/src/main.cpp )
-  include_directories( daemons/server/src daemons/server/src/nodes )
-  add_executable( mon-server ${mon-server-headers} ${mon-server-sources})
-  add_daemon(mon-server)
-ENDIF( BUILD_SERVER )
+  SET(mon-collector-sources
+      daemons/collector/src/network/cremotenode.cpp
+      daemons/collector/src/network/cnodesmanager.cpp
+      daemons/collector/src/network/ccollectorprotocol.cpp
+      daemons/collector/src/main.cpp )
+  include_directories( daemons/collector/src daemons/collector/src/network )
+  add_executable( mon-collector ${mon-collector-headers} ${mon-collector-sources})
+  add_daemon(mon-collector)
+ENDIF( BUILD_COLLECTOR )
 
 IF( BUILD_NODE )
   MESSAGE ( STATUS "---> Processing node" )
   SET(mon-node-headers
       daemons/node/src/node_st.h
-      daemons/node/src/network/cmonnodesocketserver.h
+      daemons/node/src/network/ccollectorsmanager.h
+      daemons/node/src/network/cremotecollector.h
+      daemons/node/src/network/cnodeprotocol.h
   )
   SET(mon-node-sources
-      daemons/node/src/network/cmonnodesocketserver.cpp
+      daemons/node/src/network/ccollectorsmanager.cpp
+      daemons/node/src/network/cremotecollector.cpp
+      daemons/node/src/network/cnodeprotocol.cpp
       daemons/node/src/main.cpp )
   include_directories( daemons/node/src daemons/node/src/network )
   add_executable( mon-node ${mon-node-headers} ${mon-node-sources})

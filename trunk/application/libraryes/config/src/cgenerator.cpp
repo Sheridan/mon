@@ -1,7 +1,16 @@
 /* %Id% */
 #include "cgenerator.h"
 #include "st.h"
-#include <stdlib.h>
+
+//#define MON_CONFIG_GENERATOR_DEBUG_ENABLE
+#ifdef MON_CONFIG_GENERATOR_DEBUG_ENABLE
+  #define MON_CONFIG_GENERATOR_DEBUG(_msg) MON_LOG_DBG(_msg)
+#else
+  #define MON_CONFIG_GENERATOR_DEBUG(_msg)
+#endif
+
+
+
 namespace mon
 {
 namespace lib
@@ -32,12 +41,12 @@ void CGenerator::generate()
   MON_LOG_NFO("Writing config to " << m_filename);
   writeFolder(m_root);
   fprintf(m_file, "\n");
-  MON_LOG_DBG("Writing config to " << m_filename << " done");
+  MON_CONFIG_GENERATOR_DEBUG("Writing config to " << m_filename << " done");
 }
 
 void CGenerator::writeFolder(CFolder *folder)
 {
-  MON_LOG_DBG("Enter folder: " << folder->name())
+  MON_CONFIG_GENERATOR_DEBUG("Enter folder: " << folder->name())
   int childsCount = folder->filesCount() + folder->foldersCount();
   if(childsCount == 0) { return; }
 
@@ -79,12 +88,12 @@ void CGenerator::writeFolder(CFolder *folder)
     fprintf(m_file, "}");
     fprintf(m_file, "\n");
   }
-  MON_LOG_DBG("Leave folder: " << folder->name())
+  MON_CONFIG_GENERATOR_DEBUG("Leave folder: " << folder->name())
 }
 
 void CGenerator::writeFile(CFile *file)
 {
-  MON_LOG_DBG("Enter file: " << file->name())
+  MON_CONFIG_GENERATOR_DEBUG("Enter file: " << file->name())
   if((file->parent()->filesCount()+file->parent()->foldersCount()) > 1)
   {
     writeIndent(file->level());
@@ -96,12 +105,11 @@ void CGenerator::writeFile(CFile *file)
     default: fprintf(m_file, "%s;", file->toString().c_str()); break;
   }
   fprintf(m_file, "\n");
-  MON_LOG_DBG("Leave file: " << file->name())
+  MON_CONFIG_GENERATOR_DEBUG("Leave file: " << file->name())
 }
 
 std::string CGenerator::replaceSpetial(const std::string &source)
 {
-//  return source;
   std::string result = "";
   for(std::string::const_iterator si = source.begin(); si != source.end(); ++si)
   {

@@ -1,8 +1,8 @@
 /* %Id% */
-#include "server_st.h"
+#include "collector_st.h"
 #include "default-application.h"
 #include "signals-helper.h"
-#include "nodes/cmonnodesmanager.h"
+#include "cnodesmanager.h"
 
 void mon_exit(int returnValue)
 {
@@ -24,8 +24,8 @@ int main (int argc, char* argv[])
 
   MON_DEFAULT_APPLICATION_INIT;
 
-  MON_ST_APPEND_MEMBER(mon::daemons::server::CMonNodesManager);
-  MON_SERVER_ST_NODES_MANAGER->load();
+  MON_ST_APPEND_MEMBER(mon::daemons::collector::CNodesManager);
+  MON_COLLECTOR_ST_NODES_MANAGER->load();
 
   MON_SIGNAL_LOOP;
   mon_exit(EXIT_SUCCESS);

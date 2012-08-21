@@ -4,6 +4,8 @@
 #include "signals-helper.h"
 #include <arpa/inet.h>
 #include <netdb.h>
+#include "cvariant.h"
+
 namespace mon
 {
 namespace lib
@@ -15,11 +17,18 @@ CSocketClient::CSocketClient() : CSocket()
 {
 }
 
-CSocketClient::CSocketClient(const int &descriptor)
+CSocketClient::CSocketClient(const int &descriptor, const std::string &addr_from, const int &port_from) : CSocket()
 {
+  setAddrRemote(addr_from);
+  setPortRemote(port_from);
   m_socketDescriptor = descriptor;
   m_isConnected      = true;
+  waitRecv();
 }
+
+CSocketClient::~CSocketClient()
+{}
+
 void CSocketClient::connect(const std::string &addr, const unsigned short &port)
 {
   setPortRemote(port);
@@ -27,58 +36,47 @@ void CSocketClient::connect(const std::string &addr, const unsigned short &port)
   connect();
 }
 
-#define MON_TO_STRING(_str,_tmpl,_data) \
-{ \
-  char *s = NULL; \
-  int l = snprintf(s, 0, _tmpl, _data); \
-  if(l > 0) \
-  { \
-    s = static_cast<char *>(malloc(sizeof(char) * l)); \
-    snprintf(s, l + 1, "%d", _data); \
-  } \
-  _str = s; \
-  free (s); \
-}
-
 void CSocketClient::connect()
 {
   MON_LOG_NFO("Connecting to " << addrRemote() << ":" << portRemote());
-  addrinfo hints, *result, *rp;
+  addrinfo t_connection_info, *t_ip_addresses, *t_ip_address;
 
 
-  memset(&hints, 0, sizeof(struct addrinfo));
-  hints.ai_family   = AF_UNSPEC;  /* Allow IPv4 or IPv6 */
-  hints.ai_socktype = SOCK_DGRAM; /* Datagram socket */
-  hints.ai_flags    = 0;
-  hints.ai_protocol = 0;          /* Any protocol */
+  memset(&t_connection_info, 0, sizeof(struct addrinfo));
+  t_connection_info.ai_family   = AF_UNSPEC;  /* Allow IPv4 or IPv6 */
+  t_connection_info.ai_socktype = SOCK_STREAM; /* Datagram socket */
+  t_connection_info.ai_flags    = 0;
+  t_connection_info.ai_protocol = 0;          /* Any protocol */
 
-  std::string strPort = "";
-  MON_TO_STRING(strPort,"%d",portRemote());
+  std::string strPort = mon::lib::base::toString(portRemote());
 
-  int gai_err = getaddrinfo(addrRemote().c_str(), strPort.c_str(), &hints, &result);
+  int gai_err = getaddrinfo(addrRemote().c_str(), strPort.c_str(), &t_connection_info, &t_ip_addresses);
   if (gai_err != 0)
   {
     MON_LOG_ERR("Error get address info for " << addrRemote() << ":" << portRemote() << " - " << gai_strerror(gai_err));
     MON_ABORT;
   }
 
-  for (rp = result; rp != NULL; rp = rp->ai_next)
+  for (t_ip_address = t_ip_addresses; t_ip_address != NULL; t_ip_address = t_ip_address->ai_next)
   {
-    m_socketDescriptor = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+    m_socketDescriptor = socket(t_ip_address->ai_family, t_ip_address->ai_socktype, t_ip_address->ai_protocol);
     if (m_socketDescriptor == -1) { continue; }
-    if (::connect(m_socketDescriptor, rp->ai_addr, rp->ai_addrlen) != -1) { break; } /* Success */
+    if (::connect(m_socketDescriptor, t_ip_address->ai_addr, t_ip_address->ai_addrlen) != -1) { break; } /* Success */
     ::close(m_socketDescriptor);
   }
 
-  if (rp == NULL) /* No address succeeded */
+  if (t_ip_address == NULL) /* No address succeeded */
   {
     MON_LOG_ERR("Could not connect")
-    MON_ABORT;
   }
-
-  freeaddrinfo(result);  /* No longer needed */
-  MON_LOG_NFO("Connected to " << addrRemote() << ":" << portRemote());
-  m_isConnected = true;
+  else
+  {
+    MON_LOG_NFO("Connected to " << addrRemote() << ":" << portRemote());
+    m_isConnected = true;
+    connected(addrRemote(), portRemote());
+    waitRecv();
+  }
+  freeaddrinfo(t_ip_addresses);  /* No longer needed */
 }
 
 }

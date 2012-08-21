@@ -6,7 +6,7 @@
 
 #include "st.h"
 
-#define MON_ST_NODE_SERVER_SOCKET MON_ST_MEMBER(mon::daemons::node::CMonNodeSocketServer,MON_NODE_SOCKET_SERVER_ST_MEMBER_ID)
+#define MON_ST_NODE_COLLECTOR_SOCKET MON_ST_MEMBER(mon::daemons::node::CCollectorsManager,MON_COLLECTORS_MANAGER_ST_MEMBER_ID)
 
 
 #endif // NODE_ST_H_INCLUDED

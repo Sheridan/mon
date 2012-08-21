@@ -62,8 +62,8 @@
 
 
 // singleton members id ---------------------------------------------------------------------------------------------
-#define MON_NODE_SOCKET_SERVER_ST_MEMBER_ID   1
-#define MON_SERVER_NODES_MANAGER_ST_MEMBER_ID 2
+#define MON_COLLECTORS_MANAGER_ST_MEMBER_ID   1
+#define MON_NODES_MANAGER_ST_MEMBER_ID        2
 
 #define MON_ST_APPEND_MEMBER(_type) MON_ST->appendMember(new _type())
 #define MON_ST_MEMBER(_type,_id) (static_cast<_type *>(MON_ST->member(_id)))

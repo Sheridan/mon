@@ -2,24 +2,24 @@
 #ifndef CMONNODESMANAGER_H
 #define CMONNODESMANAGER_H
 #include "csingletonmember.h"
-#include "cremotemonnode.h"
+#include "cremotenode.h"
 
 namespace mon
 {
 namespace daemons
 {
-namespace server
+namespace collector
 {
 
-class CMonNodesManager : public mon::lib::base::CSingletonMember
+class CNodesManager : public mon::lib::base::CSingletonMember
 {
 public:
-  CMonNodesManager();
-  virtual ~CMonNodesManager();
+  CNodesManager();
+  virtual ~CNodesManager();
   void load();
   void unload();
 private:
-  TRemoteMonNodes m_nodes;
+  TRemoteNodes m_nodes;
 };
 
 }

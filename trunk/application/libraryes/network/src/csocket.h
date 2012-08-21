@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 //#include <sys/types.h>
 #include <netinet/in.h>
+#include "threads-helper.h"
 
 namespace mon
 {
@@ -16,10 +17,10 @@ namespace network
 
 class CSocket
 {
+    MON_THREADED_FUNCTION_DECLARE(waitRecv)
 public:
   CSocket();
   virtual ~CSocket();
-  std::string readAll();
   void write(const std::string &data);
 
   void close();
@@ -43,6 +44,8 @@ protected:
   int  m_timeout;
   bool m_isListen;
   bool m_isConnected;
+
+  virtual void incommingMessage(const std::string &message) = 0;
 
 private:
   unsigned short m_portLocal;

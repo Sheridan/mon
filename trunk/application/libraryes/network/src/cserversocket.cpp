@@ -2,7 +2,7 @@
 #include "cserversocket.h"
 #include "signals-helper.h"
 #include "st.h"
-
+#include <arpa/inet.h>
 
 namespace mon
 {
@@ -18,14 +18,14 @@ CSocketServer::CSocketServer() : CSocket()
 
 CSocketServer::~CSocketServer()
 {
-    close();
+  MON_THREADED_FUNCTION_ABORT(listen);
 }
 
 MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
 {
   MON_LOG_NFO("Server listening... ");
-  m_socketDescriptor = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if(m_socketDescriptor == -1)
+  m_socketDescriptor = ::socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+  if(m_socketDescriptor < 0)
   {
     MON_PRINT_ERRNO("Cannot create socket");
     MON_ABORT;
@@ -35,12 +35,11 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
   memset(&stSockAddr, 0, sizeof(stSockAddr));
   stSockAddr.sin_family      = PF_INET;
   stSockAddr.sin_port        = htons(portLocal());
-  stSockAddr.sin_addr.s_addr = INADDR_ANY;
+  stSockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-  if(bind(m_socketDescriptor, (const sockaddr *)(&stSockAddr), sizeof(stSockAddr)) == -1)
+  if(::bind(m_socketDescriptor, (struct sockaddr *)(&stSockAddr), sizeof(stSockAddr)) < 0)
   {
     MON_PRINT_ERRNO("Socket bind error");
-    close();
     MON_ABORT;
   }
 
@@ -55,12 +54,14 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
 
   m_isListen = true;
 
+//  waitRecv();
+
   for(;;)
   {
-    sockaddr clientAddr;
-    memset(&clientAddr, 0, sizeof(clientAddr));
-    int clientDescriptor = accept(m_socketDescriptor, &clientAddr, NULL);
-
+    sockaddr_in clientAddr;
+    socklen_t addr_length = sizeof(clientAddr);
+    memset(&clientAddr, 0, addr_length);
+    int clientDescriptor = ::accept(m_socketDescriptor, (sockaddr *)&clientAddr, &addr_length);
     if(clientDescriptor < 0)
     {
       MON_PRINT_ERRNO("Incoming connection error");
@@ -68,18 +69,12 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
     }
     else
     {
+      MON_THREADED_FUNCTION_DISABLE_CANCEL
       MON_LOG_NFO("Incoming connection...");
-      CSocketClient *client = new CSocketClient(clientDescriptor);
-      if(checkConnection(client) && incommingConnection(client))
-      {
-        MON_LOG_NFO("Incoming connection accepted from " << client->addrRemote() << ":" << client->portRemote());
-        m_clients[client->descriptor()] = client;
-      }
-      else
-      {
-        MON_LOG_WRN("Incoming connection check failed");
-        delete client;
-      }
+      CSocketClient * client = incommingConnection(clientDescriptor, inet_ntoa(clientAddr.sin_addr), clientAddr.sin_port);
+      MON_LOG_NFO("Incoming connection accepted from " << client->addrRemote() << ":" << client->portRemote());
+      m_clients[clientDescriptor] = client;
+      MON_THREADED_FUNCTION_ENABLE_CANCEL
     }
   }
 }

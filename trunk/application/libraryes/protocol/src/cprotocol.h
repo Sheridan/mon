@@ -3,10 +3,8 @@
 #include "csocket.h"
 #include "cmessage.h"
 
-#define MON_PROTO_CONNECT_ID                 1
-#define MON_PROTO_CONNECT_REQUESTED_ID       2
-#define MON_PROTO_CONNECT_SEND_ANSWER_ID     3
-#define MON_PROTO_CONNECT_ANSWER_RECEIVED_ID 4
+#define MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT  1
+#define MON_PROTO_ID_CONNECT_ANSWER             2
 
 namespace mon
 {
@@ -19,15 +17,15 @@ class CProtocol
 {
   public:
     CProtocol(mon::lib::network::CSocket *socket);
-   ~CProtocol();
+   virtual ~CProtocol();
 
-    // connect
-    void connect                 (const std::string &password);
-    void connectionRequested     (const std::string &password);
-    void connectionSendAnswer    (const bool &answer);
-    void connectionAnswerReceived(const bool &answer);
+    // initialize messaging
+
 
     void incommingMessage(const std::string &i_incoming);
+
+  protected:
+    void sendMessage(const unsigned int &i_type, const std::string &i_text);
 
   private:
     mon::lib::network::CSocket *m_socket;

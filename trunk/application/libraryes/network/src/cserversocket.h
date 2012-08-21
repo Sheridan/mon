@@ -17,14 +17,13 @@ class CSocketServer : public CSocket
   MON_THREADED_FUNCTION_DECLARE(listen)
 public:
   CSocketServer();
-  ~CSocketServer();
+  virtual ~CSocketServer();
   void listen(const unsigned short &port);
   void close();
 
 protected:
   TClientSockets m_clients;
-  virtual bool incommingConnection(CSocketClient *client) = 0;
-  virtual bool checkConnection(CSocketClient *client) = 0;
+  virtual CSocketClient * incommingConnection(const int &clientDescriptor, const std::string &addr_from, const int & port_from) = 0;
 
 };
 

@@ -4,9 +4,9 @@ digraph G
     splines=true;
     normalize=true;
     node [shape=octagon, color=cornflowerblue];
-    mon_server_0 [label="Server 0"];
-    mon_server_1 [label="Server 1"];
-    mon_server_2 [label="Server 2"];
+    mon_collector_0 [label="Server 0"];
+    mon_collector_1 [label="Server 1"];
+    mon_collector_2 [label="Server 2"];
     
     node [shape=Mcircle, color=darkgreen];
     mon_node_0 [label="Node 0"];
@@ -48,24 +48,24 @@ digraph G
     database_1 [label="Database 1"];
 
     edge [color=brown, style=filled];
-    mon_server_1 -> mon_node_0;
-    mon_server_1 -> mon_node_1;
-    mon_server_1 -> mon_node_3;
-    mon_server_0 -> mon_node_3;
-    mon_server_0 -> mon_node_4;
-    mon_server_0 -> mon_node_5;
-    mon_server_2 -> mon_node_2;
+    mon_collector_1 -> mon_node_0;
+    mon_collector_1 -> mon_node_1;
+    mon_collector_1 -> mon_node_3;
+    mon_collector_0 -> mon_node_3;
+    mon_collector_0 -> mon_node_4;
+    mon_collector_0 -> mon_node_5;
+    mon_collector_2 -> mon_node_2;
     
-    mon_server_0 -> database_0;
-    mon_server_1 -> database_0;
-    mon_server_2 -> database_1;
+    mon_collector_0 -> database_0;
+    mon_collector_1 -> database_0;
+    mon_collector_2 -> database_1;
 
-    mon_client_0 -> mon_server_0;
-    mon_client_1 -> mon_server_1;
-    mon_client_1 -> mon_server_0;
-    mon_client_2 -> mon_server_2;
-    mon_client_2 -> mon_server_1;
-    mon_client_2 -> mon_server_0;
+    mon_client_0 -> mon_collector_0;
+    mon_client_1 -> mon_collector_1;
+    mon_client_1 -> mon_collector_0;
+    mon_client_2 -> mon_collector_2;
+    mon_client_2 -> mon_collector_1;
+    mon_client_2 -> mon_collector_0;
 
     mon_node_0 -> mon_plugin_18;
     mon_node_0 -> mon_plugin_00;
