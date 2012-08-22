@@ -1,5 +1,5 @@
 /* %Id% */
-#include "memory.h"
+#include "mon-sensor-memory.h"
 
 MON_SENSOR_BEGIN
 

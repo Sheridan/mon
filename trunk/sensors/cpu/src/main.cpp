@@ -1,5 +1,5 @@
 /* %Id% */
-#include "cpu.h"
+#include "mon-sensor-cpu.h"
 
 MON_SENSOR_BEGIN
 

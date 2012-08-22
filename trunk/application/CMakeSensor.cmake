@@ -2,7 +2,7 @@
 include (${CMAKE_INSTALL_PREFIX}/include/mon/CMakeDebug.cmake)
 set( GEN_PATH "${PROJECT_BINARY_DIR}/mon_generated_sources" )
 set( SENSOR_DEFINITION "${GEN_PATH}/definition.h" )
-set( SENSOR_HEADER "${GEN_PATH}/${EXECUTABLE_NAME}.h" )
+set( SENSOR_HEADER "${GEN_PATH}/mon-sensor-${EXECUTABLE_NAME}.h" )
 set( MON_LIB_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib/mon/global")
 file(MAKE_DIRECTORY ${GEN_PATH})
 
