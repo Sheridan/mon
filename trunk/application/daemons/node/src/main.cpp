@@ -3,6 +3,7 @@
 #include "default-application.h"
 #include "signals-helper.h"
 #include "ccollectorsmanager.h"
+#include "csensorsmanager.h"
 
 void mon_exit(int returnValue)
 {
@@ -26,6 +27,8 @@ int main (int argc, char* argv[])
 
   MON_ST_APPEND_MEMBER(mon::daemons::node::CCollectorsManager);
   MON_ST_NODE_COLLECTOR_SOCKET->listen();
+  MON_ST_APPEND_MEMBER(mon::daemons::node::CSensorsManager);
+  MON_ST_SENSORS_MANAGER->load();
 
   MON_SIGNAL_LOOP;
   mon_exit(EXIT_SUCCESS);

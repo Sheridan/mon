@@ -196,14 +196,19 @@ IF( BUILD_NODE )
       daemons/node/src/network/ccollectorsmanager.h
       daemons/node/src/network/cremotecollector.h
       daemons/node/src/network/cnodeprotocol.h
+      daemons/node/src/sensors/csensor.h
+      daemons/node/src/sensors/csensorsmanager.h
   )
   SET(mon-node-sources
       daemons/node/src/network/ccollectorsmanager.cpp
       daemons/node/src/network/cremotecollector.cpp
       daemons/node/src/network/cnodeprotocol.cpp
+      daemons/node/src/sensors/csensor.cpp
+      daemons/node/src/sensors/csensorsmanager.cpp
       daemons/node/src/main.cpp )
-  include_directories( daemons/node/src daemons/node/src/network )
+  include_directories( daemons/node/src daemons/node/src/network daemons/node/src/sensors )
   add_executable( mon-node ${mon-node-headers} ${mon-node-sources})
+  target_link_libraries(mon-node dl)
   add_daemon(mon-node)
 ENDIF( BUILD_NODE )
 # +++++++++++++++++++ applications +++++++++++++++++++

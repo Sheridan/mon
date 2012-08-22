@@ -33,7 +33,6 @@ void CNodesManager::load()
   MON_FOREACH_NODE(node)
   {
     (*node)->connect();
-//    (*node)->write("1!123");
   }
 }
 

@@ -3,6 +3,7 @@
 #define MON_ST_H
 #include "global.h"
 #include "csingleton.h"
+#include "generated.h"
 #include <errno.h>
 #include <string.h>
 // main
@@ -33,6 +34,7 @@
 // singleton members id ---------------------------------------------------------------------------------------------
 #define MON_COLLECTORS_MANAGER_ST_MEMBER_ID   1
 #define MON_NODES_MANAGER_ST_MEMBER_ID        2
+#define MON_SENSORS_MANAGER_ST_MEMBER_ID      3
 
 #define MON_ST_APPEND_MEMBER(_type) MON_ST->appendMember(new _type())
 #define MON_ST_MEMBER(_type,_id) (static_cast<_type *>(MON_ST->member(_id)))

@@ -20,6 +20,8 @@ class CRemoteCollector : public mon::lib::network::CSocketClient, public CNodePr
     virtual ~CRemoteCollector();
 
   private:
+    mon::lib::config::CFolder *m_selfConfig;
+
     void incommingMessage(const std::string &message);
     void connected(const std::string &to_addr, const unsigned short &to_port);
 };

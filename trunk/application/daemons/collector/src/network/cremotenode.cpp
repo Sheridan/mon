@@ -43,15 +43,30 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
 
 void CRemoteNode::incommingMessage(const std::string &message)
 {
-  MON_LOG_DBG(message)
+  mon::lib::protocol::CMessage t_incomming_message(message);
+  switch(t_incomming_message.type())
+  {
+    case MON_PROTO_ID_CONNECT_ANSWER:
+    {
+      if(t_incomming_message.msg().compare("t") == 0)
+      {
+        MON_LOG_DBG("Connection allowed")
+      }
+      else if(t_incomming_message.msg().compare("f") == 0)
+      {
+        MON_LOG_DBG("Connection denyed")
+      }
+      else
+      {
+        MON_LOG_DBG("Strange answer" << message)
+      }
+      break;
+    }
+  }
 }
 
 void CRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
-  MON_LOG_DBG("CRemoteMonNode " << to_addr << ":" << to_port)
-  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
-  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
-  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
   CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 
