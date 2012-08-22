@@ -2,7 +2,7 @@
 PROJECT(mon)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-OPTION ( BUILD_COLLECTOR      "Build collector"                           OFF )
+OPTION ( BUILD_COLLECTOR      "Build collector"                        OFF )
 OPTION ( BUILD_NODE           "Build node"                             ON  )
 OPTION ( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
 OPTION ( BUILD_CLIENT_NCURSES "Build mon-client-qt"                    OFF )
@@ -132,12 +132,14 @@ SET(mon-base-sources
     libraryes/base/src/cvariant.cpp
     libraryes/base/src/cstringbuilder.cpp )
 add_library(base SHARED ${mon-base-headers} ${mon-base-sources})
+install(FILES ${mon-base-headers} DESTINATION include/mon )
 install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # +++++++++++++++++++ libaryes +++++++++++++++++++
-# +++++++++++++++++++ install for sensors +++++++++++++++++++
+# +++++++++++++++++++ install some headers +++++++++++++++++++
 install(FILES defines/sensor-defines.h DESTINATION include/mon )
-# +++++++++++++++++++ install for sensors +++++++++++++++++++
+install(FILES defines/logger-helper.h DESTINATION include/mon )
+# +++++++++++++++++++ install some headers +++++++++++++++++++
 # +++++++++++++++++++ applications +++++++++++++++++++
 add_dependencies(base config logger network sensor protocol)
 target_link_libraries(base config logger network sensor protocol)

@@ -2,6 +2,7 @@
 #include "cparcer.h"
 #include "st.h"
 #include "signals-helper.h"
+#include "infinity-cycle-helper.h"
 #include <stdlib.h>
 #include <string.h>
 

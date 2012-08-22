@@ -1,6 +1,7 @@
 /* %Id% */
 #include "cserversocket.h"
 #include "signals-helper.h"
+#include "infinity-cycle-helper.h"
 #include "st.h"
 #include <arpa/inet.h>
 
@@ -56,8 +57,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
 
 //  waitRecv();
 
-  for(;;)
-  {
+  MON_INFINITY_LOOP_BEGIN(wait_for_connect);
     sockaddr_in clientAddr;
     socklen_t addr_length = sizeof(clientAddr);
     memset(&clientAddr, 0, addr_length);
@@ -76,7 +76,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
       m_clients[clientDescriptor] = client;
       MON_THREADED_FUNCTION_ENABLE_CANCEL
     }
-  }
+  MON_INFINITY_LOOP_END(wait_for_connect);
 }
 
 void CSocketServer::listen(const unsigned short &port)

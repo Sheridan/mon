@@ -1,9 +1,10 @@
 #include <iostream>
 #include <limits>
 
-#define show_limit(_type) std::cout << #_type " -> " << \
-                          "min: " << std::numeric_limits<_type>::min() << " " <<\
-                          "max: " << std::numeric_limits<_type>::max() << " " <<\
+#define show_limit(_type) std::cout << #_type " -> " <<  std::endl <<\
+                          "    size: " << sizeof(_type) << std::endl <<\
+                          "    min : " << std::numeric_limits<_type>::min() << std::endl <<\
+                          "    max : " << std::numeric_limits<_type>::max() << std::endl <<\
                           std::endl;
 
 

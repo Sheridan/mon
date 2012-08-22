@@ -1,5 +1,6 @@
 /* %Id% */
-#include "sensor-defines.h"
+#include "memory.h"
+
 MON_SENSOR_BEGIN
 
 MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION

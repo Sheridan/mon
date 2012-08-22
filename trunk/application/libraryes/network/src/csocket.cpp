@@ -33,41 +33,40 @@ CSocket::~CSocket()
 MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
 {
   std::string t_message = "";
-  INFINITY_CYCLE_BEGIN(read_or_wait)
+  MON_INFINITY_LOOP_BEGIN(read_or_wait)
     if(m_isConnected || m_isListen)
     {
       char t_recv_buffer[MON_SOCKET_RECV_BUFFER_LENGTH]; // = static_cast<char*>(malloc(sizeof(char)*MON_SOCKET_RECV_BUFFER_LENGTH));
       int  t_recv_bytes = 0;
-      INFINITY_CYCLE_BEGIN(read_all)
+      MON_INFINITY_LOOP_BEGIN(read_all)
         ::memset(t_recv_buffer, 0, sizeof(t_recv_buffer));
         t_recv_bytes = ::recv(m_socketDescriptor, t_recv_buffer, sizeof(t_recv_buffer), 0);
         if (t_recv_bytes > 0)
         {
           MON_LOG_DBG("Socket bytes received: " << t_recv_bytes)
           t_message += std::string(t_recv_buffer, t_recv_bytes);
-          INFINITY_CYCLE_RESTART(read_all)
+          MON_INFINITY_LOOP_RESTART(read_all)
         }
         if (t_recv_bytes == 0)
         {
           if(!t_message.empty())
           {
-            MON_LOG_DBG(t_message)
             incommingMessage(t_message);
           }
-          INFINITY_CYCLE_RESTART(read_all)
+          MON_INFINITY_LOOP_RESTART(read_all)
         }
         if (t_recv_bytes < 0)
         {
           MON_PRINT_ERRNO("Socket recieve error")
-          INFINITY_CYCLE_BREAK(read_all)
+          MON_INFINITY_LOOP_BREAK(read_all)
         }
-      INFINITY_CYCLE_END(read_all)
+      MON_INFINITY_LOOP_END(read_all)
     }
     else
     {
       sleep(1);
     }
-  INFINITY_CYCLE_END(read_or_wait)
+  MON_INFINITY_LOOP_END(read_or_wait)
 }
 
 void CSocket::write(const std::string &data)

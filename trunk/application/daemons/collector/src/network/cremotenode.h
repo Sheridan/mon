@@ -5,6 +5,7 @@
 #include "threads-helper.h"
 #include "class-helper.h"
 #include "ccollectorprotocol.h"
+#include "cfolder.h"
 #include <list>
 #include <string>
 
@@ -22,7 +23,7 @@ public:
   CRemoteNode(const std::string &confLeaf);
   virtual ~CRemoteNode();
 private:
-  std::string m_configLeaf;
+  mon::lib::config::CFolder *m_selfConfig;
 
   void incommingMessage(const std::string &message);
   void connected(const std::string &to_addr, const unsigned short &to_port);

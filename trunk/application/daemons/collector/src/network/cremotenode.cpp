@@ -2,6 +2,7 @@
 #include "collector_st.h"
 #include "cremotenode.h"
 #include "global.h"
+#include "infinity-cycle-helper.h"
 
 namespace mon
 {
@@ -12,14 +13,13 @@ namespace collector
 
 CRemoteNode::CRemoteNode(const std::string &confLeaf)
   : mon::lib::network::CSocketClient(),
-    CCollectorProtocol(this),
-    m_configLeaf(confLeaf)
+    CCollectorProtocol(this)
 {
   MON_LOG_DBG("Node " << confLeaf << " ");
-  MON_CFOLDER *folder = MON_ST_CONFIG->folder("nodes")->folder(m_configLeaf)->folder("connection");
-  setTimeout                               (folder->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
-  setAddrRemote                            (folder->file("host")   ->get(std::string("localhost")));
-  setPortRemote(static_cast<unsigned short>(folder->file("port")   ->get(MON_DEFAULT_LISTEN_PORT)));
+  m_selfConfig = MON_ST_CONFIG->folder("nodes")->folder(confLeaf);
+  setTimeout                               (m_selfConfig->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
+  setAddrRemote                            (m_selfConfig->folder("connection")->file("host")   ->get(std::string("localhost")));
+  setPortRemote(static_cast<unsigned short>(m_selfConfig->folder("connection")->file("port")   ->get(MON_DEFAULT_LISTEN_PORT)));
   MON_THREADED_FUNCTION_INIT(connect);
 }
 
@@ -30,8 +30,7 @@ CRemoteNode::~CRemoteNode()
 
 MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
 {
-  for(;;)
-  {
+  MON_INFINITY_LOOP_BEGIN(reconnect_loop)
     if(!isConnected())
     {
       MON_THREADED_FUNCTION_DISABLE_CANCEL
@@ -39,7 +38,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
       MON_THREADED_FUNCTION_ENABLE_CANCEL
     }
     sleep(1);
-  }
+  MON_INFINITY_LOOP_END(reconnect_loop)
 }
 
 void CRemoteNode::incommingMessage(const std::string &message)
@@ -50,10 +49,10 @@ void CRemoteNode::incommingMessage(const std::string &message)
 void CRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
   MON_LOG_DBG("CRemoteMonNode " << to_addr << ":" << to_port)
-  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_configLeaf)->file("password")->get(MON_DEFAULT_PASSWORD));
-  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_configLeaf)->file("password")->get(MON_DEFAULT_PASSWORD));
-  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_configLeaf)->file("password")->get(MON_DEFAULT_PASSWORD));
-  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_configLeaf)->file("password")->get(MON_DEFAULT_PASSWORD));
+  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
+  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
+  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
+  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 
 }
