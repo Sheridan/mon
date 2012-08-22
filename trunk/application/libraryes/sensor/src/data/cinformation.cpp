@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cinformation.h"
 namespace mon
 {

@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef INFINITYCYCLEHELPER_H
 #define INFINITYCYCLEHELPER_H
 

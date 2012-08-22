@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cstringbuilder.h"
 #include <stdio.h>
 #include <stdlib.h>

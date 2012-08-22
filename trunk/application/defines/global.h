@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef MON_GLOBAL_H
 #define MON_GLOBAL_H
 

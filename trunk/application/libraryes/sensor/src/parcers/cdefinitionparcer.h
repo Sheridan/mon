@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CDEFINITIONPARCER_H
 #define CDEFINITIONPARCER_H
 namespace mon

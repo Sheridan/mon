@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cprotocol.h"
 #include "cvariant.h"
 #include "st.h"

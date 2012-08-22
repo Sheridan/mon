@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef LOGGERHELPER_H
 #define LOGGERHELPER_H
 

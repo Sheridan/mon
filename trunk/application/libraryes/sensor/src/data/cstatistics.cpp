@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cstatistics.h"
 namespace mon
 {

@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cinformationparcer.h"
 namespace mon
 {

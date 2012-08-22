@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cnodeprotocol.h"
 namespace mon
 {

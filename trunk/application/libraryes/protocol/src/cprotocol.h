@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CPROTOCOL_H
 #define CPROTOCOL_H
 #include "csocket.h"

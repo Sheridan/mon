@@ -1,4 +1,5 @@
 *.txt filter=idter
+*.cmake filter=idter
 *.cpp filter=idter
 *.h filter=idter
 *.dot filter=idter

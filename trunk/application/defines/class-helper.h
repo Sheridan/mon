@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CLASSHELPER_H
 #define CLASSHELPER_H
 

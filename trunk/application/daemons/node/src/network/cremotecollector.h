@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CREMOTECOLLECTOR_H
 #define CREMOTECOLLECTOR_H
 #include "cclientsocket.h"

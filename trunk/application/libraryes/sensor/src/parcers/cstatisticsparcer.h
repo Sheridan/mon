@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CSTATISTICSPARCER_H
 #define CSTATISTICSPARCER_H
 namespace mon

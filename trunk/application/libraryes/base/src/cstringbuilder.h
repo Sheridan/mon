@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CSTRINGBUILDER_H
 #define CSTRINGBUILDER_H
 #include <string>

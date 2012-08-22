@@ -1,3 +1,4 @@
+/* %Id% */
 #include "cdefinition.h"
 namespace mon
 {

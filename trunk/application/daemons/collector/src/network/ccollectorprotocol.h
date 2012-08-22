@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CCOLLECTORPROTOCOL_H
 #define CCOLLECTORPROTOCOL_H
 

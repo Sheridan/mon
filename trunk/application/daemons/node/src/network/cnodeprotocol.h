@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CNODEPROTOCOL_H
 #define CNODEPROTOCOL_H
 

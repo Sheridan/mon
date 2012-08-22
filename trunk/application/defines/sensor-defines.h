@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef SENSORDEFINES_H_%sensor_name%
 #define SENSORDEFINES_H_%sensor_name%
 

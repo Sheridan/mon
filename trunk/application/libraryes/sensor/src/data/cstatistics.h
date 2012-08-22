@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CSTATISTICS_H
 #define CSTATISTICS_H
 namespace mon

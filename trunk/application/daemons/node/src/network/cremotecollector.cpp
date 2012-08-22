@@ -1,3 +1,4 @@
+/* %Id% */
 #include "node_st.h"
 #include "cremotecollector.h"
 namespace mon

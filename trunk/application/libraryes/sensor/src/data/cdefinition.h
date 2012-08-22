@@ -1,3 +1,4 @@
+/* %Id% */
 #ifndef CDEFINITION_H
 #define CDEFINITION_H
 #include "class-helper.h"
