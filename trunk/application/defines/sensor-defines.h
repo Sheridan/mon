@@ -28,15 +28,22 @@
   MON_SENSOR_IMPLEMENT_FUNCTION(const char *,getName, "Request %sensor_name% sensor name" ) { return sensor_name; }
 
 #define MON_SENSOR_BEGIN \
+  namespace mon { namespace sensor { namespace %sensor_name% { \
   MON_SENSOR_PREPARE \
   void init_sensor(mon::lib::logger::CLogger * l, mon::lib::config::CFolder * c) \
                                      { logger = l; config = c; MON_LOG_DBG("%sensor_name% sensor initialization"     ); } \
   MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned char *,getDefinition      , "Request %sensor_name% definition"        ) { return definition       ; } \
   MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int   ,getDefinitionLength, "Request %sensor_name% definition length" ) { return definition_length; }
 
-#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION  MON_SENSOR_IMPLEMENT_FUNCTION(const char *, getStatistics , "Request %sensor_name% statistics"  )
-#define MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const char *, getInformation, "Request %sensor_name% information" )
+#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const char *, getStatistics , "Request %sensor_name% statistics"  )
+#define MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION     MON_SENSOR_IMPLEMENT_FUNCTION(const char *, getInformation, "Request %sensor_name% information" )
 
-#define MON_SENSOR_END int main (int argc, char* argv[]) { return 0; }
+#define MON_SENSOR_NO_STATISTICS      MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION  { return ""; }
+#define MON_SENSOR_NO_INFORMATION     MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION { return ""; }
+
+//#define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const int   , getExemplarsCount, "Request %sensor_name% information" )
+
+
+#define MON_SENSOR_END }}} int main (int argc, char* argv[]) { return 0; }
 
 #endif // SENSORDEFINES_H_%sensor_name%

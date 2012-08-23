@@ -1,5 +1,5 @@
 /* %Id% */
-#include "cgenerator.h"
+#include "cconfigurationgenerator.h"
 #include "st.h"
 
 //#define MON_CONFIG_GENERATOR_DEBUG_ENABLE
@@ -18,7 +18,7 @@ namespace lib
 namespace config
 {
 
-CGenerator::CGenerator(const std::string &filename, CFolder *root) : m_filename(filename), m_root(root)
+CConfigurationGenerator::CConfigurationGenerator(const std::string &filename, CFolder *root) : m_filename(filename), m_root(root)
 {
   m_error = false;
   m_file = fopen(m_filename.c_str(), "w");
@@ -29,12 +29,12 @@ CGenerator::CGenerator(const std::string &filename, CFolder *root) : m_filename(
   }
 }
 
-CGenerator::~CGenerator()
+CConfigurationGenerator::~CConfigurationGenerator()
 {
   fclose(m_file);
 }
 
-void CGenerator::generate()
+void CConfigurationGenerator::generate()
 {
   if(m_error) { return; }
 
@@ -44,7 +44,7 @@ void CGenerator::generate()
   MON_CONFIG_GENERATOR_DEBUG("Writing config to " << m_filename << " done");
 }
 
-void CGenerator::writeFolder(CFolder *folder)
+void CConfigurationGenerator::writeFolder(CFolder *folder)
 {
   MON_CONFIG_GENERATOR_DEBUG("Enter folder: " << folder->name())
   int childsCount = folder->filesCount() + folder->foldersCount();
@@ -91,7 +91,7 @@ void CGenerator::writeFolder(CFolder *folder)
   MON_CONFIG_GENERATOR_DEBUG("Leave folder: " << folder->name())
 }
 
-void CGenerator::writeFile(CFile *file)
+void CConfigurationGenerator::writeFile(CFile *file)
 {
   MON_CONFIG_GENERATOR_DEBUG("Enter file: " << file->name())
   if((file->parent()->filesCount()+file->parent()->foldersCount()) > 1)
@@ -108,7 +108,7 @@ void CGenerator::writeFile(CFile *file)
   MON_CONFIG_GENERATOR_DEBUG("Leave file: " << file->name())
 }
 
-std::string CGenerator::replaceSpetial(const std::string &source)
+std::string CConfigurationGenerator::replaceSpetial(const std::string &source)
 {
   std::string result = "";
   for(std::string::const_iterator si = source.begin(); si != source.end(); ++si)
@@ -131,7 +131,7 @@ std::string CGenerator::replaceSpetial(const std::string &source)
 #define MON_INDENT_CHARACTER " "
 #define MON_INDENT_COUNT      2
 
-void CGenerator::writeIndent(const int &indent)
+void CConfigurationGenerator::writeIndent(const int &indent)
 {
   for (int i = 0; i < indent*MON_INDENT_COUNT; i++)
   {

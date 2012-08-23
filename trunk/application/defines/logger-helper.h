@@ -33,7 +33,7 @@
   #define MON_LOG_DBG(_message)
 #endif
 
-#define MON_PRINT_ERRNO(_message) MON_LOG_ERR(_message << ". (" << errno << "), " << strerror(errno));
+#define MON_PRINT_ERRNO(_message)                     MON_LOG_ERR(_message << ". (" << errno << "), " << strerror(errno));
 #define MON_PRINT_FILEOP_ERRNO(_filename, _operation) MON_PRINT_ERRNO(_operation " file '" << _filename << "' failed");
 
 

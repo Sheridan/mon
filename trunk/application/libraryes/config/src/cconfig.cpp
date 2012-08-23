@@ -1,7 +1,7 @@
 /* %Id% */
 #include "cconfig.h"
-#include "cparcer.h"
-#include "cgenerator.h"
+#include "cconfigurationparcer.h"
+#include "cconfigurationgenerator.h"
 #include "st.h"
 
 namespace mon
@@ -26,14 +26,14 @@ CConfig::~CConfig()
 void CConfig::load(const std::string &filename)
 {
   m_base_filename = filename;
-  CParcer p(m_base_filename, m_root);
+  CConfigurationParcer p(m_base_filename, m_root);
   p.parce();
 }
 
 void CConfig::save(const std::string &filename)
 {
   m_run_filename = filename;
-  CGenerator g(m_run_filename, m_root);
+  CConfigurationGenerator g(m_run_filename, m_root);
   g.generate();
 }
 

@@ -10,11 +10,11 @@ namespace lib
 {
 namespace config
 {
-class CGenerator
+class CConfigurationGenerator
 {
 public:
-  CGenerator(const std::string &filename, CFolder *root);
-  virtual ~CGenerator();
+  CConfigurationGenerator(const std::string &filename, CFolder *root);
+  virtual ~CConfigurationGenerator();
   void generate();
 
 private:

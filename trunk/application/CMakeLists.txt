@@ -37,8 +37,8 @@ install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 MESSAGE ( STATUS "---> Processing `config` library" )
 SET(mon-config-headers
     libraryes/config/src/pathinterface.h
-    libraryes/config/src/cparcer.h
-    libraryes/config/src/cgenerator.h
+    libraryes/config/src/cconfigurationparcer.h
+    libraryes/config/src/cconfigurationgenerator.h
     libraryes/config/src/cconfig.h
     libraryes/config/src/cnode.h
     libraryes/config/src/cfile.h
@@ -46,8 +46,8 @@ SET(mon-config-headers
     libraryes/config/src/config.h )
 SET(mon-config-sources
     libraryes/config/src/main.cpp
-    libraryes/config/src/cparcer.cpp
-    libraryes/config/src/cgenerator.cpp
+    libraryes/config/src/cconfigurationparcer.cpp
+    libraryes/config/src/cconfigurationgenerator.cpp
     libraryes/config/src/cconfig.cpp
     libraryes/config/src/cnode.cpp
     libraryes/config/src/cfile.cpp
@@ -124,13 +124,19 @@ SET(mon-base-headers
     libraryes/base/src/csingletonmember.h
     libraryes/base/src/csingleton.h
     libraryes/base/src/cvariant.h
-    libraryes/base/src/cstringbuilder.h )
+    libraryes/base/src/cstringbuilder.h
+    libraryes/base/src/cparcer.h
+    libraryes/base/src/cparcerfile.h
+    libraryes/base/src/parcer/cparcerstring.h)
 SET(mon-base-sources
     libraryes/base/src/main.cpp
     libraryes/base/src/csingletonmember.cpp
     libraryes/base/src/csingleton.cpp
     libraryes/base/src/cvariant.cpp
-    libraryes/base/src/cstringbuilder.cpp )
+    libraryes/base/src/cstringbuilder.cpp
+    libraryes/base/src/cparcer.cpp
+    libraryes/base/src/cparcerfile.cpp
+    libraryes/base/src/parcer/cparcerstring.cpp)
 add_library(base SHARED ${mon-base-headers} ${mon-base-sources})
 install(FILES ${mon-base-headers} DESTINATION include/mon )
 install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})

@@ -5,18 +5,20 @@ object cpu
   exemplars: 2;
   maxStatisticalUpdateFrequency: 10Hz;
   maxInformationUpdateFrequency: 0.001Hz;
+  defaultStatisticalUpdateFrequency: 1Hz;
+  defaultInformationUpdateFrequency: 0.0001Hz;
   flags:
   {
     provideStatistics,
     provideInformation,
     canBeAggregated
-  };
+  }
   tags:
   {
     system,
     hardware,
     baseResources
-  };
+  }
   statisticalFields:
   {
     idle: 
@@ -24,14 +26,14 @@ object cpu
       label: "idle";
       type: %;
       description: "CPU idle";
-    };
+    }
     app:
     {
       label: "application";
       type: %;
       description: "Application usage";
-    };
-  };
+    }
+  }
   informationFields:
   {
     vendor:
@@ -39,12 +41,12 @@ object cpu
       label: "Vendor";
       type: string;
       description: "Processor vendor";
-    };
+    }
     model:
     {
       label: "Model";
       type: string;
       description: "Model name";
-    };
-  };
-};
+    }
+  }
+}

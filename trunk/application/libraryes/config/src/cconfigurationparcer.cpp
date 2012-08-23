@@ -1,5 +1,5 @@
 /* %Id% */
-#include "cparcer.h"
+#include "cconfigurationparcer.h"
 #include "st.h"
 #include "signals-helper.h"
 #include "infinity-cycle-helper.h"
@@ -96,7 +96,7 @@ namespace lib
 namespace config
 {
 
-CParcer::CParcer(const std::string &filename, CFolder *root) : m_filename(filename), m_root(root)
+CConfigurationParcer::CConfigurationParcer(const std::string &filename, CFolder *root) : m_filename(filename), m_root(root)
 {
   m_eof        = false;
   m_error      = false;
@@ -111,7 +111,7 @@ CParcer::CParcer(const std::string &filename, CFolder *root) : m_filename(filena
   }
 }
 
-CParcer::~CParcer()
+CConfigurationParcer::~CConfigurationParcer()
 {
   if(m_error) { return; }
 
@@ -121,7 +121,7 @@ CParcer::~CParcer()
   }
 }
 
-void CParcer::parce()
+void CConfigurationParcer::parce()
 {
   if(m_error) { return; }
 
@@ -133,7 +133,7 @@ void CParcer::parce()
   MON_LOG_DBG("Loading config from " << m_filename << " done. Lines: " << m_linesCount + 2 << ", symbols: " << m_charactersCount);
 }
 
-void CParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
+void CConfigurationParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
 {
   #ifdef MON_CONF_PARCER_PRINT_VARIABLES_ENABLED
     MON_LOG_DBG("Enter folder " << folder->name());
@@ -196,7 +196,7 @@ void CParcer::readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter)
   #endif
 }
 
-void CParcer::readValue(CFile *file)
+void CConfigurationParcer::readValue(CFile *file)
 {
   mon::lib::base::EContentType c_type = mon::lib::base::ctUnknown;
   bool underZero = false;
@@ -269,7 +269,7 @@ void CParcer::readValue(CFile *file)
 
 MON_CONF_PARCER_BOOL_TRUE (v_true )
 MON_CONF_PARCER_BOOL_FALSE(v_false)
-bool CParcer::convertBool(const char *buffer)
+bool CConfigurationParcer::convertBool(const char *buffer)
 {
   for(int i = 0; i < MON_CONF_PARCER_BOOL_COUNT; i++)
   {
@@ -283,7 +283,7 @@ bool CParcer::convertBool(const char *buffer)
 #define MON_STRING_LOOP_CHECK \
   if(!slash && stringOpenChar == MON_CONF_PARCER_CURRENT_CHARACTER(read_string)) { MON_CONF_PARCER_BREAK_LOOP(read_string); }
 
-std::string CParcer::readString(const TCFChar &stringOpenChar)
+std::string CConfigurationParcer::readString(const TCFChar &stringOpenChar)
 {
   bool slash = false;
   std::string result = "";
@@ -301,7 +301,7 @@ std::string CParcer::readString(const TCFChar &stringOpenChar)
   return result;
 }
 
-void CParcer::skipComment()
+void CConfigurationParcer::skipComment()
 {
   MON_CONF_PARCER_LOOP_BEGIN(read_comment);
   case '\n': MON_CONF_PARCER_BREAK_LOOP(read_comment);
@@ -309,7 +309,7 @@ void CParcer::skipComment()
   MON_CONF_PARCER_LOOP_END(read_comment);
 }
 
-TCFChar CParcer::readChar()
+TCFChar CConfigurationParcer::readChar()
 {
   int result = fgetc(m_file);
   if(result == -1 && result != EOF)
@@ -339,7 +339,7 @@ TCFChar CParcer::readChar()
   return character;
 }
 
-void CParcer::stepBack()
+void CConfigurationParcer::stepBack()
 {
   if(fseek(m_file, -sizeof(TCFChar), SEEK_CUR) == -1)
   {

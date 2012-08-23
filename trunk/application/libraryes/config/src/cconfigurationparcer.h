@@ -1,6 +1,6 @@
 /* %Id% */
-#ifndef CPARCER_H
-#define CPARCER_H
+#ifndef CCONFIGURATIONPARCER_H
+#define CCONFIGURATIONPARCER_H
 #include <string>
 #include "cfolder.h"
 #include <stdio.h>
@@ -14,11 +14,11 @@ namespace config
 
 typedef std::string::value_type TCFChar;
 
-class CParcer
+class CConfigurationParcer
 {
 public:
-  CParcer(const std::string &filename, CFolder *root);
-  ~CParcer();
+  CConfigurationParcer(const std::string &filename, CFolder *root);
+  ~CConfigurationParcer();
   void parce();
 
 private:
@@ -49,4 +49,4 @@ private:
 }
 }
 
-#endif // CPARCER_H
+#endif // CCONFIGURATIONPARCER_H

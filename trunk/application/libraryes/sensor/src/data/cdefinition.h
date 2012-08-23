@@ -14,6 +14,7 @@ namespace sensor
 
 enum EDataType
 {
+  dtUnknown,
   dtPercent,
   dtBool,
   dtShort,
@@ -32,8 +33,19 @@ struct SField
     std::string label;
     std::string description;
     EDataType   type;
+    SField() { name = ""; label = ""; description = ""; type = dtUnknown; }
     SField(const std::string &in, const std::string &il, const EDataType &it, const std::string &id)
     {name = in; label = il; type = it; description = id;}
+};
+
+struct SUpdateFrequences
+{
+    float maxFrequence;
+    float defaultFrequence;
+    float currentFrequence;
+    SUpdateFrequences() { maxFrequence = 0; defaultFrequence = 0; currentFrequence = 0; }
+    SUpdateFrequences(const float &m, const float &d, const float &c)
+    { maxFrequence = m; defaultFrequence = d; currentFrequence = c; }
 };
 
 enum EFlags
@@ -49,20 +61,24 @@ typedef std::list<SField>      TFields;
 
 class CDefinition
 {
-    MON_PROPERTY(std::string     ,label                        )
-    MON_PROPERTY(unsigned int    ,exemplars                    )
-    MON_PROPERTY(float           ,maxStatisticalUpdateFrequency)
-    MON_PROPERTY(float           ,maxInformationUpdateFrequency)
-    MON_READONLY_PROPERTY(TFlags ,flags                        )
-    MON_READONLY_PROPERTY(TTags  ,tags                         )
-    MON_READONLY_PROPERTY(TFields,informationFields            )
-    MON_READONLY_PROPERTY(TFields,statisticalFields            )
+    MON_PROPERTY(std::string      , label                       )
+    MON_PROPERTY(unsigned int     , exemplars                   )
+    MON_PROPERTY(SUpdateFrequences, statisticalUpdateFrequences )
+    MON_PROPERTY(SUpdateFrequences, informationUpdateFrequences )
+    MON_READONLY_PROPERTY(TFlags  , flags                       )
+    MON_READONLY_PROPERTY(TTags   , tags                        )
+    MON_READONLY_PROPERTY(TFields , informationFields           )
+    MON_READONLY_PROPERTY(TFields , statisticalFields           )
   public:
     CDefinition();
+    ~CDefinition();
+    std::string generateText();
 
   private:
     void addFlag(const EFlags &flag);
+    bool hasFlag(const EFlags &flag);
     void addTag (const std::string &tag);
+    bool hasTag (const std::string &tag);
     void addInformationField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description);
     void addStatisticalField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description);
 
