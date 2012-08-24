@@ -4,6 +4,7 @@
 #include <string>
 #include "cdefinition.h"
 #include "class-helper.h"
+#include "cparcerstring.h"
 
 namespace mon
 {
@@ -12,21 +13,16 @@ namespace lib
 namespace sensor
 {
 
-class CDefinitionParcer
+class CDefinitionParcer : public mon::lib::base::CParcerString
 {
-    CDefinitionParcer();
+    CDefinitionParcer(const std::string &definition);
     ~CDefinitionParcer();
-    CDefinition * parce(const std::string &definition);
+    CDefinition * parce();
 
   private:
     std::string m_definitionText;
     int         m_currentIndex;
 
-//    TCFChar readChar();
-//    void stepBack();
-//    void skipComment();
-//    std::string readString(const TCFChar &stringOpenChar);
-//    void readValue();
 };
 
 }

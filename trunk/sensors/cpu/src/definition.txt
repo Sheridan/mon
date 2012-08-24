@@ -1,12 +1,20 @@
 # %Id%
-object cpu
+object cpu_utilisation
 {
-  label: "CPU";
-  exemplars: 2;
-  maxStatisticalUpdateFrequency: 10Hz;
-  maxInformationUpdateFrequency: 0.001Hz;
-  defaultStatisticalUpdateFrequency: 1Hz;
-  defaultInformationUpdateFrequency: 0.0001Hz;
+  label: "CPU Utilisation";
+  frequence:
+  {
+    statistical:
+    {
+      max: 10Hz;
+      default: 1Hz;
+    }
+    information:
+    {
+      max: 0.001Hz;
+      default: 0.0001Hz;
+    }
+  }
   flags:
   {
     provideStatistics,
@@ -47,6 +55,38 @@ object cpu
       label: "Model";
       type: string;
       description: "Model name";
+    }
+  }
+}
+
+object cpu_frequency
+{
+  label: "CPU Utilisation";
+  frequence:
+  {
+    statistical:
+    {
+      max: 2Hz;
+      default: 0.05Hz;
+    }
+  }
+  flags:
+  {
+    provideStatistics
+  }
+  tags:
+  {
+    system,
+    hardware,
+    baseResources
+  }
+  statisticalFields:
+  {
+    frequency: 
+    {
+      label: "CPU Frequency";
+      type: ulong;
+      description: "CPU Frequency";
     }
   }
 }

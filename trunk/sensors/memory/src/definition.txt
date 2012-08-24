@@ -2,18 +2,24 @@
 object memory
 {
   label: "Memory";
-  exemplars: 1;
-  maxStatisticalUpdateFrequency: 10Hz;
+  frequence:
+  {
+    statistical:
+    {
+      max: 10Hz;
+      default: 1Hz;
+    }
+  }
   flags:
   {
     provideStatistics
-  };
+  }
   tags:
   {
     system,
     hardware,
     baseResources
-  };
+  }
   statisticalFields:
   {
     free: 
@@ -21,18 +27,18 @@ object memory
       label: "free";
       type: unsigned long;
       description: "Free memory";
-    };
+    }
     used:
     {
       label: "used";
       type: unsigned long;
       description: "Used memory";
-    };
+    }
     cashe:
     {
       label: "cashe";
       type: unsigned long;
       description: "Used for cache";
-    };
-  };
-};
+    }
+  }
+}

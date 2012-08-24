@@ -4,11 +4,10 @@
 
 #define BREAK_AT 20
 
-int main(int argc, char *argv[]) {
-
-  if ( argc != 4 ) /* argc should be 2 for correct execution */
+int main(int argc, char *argv[])
+{
+  if ( argc != 4 )
   {
-    /* We print argv[0] assuming it is the program name */
     printf( "usage: %s <input filename> <output filename> <variable_name>", argv[0] );
   }
   else
