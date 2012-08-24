@@ -2,10 +2,10 @@
 PROJECT(mon)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-OPTION ( BUILD_COLLECTOR      "Build collector"                        OFF )
-OPTION ( BUILD_NODE           "Build node"                             ON  )
-OPTION ( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
-OPTION ( BUILD_CLIENT_NCURSES "Build mon-client-qt"                    OFF )
+OPTION( BUILD_COLLECTOR      "Build collector"                        OFF )
+OPTION( BUILD_NODE           "Build node"                             ON  )
+OPTION( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
+OPTION( BUILD_CLIENT_NCURSES "Build mon-client-qt"                    OFF )
 
 SET(LIB_PREFIX_TARGET  "lib/mon"                     )
 SET(LIB_GLOBAL_TARGET  "${LIB_PREFIX_TARGET}/global" )
@@ -15,7 +15,7 @@ include(CMakeDebug.cmake)
 install(FILES CMakeDebug.cmake DESTINATION include/mon)
 install(FILES CMakeSensor.cmake DESTINATION include/mon)
 
-MESSAGE ( STATUS "---> Processing base" )
+MESSAGE( STATUS "---> Processing base" )
 
 set( GEN_PATH "${PROJECT_BINARY_DIR}/mon_generated_sources" )
 file(MAKE_DIRECTORY ${GEN_PATH})
@@ -34,24 +34,24 @@ install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 # +++++++++++++++++++ libaryes +++++++++++++++++++
 
 # --------- config library --------------
-MESSAGE ( STATUS "---> Processing `config` library" )
+MESSAGE( STATUS "---> Processing `config` library" )
 SET(mon-config-headers
-    libraryes/config/src/pathinterface.h
-    libraryes/config/src/cconfigurationparcer.h
-    libraryes/config/src/cconfigurationgenerator.h
+    libraryes/config/src/model/pathinterface.h
+    libraryes/config/src/rw/cconfigurationparcer.h
+    libraryes/config/src/rw/cconfigurationgenerator.h
     libraryes/config/src/cconfig.h
-    libraryes/config/src/cnode.h
-    libraryes/config/src/cfile.h
-    libraryes/config/src/cfolder.h
+    libraryes/config/src/model/cnode.h
+    libraryes/config/src/model/cfile.h
+    libraryes/config/src/model/cfolder.h
     libraryes/config/src/config.h )
 SET(mon-config-sources
     libraryes/config/src/main.cpp
-    libraryes/config/src/cconfigurationparcer.cpp
-    libraryes/config/src/cconfigurationgenerator.cpp
+    libraryes/config/src/rw/cconfigurationparcer.cpp
+    libraryes/config/src/rw/cconfigurationgenerator.cpp
     libraryes/config/src/cconfig.cpp
-    libraryes/config/src/cnode.cpp
-    libraryes/config/src/cfile.cpp
-    libraryes/config/src/cfolder.cpp)
+    libraryes/config/src/model/cnode.cpp
+    libraryes/config/src/model/cfile.cpp
+    libraryes/config/src/model/cfolder.cpp)
 add_library(config SHARED ${mon-config-headers} ${mon-config-sources})
 install(FILES ${mon-config-headers} DESTINATION include/mon )
 install(TARGETS config LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
@@ -121,21 +121,22 @@ install(TARGETS protocol LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 # --------- base library --------------
 MESSAGE ( STATUS "---> Processing `base` library" )
 SET(mon-base-headers
-    libraryes/base/src/csingletonmember.h
-    libraryes/base/src/csingleton.h
+    libraryes/base/src/singleton/csingletonmember.h
+    libraryes/base/src/singleton/csingleton.h
     libraryes/base/src/cvariant.h
     libraryes/base/src/cstringbuilder.h
-    libraryes/base/src/cparcer.h
-    libraryes/base/src/cparcerfile.h
-    libraryes/base/src/parcer/cparcerstring.h)
+    libraryes/base/src/parcer/cparcer.h
+    libraryes/base/src/parcer/cparcerfile.h
+    libraryes/base/src/parcer/cparcerstring.h
+    libraryes/base/src/parcer/parcer-helper.h)
 SET(mon-base-sources
     libraryes/base/src/main.cpp
-    libraryes/base/src/csingletonmember.cpp
-    libraryes/base/src/csingleton.cpp
+    libraryes/base/src/singleton/csingletonmember.cpp
+    libraryes/base/src/singleton/csingleton.cpp
     libraryes/base/src/cvariant.cpp
     libraryes/base/src/cstringbuilder.cpp
-    libraryes/base/src/cparcer.cpp
-    libraryes/base/src/cparcerfile.cpp
+    libraryes/base/src/parcer/cparcer.cpp
+    libraryes/base/src/parcer/cparcerfile.cpp
     libraryes/base/src/parcer/cparcerstring.cpp)
 add_library(base SHARED ${mon-base-headers} ${mon-base-sources})
 install(FILES ${mon-base-headers} DESTINATION include/mon )
@@ -151,9 +152,13 @@ add_dependencies(base config logger network sensor protocol)
 target_link_libraries(base config logger network sensor protocol)
 include_directories( ${GEN_PATH}
                      libraryes/base/src
+                     libraryes/base/src/singleton
+                     libraryes/base/src/parcer
                      libraryes/network/src
                      libraryes/logger/src
                      libraryes/config/src
+                     libraryes/config/src/model
+                     libraryes/config/src/rw
                      libraryes/sensor/src
                      libraryes/sensor/src/data
                      libraryes/sensor/src/parcers
