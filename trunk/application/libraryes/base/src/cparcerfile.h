@@ -18,11 +18,9 @@ class CParcerFile : public CParcer
 
   private:
     FILE    *m_file;
-    bool     m_eof;
-    bool     m_error;
 
-    SExtractedCharacter goOneCharacterForward();
-    SExtractedCharacter goOneCharacterBack();
+    TStdStringCharacter goOneCharacterForward();
+    TStdStringCharacter goOneCharacterBack();
 };
 
 }

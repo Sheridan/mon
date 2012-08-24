@@ -1,0 +1,20 @@
+#!/bin/bash
+
+filelist=( application/libraryes/config/src/cconfigurationparcer.cpp )
+include="-I application/libraryes/base/src
+         -I application/libraryes/network/src
+         -I application/libraryes/logger/src
+         -I application/libraryes/config/src
+         -I application/libraryes/sensor/src
+         -I application/libraryes/sensor/src/data
+         -I application/libraryes/sensor/src/parcers
+         -I application/libraryes/protocol/src
+         -I application/defines 
+         -I /tmp/mon/build/application/mon_generated_sources"
+          
+#echo ${include}
+
+for f in $filelist
+do
+  g++ -E $f $include
+done

@@ -1,7 +1,8 @@
 #include "cparcer.h"
 #include "st.h"
 #include "signals-helper.h"
-#include <ctype.h>
+#include "parcer-helper.h"
+
 namespace mon
 {
 namespace lib
@@ -17,17 +18,19 @@ CParcer::CParcer()
   m_linesCount                 = 0;
   m_currentLineCharactersCount = 0;
   m_charactersCount            = 0;
+  m_error = false;
+  m_eof   = false;
 }
 
 CParcer::~CParcer()
 {}
 
-SExtractedCharacter CParcer::readCharacter()
+TStdStringCharacter CParcer::readCharacter()
 {
-  SExtractedCharacter t_character = goOneCharacterForward();
-  if (t_character.valid)
+  TStdStringCharacter t_character = goOneCharacterForward();
+  if (!m_error && !m_eof)
   {
-    switch(t_character.character)
+    switch(t_character)
     {
       case '\n':
       {
@@ -44,10 +47,10 @@ SExtractedCharacter CParcer::readCharacter()
   return t_character;
 }
 
-SExtractedCharacter CParcer::stepBack()
+TStdStringCharacter CParcer::stepBack()
 {
-  SExtractedCharacter t_character = goOneCharacterBack();
-  if(t_character.valid)
+  TStdStringCharacter t_character = goOneCharacterBack();
+  if(!m_error && !m_eof)
   {
     m_charactersCount--;
     m_currentLineCharactersCount--;
@@ -60,9 +63,9 @@ SExtractedCharacter CParcer::stepBack()
   return t_character;
 }
 
-void CParcer::parcerError(const std::string &object, const std::string& message)
+void CParcer::parcerError(const std::string& message)
 {
-  MON_LOG_ERR("Can not parce "<< object <<", line " << m_linesCount+1 << ", symbol " << m_currentLineCharactersCount-1 << ": " << message);
+  MON_LOG_ERR("Can not parce, line " << m_linesCount+1 << ", symbol " << m_currentLineCharactersCount-1 << ": " << message);
   MON_ABORT;
 }
 
@@ -77,9 +80,9 @@ void CParcer::skipComment()
 }
 
 #define MON_STRING_LOOP_CHECK \
-  if(!slash) { MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_string, stringOpenChar.character) { return MON_PARCER_BUFFER(read_string); } }
+  if(!slash) { MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_string, stringOpenChar) { return MON_PARCER_BUFFER(read_string); } }
 
-std::string CParcer::readString(const SExtractedCharacter &stringOpenChar)
+std::string CParcer::readString(const TStdStringCharacter &stringOpenChar)
 {
   bool slash = false;
   MON_PARCER_LOOP_BEGIN(read_string);
@@ -98,21 +101,46 @@ std::string CParcer::readString(const SExtractedCharacter &stringOpenChar)
   return "";
 }
 
-bool CParcer::isAlpha(const SExtractedCharacter &character)
+bool CParcer::convertBool(const std::string &string)
 {
-  if (isalpha(character.character) != EOF) { return true; }
-  if (        character.character  == '_') { return true; }
+  const char * buffer = string.c_str();
+  for(int i = 0; i < boolKeywordsCount; i++)
+  {
+    if(strcasecmp(keywordsTrue [i], buffer) == 0) { return true ; }
+    if(strcasecmp(keywordsFalse[i], buffer) == 0) { return false; }
+  }
+  parcerError("Unknown bool value: " + string);
   return false;
 }
 
-bool CParcer::isNumeric(const SExtractedCharacter &character)
+bool CParcer::isAlpha(const TStdStringCharacter &character)
 {
-  return isdigit(character.character) != EOF;
+  switch(character) { MON_PARCER_CASES_ALPHA: { return true; } }
+  return false;
 }
 
-bool CParcer::isWhiteSpace(const SExtractedCharacter &character)
+bool CParcer::isNumeric(const TStdStringCharacter &character)
 {
-  return isspace(character.character) != EOF;
+  switch(character) { MON_PARCER_CASES_NUMERIC: { return true; } }
+  return false;
+}
+
+bool CParcer::isNumericDot(const TStdStringCharacter &character)
+{
+  switch(character) { MON_PARCER_CASES_NUMERIC_DOT: { return true; } }
+  return false;
+}
+
+bool CParcer::isWhiteSpace(const TStdStringCharacter &character)
+{
+  switch(character) { MON_PARCER_CASES_WHITE: { return true; } }
+  return false;
+}
+
+bool CParcer::isQuotation (const TStdStringCharacter &character)
+{
+  switch(character) { MON_PARCER_CASES_QUOTATION: { return true; } }
+  return false;
 }
 
 }

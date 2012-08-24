@@ -19,8 +19,8 @@ class CParcerString : public CParcer
     ~CParcerString();
 
   private:
-    SExtractedCharacter goOneCharacterForward();
-    SExtractedCharacter goOneCharacterBack();
+    TStdStringCharacter goOneCharacterForward();
+    TStdStringCharacter goOneCharacterBack();
 };
 
 }

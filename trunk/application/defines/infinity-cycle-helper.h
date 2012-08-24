@@ -10,13 +10,13 @@
 
 #define MON_INFINITY_LOOP_BEGIN(_name) \
   { \
-    MON_INFINITY_LOOP_RESTART(_name) \
+    MON_INFINITY_LOOP_RESTART(_name); \
     MON_INFINITY_LOOP_BEGIN_LABEL_NAME(_name): ; \
     for(;;) \
       {
 #define MON_INFINITY_LOOP_END(_name) \
       } \
-    MON_INFINITY_LOOP_BREAK(_name) \
+    MON_INFINITY_LOOP_BREAK(_name); \
     MON_INFINITY_LOOP_END_LABEL_NAME(_name): ; \
   }
 

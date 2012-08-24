@@ -3,7 +3,7 @@
 #define CCONFIGURATIONPARCER_H
 #include <string>
 #include "cfolder.h"
-#include <stdio.h>
+#include "cparcerfile.h"
 
 namespace mon
 {
@@ -12,9 +12,7 @@ namespace lib
 namespace config
 {
 
-typedef std::string::value_type TCFChar;
-
-class CConfigurationParcer
+class CConfigurationParcer : mon::lib::base::CParcerFile
 {
 public:
   CConfigurationParcer(const std::string &filename, CFolder *root);
@@ -22,27 +20,9 @@ public:
   void parce();
 
 private:
-  std::string m_filename;
-  FILE    *m_file;
   CFolder *m_root;
-
-  // flags
-  bool     m_eof;
-  bool     m_error;
-
-  // statistic
-  unsigned int m_linesCount;
-  unsigned int m_charactersCount;
-  unsigned int m_currentLineCharactersCount;
-
-  TCFChar readChar();
-  void stepBack();
-  void skipComment();
-  std::string readString(const TCFChar &stringOpenChar);
-
-  void readFolder(CFolder *folder, const TCFChar &lastFolderDelimiter = 0);
+  void readFolder(CFolder *folder, const mon::lib::base::TStdStringCharacter &lastFolderDelimiter = 0);
   void readValue(CFile *file);
-  bool convertBool(const char *buffer);
 };
 
 }

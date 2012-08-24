@@ -15,22 +15,24 @@ CParcerString::CParcerString(const std::string &i_text) : CParcer(), m_text(i_te
 CParcerString::~CParcerString()
 {}
 
-SExtractedCharacter CParcerString::goOneCharacterForward()
+TStdStringCharacter CParcerString::goOneCharacterForward()
 {
   if(m_textIndex+1 == m_textLength)
   {
-    return SExtractedCharacter();
+    m_eof = true;
+    return 0;
   }
-  return SExtractedCharacter(m_text[m_textIndex++]);
+  return m_text[m_textIndex++];
 }
 
-SExtractedCharacter CParcerString::goOneCharacterBack()
+TStdStringCharacter CParcerString::goOneCharacterBack()
 {
   if(m_textIndex-1 < 0)
   {
-    return SExtractedCharacter();
+    m_error = true;
+    return 0;
   }
-  return SExtractedCharacter(m_text[m_textIndex--]);
+  return m_text[m_textIndex--];
 }
 
 }

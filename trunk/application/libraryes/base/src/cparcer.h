@@ -2,7 +2,6 @@
 #define CPARCER_H
 #include <string>
 #include "class-helper.h"
-#include "parcer-helper.h"
 
 namespace mon
 {
@@ -13,42 +12,37 @@ namespace base
 
 typedef std::string::value_type TStdStringCharacter;
 
-struct SExtractedCharacter
-{
-    TStdStringCharacter character;
-    bool valid;
-    SExtractedCharacter(const TStdStringCharacter &c, const bool &v) { character = c; valid = v    ; }
-    SExtractedCharacter(const TStdStringCharacter &c               ) { character = c; valid = true ; }
-    SExtractedCharacter(                                           ) { character = 0; valid = false; }
-    SExtractedCharacter(const SExtractedCharacter &c               ) { character = c.character; valid = c.valid; }
-};
-
 class CParcer
 {
   public:
     CParcer();
     virtual ~CParcer();
+
   protected:
+
+    bool m_eof;
+    bool m_error;
 
     static const int   boolKeywordsCount = 4;
     static const char *keywordsTrue [boolKeywordsCount];
     static const char *keywordsFalse[boolKeywordsCount];
 
-    virtual SExtractedCharacter goOneCharacterForward() = 0;
-    virtual SExtractedCharacter goOneCharacterBack   () = 0;
-    SExtractedCharacter readCharacter();
-    SExtractedCharacter stepBack();
-
-//    void readValue();
+    virtual TStdStringCharacter goOneCharacterForward() = 0;
+    virtual TStdStringCharacter goOneCharacterBack   () = 0;
+    TStdStringCharacter readCharacter();
+    TStdStringCharacter stepBack();
 
     void skipComment();
-    std::string readString(const SExtractedCharacter &stringOpenChar);
+    std::string readString(const TStdStringCharacter &stringOpenChar);
+    bool convertBool(const std::string &string);
 
-    bool isAlpha     (const SExtractedCharacter &character);
-    bool isNumeric   (const SExtractedCharacter &character);
-    bool isWhiteSpace(const SExtractedCharacter &character);
+    bool isAlpha     (const TStdStringCharacter &character);
+    bool isNumeric   (const TStdStringCharacter &character);
+    bool isNumericDot(const TStdStringCharacter &character);
+    bool isWhiteSpace(const TStdStringCharacter &character);
+    bool isQuotation (const TStdStringCharacter &character);
 
-    void parcerError(const std::string& object, const std::string& message);
+    void parcerError(const std::string& message);
 
     // statistic
     int m_linesCount;

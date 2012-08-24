@@ -1,5 +1,6 @@
 #include "cparcerfile.h"
 #include "parcer-helper.h"
+#include <stdlib.h>
 
 namespace mon
 {
@@ -28,27 +29,27 @@ CParcerFile::~CParcerFile()
   }
 }
 
-SExtractedCharacter CParcerFile::goOneCharacterForward()
+TStdStringCharacter CParcerFile::goOneCharacterForward()
 {
   int result = fgetc(m_file);
-  if(result == -1 && result != EOF)
+  m_eof = result == EOF;
+  if(result == -1 && !m_eof)
   {
     m_error = true;
     MON_PRINT_FILEOP_ERRNO(m_filename, "Read file error");
-    return SExtractedCharacter();
+    return 0;
   }
-
-  m_eof = result == EOF;
-  return SExtractedCharacter(static_cast<TStdStringCharacter>(result));
+  return static_cast<TStdStringCharacter>(result);
 }
 
-SExtractedCharacter CParcerFile::goOneCharacterBack()
+TStdStringCharacter CParcerFile::goOneCharacterBack()
 {
-  if(fseek(m_file, -sizeof(TStdStringCharacter)*2, SEEK_CUR) == -1)
+//  MON_LOG_DBG((int)sizeof(TStdStringCharacter)*2); MON_ABORT;
+  if(fseek(m_file, ftell(m_file)-(sizeof(TStdStringCharacter)*2), SEEK_SET) == -1)
   {
     m_error = true;
-    MON_PRINT_FILEOP_ERRNO(m_filename, "Seek");
-    return SExtractedCharacter();
+    MON_PRINT_FILEOP_ERRNO(m_filename, "Seek file error");
+    return 0;
   }
   return readCharacter();
 }
