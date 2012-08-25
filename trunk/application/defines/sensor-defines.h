@@ -41,8 +41,9 @@
 #define MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION     MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getInformation   , "Request %sensor_name% information" )
 #define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getExemplarsCount, "Request %sensor_name% information" )
 
-#define MON_SENSOR_NO_STATISTICS  MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION  { return NULL; }
-#define MON_SENSOR_NO_INFORMATION MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION { return NULL; }
+#define MON_SENSOR_NO_STATISTICS                      MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      { return NULL      ; }
+#define MON_SENSOR_NO_INFORMATION                     MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION     { return NULL      ; }
+#define MON_SENSOR_STATIC_EXEMPLARS_COUNT(_exemplars) MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION { return _exemplars; }
 
 #define MON_SENSOR_REQUESTED_OBJECT_IS(_name)  (strcmp(object,#_name) == 0)
 #define MON_SENSOR_REQUESTED_OBJECT_IS_NOT_SET (object == NULL)

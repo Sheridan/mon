@@ -5,6 +5,7 @@
 #include "cdefinition.h"
 #include "class-helper.h"
 #include "cparcerstring.h"
+#include "cfrequency.h"
 
 namespace mon
 {
@@ -15,13 +16,21 @@ namespace sensor
 
 class CDefinitionParcer : public mon::lib::base::CParcerString
 {
-    CDefinitionParcer(const std::string &definition);
+    CDefinitionParcer(CDefinition *target, const std::string &definition);
     ~CDefinitionParcer();
-    CDefinition * parce();
+    void parce();
 
   private:
-    std::string m_definitionText;
-    int         m_currentIndex;
+    std::string  m_definitionText;
+    int          m_currentIndex;
+    CDefinition *m_definition;
+
+    CObject *parceObject();
+
+    void readFrequences(CObject *obj);
+    void readFrequency(const EFrequencyClasses &ftype, CObject *obj);
+    void skipToSemicolon();
+    std::string readStringValue();
 
 };
 

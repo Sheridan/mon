@@ -15,40 +15,18 @@ CDefinition::~CDefinition()
 {
 }
 
-
-void CDefinition::addFlag(const EFlags &flag)
+void CDefinition::addObject(const std::string &name, CObject *obj)
 {
-  m_flags.insert(flag);
+  m_objects[name] = obj;
 }
 
-bool CDefinition::hasFlag(const EFlags &flag)
+CObject *CDefinition::object(const std::string &name)
 {
-  return m_flags.count(flag) > 0;
-}
-
-void CDefinition::addTag (const std::string &tag)
-{
-  m_tags.insert(tag);
-}
-
-bool CDefinition::hasTag (const std::string &tag)
-{
-  return m_tags.count(tag) > 0;
-}
-
-void CDefinition::addInformationField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description)
-{
-  m_informationFields.push_front(SField(name, label, type, description));
-}
-
-void CDefinition::addStatisticalField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description)
-{
-  m_statisticalFields.push_front(SField(name, label, type, description));
-}
-
-std::string CDefinition::generateText()
-{
-  return "";
+  if (m_objects.count(name) > 0)
+  {
+    return m_objects[name];
+  }
+  return NULL;
 }
 
 }

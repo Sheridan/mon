@@ -90,15 +90,21 @@ install(TARGETS network LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 MESSAGE ( STATUS "---> Processing `sensor` library" )
 SET(mon-sensor-headers
     libraryes/sensor/src/data/cdefinition.h
+    libraryes/sensor/src/data/cobject.h
     libraryes/sensor/src/data/cinformation.h
     libraryes/sensor/src/data/cstatistics.h
+    libraryes/sensor/src/data/types/cfrequency.h
+    libraryes/sensor/src/data/types/cfrequences.h
     libraryes/sensor/src/parcers/cdefinitionparcer.h
     libraryes/sensor/src/parcers/cinformationparcer.h
     libraryes/sensor/src/parcers/cstatisticsparcer.h)
 SET(mon-sensor-sources
     libraryes/sensor/src/data/cdefinition.cpp
+    libraryes/sensor/src/data/cobject.cpp
     libraryes/sensor/src/data/cinformation.cpp
     libraryes/sensor/src/data/cstatistics.cpp
+    libraryes/sensor/src/data/types/cfrequency.cpp
+    libraryes/sensor/src/data/types/cfrequences.cpp
     libraryes/sensor/src/parcers/cdefinitionparcer.cpp
     libraryes/sensor/src/parcers/cinformationparcer.cpp
     libraryes/sensor/src/parcers/cstatisticsparcer.cpp
@@ -147,6 +153,7 @@ install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 install(FILES defines/sensor-defines.h DESTINATION include/mon )
 install(FILES defines/logger-helper.h DESTINATION include/mon )
 # +++++++++++++++++++ install some headers +++++++++++++++++++
+
 # +++++++++++++++++++ applications +++++++++++++++++++
 add_dependencies(base config logger network sensor protocol)
 target_link_libraries(base config logger network sensor protocol)
@@ -161,6 +168,7 @@ include_directories( ${GEN_PATH}
                      libraryes/config/src/rw
                      libraryes/sensor/src
                      libraryes/sensor/src/data
+                     libraryes/sensor/src/data/types
                      libraryes/sensor/src/parcers
                      libraryes/protocol/src
                      defines )

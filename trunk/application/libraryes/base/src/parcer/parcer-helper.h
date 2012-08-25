@@ -43,7 +43,7 @@
 // -----------------------------------------------  buffer
 
 // -----------------------------------------------  buffer checks
-#define MON_PARCER_CHECK_BUFFER(_name,_no,_err_message)          if( _no MON_PARCER_BUFFER(_name).empty()) { parcerError(_err_message  MON_PARCER_BUFFER_ERROR_PART(_name)); }
+#define MON_PARCER_CHECK_BUFFER(_name,_no,_err_message)          if( _no MON_PARCER_BUFFER(_name).empty()) { parcerError(_err_message  MON_PARCER_BUFFER_ERROR_PART(_name), MON_PARCER_CURRENT_CHARACTER(_name)); }
 #define MON_PARCER_ERROR_IF_BUFFER_EMPTY(_name, _err_message)    MON_PARCER_CHECK_BUFFER(_name, ,_err_message)
 #define MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(_name, _err_message) MON_PARCER_CHECK_BUFFER(_name,!,_err_message)
 // -----------------------------------------------  buffer checks
@@ -86,6 +86,11 @@
 #define MON_PARCER_CURRENT_CHARACTER_IS_QUOTATION(_name)        if (MON_PARCER_CURRENT_CHARACTER_QUOTATION_CHECK(_name))
 #define MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(_name,_character) if (MON_PARCER_CURRENT_CHARACTER_EQUAL_CHECK(_name,_character))
 // -----------------------------------------------  characters check
+#define MON_PARCER_KEYWORD_CHECK(_name,_kw) (MON_PARCER_BUFFER(_name).compare(_kw))
+
+#define MON_PARCER_IS_KEYWORD(_name,_kw) if(MON_PARCER_KEYWORD_CHECK(_name,_kw))
+// -----------------------------------------------  keywords check
+// -----------------------------------------------  keywords check
 
 // -----------------------------------------------  characters
 #define MON_PARCER_CASES_ALPHA       case 'a': case 'A': case 'b': case 'B': case 'c': case 'C': case 'd': case 'D': case 'e': case 'E': \

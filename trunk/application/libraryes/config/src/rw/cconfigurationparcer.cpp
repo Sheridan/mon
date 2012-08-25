@@ -93,7 +93,7 @@ void CConfigurationParcer::readFolder(CFolder *folder, const mon::lib::base::TSt
       MON_PARCER_BUFFER_RESET(variable_name);
       MON_PARCER_LOOP_RESTART(variable_name);
     }
-    parcerError("Variable name must contain only alpha, numeric and '_' symbols" MON_PARCER_BUFFER_ERROR_PART(variable_name));
+    parcerError("Variable name must contain only alpha, numeric and '_' symbols" MON_PARCER_BUFFER_ERROR_PART(variable_name), MON_PARCER_CURRENT_CHARACTER(variable_name));
   }
   MON_PARCER_LOOP_END(variable_name);
 
@@ -155,7 +155,7 @@ void CConfigurationParcer::readValue(CFile *file)
         }
         case mon::lib::base::ctUnknown:
         {
-          parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value));
+          parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value));
         }
       }
       stepBack();
@@ -176,7 +176,7 @@ void CConfigurationParcer::readValue(CFile *file)
     MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC_DOT(variable_value)
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(variable_value, "Missing numeric before dot");
-      if(c_type == mon::lib::base::ctFloat) { parcerError("Double numeric dot?" MON_PARCER_BUFFER_ERROR_PART(variable_value)); }
+      if(c_type == mon::lib::base::ctFloat) { parcerError("Double numeric dot?" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
       MON_PARCER_BUFFER_RESET(variable_value);
       c_type = mon::lib::base::ctFloat;
       MON_PARCER_LOOP_RESTART(variable_value);
@@ -187,7 +187,7 @@ void CConfigurationParcer::readValue(CFile *file)
       if(c_type == mon::lib::base::ctUnknown)  { c_type = mon::lib::base::ctBool; }
       MON_PARCER_LOOP_RESTART(variable_value);
     }
-    parcerError("Misplaced character" MON_PARCER_BUFFER_ERROR_PART(variable_value));
+    parcerError("Misplaced character" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value));
   }
   MON_PARCER_LOOP_END(variable_value);
 

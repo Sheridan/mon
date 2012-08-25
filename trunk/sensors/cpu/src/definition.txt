@@ -1,5 +1,5 @@
 # %Id%
-object cpu_utilisation
+utilisation
 {
   label: "CPU Utilisation";
   frequence:
@@ -59,9 +59,9 @@ object cpu_utilisation
   }
 }
 
-object cpu_frequency
+frequency
 {
-  label: "CPU Utilisation";
+  label: "CPU Frequency";
   frequence:
   {
     statistical:

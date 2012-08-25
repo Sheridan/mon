@@ -1,5 +1,5 @@
 # %Id%
-object memory
+memory
 {
   label: "Memory";
   frequence:
@@ -7,7 +7,7 @@ object memory
     statistical:
     {
       max: 10Hz;
-      default: 1Hz;
+      default: 1SPP;
     }
   }
   flags:

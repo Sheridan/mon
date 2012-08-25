@@ -34,6 +34,7 @@ class CParcer
 
     void skipComment();
     std::string readString(const TStdStringCharacter &stringOpenChar);
+    TStdStringCharacter findString();
     bool convertBool(const std::string &string);
 
     bool isAlpha     (const TStdStringCharacter &character);
@@ -42,7 +43,7 @@ class CParcer
     bool isWhiteSpace(const TStdStringCharacter &character);
     bool isQuotation (const TStdStringCharacter &character);
 
-    void parcerError(const std::string& message);
+    void parcerError(const std::string& message, const TStdStringCharacter &character);
 
     // statistic
     int m_linesCount;

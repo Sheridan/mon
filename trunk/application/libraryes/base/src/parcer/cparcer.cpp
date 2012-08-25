@@ -63,9 +63,9 @@ TStdStringCharacter CParcer::stepBack()
   return t_character;
 }
 
-void CParcer::parcerError(const std::string& message)
+void CParcer::parcerError(const std::string& message, const TStdStringCharacter &character)
 {
-  MON_LOG_ERR("Can not parce, line " << m_linesCount+1 << ", symbol " << m_currentLineCharactersCount-1 << ": " << message);
+  MON_LOG_ERR("Can not parce, line " << m_linesCount+1 << ", symbol " << m_currentLineCharactersCount-1 << " (`" << character << "`): " << message);
   MON_ABORT;
 }
 
@@ -101,6 +101,25 @@ std::string CParcer::readString(const TStdStringCharacter &stringOpenChar)
   return "";
 }
 
+TStdStringCharacter CParcer::findString()
+{
+  MON_PARCER_LOOP_BEGIN(find_string)
+  {
+    MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(find_string)
+    {
+      MON_PARCER_LOOP_RESTART(find_string);
+    }
+    MON_PARCER_CURRENT_CHARACTER_IS_QUOTATION(find_string)
+    {
+      return MON_PARCER_CURRENT_CHARACTER(find_string);
+    }
+    MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(find_string, "Misplaced character");
+  }
+  MON_PARCER_LOOP_END(find_string);
+  parcerError("Can not find string", ' ');
+  return ' ';
+}
+
 bool CParcer::convertBool(const std::string &string)
 {
   const char * buffer = string.c_str();
@@ -109,7 +128,7 @@ bool CParcer::convertBool(const std::string &string)
     if(strcasecmp(keywordsTrue [i], buffer) == 0) { return true ; }
     if(strcasecmp(keywordsFalse[i], buffer) == 0) { return false; }
   }
-  parcerError("Unknown bool value: " + string);
+  parcerError("Unknown bool value: " + string, ' ');
   return false;
 }
 
