@@ -2,25 +2,21 @@
 memory
 {
   label: "Memory";
-  frequence:
+  type: statistic;
+  frequency:
   {
-    statistical:
-    {
-      max: 10Hz;
-      default: 1SPP;
-    }
+    max: 10Hz;
+    default: 1SPP;
   }
   flags:
-  {
-    provideStatistics
-  }
+  {}
   tags:
   {
     system,
     hardware,
     baseResources
   }
-  statisticalFields:
+  fields:
   {
     free: 
     {

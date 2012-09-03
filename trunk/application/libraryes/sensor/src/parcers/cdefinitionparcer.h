@@ -27,8 +27,7 @@ class CDefinitionParcer : public mon::lib::base::CParcerString
 
     CObject *parceObject();
 
-    void readFrequences(CObject *obj);
-    void readFrequency(const EFrequencyClasses &ftype, CObject *obj);
+    void readFrequency(CObject *obj);
     void skipToSemicolon();
     std::string readStringValue();
 

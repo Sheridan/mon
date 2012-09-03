@@ -7,21 +7,15 @@ namespace lib
 namespace sensor
 {
 
-#define MON_FOREACH_FREQUENCES(_name) \
-   for(TFrequences::iterator _name = m_frequences.begin(); \
-    _name != m_frequences.end(); \
-    ++_name)
 
 CObject::CObject()
-{}
+{
+  m_frequences = NULL;
+}
 
 CObject::~CObject()
 {
-  MON_FOREACH_FREQUENCES(freq)
-  {
-    delete freq->second;
-  }
-  m_frequences.clear();
+  delete m_frequences;
 }
 
 void CObject::addFlag(const EFlags &flag)
@@ -44,19 +38,15 @@ bool CObject::hasTag (const std::string &tag)
   return m_tags.count(tag) > 0;
 }
 
-void CObject::addInformationField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description)
+void CObject::addField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description)
 {
-  m_informationFields.push_front(SField(name, label, type, description));
+  m_fields.push_front(SField(name, label, type, description));
 }
 
-void CObject::addStatisticalField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description)
+void CObject::setFrequences(const EFrequenceType &typeMax, const float &frequencyMax, const EFrequenceType &typeDefault, const float &frequencyDefault)
 {
-  m_statisticalFields.push_front(SField(name, label, type, description));
-}
-
-void CObject::setFrequences(const EFrequencyClasses &ftype, const EFrequenceType &typeMax, const float &frequencyMax, const EFrequenceType &typeDefault, const float &frequencyDefault)
-{
-  m_frequences[ftype] = new CFrequences(typeMax, frequencyMax, typeDefault, frequencyDefault);
+  delete m_frequences;
+  m_frequences = new CFrequences(typeMax, frequencyMax, typeDefault, frequencyDefault);
 }
 
 std::string CObject::generateText()

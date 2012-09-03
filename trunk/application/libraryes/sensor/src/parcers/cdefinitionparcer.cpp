@@ -77,9 +77,9 @@ CObject * CDefinitionParcer::parceObject()
         MON_PARCER_BUFFER_RESET(read_object);
         MON_PARCER_LOOP_RESTART(read_object);
       }
-      MON_PARCER_IS_KEYWORD(read_object, "frequence")
+      MON_PARCER_IS_KEYWORD(read_object, "frequency")
       {
-        readFrequences(obj);
+        readFrequency(obj);
         MON_PARCER_BUFFER_RESET(read_object);
         MON_PARCER_LOOP_RESTART(read_object);
       }
@@ -103,44 +103,7 @@ CObject * CDefinitionParcer::parceObject()
   return obj;
 }
 
-void CDefinitionParcer::readFrequences(CObject *obj)
-{
-  MON_PARCER_LOOP_BEGIN(read_frequences)
-  {
-    MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_frequences)
-    {
-      MON_PARCER_BUFFER_APPEND(read_frequences);
-      MON_PARCER_LOOP_RESTART(read_frequences);
-    }
-    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(read_frequences)
-    {
-      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_frequences, "Frequency keyword must begin only with alpha symbols");
-      MON_PARCER_BUFFER_APPEND(read_frequences);
-      MON_PARCER_LOOP_RESTART(read_frequences);
-    }
-    MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(read_frequences)
-    {
-      MON_PARCER_LOOP_RESTART(read_frequences);
-    }
-    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frequences, '}')
-    {
-      MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_frequences, "Misplaced character");
-      MON_PARCER_LOOP_BREAK(read_frequences)
-    }
-    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frequences, ':')
-    {
-      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_frequences, "Missed frequency keyword");
-      MON_PARCER_IS_KEYWORD(read_frequences, "statistical")
-      {}
-      MON_PARCER_IS_KEYWORD(read_frequences, "information")
-      {}
-    }
-    MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_frequences, "Misplaced character");
-  }
-  MON_PARCER_LOOP_END(read_frequences);
-}
-
-void CDefinitionParcer::readFrequency(const EFrequencyClasses &ftype, CObject *obj)
+void CDefinitionParcer::readFrequency(CObject *obj)
 {
   MON_PARCER_LOOP_BEGIN(read_frequency)
   {

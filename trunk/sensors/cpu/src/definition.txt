@@ -2,23 +2,14 @@
 utilisation
 {
   label: "CPU Utilisation";
-  frequence:
+  type: statistic;
+  frequency:
   {
-    statistical:
-    {
-      max: 10Hz;
-      default: 1Hz;
-    }
-    information:
-    {
-      max: 0.001Hz;
-      default: 0.0001Hz;
-    }
+    max: 2Hz;
+    default: 0.5Hz;
   }
   flags:
   {
-    provideStatistics,
-    provideInformation,
     canBeAggregated
   }
   tags:
@@ -27,7 +18,7 @@ utilisation
     hardware,
     baseResources
   }
-  statisticalFields:
+  fields:
   {
     idle: 
     {
@@ -42,7 +33,24 @@ utilisation
       description: "Application usage";
     }
   }
-  informationFields:
+}
+
+info
+{
+  label: "CPU Information";
+  type: information;
+  frequency:
+  {
+    max: 0.001Hz;
+    default: 0.0001Hz;
+  }
+  tags:
+  {
+    system,
+    hardware,
+    baseResources
+  }
+  fields:
   {
     vendor:
     {
@@ -57,30 +65,25 @@ utilisation
       description: "Model name";
     }
   }
-}
 
 frequency
 {
   label: "CPU Frequency";
-  frequence:
+  type: statistic;
+  frequency:
   {
-    statistical:
-    {
-      max: 2Hz;
-      default: 0.05Hz;
-    }
+    max: 2Hz;
+    default: 0.05Hz;
   }
   flags:
-  {
-    provideStatistics
-  }
+  {}
   tags:
   {
     system,
     hardware,
     baseResources
   }
-  statisticalFields:
+  fields:
   {
     frequency: 
     {

@@ -42,44 +42,38 @@ struct SField
 
 enum EFlags
 {
-  fProvideStatistics,  // Может выдавать статистику
-  fProvideInformation, // Может выдавать информацию
   fAggregated          // Данные полей статистики представляют собой часть целого. То есть например 10%, 70%, 20%
 };
 
-enum EFrequencyClasses
+enum EType
 {
-  fcUpdateStatistical,
-  fcUpdateInformation
+  tStatistic,
+  tInformation
 };
 
 typedef std::set<EFlags>       TFlags;
 typedef std::set<std::string>  TTags;
 typedef std::list<SField>      TFields;
-typedef std::map<EFrequencyClasses, CFrequences *> TFrequences;
 
 class CObject
 {
-    MON_PROPERTY(std::string           , label                       )
-    MON_PROPERTY(unsigned int          , exemplars                   )
-    MON_READONLY_PROPERTY(TFlags       , flags                       )
-    MON_READONLY_PROPERTY(TTags        , tags                        )
-    MON_READONLY_PROPERTY(TFields      , informationFields           )
-    MON_READONLY_PROPERTY(TFields      , statisticalFields           )
+    MON_PROPERTY(std::string            , label      )
+    MON_PROPERTY(unsigned int           , exemplars  )
+    MON_READONLY_PROPERTY(TFlags        , flags      )
+    MON_READONLY_PROPERTY(TTags         , tags       )
+    MON_READONLY_PROPERTY(TFields       , fields     )
+    MON_READONLY_PROPERTY(CFrequences  *, frequences)
   public:
     CObject();
     ~CObject();
     std::string generateText();
-    void setFrequences(const EFrequencyClasses &ftype, const EFrequenceType &typeMax, const float &frequencyMax, const EFrequenceType &typeDefault, const float &frequencyDefault);
+    void setFrequences(const EFrequenceType &typeMax, const float &frequencyMax, const EFrequenceType &typeDefault, const float &frequencyDefault);
     void addFlag(const EFlags &flag);
     bool hasFlag(const EFlags &flag);
     void addTag (const std::string &tag);
     bool hasTag (const std::string &tag);
-    void addInformationField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description);
-    void addStatisticalField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description);
+    void addField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description);
 
-  private:
-    TFrequences m_frequences;
 };
 
 typedef std::map<std::string, CObject *> TObjects;
