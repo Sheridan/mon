@@ -4,9 +4,9 @@ digraph G
     splines=true;
     normalize=true;
     node [shape=octagon, color=cornflowerblue];
-    mon_collector_0 [label="Server 0"];
-    mon_collector_1 [label="Server 1"];
-    mon_collector_2 [label="Server 2"];
+    mon_collector_0 [label="Collector 0"];
+    mon_collector_1 [label="Collector 1"];
+    mon_collector_2 [label="Collector 2"];
     
     node [shape=Mcircle, color=darkgreen];
     mon_node_0 [label="Node 0"];

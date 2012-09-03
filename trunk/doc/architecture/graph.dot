@@ -1,7 +1,7 @@
 digraph G
 {
     node [shape=octagon, color=cornflowerblue];
-    mon_collector [label="Server"];
+    mon_collector [label="Collector"];
     node [shape=Mcircle, color=darkgreen];
     mon_node [label="Node"];
     node [shape=Msquare, color=coral3];
@@ -35,8 +35,8 @@ digraph G
     edge [style=dashed];
     c->d [label="Answer"];
     edge [color=green, style=filled];
-    a->b [label="Server <-> Node"];
+    a->b [label="Collector <-> Node"];
     edge [color=magenta, style=filled];
-    d->e [label="Client <-> Server"];
+    d->e [label="Client <-> Collector"];
     
 }
