@@ -13,12 +13,11 @@ namespace daemons
 namespace node
 {
 
-typedef void         (*TFInitSensor)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
-typedef const char * (*TFGetName)            (const char *);
-typedef const char * (*TFGetDefinition)      (const char *);
-typedef unsigned int (*TFGetDefinitionLength)(const char *);
-typedef const char * (*TFGetStatistics)      (const char *);
-typedef const char * (*TFGetInformation)     (const char *);
+typedef void              (*TFInitSensor)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
+typedef const char *      (*TFGetName)            (const char *);
+typedef const char *      (*TFGetDefinition)      (const char *);
+typedef unsigned int      (*TFGetDefinitionLength)(const char *);
+typedef const std::string (*TFGetStatistics)      (const char *);
 
 class CSensor
 {
@@ -32,7 +31,6 @@ class CSensor
     TFGetDefinition       getDefinition;
     TFGetDefinitionLength getDefinitionLength;
     TFGetStatistics       getStatistics;
-    TFGetInformation      getInformation;
 
   private:
     void * m_handle;

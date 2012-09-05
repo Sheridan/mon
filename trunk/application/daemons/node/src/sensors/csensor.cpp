@@ -44,7 +44,6 @@ void CSensor::load()
   MON_IMPORT(TFGetDefinition      , getDefinition);
   MON_IMPORT(TFGetDefinitionLength, getDefinitionLength);
   MON_IMPORT(TFGetStatistics      , getStatistics);
-  MON_IMPORT(TFGetInformation     , getInformation);
 
   initSensor(MON_ST_LOGGER, MON_ST_CONFIG->folder("node")->folder("sensors")->folder(m_name));
 }

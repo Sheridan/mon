@@ -37,8 +37,7 @@
 
 #define MON_SENSOR_END int main (int argc, char* argv[]) { return 0; }
 
-#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getStatistics    , "Request %sensor_name% statistics"  )
-#define MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION     MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getInformation   , "Request %sensor_name% information" )
+#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const std::string , getStatistics    , "Request %sensor_name% statistics"  )
 #define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getExemplarsCount, "Request %sensor_name% information" )
 
 #define MON_SENSOR_NO_STATISTICS                      MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      { return NULL      ; }
