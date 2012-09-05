@@ -5,7 +5,7 @@
 #include <set>
 #include <list>
 #include <map>
-#include "cfrequences.h"
+#include "cfrequency.h"
 #include "class-helper.h"
 namespace mon
 {
@@ -16,7 +16,6 @@ namespace sensor
 
 enum EDataType
 {
-  dtUnknown,
   dtPercent,
   dtBool,
   dtShort,
@@ -35,20 +34,28 @@ struct SField
     std::string label;
     std::string description;
     EDataType   type;
-    SField() { name = ""; label = ""; description = ""; type = dtUnknown; }
+    SField() { name = ""; label = ""; description = ""; type = dtInteger; }
     SField(const std::string &in, const std::string &il, const EDataType &it, const std::string &id)
     {name = in; label = il; type = it; description = id;}
 };
 
 enum EFlags
 {
-  fAggregated          // Данные полей статистики представляют собой часть целого. То есть например 10%, 70%, 20%
+  fAggregated,          // Данные полей статистики представляют собой часть целого. То есть например 10%, 70%, 20%
+  fCalculateTotal       // Необходимо суммировать значения полей в отдельное, генерируемое поле
 };
 
 enum EType
 {
   tStatistic,
   tInformation
+};
+
+enum EFrequencyPurpose
+{
+  fpMax     = 0,
+  fpDefault = 1,
+  fpCurrent = 2
 };
 
 typedef std::set<EFlags>       TFlags;
@@ -59,20 +66,23 @@ class CObject
 {
     MON_PROPERTY(std::string            , label      )
     MON_PROPERTY(unsigned int           , exemplars  )
+    MON_PROPERTY(EType                  , type       )
     MON_READONLY_PROPERTY(TFlags        , flags      )
     MON_READONLY_PROPERTY(TTags         , tags       )
     MON_READONLY_PROPERTY(TFields       , fields     )
-    MON_READONLY_PROPERTY(CFrequences  *, frequences)
   public:
     CObject();
     ~CObject();
     std::string generateText();
-    void setFrequences(const EFrequenceType &typeMax, const float &frequencyMax, const EFrequenceType &typeDefault, const float &frequencyDefault);
-    void addFlag(const EFlags &flag);
-    bool hasFlag(const EFlags &flag);
-    void addTag (const std::string &tag);
-    bool hasTag (const std::string &tag);
-    void addField(const std::string &name, const std::string &label, const EDataType &type, const std::string &description);
+    void setFrequency(const EFrequencyPurpose &purpose, const EFrequencyMeasurment &measurment, const float &value);
+    void addField    (const std::string &name, const std::string &label, const EDataType &type, const std::string &description);
+    void addFlag     (const EFlags &flag);
+    bool hasFlag     (const EFlags &flag);
+    void addTag      (const std::string &tag);
+    bool hasTag      (const std::string &tag);
+
+  private:
+    CFrequency *m_frequences[3];
 
 };
 

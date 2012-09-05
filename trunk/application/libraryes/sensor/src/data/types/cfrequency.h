@@ -9,7 +9,7 @@ namespace lib
 namespace sensor
 {
 
-enum EFrequenceType
+enum EFrequencyMeasurment
 {
   ftHz, // Обычное упоминание частоты
   ftSPP // Secunds per pulse, один раз в икс секунд
@@ -18,13 +18,13 @@ enum EFrequenceType
 class CFrequency
 {
   public:
-    CFrequency(const EFrequenceType &i_type, const float &i_frequency);
+    CFrequency(const EFrequencyMeasurment &i_measurment, const float &i_frequency);
     float asHz ();
     float asSPP();
 
   private:
-    EFrequenceType  m_type;
-    float           m_frequency;
+    EFrequencyMeasurment  m_measurment;
+    float                 m_frequency;
 };
 
 }

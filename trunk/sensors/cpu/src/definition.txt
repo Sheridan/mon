@@ -10,7 +10,7 @@ utilisation
   }
   flags:
   {
-    canBeAggregated
+    aggregated
   }
   tags:
   {

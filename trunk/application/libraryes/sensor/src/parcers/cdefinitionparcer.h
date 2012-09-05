@@ -14,6 +14,13 @@ namespace lib
 namespace sensor
 {
 
+enum EFrequencyCurrentReading
+{
+  fcrKeyword,
+  fcrValue,
+  fcrMeasurment
+};
+
 class CDefinitionParcer : public mon::lib::base::CParcerString
 {
     CDefinitionParcer(CDefinition *target, const std::string &definition);
@@ -27,9 +34,16 @@ class CDefinitionParcer : public mon::lib::base::CParcerString
 
     CObject *parceObject();
 
-    void readFrequency(CObject *obj);
+    void readFrequences(CObject *obj);
+    void readType      (CObject *obj);
+    void readFlags     (CObject *obj);
+    void readTags      (CObject *obj);
+    void readFields    (CObject *obj);
+    void readField     (CObject *obj, const std::string &name);
+
     void skipToSemicolon();
     std::string readStringValue();
+    std::string readValue();
 
 };
 

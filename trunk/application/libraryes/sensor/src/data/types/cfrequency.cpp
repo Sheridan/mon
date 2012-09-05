@@ -7,14 +7,14 @@ namespace lib
 namespace sensor
 {
 
-CFrequency::CFrequency(const EFrequenceType &i_type, const float &i_frequency)
-  : m_type(i_type), m_frequency(i_frequency)
+CFrequency::CFrequency(const EFrequencyMeasurment &i_measurment, const float &i_frequency)
+  : m_measurment(i_measurment), m_frequency(i_frequency)
 {
 }
 
 float CFrequency::asHz()
 {
-  switch(m_type)
+  switch(m_measurment)
   {
     case ftHz : { return m_frequency;  }
     case ftSPP: { return 1/m_frequency;}
@@ -24,7 +24,7 @@ float CFrequency::asHz()
 
 float CFrequency::asSPP()
 {
-  switch(m_type)
+  switch(m_measurment)
   {
     case ftHz : { return 1/m_frequency; }
     case ftSPP: { return m_frequency  ; }

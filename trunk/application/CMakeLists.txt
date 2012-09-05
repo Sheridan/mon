@@ -94,7 +94,6 @@ SET(mon-sensor-headers
     libraryes/sensor/src/data/cinformation.h
     libraryes/sensor/src/data/cstatistics.h
     libraryes/sensor/src/data/types/cfrequency.h
-    libraryes/sensor/src/data/types/cfrequences.h
     libraryes/sensor/src/parcers/cdefinitionparcer.h
     libraryes/sensor/src/parcers/cinformationparcer.h
     libraryes/sensor/src/parcers/cstatisticsparcer.h)
@@ -104,7 +103,6 @@ SET(mon-sensor-sources
     libraryes/sensor/src/data/cinformation.cpp
     libraryes/sensor/src/data/cstatistics.cpp
     libraryes/sensor/src/data/types/cfrequency.cpp
-    libraryes/sensor/src/data/types/cfrequences.cpp
     libraryes/sensor/src/parcers/cdefinitionparcer.cpp
     libraryes/sensor/src/parcers/cinformationparcer.cpp
     libraryes/sensor/src/parcers/cstatisticsparcer.cpp
