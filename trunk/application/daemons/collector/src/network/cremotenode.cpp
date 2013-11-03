@@ -31,6 +31,7 @@ CRemoteNode::~CRemoteNode()
 MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
 {
   MON_INFINITY_LOOP_BEGIN(reconnect_loop)
+    MON_THREADED_ABORT_IF_NEED(connect);
     if(!isConnected())
     {
       MON_THREADED_FUNCTION_DISABLE_CANCEL
@@ -43,6 +44,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
 
 void CRemoteNode::incommingMessage(const std::string &message)
 {
+  MON_LOG_DBG("----- Incoming message: " << message);
   mon::lib::protocol::CMessage t_incomming_message(message);
   switch(t_incomming_message.type())
   {

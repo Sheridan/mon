@@ -21,6 +21,7 @@ CRemoteCollector::~CRemoteCollector()
 
 void CRemoteCollector::incommingMessage(const std::string &message)
 {
+  MON_LOG_DBG("----- Incoming message: " << message);
   mon::lib::protocol::CMessage t_incomming_message(message);
   switch(t_incomming_message.type())
   {

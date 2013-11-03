@@ -15,10 +15,11 @@
   private: \
     void run_thread##_name(); \
     bool thread_is_active##_name; \
+    bool terminate_thread##_name; \
     pthread_t thread_id_##_name; \
     void abort_thread_##_name();
 
-#define MON_THREADED_FUNCTION_INIT(_name) thread_is_active##_name = false
+#define MON_THREADED_FUNCTION_INIT(_name) thread_is_active##_name = false; terminate_thread##_name = false;
 
 #define MON_THREADED_FUNCTION_IMPLEMENT(_class,_name) \
 void * thread_##_name(void *data) \
@@ -47,7 +48,9 @@ void _class::abort_thread_##_name() \
 { \
   if(thread_is_active##_name) \
   { \
+    terminate_thread##_name = true; \
     MON_LOG_DBG("Thread " #_name " terminating..."); \
+    sleep(1); \
     errno = pthread_cancel(thread_id_##_name); pthread_join(thread_id_##_name, NULL); \
     if(errno) { MON_PRINT_ERRNO("Thread " #_name " terminating failed."); } \
     else { MON_LOG_DBG("Thread " #_name " terminated..."); } \
@@ -58,5 +61,6 @@ void _class::abort_thread_##_name() \
 void _class::run_thread##_name()
 
 #define MON_THREADED_FUNCTION_ABORT(_name) abort_thread_##_name();
+#define MON_THREADED_ABORT_IF_NEED(_name) if(terminate_thread##_name) {return;}
 
 #endif // THREADSHELPER_H_INCLUDED

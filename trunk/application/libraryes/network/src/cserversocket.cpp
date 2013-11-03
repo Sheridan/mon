@@ -19,7 +19,7 @@ CSocketServer::CSocketServer() : CSocket()
 
 CSocketServer::~CSocketServer()
 {
-  MON_THREADED_FUNCTION_ABORT(listen);
+    close();
 }
 
 MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
@@ -58,6 +58,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocketServer, listen)
 //  waitRecv();
 
   MON_INFINITY_LOOP_BEGIN(wait_for_connect);
+    MON_THREADED_ABORT_IF_NEED(listen);
     sockaddr_in clientAddr;
     socklen_t addr_length = sizeof(clientAddr);
     memset(&clientAddr, 0, addr_length);

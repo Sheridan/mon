@@ -26,50 +26,48 @@ CSocket::CSocket()
 
 CSocket::~CSocket()
 {
-  MON_THREADED_FUNCTION_ABORT(waitRecv);
   close();
 }
-//#define MON_SOCKET_RECV_BUFFER_LENGTH 512
+
 MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
 {
   std::string t_message = "";
   char t_current_char = '\0';
   MON_INFINITY_LOOP_BEGIN(read_or_wait)
+    MON_THREADED_ABORT_IF_NEED(waitRecv);
     if(m_isConnected || m_isListen)
     {
-//      char t_recv_buffer[MON_SOCKET_RECV_BUFFER_LENGTH]; // = static_cast<char*>(malloc(sizeof(char)*MON_SOCKET_RECV_BUFFER_LENGTH));
       int  t_recv_bytes = 0;
       MON_INFINITY_LOOP_BEGIN(read_all)
-//        ::memset(t_recv_buffer, 0, sizeof(t_recv_buffer));
+        MON_THREADED_ABORT_IF_NEED(waitRecv);
         t_recv_bytes = ::recv(m_socketDescriptor, &t_current_char, sizeof(char), 0);
-//        if (t_recv_bytes > 0)
-//        {
-//          MON_LOG_DBG("Socket bytes received: " << t_recv_bytes)
-////          t_message += std::string(t_recv_buffer, t_recv_bytes);
-//          MON_INFINITY_LOOP_RESTART(read_all)
-//        }
-//        if (t_recv_bytes == 0)
-//        {
-//          if(!t_message.empty())
-//          {
-//            incommingMessage(t_message);
-//          }
-//          MON_INFINITY_LOOP_RESTART(read_all)
-//        }
+        if (t_recv_bytes > 0)
+        {
+          switch(t_current_char)
+          {
+            case '\n':
+            {
+              incommingMessage(t_message);
+              t_message = "";
+              break;
+            }
+            default: t_message += t_current_char;
+          }
+          MON_INFINITY_LOOP_RESTART(read_all)
+        }
+        if (t_recv_bytes == 0)
+        {
+          if(!t_message.empty())
+          {
+            incommingMessage(t_message);
+            t_message = "";
+          }
+          MON_INFINITY_LOOP_RESTART(read_all)
+        }
         if (t_recv_bytes < 0)
         {
           MON_PRINT_ERRNO("Socket recieve error")
           MON_INFINITY_LOOP_BREAK(read_all)
-        }
-        switch(t_current_char)
-        {
-          case '\n':
-          {
-            incommingMessage(t_message);
-            t_message = "";
-            break;
-          }
-          default: t_message += t_current_char;
         }
       MON_INFINITY_LOOP_END(read_all)
     }
@@ -115,6 +113,7 @@ void CSocket::close()
     m_isListen    = false;
     m_isConnected = false;
   }
+  MON_THREADED_FUNCTION_ABORT(waitRecv);
 }
 
 #define MON_SOCKET_OPTION_SET(_to,_from) \
