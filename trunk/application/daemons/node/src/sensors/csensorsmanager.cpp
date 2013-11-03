@@ -1,6 +1,13 @@
 /* %Id% */
 #include "csensorsmanager.h"
 #include "st.h"
+
+#define MON_FOREACH_SENSOR(_name) \
+   for(mon::daemons::node::TSensors::iterator _name = m_sensors.begin(); \
+    _name != m_sensors.end(); \
+    ++_name)
+
+
 namespace mon
 {
 namespace daemons
@@ -27,6 +34,17 @@ void CSensorsManager::load()
     MON_LOG_DBG("Sensor " << t_sensor->getName(NULL) << " loaded");
   }
 }
+
+std::string CSensorsManager::getGensorsNamesList(const std::string &delimiter)
+{
+  std::string result;
+  MON_FOREACH_SENSOR(sensor)
+  {
+    result += std::string((*sensor)->getName(NULL)) + delimiter;
+  }
+  return result.substr(0, result.length()-1);
+}
+
 
 }
 }

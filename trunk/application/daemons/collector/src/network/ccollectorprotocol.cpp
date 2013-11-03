@@ -19,6 +19,11 @@ void CCollectorProtocol::connect(const std::string &password)
   sendMessage(MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT, password);
 }
 
+void CCollectorProtocol::requestSensorsList()
+{
+  sendMessage(MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST);
+}
+
 }
 }
 }

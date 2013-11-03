@@ -17,6 +17,7 @@ class CCollectorProtocol : public mon::lib::protocol::CProtocol
     CCollectorProtocol(mon::lib::network::CSocket *socket);
     ~CCollectorProtocol();
     void connect (const std::string &password);
+    void requestSensorsList();
 };
 
 }

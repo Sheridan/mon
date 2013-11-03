@@ -6,6 +6,7 @@
 #include "class-helper.h"
 #include "ccollectorprotocol.h"
 #include "cfolder.h"
+#include "cremotenodesensor.h"
 #include <list>
 #include <string>
 
@@ -24,6 +25,8 @@ public:
   virtual ~CRemoteNode();
 private:
   mon::lib::config::CFolder *m_selfConfig;
+
+  TRemoteNodeSensors m_nodeSensors;
 
   void incommingMessage(const std::string &message);
   void connected(const std::string &to_addr, const unsigned short &to_port);

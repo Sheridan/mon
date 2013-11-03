@@ -21,7 +21,7 @@ CRemoteCollector::~CRemoteCollector()
 
 void CRemoteCollector::incommingMessage(const std::string &message)
 {
-  MON_LOG_DBG("----- Incoming message: " << message);
+  MON_LOG_DBG("Incoming message from collector: " << message);
   mon::lib::protocol::CMessage t_incomming_message(message);
   switch(t_incomming_message.type())
   {
@@ -31,6 +31,12 @@ void CRemoteCollector::incommingMessage(const std::string &message)
                   t_incomming_message.msg().compare(MON_ST_CONFIG->file("password")->get(MON_DEFAULT_PASSWORD)) == 0 ? "t" : "f" );
       break;
     }
+    case MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST:
+    {
+      sendMessage(MON_PROTO_ID_ANSWER_NODE_SENSORS_LIST, MON_ST_SENSORS_MANAGER->getGensorsNamesList());
+      break;
+    }
+    default: CNodeProtocol::incommingMessage(message);
   }
 }
 

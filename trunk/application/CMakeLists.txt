@@ -132,6 +132,7 @@ SET(mon-base-headers
     libraryes/base/src/parcer/cparcer.h
     libraryes/base/src/parcer/cparcerfile.h
     libraryes/base/src/parcer/cparcerstring.h
+    libraryes/base/src/parcer/stringhelper.h
     libraryes/base/src/parcer/parcer-helper.h)
 SET(mon-base-sources
     libraryes/base/src/main.cpp
@@ -141,7 +142,8 @@ SET(mon-base-sources
     libraryes/base/src/cstringbuilder.cpp
     libraryes/base/src/parcer/cparcer.cpp
     libraryes/base/src/parcer/cparcerfile.cpp
-    libraryes/base/src/parcer/cparcerstring.cpp)
+    libraryes/base/src/parcer/cparcerstring.cpp
+    libraryes/base/src/parcer/stringhelper.cpp)
 add_library(base SHARED ${mon-base-headers} ${mon-base-sources})
 install(FILES ${mon-base-headers} DESTINATION include/mon )
 install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
@@ -193,11 +195,13 @@ IF( BUILD_COLLECTOR )
   SET(mon-collector-headers
         daemons/collector/src/collector_st.h
         daemons/collector/src/network/cremotenode.h
+        daemons/collector/src/network/cremotenodesensor.h
         daemons/collector/src/network/cnodesmanager.h
         daemons/collector/src/network/ccollectorprotocol.h
      )
   SET(mon-collector-sources
       daemons/collector/src/network/cremotenode.cpp
+      daemons/collector/src/network/cremotenodesensor.cpp
       daemons/collector/src/network/cnodesmanager.cpp
       daemons/collector/src/network/ccollectorprotocol.cpp
       daemons/collector/src/main.cpp )

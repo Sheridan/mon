@@ -2,6 +2,7 @@
 #include "collector_st.h"
 #include "cremotenode.h"
 #include "global.h"
+#include "stringhelper.h"
 #include "infinity-cycle-helper.h"
 
 namespace mon
@@ -44,7 +45,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
 
 void CRemoteNode::incommingMessage(const std::string &message)
 {
-  MON_LOG_DBG("----- Incoming message: " << message);
+  MON_LOG_DBG("Incoming message from node: " << message);
   mon::lib::protocol::CMessage t_incomming_message(message);
   switch(t_incomming_message.type())
   {
@@ -52,11 +53,12 @@ void CRemoteNode::incommingMessage(const std::string &message)
     {
       if(t_incomming_message.msg().compare("t") == 0)
       {
-        MON_LOG_DBG("Connection allowed")
+        MON_LOG_NFO("Connection allowed")
+        requestSensorsList();
       }
       else if(t_incomming_message.msg().compare("f") == 0)
       {
-        MON_LOG_DBG("Connection denyed")
+        MON_LOG_ERR("Connection denyed")
       }
       else
       {
@@ -64,6 +66,17 @@ void CRemoteNode::incommingMessage(const std::string &message)
       }
       break;
     }
+    case MON_PROTO_ID_ANSWER_NODE_SENSORS_LIST:
+    {
+      std::vector<std::string> sensorsNames;
+      mon::lib::base::split(t_incomming_message.msg(), ':', sensorsNames);
+      for(std::vector<std::string>::iterator sensorName = sensorsNames.begin(); sensorName != sensorsNames.end(); ++sensorName)
+      {
+        CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(*(sensorName), this);
+        m_nodeSensors.push_back(rnSensor);
+      }
+    }
+    default: CCollectorProtocol::incommingMessage(message);
   }
 }
 

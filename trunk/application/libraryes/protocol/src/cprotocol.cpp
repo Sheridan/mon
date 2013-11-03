@@ -18,23 +18,7 @@ CProtocol::~CProtocol()
 void CProtocol::incommingMessage(const std::string &i_incoming)
 {
   CMessage t_msg(i_incoming);
-  switch (t_msg.type())
-  {
-    case MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT:
-    {
-      sendMessage(
-                   MON_PROTO_ID_CONNECT_ANSWER,
-                   t_msg.msg().compare(MON_ST_CONFIG->folder("node")->file("password")->get(std::string(""))) == 0 ? "+" : "-"
-                 );
-      break;
-    }
-    case MON_PROTO_ID_CONNECT_ANSWER:
-    {
-
-      break;
-    }
-    default: MON_LOG_WRN("Uncknown incoming message type: " << t_msg.type() << " (" << t_msg.msg() << ")")
-  }
+  MON_LOG_WRN("Uncknown incoming message type: " << t_msg.type() << " (" << t_msg.msg() << ")")
 }
 
 void CProtocol::sendMessage(const unsigned int &i_type, const std::string &i_text)
