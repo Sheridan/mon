@@ -20,17 +20,53 @@ utilisation
   }
   fields:
   {
+    user:
+    {
+      label: "user";
+      type: %;
+      description: "User usage";
+    }
+    nice: 
+    {
+      label: "nice";
+      type: %;
+      description: "Nice usage";
+    }
+    system: 
+    {
+      label: "system";
+      type: %;
+      description: "System usage";
+    }
+    iowait: 
+    {
+      label: "iowait";
+      type: %;
+      description: "I/O wait";
+    }
+    irq: 
+    {
+      label: "irq";
+      type: %;
+      description: "IRQ";
+    }
+    sirq: 
+    {
+      label: "sirq";
+      type: %;
+      description: "sIRQ";
+    }
+    steal: 
+    {
+      label: "steal";
+      type: %;
+      description: "Steal";
+    }
     idle: 
     {
       label: "idle";
       type: %;
       description: "CPU idle";
-    }
-    app:
-    {
-      label: "application";
-      type: %;
-      description: "Application usage";
     }
   }
 }

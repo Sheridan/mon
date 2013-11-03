@@ -24,7 +24,7 @@ void CSensorsManager::load()
     CSensor *t_sensor = new CSensor((*folder)->name());
     m_sensors.push_back(t_sensor);
     t_sensor->load();
-    MON_LOG_DBG(t_sensor->getDefinition(NULL))
+    MON_LOG_DBG("Sensor " << t_sensor->getName(NULL) << " loaded");
   }
 }
 

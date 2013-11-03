@@ -69,6 +69,7 @@ void CRemoteNode::incommingMessage(const std::string &message)
 
 void CRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
+  MON_LOG_DBG("Collector connected to " << to_addr << ":" << to_port);
   CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 

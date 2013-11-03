@@ -9,7 +9,9 @@ memory
     default: 1SPP;
   }
   flags:
-  {}
+  {
+    aggregated
+  }
   tags:
   {
     system,
@@ -18,17 +20,29 @@ memory
   }
   fields:
   {
+    used:
+    {
+      label: "used";
+      type: unsigned long;
+      description: "Used memory";
+    }
     free: 
     {
       label: "free";
       type: unsigned long;
       description: "Free memory";
     }
-    used:
+    shared: 
     {
-      label: "used";
+      label: "shared";
       type: unsigned long;
-      description: "Used memory";
+      description: "Shared memory";
+    }
+    buffers:
+    {
+      label: "buffers";
+      type: unsigned long;
+      description: "Used for buffers";
     }
     cashe:
     {
@@ -36,5 +50,6 @@ memory
       type: unsigned long;
       description: "Used for cache";
     }
+    
   }
 }
