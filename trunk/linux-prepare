@@ -7,6 +7,9 @@ mkdir -p ${build_path}
 mkdir -p ${install_path}
 
 cp doc/config/debug.node.conf ${root_path}
+cp doc/config/node.cpu.conf ${root_path}
+cp doc/config/node.memory.conf ${root_path}
+cp doc/config/node.logger.conf ${root_path}
 cp doc/config/debug.collector.conf ${root_path}
 
 dev_ui_build_path="${build_path}/de"
