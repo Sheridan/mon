@@ -45,6 +45,17 @@ std::string CSensorsManager::getGensorsNamesList(const std::string &delimiter)
   return result.substr(0, result.length()-1);
 }
 
+CSensor *CSensorsManager::sensor(const std::string &name)
+{
+    MON_FOREACH_SENSOR(sensor)
+    {
+        if(name.compare((*sensor)->getName(NULL)) == 0)
+        {
+            return (*sensor);
+        }
+    }
+    return NULL;
+}
 
 }
 }

@@ -17,6 +17,7 @@ class CSensorsManager : public mon::lib::base::CSingletonMember
     ~CSensorsManager();
     void load();
     std::string getGensorsNamesList(const std::string &delimiter = ":");
+    CSensor *sensor(const std::string &name);
   private:
     TSensors m_sensors;
 };

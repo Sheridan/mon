@@ -18,6 +18,7 @@ class CCollectorProtocol : public mon::lib::protocol::CProtocol
     ~CCollectorProtocol();
     void connect (const std::string &password);
     void requestSensorsList();
+    void requestSensorDefinition(const std::string &sensor);
 };
 
 }

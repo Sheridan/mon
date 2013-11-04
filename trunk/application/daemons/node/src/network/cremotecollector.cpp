@@ -36,6 +36,11 @@ void CRemoteCollector::incommingMessage(const std::string &message)
       sendMessage(MON_PROTO_ID_ANSWER_NODE_SENSORS_LIST, MON_ST_SENSORS_MANAGER->getGensorsNamesList());
       break;
     }
+    case MON_PROTO_ID_REQUEST_SENSOR_DEFINITION:
+    {
+      sendMessage(MON_PROTO_ID_ANSWER_SENSOR_DEFINITION, MON_ST_SENSORS_MANAGER->sensor(t_incomming_message.msg())->getDefinition(NULL));
+      break;
+    }
     default: CNodeProtocol::incommingMessage(message);
   }
 }

@@ -53,16 +53,13 @@ void CRemoteNode::incommingMessage(const std::string &message)
     {
       if(t_incomming_message.msg().compare("t") == 0)
       {
-        MON_LOG_NFO("Connection allowed")
+        MON_LOG_NFO("Connection allowed");
         requestSensorsList();
       }
       else if(t_incomming_message.msg().compare("f") == 0)
       {
-        MON_LOG_ERR("Connection denyed")
-      }
-      else
-      {
-        MON_LOG_DBG("Strange answer" << message)
+        MON_LOG_ERR("Connection denyed");
+        MON_ABORT;
       }
       break;
     }
@@ -75,6 +72,11 @@ void CRemoteNode::incommingMessage(const std::string &message)
         CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(*(sensorName), this);
         m_nodeSensors.push_back(rnSensor);
       }
+    }
+    case MON_PROTO_ID_ANSWER_SENSOR_DEFINITION:
+    {
+      MON_LOG_DBG(t_incomming_message.msg());
+      break;
     }
     default: CCollectorProtocol::incommingMessage(message);
   }

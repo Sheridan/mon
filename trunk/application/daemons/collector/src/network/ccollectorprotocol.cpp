@@ -24,6 +24,11 @@ void CCollectorProtocol::requestSensorsList()
   sendMessage(MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST);
 }
 
+void CCollectorProtocol::requestSensorDefinition(const std::string &sensor)
+{
+    sendMessage(MON_PROTO_ID_REQUEST_SENSOR_DEFINITION, sensor);
+}
+
 }
 }
 }
