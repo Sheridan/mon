@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # %Id%
+
+. ./linux-environment
+
 debug_off=${1:-"ON"}
-build_path="/tmp/mon/build"
-install_path="/tmp/mon/package"
 current_path=$PWD
-build_threads=$(($(cat /proc/cpuinfo| grep family | wc -l)+1))
 function run_cmd
 {
   name=$1
   cmd=$2
   echo "--> $name ($cmd)"
+  echo $cmd >> ${build_path}/commands
   $cmd
   if (($?>0))
   then

@@ -60,6 +60,17 @@ void CConfigurationParcer::readFolder(CFolder *folder, const mon::lib::base::TSt
       MON_PARCER_BUFFER_RESET(variable_name);
       MON_PARCER_LOOP_RESTART(variable_name);
     }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(variable_name, ':')
+    {
+      MON_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Keyword name can't be empty");
+      MON_PARCER_IS_KEYWORD(variable_name, "include")
+      {
+          includeFile(folder);
+          MON_PARCER_BUFFER_RESET(variable_name);
+          MON_PARCER_LOOP_RESTART(variable_name);
+      }
+      parcerError("Unknown keyword " MON_PARCER_BUFFER_ERROR_PART(variable_name), MON_PARCER_CURRENT_CHARACTER(variable_name));
+    }
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(variable_name, '#')
     {
       skipComment();
@@ -89,9 +100,7 @@ void CConfigurationParcer::readFolder(CFolder *folder, const mon::lib::base::TSt
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(variable_name, "Variable path name can't be empty");
       readFolder(folder->folder(MON_PARCER_BUFFER(variable_name)), MON_PARCER_CURRENT_CHARACTER(variable_name));
-      if(lastFolderDelimiter == '.') { MON_PARCER_LOOP_BREAK(variable_name) }
-      MON_PARCER_BUFFER_RESET(variable_name);
-      MON_PARCER_LOOP_RESTART(variable_name);
+      MON_PARCER_LOOP_BREAK(variable_name);
     }
     parcerError("Variable name must contain only alpha, numeric and '_' symbols" MON_PARCER_BUFFER_ERROR_PART(variable_name), MON_PARCER_CURRENT_CHARACTER(variable_name));
   }
@@ -133,30 +142,11 @@ void CConfigurationParcer::readValue(CFile *file)
       #endif
       switch(c_type)
       {
-        case mon::lib::base::ctBool   :
-        {
-          file->set(convertBool(MON_PARCER_BUFFER(variable_value)));
-          break;
-        }
-        case mon::lib::base::ctString :
-        {
-          file->set(MON_PARCER_BUFFER(variable_value));
-          break;
-        }
-        case mon::lib::base::ctInt    :
-        {
-          file->set(mon::lib::base::toInt(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1));
-          break;
-        }
-        case mon::lib::base::ctFloat  :
-        {
-          file->set(mon::lib::base::toFloat(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1));
-          break;
-        }
-        case mon::lib::base::ctUnknown:
-        {
-          parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value));
-        }
+        case mon::lib::base::ctBool   : { file->set(convertBool(            MON_PARCER_BUFFER(variable_value)))                   ; break; }
+        case mon::lib::base::ctString : { file->set(                        MON_PARCER_BUFFER(variable_value))                    ; break; }
+        case mon::lib::base::ctInt    : { file->set(mon::lib::base::toInt  (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::ctFloat  : { file->set(mon::lib::base::toFloat(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::ctUnknown: { parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
       }
       stepBack();
       MON_PARCER_LOOP_BREAK(variable_value);
@@ -190,7 +180,18 @@ void CConfigurationParcer::readValue(CFile *file)
     parcerError("Misplaced character" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value));
   }
   MON_PARCER_LOOP_END(variable_value);
+}
 
+void CConfigurationParcer::includeFile(CFolder *folder)
+{
+    CFile file("include", folder);
+    readValue(&file);
+    if (file.contentType() != mon::lib::base::ctString)
+    {
+        parcerError("Include file path must be a string");
+    }
+    CConfigurationParcer includeParcer(file.toString(), folder);
+    includeParcer.parce();
 }
 
 }

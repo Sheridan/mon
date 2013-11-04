@@ -42,8 +42,10 @@ class CParcer
     bool isNumericDot(const TStdStringCharacter &character);
     bool isWhiteSpace(const TStdStringCharacter &character);
     bool isQuotation (const TStdStringCharacter &character);
+    bool isMarker    (const TStdStringCharacter &character);
 
     void parcerError(const std::string& message, const TStdStringCharacter &character);
+    void parcerError(const std::string& message);
 
     // statistic
     int m_linesCount;

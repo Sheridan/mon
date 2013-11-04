@@ -44,7 +44,6 @@ TStdStringCharacter CParcerFile::goOneCharacterForward()
 
 TStdStringCharacter CParcerFile::goOneCharacterBack()
 {
-//  MON_LOG_DBG((int)sizeof(TStdStringCharacter)*2); MON_ABORT;
   if(fseek(m_file, ftell(m_file)-(sizeof(TStdStringCharacter)*2), SEEK_SET) == -1)
   {
     m_error = true;

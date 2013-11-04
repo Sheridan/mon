@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# %Id%
+root_path="/tmp/mon"
+build_path="${root_path}/build"
+install_path="${root_path}/package"
+build_threads=$(($(cat /proc/cpuinfo | grep family | wc -l)+1))

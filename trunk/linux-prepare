@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. ./linux-environment
+
+mkdir -p ${root_path}
+mkdir -p ${build_path}
+mkdir -p ${install_path}
+
+cp doc/config/debug.node.conf ${root_path}
+cp doc/config/debug.collector.conf ${root_path}
+
+dev_ui_build_path="${build_path}/de"
+mkdir -p "${dev_ui_build_path}/application"
+for s in $(ls -1 sensors)
+do 
+    mkdir -p "${dev_ui_build_path}/sensors/${s}"
+done

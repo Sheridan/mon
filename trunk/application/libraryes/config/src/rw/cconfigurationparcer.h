@@ -23,6 +23,7 @@ private:
   CFolder *m_root;
   void readFolder(CFolder *folder, const mon::lib::base::TStdStringCharacter &lastFolderDelimiter = 0);
   void readValue(CFile *file);
+  void includeFile(CFolder *folder);
 };
 
 }

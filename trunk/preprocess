@@ -1,10 +1,14 @@
 #!/bin/bash
 
-filelist=( application/libraryes/config/src/cconfigurationparcer.cpp )
+filelist=( application/libraryes/config/src/rw/cconfigurationparcer.cpp )
 include="-I application/libraryes/base/src
+	 -I application/libraryes/base/src/parcer
+	 -I application/libraryes/base/src/singleton
          -I application/libraryes/network/src
          -I application/libraryes/logger/src
          -I application/libraryes/config/src
+         -I application/libraryes/config/src/rw
+         -I application/libraryes/config/src/model
          -I application/libraryes/sensor/src
          -I application/libraryes/sensor/src/data
          -I application/libraryes/sensor/src/parcers

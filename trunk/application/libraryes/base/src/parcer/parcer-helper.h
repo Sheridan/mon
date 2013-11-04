@@ -8,7 +8,7 @@
 // -----------------------------------------------  debug
 //#define MON_PARCER_PRINT_CURRENT_CHAR_ENABLED
 //#define MON_PARCER_PRINT_LOOP_STATUS_ENABLED
-//#define MON_PARCER_PRINT_VARIABLES_ENABLED
+#define MON_PARCER_PRINT_VARIABLES_ENABLED
 
 #ifdef MON_PARCER_PRINT_LOOP_STATUS_ENABLED
   #define MON_PARCER_PRINT_LOOP_STATUS(_name,_status) MON_LOG_DBG("Loop " #_name " " #_status);
@@ -71,12 +71,12 @@
 // -----------------------------------------------  loop control
 
 // -----------------------------------------------  characters check
-
 #define MON_PARCER_CURRENT_CHARACTER_ALPHA_CHECK(_name)            isAlpha     (MON_PARCER_CURRENT_CHARACTER(_name))
 #define MON_PARCER_CURRENT_CHARACTER_NUMERIC_CHECK(_name)          isNumeric   (MON_PARCER_CURRENT_CHARACTER(_name))
 #define MON_PARCER_CURRENT_CHARACTER_NUMERIC_DOT_CHECK(_name)      isNumericDot(MON_PARCER_CURRENT_CHARACTER(_name))
 #define MON_PARCER_CURRENT_CHARACTER_WHITESPACE_CHECK(_name)       isWhiteSpace(MON_PARCER_CURRENT_CHARACTER(_name))
 #define MON_PARCER_CURRENT_CHARACTER_QUOTATION_CHECK(_name)        isQuotation (MON_PARCER_CURRENT_CHARACTER(_name))
+#define MON_PARCER_CURRENT_CHARACTER_MARKER_CHECK(_name)           isMArker    (MON_PARCER_CURRENT_CHARACTER(_name))
 #define MON_PARCER_CURRENT_CHARACTER_EQUAL_CHECK(_name,_character) MON_PARCER_CURRENT_CHARACTER(_name) == _character
 
 #define MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(_name)            if (MON_PARCER_CURRENT_CHARACTER_ALPHA_CHECK(_name))
@@ -84,12 +84,13 @@
 #define MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC_DOT(_name)      if (MON_PARCER_CURRENT_CHARACTER_NUMERIC_DOT_CHECK(_name))
 #define MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(_name)       if (MON_PARCER_CURRENT_CHARACTER_WHITESPACE_CHECK(_name))
 #define MON_PARCER_CURRENT_CHARACTER_IS_QUOTATION(_name)        if (MON_PARCER_CURRENT_CHARACTER_QUOTATION_CHECK(_name))
+#define MON_PARCER_CURRENT_CHARACTER_IS_MARKER(_name)           if (MON_PARCER_CURRENT_CHARACTER_MARKER_CHECK(_name))
 #define MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(_name,_character) if (MON_PARCER_CURRENT_CHARACTER_EQUAL_CHECK(_name,_character))
 // -----------------------------------------------  characters check
-#define MON_PARCER_KEYWORD_CHECK(_name,_kw) (MON_PARCER_BUFFER(_name).compare(_kw))
 
-#define MON_PARCER_IS_KEYWORD(_name,_kw) if(MON_PARCER_KEYWORD_CHECK(_name,_kw))
 // -----------------------------------------------  keywords check
+#define MON_PARCER_KEYWORD_CHECK(_name,_kw) (MON_PARCER_BUFFER(_name).compare(_kw) == 0)
+#define MON_PARCER_IS_KEYWORD(_name,_kw) if(MON_PARCER_KEYWORD_CHECK(_name,_kw))
 // -----------------------------------------------  keywords check
 
 // -----------------------------------------------  characters
@@ -103,6 +104,7 @@
 #define MON_PARCER_CASES_NUMERIC     case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9'
 #define MON_PARCER_CASES_WHITE       case ' ': case '\t':case '\r':case '\n':case '\v':case '\f'
 #define MON_PARCER_CASES_QUOTATION   case '"': case '\'':case '`'
+#define MON_PARCER_CASES_MARKERS     case '{': case '}': case '=': case ';': case ':': case '.': case '#'
 // -----------------------------------------------  characters
 
 #endif // PARCERHELPER_H

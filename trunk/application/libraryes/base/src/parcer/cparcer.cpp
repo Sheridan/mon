@@ -69,6 +69,12 @@ void CParcer::parcerError(const std::string& message, const TStdStringCharacter 
   MON_ABORT;
 }
 
+void CParcer::parcerError(const std::string& message)
+{
+  MON_LOG_ERR("Can not parce, line " << m_linesCount+1 << ", symbol " << m_currentLineCharactersCount-1 << " " << message);
+  MON_ABORT;
+}
+
 void CParcer::skipComment()
 {
   MON_PARCER_LOOP_BEGIN(read_comment);
@@ -159,6 +165,12 @@ bool CParcer::isWhiteSpace(const TStdStringCharacter &character)
 bool CParcer::isQuotation (const TStdStringCharacter &character)
 {
   switch(character) { MON_PARCER_CASES_QUOTATION: { return true; } }
+  return false;
+}
+
+bool CParcer::isMarker(const TStdStringCharacter &character)
+{
+  switch(character) { MON_PARCER_CASES_MARKERS: { return true; } }
   return false;
 }
 
