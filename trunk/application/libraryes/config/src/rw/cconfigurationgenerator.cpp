@@ -2,7 +2,7 @@
 #include "cconfigurationgenerator.h"
 #include "st.h"
 
-#define MON_CONFIG_GENERATOR_DEBUG_ENABLE
+//#define MON_CONFIG_GENERATOR_DEBUG_ENABLE
 #ifdef MON_CONFIG_GENERATOR_DEBUG_ENABLE
   #define MON_CONFIG_GENERATOR_DEBUG(_msg) MON_LOG_DBG(_msg)
 #else

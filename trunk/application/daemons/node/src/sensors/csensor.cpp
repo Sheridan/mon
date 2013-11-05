@@ -39,12 +39,12 @@ CSensor::~CSensor()
 void CSensor::load()
 {
   char *error; error = NULL;
-  MON_IMPORT(TFInitSensor         , initSensor);
-  MON_IMPORT(TFGetName            , getName);
-  MON_IMPORT(TFGetDefinition      , getDefinition);
+  MON_IMPORT(TFInitSensor         , initSensor         );
+  MON_IMPORT(TFGetName            , getName            );
+  MON_IMPORT(TFGetDefinition      , getDefinition      );
   MON_IMPORT(TFGetDefinitionLength, getDefinitionLength);
-  MON_IMPORT(TFGetStatistics      , getStatistics);
-
+  MON_IMPORT(TFGetStatistics      , getStatistics      );
+  MON_IMPORT(TFGetSensorAvialable , getSensorAvialable );
   initSensor(MON_ST_LOGGER, MON_ST_CONFIG->folder("sensors")->folder(m_name));
 }
 

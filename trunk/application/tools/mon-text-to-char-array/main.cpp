@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-      fprintf(h_file, "const unsigned char %s[] = {\n", argv[3]);
+      fprintf(h_file, "const char %s[] = {\n", argv[3]);
       int x;
       int characters_count = 0;
       int unbreacked_count = 0;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
       {
         characters_count++;
         unbreacked_count++;
-        fprintf(h_file, "%#x, ", static_cast<unsigned char>(x));
+        fprintf(h_file, "%#x, ", static_cast<char>(x));
         if(unbreacked_count == BREAK_AT)
         {
           unbreacked_count = 0;
