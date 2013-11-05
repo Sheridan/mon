@@ -21,12 +21,14 @@ public:
   bool         containsFolder(const std::string & name);
   CFolder    * folder        (const std::string & name);
   int          foldersCount  ();
-  TFoldersList folders();
+  TFoldersList folders       ();
 
   bool       containsFile(const std::string & name);
   CFile    * file        (const std::string & name);
   int        filesCount  ();
   TFilesList files       ();
+
+  CFolder  * root        ();
 
   // `fs` operations :)
   void cd(CFolder *val);

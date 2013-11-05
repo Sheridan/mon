@@ -50,6 +50,7 @@ int           CConfig::filesCount    (                        ) { return m_pwd->
 TFilesList    CConfig::files         (                        ) { return m_pwd->files         (    ); }
 CFile       * CConfig::file          (const std::string & name) { return m_pwd->file          (name); }
 
+CFolder     * CConfig::root          (                        ) { return m_root                     ; }
 }
 }
 }

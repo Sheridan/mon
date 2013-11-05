@@ -174,7 +174,7 @@ include_directories( ${GEN_PATH}
                      defines )
 
 function(add_run target_name)
-  file(WRITE ${GEN_PATH}/${target_name}-run "#!/bin/bash\n\nLD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/${LIB_GLOBAL_TARGET}\" ./${target_name}\n\n"  )
+  file(WRITE ${GEN_PATH}/${target_name}-run "#!/bin/bash\n\nLD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/${LIB_GLOBAL_TARGET}\" ./${target_name} $@\n\n"  )
   install(FILES ${GEN_PATH}/${target_name}-run
           DESTINATION bin
           PERMISSIONS
@@ -231,5 +231,13 @@ IF( BUILD_NODE )
   add_executable( mon-node ${mon-node-headers} ${mon-node-sources})
   target_link_libraries(mon-node dl)
   add_daemon(mon-node)
+
+  MESSAGE ( STATUS "---> Processing sensor tester" )
+  SET(mon-sensor-test-headers  )
+  SET(mon-sensor-test-sources tools/mon-sensor-test/main.cpp )
+  add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
+  target_link_libraries(mon-sensor-test base config logger dl)
+  install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
+  add_run(mon-sensor-test)
 ENDIF( BUILD_NODE )
 # +++++++++++++++++++ applications +++++++++++++++++++

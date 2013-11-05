@@ -1,0 +1,107 @@
+/* %Id% */
+
+#include "config.h"
+#include "logger.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <string.h>
+#include <dlfcn.h>
+#include <stdlib.h>
+// ------------------ variables --------------------------------------------------------------------
+mon::lib::config::CConfig *config;
+mon::lib::logger::CLogger *logger;
+std::string sensorFile;
+std::string configFile;
+void * sensor_handle;
+typedef void               (*TFInitSensor)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
+typedef const char        *(*TFGetName)            (const char *);
+typedef const char        *(*TFGetDefinition)      (const char *);
+typedef const unsigned int (*TFGetDefinitionLength)(const char *);
+typedef const char        *(*TFGetStatistics)      (const char *);
+typedef const bool         (*TFGetSensorAvialable) (const char *);
+TFInitSensor          initSensor;
+TFGetName             getName;
+TFGetDefinition       getDefinition;
+TFGetDefinitionLength getDefinitionLength;
+TFGetStatistics       getStatistics;
+TFGetSensorAvialable  getSensorAvialable;
+// ------------------ variables --------------------------------------------------------------------
+// ------------------ functions --------------------------------------------------------------------
+void help()
+{
+  printf("\n");
+  printf("-h, --help   This help\n");
+  printf("-c, --config Sensor config file\n");
+  printf("-s, --sensor Sensor .so file\n");
+  printf("\n");
+  exit(0);
+}
+void setopts(int argc, char *argv[])
+{
+  static const char *optString = "hs:c:";
+  static const struct option longOpts[] = {
+      { "help"     , no_argument      , NULL, 'h' },
+      { "sensor"   , required_argument, NULL, 's' },
+      { "config"   , required_argument, NULL, 'c' },
+      { NULL       , no_argument      , NULL,  0  }};
+  int c;
+  int option_index = 0;
+  while ((c = getopt_long(argc, argv, optString, longOpts, &option_index)) != -1)
+  {
+    switch (c)
+    {
+      case 'h': help();                           break;
+      case 's': sensorFile = std::string(optarg); break;
+      case 'c': configFile = std::string(optarg); break;
+      case '?': break;
+    }
+  }
+}
+
+#define MON_IMPORT_ERROR(_name) \
+  if ((error = dlerror()) != NULL) \
+  { \
+    printf("Error importing function `" #_name "` from sensor `%s`: %s\n", sensorFile.c_str(), error); \
+    exit(1);   \
+  }
+#define MON_IMPORT(_type, _name) _name = (_type) dlsym(sensor_handle, #_name); MON_IMPORT_ERROR(_name);
+void load()
+{
+  sensor_handle = dlopen(sensorFile.c_str(), RTLD_NOW);
+  if (!sensor_handle)
+  {
+    printf("Sensor `%s` loading error: %s\n", sensorFile.c_str(), dlerror());
+    exit(1);
+  }
+  char *error; error = NULL;
+  MON_IMPORT(TFInitSensor         , initSensor         );
+  MON_IMPORT(TFGetName            , getName            );
+  MON_IMPORT(TFGetDefinition      , getDefinition      );
+  MON_IMPORT(TFGetDefinitionLength, getDefinitionLength);
+  MON_IMPORT(TFGetStatistics      , getStatistics      );
+  MON_IMPORT(TFGetSensorAvialable , getSensorAvialable );
+  initSensor(logger, config->root());
+}
+
+// ------------------ functions --------------------------------------------------------------------
+// ------------------ main -------------------------------------------------------------------------
+int main(int argc, char *argv[])
+{
+  setopts(argc, argv);
+  config = new mon::lib::config::CConfig();
+  logger = new mon::lib::logger::CLogger();
+  config->load(configFile);
+  load();
+  printf("Sensor name: %s\n", getName(NULL));
+  bool sensorAvialable = getSensorAvialable(NULL);
+  printf("Sensor avialable? %s.\n", sensorAvialable ? "Yes" : "No");
+  if(sensorAvialable)
+  {
+    printf("Sensor definition (%d bytes):\n%s\n", getDefinitionLength(NULL), getDefinition(NULL));
+  }
+  delete config;
+  delete logger;
+  exit(0);
+}
+// ------------------ main -------------------------------------------------------------------------
