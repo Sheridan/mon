@@ -9,7 +9,7 @@ namespace collector
 {
 
 CRemoteNodeSensor::CRemoteNodeSensor(const std::string &name, CRemoteNode *parentNode) :
-  m_parentNode(parentNode), m_sensorName(name)
+  m_sensorName(name), m_parentNode(parentNode)
 {
   MON_LOG_DBG("Remote Node Sensor: '" << m_sensorName << "'");
 }

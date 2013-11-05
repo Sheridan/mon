@@ -9,6 +9,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
   {
     return "";
   }
+  return "";
 }
 
 MON_SENSOR_STATIC_EXEMPLARS_COUNT(1);
