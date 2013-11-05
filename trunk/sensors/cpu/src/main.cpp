@@ -1,5 +1,6 @@
 /* %Id% */
 #include "mon-sensor-cpu.h"
+#include <unistd.h>
 
 MON_SENSOR_BEGIN
 
@@ -26,10 +27,15 @@ MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION
   return 1;
 }
 
+#define MON_SENSOR_STAT_FILE "/proc/stat"
 MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION
 {
-  return true;
+  bool avialable = (access(MON_SENSOR_STAT_FILE, R_OK ) != -1);
+  if(!avialable)
+  {
+    MON_PRINT_FILEOP_ERRNO(MON_SENSOR_STAT_FILE, "Access failed");
+  }
+  return avialable;
 }
-
 
 MON_SENSOR_END
