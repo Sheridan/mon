@@ -11,6 +11,7 @@ cp doc/config/node.cpu.conf ${root_path}
 cp doc/config/node.memory.conf ${root_path}
 cp doc/config/node.logger.conf ${root_path}
 cp doc/config/debug.collector.conf ${root_path}
+cp doc/config/collector.node.localhost.conf ${root_path}
 
 dev_ui_build_path="${build_path}/de"
 mkdir -p "${dev_ui_build_path}/application"
