@@ -1,6 +1,7 @@
 /* %Id% */
 #include "csensorsmanager.h"
 #include "st.h"
+#include <unistd.h>
 
 #define MON_FOREACH_SENSOR(_name) \
    for(mon::daemons::node::TSensors::iterator _name = m_sensors.begin(); \
@@ -33,7 +34,15 @@ void CSensorsManager::load()
     t_sensor->load();
     if(t_sensor->getSensorAvialable(NULL))
     {
-      MON_LOG_DBG("Sensor " << t_sensor->getName(NULL) << " loaded");
+      MON_LOG_NFO("Sensor " << t_sensor->getName(NULL) << " loaded");
+      if(strcmp(t_sensor->getName(NULL), "cpu") == 0)
+      {
+        for (int a = 0; a < 10; a++)
+        {
+          MON_LOG_DBG(t_sensor->getStatistics("utilisation"));
+          sleep(1);
+        }
+      }
     }
   }
 }

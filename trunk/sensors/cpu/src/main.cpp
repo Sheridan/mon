@@ -81,24 +81,24 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
     std::ostringstream result;
     result << "cpu:utilisation!";
     MON_FILE_FSCANF_ALL_CPU_START(read_stat, stat, "%d")
-        delta.user       = prevstat[stat.cpu_number].user       - stat.user;
-        delta.nice       = prevstat[stat.cpu_number].nice       - stat.nice;
-        delta.system     = prevstat[stat.cpu_number].system     - stat.system;
-        delta.idle       = prevstat[stat.cpu_number].idle       - stat.idle;
-        delta.iowait     = prevstat[stat.cpu_number].iowait     - stat.iowait;
-        delta.irq        = prevstat[stat.cpu_number].irq        - stat.irq;
-        delta.softirq    = prevstat[stat.cpu_number].softirq    - stat.softirq;
-        delta.steal      = prevstat[stat.cpu_number].steal      - stat.steal;
-        delta.guest      = prevstat[stat.cpu_number].guest      - stat.guest;
-        delta.guest_nice = prevstat[stat.cpu_number].guest_nice - stat.guest_nice;
+        delta.user       = stat.user       - prevstat[stat.cpu_number].user;
+        delta.nice       = stat.nice       - prevstat[stat.cpu_number].nice;
+        delta.system     = stat.system     - prevstat[stat.cpu_number].system;
+        delta.idle       = stat.idle       - prevstat[stat.cpu_number].idle;
+        delta.iowait     = stat.iowait     - prevstat[stat.cpu_number].iowait;
+        delta.irq        = stat.irq        - prevstat[stat.cpu_number].irq;
+        delta.softirq    = stat.softirq    - prevstat[stat.cpu_number].softirq;
+        delta.steal      = stat.steal      - prevstat[stat.cpu_number].steal;
+        delta.guest      = stat.guest      - prevstat[stat.cpu_number].guest;
+        delta.guest_nice = stat.guest_nice - prevstat[stat.cpu_number].guest_nice;
         totalDelta = delta.user + delta.nice    + delta.system + delta.idle  + delta.iowait +
                      delta.irq  + delta.softirq + delta.steal  + delta.guest + delta.guest_nice;
         onePercent = totalDelta / 100;
-        result << stat.cpu_number << "#" << (delta.user   *onePercent) << ":" << (delta.nice      *onePercent) << ":"
-                                         << (delta.system *onePercent) << ":" << (delta.idle      *onePercent) << ":"
-                                         << (delta.iowait *onePercent) << ":" << (delta.irq       *onePercent) << ":"
-                                         << (delta.softirq*onePercent) << ":" << (delta.steal     *onePercent) << ":"
-                                         << (delta.guest  *onePercent) << ":" << (delta.guest_nice*onePercent) << "|";
+        result << stat.cpu_number << "#" << ((float)delta.user   *onePercent) << ":" << ((float)delta.nice      *onePercent) << ":"
+                                         << ((float)delta.system *onePercent) << ":" << ((float)delta.idle      *onePercent) << ":"
+                                         << ((float)delta.iowait *onePercent) << ":" << ((float)delta.irq       *onePercent) << ":"
+                                         << ((float)delta.softirq*onePercent) << ":" << ((float)delta.steal     *onePercent) << ":"
+                                         << ((float)delta.guest  *onePercent) << ":" << ((float)delta.guest_nice*onePercent) << "|";
         prevstat[stat.cpu_number] = stat;
     MON_FILE_FSCANF_ALL_CPU_STOP(read_stat, stat)
     std::string r = result.str();
