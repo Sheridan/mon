@@ -11,7 +11,7 @@ function run_cmd
   name=$1
   cmd=$2
   echo "--> $name ($cmd)"
-  echo $cmd >> ${build_path}/commands
+  echo $cmd >> ${console_build_path}/commands
   $cmd
   if (($?>0))
   then
@@ -23,7 +23,7 @@ function build()
 {
   path=$1
   echo "-------------------> Building $path <-------------------"
-  object_build_path="$build_path/$path"
+  object_build_path="$console_build_path/$path"
   object_path="$current_path/$path"
   mkdir -p $object_build_path
   cd $object_build_path
@@ -33,7 +33,7 @@ function build()
   cd $build_path
 }
 
-mkdir -p $build_path
+mkdir -p $console_build_path
 mkdir -p $install_path
 build "application"
 build "sensors/cpu"

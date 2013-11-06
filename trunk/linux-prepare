@@ -5,17 +5,20 @@
 mkdir -p ${root_path}
 mkdir -p ${build_path}
 mkdir -p ${install_path}
+mkdir -p ${conf_path}
+mkdir -p ${log_path}
+mkdir -p ${data_path}
+mkdir -p ${run_path}
 
-cp doc/config/debug.node.conf ${root_path}
-cp doc/config/node.cpu.conf ${root_path}
-cp doc/config/node.memory.conf ${root_path}
-cp doc/config/node.logger.conf ${root_path}
-cp doc/config/debug.collector.conf ${root_path}
-cp doc/config/collector.node.localhost.conf ${root_path}
+cp doc/config/node.conf ${conf_path}
+cp doc/config/node.cpu.conf ${conf_path}
+cp doc/config/node.memory.conf ${conf_path}
+cp doc/config/node.logger.conf ${conf_path}
+cp doc/config/collector.conf ${conf_path}
+cp doc/config/collector.node.localhost.conf ${conf_path}
 
-dev_ui_build_path="${build_path}/de"
-mkdir -p "${dev_ui_build_path}/application"
+mkdir -p "${ide_build_path}/application"
 for s in $(ls -1 sensors)
 do 
-    mkdir -p "${dev_ui_build_path}/sensors/${s}"
+    mkdir -p "${ide_build_path}/sensors/${s}"
 done

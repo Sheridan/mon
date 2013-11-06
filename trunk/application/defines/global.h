@@ -7,14 +7,14 @@
 #define MON_DEFAULT_PASSWORD        std::string()
 
 #ifdef MON_DEBUG
-#define MON_CONF_FILE "/tmp/mon/debug." MON_MODULE_NAME ".conf"
-#define MON_RUN_FILE  "/tmp/mon/debug." MON_MODULE_NAME ".run.conf"
-#define MON_LOG_FILE  "/tmp/mon/debug." MON_MODULE_NAME ".log"
+  #define MON_DEBUG_PATH_PREFIX "/tmp/mon/root"
 #else
-#define MON_CONF_FILE "/etc/mon/"     MON_MODULE_NAME ".conf"
-#define MON_RUN_FILE  "/var/run/mon/" MON_MODULE_NAME ".conf"
-#define MON_LOG_FILE  "/var/log/mon/" MON_MODULE_NAME ".log"
+  #define MON_DEBUG_PATH_PREFIX
 #endif
+
+#define MON_CONF_FILE MON_DEBUG_PATH_PREFIX "/etc/mon/"     MON_MODULE_NAME ".conf"
+#define MON_RUN_FILE  MON_DEBUG_PATH_PREFIX "/var/lib/mon/" MON_MODULE_NAME ".conf"
+#define MON_LOG_FILE  MON_DEBUG_PATH_PREFIX "/var/log/mon/" MON_MODULE_NAME ".log"
 
 
 

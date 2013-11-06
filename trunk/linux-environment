@@ -3,5 +3,11 @@
 # %Id%
 root_path="/tmp/mon"
 build_path="${root_path}/build"
-install_path="${root_path}/package"
+console_build_path="${build_path}/console"
+ide_build_path="${build_path}/ide"
+install_path="${root_path}/root"
+conf_path="${install_path}/etc/mon"
+log_path="${install_path}/var/log/mon"
+run_path="${install_path}/var/run/mon"
+data_path="${install_path}/var/lib/mon"
 build_threads=$(($(cat /proc/cpuinfo | grep family | wc -l)+1))
