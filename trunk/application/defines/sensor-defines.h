@@ -6,6 +6,7 @@
 #include "clogger.h"
 #include "cconfig.h"
 #include "logger-helper.h"
+#include "file-operations-defines.h"
 #include <string>
 
 #define MON_ST_LOGGER logger

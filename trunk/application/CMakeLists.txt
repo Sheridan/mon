@@ -152,6 +152,7 @@ install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 # +++++++++++++++++++ install some headers +++++++++++++++++++
 install(FILES defines/sensor-defines.h DESTINATION include/mon )
 install(FILES defines/logger-helper.h DESTINATION include/mon )
+install(FILES defines/file-operations-defines.h DESTINATION include/mon )
 # +++++++++++++++++++ install some headers +++++++++++++++++++
 
 # +++++++++++++++++++ applications +++++++++++++++++++
