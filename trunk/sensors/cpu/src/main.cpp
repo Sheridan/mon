@@ -8,6 +8,7 @@ MON_SENSOR_BEGIN
 
 
 #define MON_SENSOR_STAT_FILE "/proc/stat"
+#define MON_SENSOR_INFO_FILE "/proc/cpuinfo"
 #define MON_FILE_FSCANF_ALL_CPU_START(_name,_struct) \
   char * cpu_##_name; \
   MON_FILE_OPEN(MON_SENSOR_STAT_FILE, _name); \
@@ -113,11 +114,21 @@ MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION
 
 MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION
 {
-  if(MON_SENSOR_REQUESTED_OBJECT_IS_NOT_SET) { return true; }
+  if(MON_SENSOR_REQUESTED_OBJECT_IS_NOT_SET)
+  {
+    return MON_SENSOR_CALL_AVIALABILITY_FUNCTION(utilisation) &&
+           MON_SENSOR_CALL_AVIALABILITY_FUNCTION(info);
+  }
   if(MON_SENSOR_REQUESTED_OBJECT_IS(utilisation))
   {
     if(access(MON_SENSOR_STAT_FILE, R_OK ) != -1) return true;
     MON_PRINT_FILEOP_ERRNO(MON_SENSOR_STAT_FILE, "Access failed");
+    return false;
+  }
+  if(MON_SENSOR_REQUESTED_OBJECT_IS(info))
+  {
+    if(access(MON_SENSOR_INFO_FILE, R_OK ) != -1) return true;
+    MON_PRINT_FILEOP_ERRNO(MON_SENSOR_INFO_FILE, "Access failed");
     return false;
   }
   return false;

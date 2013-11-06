@@ -19,7 +19,7 @@
 #ifdef MON_DEBUG
   #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) \
                 _return_type internal_%sensor_name%_##_function_name(const char *object); \
-     extern "C" _return_type _function_name                         (const char *object) { MON_LOG_DBG(_debug_text); return internal_%sensor_name%_##_function_name(object); } \
+  extern "C" _return_type _function_name                            (const char *object) { MON_LOG_DBG(_debug_text << " Object: " << (object != NULL ? object : "none")); return internal_%sensor_name%_##_function_name(object); } \
                 _return_type internal_%sensor_name%_##_function_name(const char *object)
 #else
   #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) extern "C" _return_type _function_name(const char *object )
@@ -32,15 +32,16 @@
   void initialize(); \
   extern "C" void initSensor(mon::lib::logger::CLogger * l, mon::lib::config::CFolder * c) \
                                      { logger = l; config = c; MON_LOG_DBG("%sensor_name% sensor initialization"     ); initialize(); } \
-  MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getName            , "Request %sensor_name% sensor name"       ) { return sensor_name      ; } \
-  MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getDefinition      , "Request %sensor_name% definition"        ) { return definition       ; } \
-  MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getDefinitionLength, "Request %sensor_name% definition length" ) { return definition_length; }
+  MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getName            , "Request %sensor_name% sensor name."       ) { return sensor_name      ; } \
+  MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getDefinition      , "Request %sensor_name% definition."        ) { return definition       ; } \
+  MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getDefinitionLength, "Request %sensor_name% definition length." ) { return definition_length; }
 
 #define MON_SENSOR_END int main (int argc, char* argv[]) { return 0; }
 
-#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getStatistics     , "Request %sensor_name% statistics"    )
-#define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getExemplarsCount , "Request %sensor_name% information"   )
-#define MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION    MON_SENSOR_IMPLEMENT_FUNCTION(const bool        , getSensorAvialable, "Request %sensor_name% avialability"  )
+#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getStatistics     , "Request %sensor_name% statistics."    )
+#define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getExemplarsCount , "Request %sensor_name% information."   )
+#define MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION    MON_SENSOR_IMPLEMENT_FUNCTION(const bool        , getSensorAvialable, "Request %sensor_name% avialability."  )
+#define MON_SENSOR_CALL_AVIALABILITY_FUNCTION(_object) getSensorAvialable(#_object)
 
 #define MON_SENSOR_AVIALABLE_ALWAYS MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION {return true;}
 
