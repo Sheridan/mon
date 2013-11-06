@@ -8,6 +8,8 @@
 #include "logger-helper.h"
 #include "file-operations-defines.h"
 #include <string>
+#include <iostream>
+#include <sstream>
 
 #define MON_ST_LOGGER logger
 #define MON_ST_CONFIG config
@@ -51,5 +53,12 @@
 
 #define MON_SENSOR_INITIALIZE    void initialize()
 #define MON_SENSOR_NO_INITIALIZE void initialize() {}
+
+#define MON_SENSOR_DATA_DECLARE std::stringstream result; result << "%sensor_name%:" << object << "!";
+#define MON_SENSOR_DATA_START_EXEMPLAR(_exemplar) result << _exemplar << "#";
+#define MON_SENSOR_DATA_ADD_LAST_POINT(_point) result << _point;
+#define MON_SENSOR_DATA_ADD_POINT(_point) result << _point << ":";
+#define MON_SENSOR_DATA_STOP_EXEMPLAR result << "|";
+#define MON_SENSOR_DATA_RETURN std::string r = result.str(); return r.substr(0, r.length()-1).c_str();
 
 #endif // SENSORDEFINES_H_%sensor_name%
