@@ -61,6 +61,11 @@ MON_SENSOR_INITIALIZE
   MON_FILE_FSCANF_ALL_CPU_STOP(file_cpu_count, stat)
 }
 
+MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION
+{
+  return cpu_count;
+}
+
 MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
 {
   if(MON_SENSOR_REQUESTED_OBJECT_IS_NOT_SET)
@@ -72,7 +77,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
     SCPUStat stat, delta;
     int totalDelta = 0;
     float onePercent = 0;
-    MON_SENSOR_DATA_DECLARE;
+    MON_SENSOR_DATA_DECLARE(cpuframeset);
     MON_FILE_FSCANF_ALL_CPU_START(read_stat, stat)
         delta.user       = stat.user       - prevstat[stat.cpu_number].user;
         delta.nice       = stat.nice       - prevstat[stat.cpu_number].nice;
@@ -87,30 +92,23 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
         totalDelta = delta.user + delta.nice    + delta.system + delta.idle  + delta.iowait    +
                      delta.irq  + delta.softirq + delta.steal  + delta.guest + delta.guest_nice;
         onePercent = totalDelta / 100;
-        MON_SENSOR_DATA_START_EXEMPLAR(stat.cpu_number);
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.user      *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.nice      *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.system    *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.idle      *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.iowait    *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.irq       *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.softirq   *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.steal     *onePercent));
-        MON_SENSOR_DATA_ADD_POINT(     ((float)delta.guest     *onePercent));
-        MON_SENSOR_DATA_ADD_LAST_POINT(((float)delta.guest_nice*onePercent));
-        MON_SENSOR_DATA_STOP_EXEMPLAR;
+        cpuframeset.newFrame(stat.cpu_number)
+              << ((float)delta.user      *onePercent)
+              << ((float)delta.nice      *onePercent)
+              << ((float)delta.system    *onePercent)
+              << ((float)delta.idle      *onePercent)
+              << ((float)delta.iowait    *onePercent)
+              << ((float)delta.irq       *onePercent)
+              << ((float)delta.softirq   *onePercent)
+              << ((float)delta.steal     *onePercent)
+              << ((float)delta.guest     *onePercent)
+              << ((float)delta.guest_nice*onePercent);
         prevstat[stat.cpu_number] = stat;
     MON_FILE_FSCANF_ALL_CPU_STOP(read_stat, stat)
-    MON_SENSOR_DATA_RETURN;
+    return cpuframeset.msg().c_str();
   }
   return "";
 }
-
-MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION
-{
-  return cpu_count;
-}
-
 
 MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION
 {

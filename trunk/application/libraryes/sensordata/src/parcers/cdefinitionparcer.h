@@ -11,7 +11,7 @@ namespace mon
 {
 namespace lib
 {
-namespace sensor
+namespace sensordata
 {
 
 enum EFrequencyCurrentReading

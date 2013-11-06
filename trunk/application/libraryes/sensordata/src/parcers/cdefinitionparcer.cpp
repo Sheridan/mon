@@ -7,7 +7,7 @@ namespace mon
 {
 namespace lib
 {
-namespace sensor
+namespace sensordata
 {
 
 CDefinitionParcer::CDefinitionParcer(CDefinition *target, const std::string &definition)

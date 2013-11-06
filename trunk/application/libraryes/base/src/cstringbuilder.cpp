@@ -50,6 +50,8 @@ void CStringBuilder::preface(const bool          &val) { MON_SB_CONCAT(m_message
 void CStringBuilder::preface(const std::string   &val) { MON_SB_CONCAT(m_message, val                   ); }
 void CStringBuilder::preface(const float         &val) { MON_SB_SPRINTF("%f"    , val                   ); }
 
+void CStringBuilder::removeLast(const int &characters) { m_message.erase(m_message.end()-characters, m_message.end()); }
+
 const std::string &CStringBuilder::msg() const { return m_message ; }
 
 }

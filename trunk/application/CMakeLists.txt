@@ -87,7 +87,7 @@ install(FILES ${mon-network-headers} DESTINATION include/mon )
 install(TARGETS network LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- sensordata library --------------
-MESSAGE ( STATUS "---> Processing `sensor` library" )
+MESSAGE ( STATUS "---> Processing `sensordata` library" )
 SET(mon-sensordata-headers
     libraryes/sensordata/src/data/cdefinition.h
     libraryes/sensordata/src/data/cobject.h
@@ -111,13 +111,16 @@ add_library(sensordata SHARED ${mon-sensordata-headers} ${mon-sensordata-sources
 install(TARGETS sensordata LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- sensorplugin library --------------
-MESSAGE ( STATUS "---> Processing `sensor` library" )
+MESSAGE ( STATUS "---> Processing `sensorplugin` library" )
 SET(mon-sensorplugin-headers
-    libraryes/sensorplugin/src/csensor.h)
+    libraryes/sensorplugin/src/csensorplugin.h
+    libraryes/sensorplugin/src/cframesetbuilder.h)
 SET(mon-sensorplugin-sources
-    libraryes/sensorplugin/src/csensor.cpp
+    libraryes/sensorplugin/src/csensorplugin.cpp
+    libraryes/sensorplugin/src/cframesetbuilder.cpp
     libraryes/sensorplugin/src/main.cpp )
 add_library(sensorplugin SHARED ${mon-sensorplugin-headers} ${mon-sensorplugin-sources})
+install(FILES ${mon-sensorplugin-headers} DESTINATION include/mon )
 install(TARGETS sensorplugin LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- protocol library --------------

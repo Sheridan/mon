@@ -1,12 +1,11 @@
 /* %Id% */
-#include "csensor.h"
+#include "csensorplugin.h"
 namespace mon
 {
 namespace lib
 {
-namespace base
+namespace sensorplugin
 {
-
 
 }
 }

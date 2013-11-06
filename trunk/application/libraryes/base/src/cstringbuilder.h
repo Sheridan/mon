@@ -56,25 +56,27 @@ class CStringBuilder
   public:
     CStringBuilder(const std::string &init = "");
 
-    void append(const int           &val);
-    void append(const unsigned int  &val);
-    void append(const double        &val);
-    void append(const float         &val);
-    void append(const bool          &val);
-    void append(const std::string   &val);
-    void append(const char          *val);
-    void append(const char          &val);
-    void append(const unsigned char &val);
+    virtual void append(const int           &val);
+    virtual void append(const unsigned int  &val);
+    virtual void append(const double        &val);
+    virtual void append(const float         &val);
+    virtual void append(const bool          &val);
+    virtual void append(const std::string   &val);
+    virtual void append(const char          *val);
+    virtual void append(const char          &val);
+    virtual void append(const unsigned char &val);
 
-    void preface(const int           &val);
-    void preface(const unsigned int  &val);
-    void preface(const double        &val);
-    void preface(const float         &val);
-    void preface(const bool          &val);
-    void preface(const std::string   &val);
-    void preface(const char          *val);
-    void preface(const char          &val);
-    void preface(const unsigned char &val);
+    virtual void preface(const int           &val);
+    virtual void preface(const unsigned int  &val);
+    virtual void preface(const double        &val);
+    virtual void preface(const float         &val);
+    virtual void preface(const bool          &val);
+    virtual void preface(const std::string   &val);
+    virtual void preface(const char          *val);
+    virtual void preface(const char          &val);
+    virtual void preface(const unsigned char &val);
+
+    void removeLast(const int &characters = 1);
 
     const std::string &msg() const;
 

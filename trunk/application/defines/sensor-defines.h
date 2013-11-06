@@ -7,6 +7,7 @@
 #include "cconfig.h"
 #include "logger-helper.h"
 #include "file-operations-defines.h"
+#include "csensorplugin.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -55,11 +56,7 @@
 #define MON_SENSOR_INITIALIZE    void initialize()
 #define MON_SENSOR_NO_INITIALIZE void initialize() {}
 
-#define MON_SENSOR_DATA_DECLARE std::stringstream result; result << "%sensor_name%:" << object << "!";
-#define MON_SENSOR_DATA_START_EXEMPLAR(_exemplar) result << _exemplar << "#";
-#define MON_SENSOR_DATA_ADD_LAST_POINT(_point) result << _point;
-#define MON_SENSOR_DATA_ADD_POINT(_point) result << _point << ":";
-#define MON_SENSOR_DATA_STOP_EXEMPLAR result << "|";
-#define MON_SENSOR_DATA_RETURN std::string r = result.str(); return r.substr(0, r.length()-1).c_str();
+#define MON_SENSOR_DATA_DECLARE(_name) mon::lib::sensorplugin::CFramesetBuilder _name("%sensor_name%", object, getExemplarsCount(object));
+
 
 #endif // SENSORDEFINES_H_%sensor_name%

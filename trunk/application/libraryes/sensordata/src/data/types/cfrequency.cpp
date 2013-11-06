@@ -4,7 +4,7 @@ namespace mon
 {
 namespace lib
 {
-namespace sensor
+namespace sensordata
 {
 
 CFrequency::CFrequency(const EFrequencyMeasurment &i_measurment, const float &i_frequency)
