@@ -86,29 +86,39 @@ target_link_libraries(network pthread)
 install(FILES ${mon-network-headers} DESTINATION include/mon )
 install(TARGETS network LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
-# --------- sensor library --------------
+# --------- sensordata library --------------
 MESSAGE ( STATUS "---> Processing `sensor` library" )
-SET(mon-sensor-headers
-    libraryes/sensor/src/data/cdefinition.h
-    libraryes/sensor/src/data/cobject.h
-    libraryes/sensor/src/data/cinformation.h
-    libraryes/sensor/src/data/cstatistics.h
-    libraryes/sensor/src/data/types/cfrequency.h
-    libraryes/sensor/src/parcers/cdefinitionparcer.h
-    libraryes/sensor/src/parcers/cinformationparcer.h
-    libraryes/sensor/src/parcers/cstatisticsparcer.h)
-SET(mon-sensor-sources
-    libraryes/sensor/src/data/cdefinition.cpp
-    libraryes/sensor/src/data/cobject.cpp
-    libraryes/sensor/src/data/cinformation.cpp
-    libraryes/sensor/src/data/cstatistics.cpp
-    libraryes/sensor/src/data/types/cfrequency.cpp
-    libraryes/sensor/src/parcers/cdefinitionparcer.cpp
-    libraryes/sensor/src/parcers/cinformationparcer.cpp
-    libraryes/sensor/src/parcers/cstatisticsparcer.cpp
-    libraryes/sensor/src/main.cpp )
-add_library(sensor SHARED ${mon-sensor-headers} ${mon-sensor-sources})
-install(TARGETS sensor LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
+SET(mon-sensordata-headers
+    libraryes/sensordata/src/data/cdefinition.h
+    libraryes/sensordata/src/data/cobject.h
+    libraryes/sensordata/src/data/cinformation.h
+    libraryes/sensordata/src/data/cstatistics.h
+    libraryes/sensordata/src/data/types/cfrequency.h
+    libraryes/sensordata/src/parcers/cdefinitionparcer.h
+    libraryes/sensordata/src/parcers/cinformationparcer.h
+    libraryes/sensordata/src/parcers/cstatisticsparcer.h)
+SET(mon-sensordata-sources
+    libraryes/sensordata/src/data/cdefinition.cpp
+    libraryes/sensordata/src/data/cobject.cpp
+    libraryes/sensordata/src/data/cinformation.cpp
+    libraryes/sensordata/src/data/cstatistics.cpp
+    libraryes/sensordata/src/data/types/cfrequency.cpp
+    libraryes/sensordata/src/parcers/cdefinitionparcer.cpp
+    libraryes/sensordata/src/parcers/cinformationparcer.cpp
+    libraryes/sensordata/src/parcers/cstatisticsparcer.cpp
+    libraryes/sensordata/src/main.cpp )
+add_library(sensordata SHARED ${mon-sensordata-headers} ${mon-sensordata-sources})
+install(TARGETS sensordata LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
+
+# --------- sensorplugin library --------------
+MESSAGE ( STATUS "---> Processing `sensor` library" )
+SET(mon-sensorplugin-headers
+    libraryes/sensorplugin/src/csensor.h)
+SET(mon-sensorplugin-sources
+    libraryes/sensorplugin/src/csensor.cpp
+    libraryes/sensorplugin/src/main.cpp )
+add_library(sensorplugin SHARED ${mon-sensorplugin-headers} ${mon-sensorplugin-sources})
+install(TARGETS sensorplugin LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- protocol library --------------
 MESSAGE ( STATUS "---> Processing `protocol` library" )
@@ -156,8 +166,8 @@ install(FILES defines/file-operations-defines.h DESTINATION include/mon )
 # +++++++++++++++++++ install some headers +++++++++++++++++++
 
 # +++++++++++++++++++ applications +++++++++++++++++++
-add_dependencies(base config logger network sensor protocol)
-target_link_libraries(base config logger network sensor protocol)
+add_dependencies(base config logger network sensordata protocol)
+target_link_libraries(base config logger network sensordata protocol)
 include_directories( ${GEN_PATH}
                      libraryes/base/src
                      libraryes/base/src/singleton
@@ -167,10 +177,10 @@ include_directories( ${GEN_PATH}
                      libraryes/config/src
                      libraryes/config/src/model
                      libraryes/config/src/rw
-                     libraryes/sensor/src
-                     libraryes/sensor/src/data
-                     libraryes/sensor/src/data/types
-                     libraryes/sensor/src/parcers
+                     libraryes/sensordata/src
+                     libraryes/sensordata/src/data
+                     libraryes/sensordata/src/data/types
+                     libraryes/sensordata/src/parcers
                      libraryes/protocol/src
                      defines )
 
