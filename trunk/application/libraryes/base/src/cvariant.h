@@ -10,15 +10,15 @@ namespace lib
 namespace base
 {
 
-int    toInt   (const std::string &val);
-bool   toBool  (const std::string &val);
-float  toFloat (const std::string &val);
-double toDouble(const std::string &val);
-std::string toString(const int    &val);
-std::string toString(const bool   &val);
-std::string toString(const float  &val);
-std::string toString(const double &val);
-unsigned int toUInt (const std::string &val);
+int          toInt   (const std::string &val);
+bool         toBool  (const std::string &val);
+float        toFloat (const std::string &val);
+double       toDouble(const std::string &val);
+std::string  toString(const int         &val);
+std::string  toString(const bool        &val);
+std::string  toString(const float       &val);
+std::string  toString(const double      &val);
+unsigned int toUInt  (const std::string &val);
 
 enum EContentType
 {
@@ -40,12 +40,12 @@ union UContent
 class CVariant
 {
 public:
-  CVariant(                       ) { m_contentType = ctUnknown; reset();  }
-  CVariant(const bool         &val) { m_contentType = ctUnknown; set(val); }
-  CVariant(const int          &val) { m_contentType = ctUnknown; set(val); }
-  CVariant(const double       &val) { m_contentType = ctUnknown; set(val); }
-  CVariant(const std::string  &val) { m_contentType = ctUnknown; set(val); }
-  CVariant(const CVariant     &val) { m_contentType = ctUnknown; set(val); }
+  CVariant(                       ) { reset();  }
+  CVariant(const bool         &val) { set(val); }
+  CVariant(const int          &val) { set(val); }
+  CVariant(const double       &val) { set(val); }
+  CVariant(const std::string  &val) { set(val); }
+  CVariant(const CVariant     &val) { set(val); }
   virtual ~CVariant();
   void reset();
   bool isEmpty();

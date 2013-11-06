@@ -20,12 +20,12 @@ typedef const char        *(*TFGetDefinition)      (const char *);
 typedef const unsigned int (*TFGetDefinitionLength)(const char *);
 typedef const char        *(*TFGetStatistics)      (const char *);
 typedef const bool         (*TFGetSensorAvialable) (const char *);
-TFInitSensor          initSensor;
-TFGetName             getName;
-TFGetDefinition       getDefinition;
-TFGetDefinitionLength getDefinitionLength;
-TFGetStatistics       getStatistics;
-TFGetSensorAvialable  getSensorAvialable;
+TFInitSensor          initSensor = NULL;
+TFGetName             getName = NULL;
+TFGetDefinition       getDefinition = NULL;
+TFGetDefinitionLength getDefinitionLength = NULL;
+TFGetStatistics       getStatistics = NULL;
+TFGetSensorAvialable  getSensorAvialable = NULL;
 // ------------------ variables --------------------------------------------------------------------
 // ------------------ functions --------------------------------------------------------------------
 void help()
@@ -54,7 +54,6 @@ void setopts(int argc, char *argv[])
       case 'h': help();                           break;
       case 's': sensorFile = std::string(optarg); break;
       case 'c': configFile = std::string(optarg); break;
-      case '?': break;
     }
   }
 }
@@ -84,13 +83,24 @@ void load()
   initSensor(logger, config->root());
 }
 
+void unload()
+{
+  initSensor = NULL;
+  getName = NULL;
+  getDefinition = NULL;
+  getDefinitionLength = NULL;
+  getStatistics = NULL;
+  getSensorAvialable = NULL;
+  dlclose(sensor_handle);
+}
+
 // ------------------ functions --------------------------------------------------------------------
 // ------------------ main -------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
-  setopts(argc, argv);
   config = new mon::lib::config::CConfig();
   logger = new mon::lib::logger::CLogger();
+  setopts(argc, argv);
   config->load(configFile);
   load();
   printf("Sensor name: %s\n", getName(NULL));
@@ -100,8 +110,9 @@ int main(int argc, char *argv[])
   {
     printf("Sensor definition (%d bytes):\n%s\n", getDefinitionLength(NULL), getDefinition(NULL));
   }
-  delete config;
+  unload();
   delete logger;
-  exit(0);
+  delete config;
+  return 0;
 }
 // ------------------ main -------------------------------------------------------------------------

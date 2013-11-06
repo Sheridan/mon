@@ -4,8 +4,7 @@
 
 #include "definition.h"
 #include "clogger.h"
-#include "cfolder.h"
-#include "cfile.h"
+#include "cconfig.h"
 #include "logger-helper.h"
 #include <string>
 

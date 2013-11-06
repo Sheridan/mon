@@ -27,6 +27,7 @@ class CSensor
     CSensor(const std::string &i_name);
     ~CSensor();
     void load();
+    void unload();
     TFInitSensor          initSensor;
     TFGetName             getName;
     TFGetDefinition       getDefinition;

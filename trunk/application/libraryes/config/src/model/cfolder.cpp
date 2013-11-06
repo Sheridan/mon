@@ -1,6 +1,7 @@
 /* %Id% */
 #include "cfolder.h"
 #include "cfile.h"
+
 namespace mon
 {
 namespace lib
@@ -9,14 +10,10 @@ namespace config
 {
 
 CFolder::CFolder() : CNode("", NULL)
-{
-  //ctor
-}
+{}
 
 CFolder::CFolder(const std::string &nodeName, CNode *parentNode) : CNode(nodeName, parentNode)
-{
-
-}
+{}
 
 CFolder::~CFolder()
 {

@@ -13,14 +13,14 @@ namespace base
 #define MON_VARIANT_FROM_STRING(_type) _type res; std::istringstream(val) >> res; return res;
 #define MON_VARIANT_TO_STRING std::string res; std::stringstream buf; buf << val; buf >> res; return res;
 
-int    toInt   (const std::string &val) { MON_VARIANT_FROM_STRING(int)   ; }
-bool   toBool  (const std::string &val) { MON_VARIANT_FROM_STRING(bool)  ; }
-float  toFloat (const std::string &val) { MON_VARIANT_FROM_STRING(float) ; }
-double toDouble(const std::string &val) { MON_VARIANT_FROM_STRING(double); }
-std::string toString(const int    &val) { MON_VARIANT_TO_STRING }
-std::string toString(const bool   &val) { MON_VARIANT_TO_STRING }
-std::string toString(const float  &val) { MON_VARIANT_TO_STRING }
-std::string toString(const double &val) { MON_VARIANT_TO_STRING }
+int    toInt   (const std::string &val)      { MON_VARIANT_FROM_STRING(int)   ; }
+bool   toBool  (const std::string &val)      { MON_VARIANT_FROM_STRING(bool)  ; }
+float  toFloat (const std::string &val)      { MON_VARIANT_FROM_STRING(float) ; }
+double toDouble(const std::string &val)      { MON_VARIANT_FROM_STRING(double); }
+std::string toString(const int    &val)      { MON_VARIANT_TO_STRING }
+std::string toString(const bool   &val)      { MON_VARIANT_TO_STRING }
+std::string toString(const float  &val)      { MON_VARIANT_TO_STRING }
+std::string toString(const double &val)      { MON_VARIANT_TO_STRING }
 unsigned int toUInt (const std::string &val) { MON_VARIANT_FROM_STRING(unsigned int); }
 
 
