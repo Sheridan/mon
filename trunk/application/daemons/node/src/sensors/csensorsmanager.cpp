@@ -35,14 +35,6 @@ void CSensorsManager::load()
     if(t_sensor->getSensorAvialable(NULL))
     {
       MON_LOG_NFO("Sensor " << t_sensor->getName(NULL) << " loaded");
-      if(strcmp(t_sensor->getName(NULL), "cpu") == 0)
-      {
-        for (int a = 0; a < 10; a++)
-        {
-          MON_LOG_DBG(t_sensor->getStatistics("utilisation"));
-          sleep(1);
-        }
-      }
     }
   }
 }
