@@ -8,57 +8,54 @@ MON_SENSOR_BEGIN
 
 
 #define MON_SENSOR_STAT_FILE "/proc/stat"
-#define MON_SENSOR_INFO_FILE "/proc/cpuinfo"
-#define MON_FILE_FSCANF_ALL_CPU_START(_name,_struct) \
-  char * cpu_##_name; \
+#define MON_FILE_FSCANF_ALL_CPUSTAT_START(_name,_struct) \
+  char cpu_##_name[32]; \
   MON_FILE_OPEN(MON_SENSOR_STAT_FILE, _name); \
   MON_FILE_FSCANF_ALL(_name, "%s %d %d %d %d %d %d %d %d %d %d", \
                       cpu_##_name, \
                       &_struct.user, &_struct.nice,    &_struct.system, &_struct.idle,  &_struct.iowait, \
                       &_struct.irq,  &_struct.softirq, &_struct.steal,  &_struct.guest, &_struct.guest_nice) \
 { if(!(cpu_##_name && strstr(cpu_##_name, "cpu"))) { break; } if(strlen(cpu_##_name) > 3) {
+#define MON_FILE_FSCANF_ALL_CPUSTAT_STOP(_name,_struct) _struct.cpu_number++; } } MON_FILE_CLOSE(MON_SENSOR_STAT_FILE, _name);
 
-#define MON_FILE_FSCANF_ALL_CPU_STOP(_name,_struct) _struct.cpu_number++; } } MON_FILE_CLOSE(MON_SENSOR_STAT_FILE, _name);
+#define MON_SENSOR_INFO_FILE "/proc/cpuinfo"
+#define MON_FILE_FSCANF_ALL_CPUINFO_START(_name,_struct) \
+  char * cpuinfo_##_name = NULL; \
+  MON_FILE_OPEN(MON_SENSOR_INFO_FILE, _name); \
+  MON_FILE_FSCANF_ALL(_name, "%s %d %d %d %d %d %d %d %d %d %d", \
+                      cpu_##_name, \
+                      &_struct.user, &_struct.nice,    &_struct.system, &_struct.idle,  &_struct.iowait, \
+                      &_struct.irq,  &_struct.softirq, &_struct.steal,  &_struct.guest, &_struct.guest_nice) \
+{ if(!(cpu_##_name && strstr(cpu_##_name, "cpu"))) { break; } if(strlen(cpu_##_name) > 3) {
+#define MON_FILE_FSCANF_ALL_CPUINFO_STOP(_name,_struct) _struct.cpu_number++; } } MON_FILE_CLOSE(MON_SENSOR_INFO_FILE, _name);
 
 struct SCPUStat
 {
-  int user;
-  int nice;
-  int system;
-  int idle;
-  int iowait;
-  int irq;
-  int softirq;
-  int steal;
-  int guest;
-  int guest_nice;
-  int cpu_number;
-  SCPUStat() { user = nice = system = idle = iowait = irq = softirq = steal = guest = guest_nice = cpu_number = 0; }
+  int user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice, cpu_number;
+  SCPUStat() { user = nice = system = idle = iowait =
+               irq = softirq = steal = guest = guest_nice = cpu_number = 0; }
 };
 typedef std::map<int, SCPUStat> TCPUsStat;
 TCPUsStat prevstat;
+
+struct SCPUInfo
+{
+  char vendor[64], modelName[128];
+  int family, model, stepping;
+  int cpu_number;
+  SCPUInfo() { memset(vendor, '\0', 64); memset(modelName, '\0', 128);
+               family = model = stepping = cpu_number = 0; }
+};
 
 unsigned int cpu_count = 1;
 
 MON_SENSOR_INITIALIZE
 {
   SCPUStat stat;
-  MON_FILE_FSCANF_ALL_CPU_START(file_cpu_count, stat)
-     /* MON_LOG_DBG("fscanf: " <<
-                  "cpu"           << stat.cpu_number << " -> " <<
-                  "  user:"       << stat.user       <<
-                  ", nice:"       << stat.nice       <<
-                  ", system:"     << stat.system     <<
-                  ", idle:"       << stat.idle       <<
-                  ", iowait:"     << stat.iowait     <<
-                  ", irq:"        << stat.irq        <<
-                  ", softirq:"    << stat.softirq    <<
-                  ", steal:"      << stat.steal      <<
-                  ", guest:"      << stat.guest      <<
-                  ", guest_nice:" << stat.guest_nice);*/
+  MON_FILE_FSCANF_ALL_CPUSTAT_START(file_cpu_count, stat)
       cpu_count++;
       prevstat[stat.cpu_number] = stat;
-  MON_FILE_FSCANF_ALL_CPU_STOP(file_cpu_count, stat)
+  MON_FILE_FSCANF_ALL_CPUSTAT_STOP(file_cpu_count, stat)
 }
 
 MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION
@@ -70,7 +67,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
 {
   if(MON_SENSOR_REQUESTED_OBJECT_IS_NOT_SET)
   {
-    return "";
+    return NULL;
   }
   if(MON_SENSOR_REQUESTED_OBJECT_IS(utilisation))
   {
@@ -78,7 +75,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
     float totalDelta = 0;
     float onePercent = 0;
     MON_SENSOR_DATA_DECLARE(cpuframeset);
-    MON_FILE_FSCANF_ALL_CPU_START(read_stat, stat)
+    MON_FILE_FSCANF_ALL_CPUSTAT_START(read_stat, stat)
         delta.user       = stat.user       - prevstat[stat.cpu_number].user;
         delta.nice       = stat.nice       - prevstat[stat.cpu_number].nice;
         delta.system     = stat.system     - prevstat[stat.cpu_number].system;
@@ -92,7 +89,6 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
         totalDelta = delta.user + delta.nice    + delta.system + delta.idle  + delta.iowait    +
                      delta.irq  + delta.softirq + delta.steal  + delta.guest + delta.guest_nice;
         onePercent = totalDelta / 100;
-        MON_LOG_DBG(totalDelta << " " << onePercent);
         cpuframeset.newFrame(stat.cpu_number)
               << ((float)delta.user      *onePercent)
               << ((float)delta.nice      *onePercent)
@@ -105,10 +101,13 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
               << ((float)delta.guest     *onePercent)
               << ((float)delta.guest_nice*onePercent);
         prevstat[stat.cpu_number] = stat;
-    MON_FILE_FSCANF_ALL_CPU_STOP(read_stat, stat)
+    MON_FILE_FSCANF_ALL_CPUSTAT_STOP(read_stat, stat)
     return cpuframeset.msg().c_str();
   }
-  return "";
+  if(MON_SENSOR_REQUESTED_OBJECT_IS(info))
+  {
+  }
+  return NULL;
 }
 
 MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION
@@ -134,3 +133,16 @@ MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION
 }
 
 MON_SENSOR_END
+
+/* MON_LOG_DBG("fscanf: " <<
+             "cpu"           << stat.cpu_number << " -> " <<
+             "  user:"       << stat.user       <<
+             ", nice:"       << stat.nice       <<
+             ", system:"     << stat.system     <<
+             ", idle:"       << stat.idle       <<
+             ", iowait:"     << stat.iowait     <<
+             ", irq:"        << stat.irq        <<
+             ", softirq:"    << stat.softirq    <<
+             ", steal:"      << stat.steal      <<
+             ", guest:"      << stat.guest      <<
+             ", guest_nice:" << stat.guest_nice);*/

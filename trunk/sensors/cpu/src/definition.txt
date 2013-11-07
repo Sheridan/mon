@@ -38,6 +38,12 @@ utilisation
       type: %;
       description: "System usage";
     }
+    idle:
+    {
+      label: "idle";
+      type: %;
+      description: "CPU idle";
+    }
     iowait: 
     {
       label: "iowait";
@@ -62,11 +68,17 @@ utilisation
       type: %;
       description: "Steal";
     }
-    idle: 
+    guest:
     {
-      label: "idle";
+      label: "sirq";
       type: %;
-      description: "CPU idle";
+      description: "Guest";
+    }
+    guest_nice:
+    {
+      label: "steal";
+      type: %;
+      description: "Guest nice";
     }
   }
 }
@@ -99,6 +111,12 @@ info
       label: "Model";
       type: string;
       description: "Model name";
+    }
+    fms:
+    {
+      label: "Cpu family, model, stepping";
+      type: string;
+      description: "Cpu family, model, stepping in one string";
     }
   }
 
