@@ -22,7 +22,7 @@ CRemoteCollector::~CRemoteCollector()
 void CRemoteCollector::incommingMessage(const std::string &message)
 {
   MON_LOG_DBG("Incoming message from collector: " << message);
-  mon::lib::protocol::CNetworkMessage t_incomming_message(message);
+  mon::lib::protocol::CNetworkMessage t_incomming_message(this, message);
   switch(t_incomming_message.type())
   {
     case MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT:

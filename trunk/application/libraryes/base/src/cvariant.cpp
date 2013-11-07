@@ -22,6 +22,7 @@ std::string toString(const bool   &val)      { MON_VARIANT_TO_STRING }
 std::string toString(const float  &val)      { MON_VARIANT_TO_STRING }
 std::string toString(const double &val)      { MON_VARIANT_TO_STRING }
 unsigned int toUInt (const std::string &val) { MON_VARIANT_FROM_STRING(unsigned int); }
+unsigned long long toULLong (const std::string &val) { MON_VARIANT_FROM_STRING(unsigned long long); }
 
 
 CVariant::~CVariant()

@@ -19,6 +19,7 @@ std::string  toString(const bool        &val);
 std::string  toString(const float       &val);
 std::string  toString(const double      &val);
 unsigned int toUInt  (const std::string &val);
+unsigned long long toULLong  (const std::string &val);
 
 enum EContentType
 {

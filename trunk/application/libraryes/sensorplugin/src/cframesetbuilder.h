@@ -8,7 +8,9 @@ namespace lib
 {
 namespace sensorplugin
 {
-
+/** Сборщик фреймов.
+ * Позволяет удобно собирать сообщение с статистическими данными, подготавливает для отправки
+ */
 class CFramesetBuilder : public mon::lib::base::CStringBuilder
 {
 public:
@@ -30,8 +32,8 @@ public:
   const std::string &msg();
 
 private:
-  int  m_totalFrames;
-  int  m_framesCount;
+  int  m_totalFrames; //!< Общий счетчик фреймов в фреймсете.
+  int  m_framesCount; //!< Текущий фрейм фреймсета
 };
 
 

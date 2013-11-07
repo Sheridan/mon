@@ -4,7 +4,7 @@
 #include "csocket.h"
 #include "cnetworkmessage.h"
 #include "protocol-control.h"
-
+#include <map>
 
 namespace mon
 {
@@ -13,7 +13,8 @@ namespace lib
 namespace protocol
 {
 
-typedef void (*TFIncommingMsgCallback) (const std::string &);
+typedef void (*TFIncommingMsgCallback) (mon::lib::protocol::CNetworkMessage &);
+typedef std::map<int,TFIncommingMsgCallback> TCallMap;
 
 class CProtocol
 {
@@ -27,7 +28,12 @@ protected:
 
 private:
   mon::lib::network::CSocket *m_socket;
+  unsigned long long m_currentID; //!< Текущий идентификатор сообщения. При достижении максимума - сбрасывается в ноль
+
+  unsigned long long getID();
 };
+
+
 
 }
 }

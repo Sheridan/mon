@@ -29,6 +29,7 @@ MON_SENSOR_BEGIN
 { if(!(cpu_##_name && strstr(cpu_##_name, "cpu"))) { break; } if(strlen(cpu_##_name) > 3) {
 #define MON_FILE_FSCANF_ALL_CPUINFO_STOP(_name,_struct) _struct.cpu_number++; } } MON_FILE_CLOSE(MON_SENSOR_INFO_FILE, _name);
 
+/*! Struct for store cpu statistics */
 struct SCPUStat
 {
   int user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice, cpu_number;
@@ -38,6 +39,7 @@ struct SCPUStat
 typedef std::map<int, SCPUStat> TCPUsStat;
 TCPUsStat prevstat;
 
+/*! Struct for store cpu information */
 struct SCPUInfo
 {
   char vendor[64], modelName[128];
