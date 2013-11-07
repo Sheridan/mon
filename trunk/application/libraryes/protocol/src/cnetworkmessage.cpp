@@ -1,6 +1,7 @@
 /* %Id% */
-#include "cmessage.h"
+#include "cnetworkmessage.h"
 #include "cvariant.h"
+#include "protocol-control.h"
 
 namespace mon
 {
@@ -9,12 +10,12 @@ namespace lib
 namespace protocol
 {
 
-CMessage::CMessage(const unsigned int &i_type)
+CNetworkMessage::CNetworkMessage(const unsigned int &i_type)
   : mon::lib::base::CStringBuilder(),
     m_type(i_type)
 {}
 
-CMessage::CMessage(const std::string  &i_incoming)
+CNetworkMessage::CNetworkMessage(const std::string  &i_incoming)
   : mon::lib::base::CStringBuilder()
 {
   int t_index = i_incoming.find(MON_PROTO_TYPE_DELIMITER);
@@ -22,17 +23,17 @@ CMessage::CMessage(const std::string  &i_incoming)
   append(i_incoming.substr(t_index+1, i_incoming.length()));
 }
 
-CMessage::CMessage(const unsigned int &i_type, const std::string  &i_text)
+CNetworkMessage::CNetworkMessage(const unsigned int &i_type, const std::string  &i_text)
   : mon::lib::base::CStringBuilder(),
     m_type(i_type)
 {
   append(i_text);
 }
 
-CMessage::~CMessage()
+CNetworkMessage::~CNetworkMessage()
 {}
 
-const std::string &CMessage::prepared_msg()
+const std::string &CNetworkMessage::prepared_msg()
 {
 //  preface(MON_PROTO_TYPE_DELIMITER);
 //  preface(m_id);

@@ -46,7 +46,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
 void CRemoteNode::incommingMessage(const std::string &message)
 {
   MON_LOG_DBG("Incoming message from node: " << message);
-  mon::lib::protocol::CMessage t_incomming_message(message);
+  mon::lib::protocol::CNetworkMessage t_incomming_message(message);
   switch(t_incomming_message.type())
   {
     case MON_PROTO_ID_CONNECT_ANSWER:

@@ -127,10 +127,10 @@ install(TARGETS sensorplugin LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 MESSAGE ( STATUS "---> Processing `protocol` library" )
 SET(mon-protocol-headers
     libraryes/protocol/src/cprotocol.h
-    libraryes/protocol/src/cmessage.h)
+    libraryes/protocol/src/cnetworkmessage.h)
 SET(mon-protocol-sources
     libraryes/protocol/src/cprotocol.cpp
-    libraryes/protocol/src/cmessage.cpp
+    libraryes/protocol/src/cnetworkmessage.cpp
     libraryes/protocol/src/main.cpp )
 add_library(protocol SHARED ${mon-protocol-headers} ${mon-protocol-sources})
 install(TARGETS protocol LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
@@ -166,6 +166,7 @@ install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 install(FILES defines/sensor-defines.h DESTINATION include/mon )
 install(FILES defines/logger-helper.h DESTINATION include/mon )
 install(FILES defines/file-operations-defines.h DESTINATION include/mon )
+install(FILES defines/protocol-control.h DESTINATION include/mon )
 # +++++++++++++++++++ install some headers +++++++++++++++++++
 
 # +++++++++++++++++++ applications +++++++++++++++++++

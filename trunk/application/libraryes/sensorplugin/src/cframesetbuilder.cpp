@@ -1,11 +1,5 @@
 #include "cframesetbuilder.h"
-
-
-#define MON_DATA_SENSORNAME_I_FRAMENAME_DELIMITER      ":"
-#define MON_DATA_SENSOR_HEADER_I_FRAMESETS_DELIMITER   "!"
-#define MON_DATA_SENSOR_FRAMENUMBER_I_FIELDS_DELIMITER "#"
-#define MON_DATA_SENSOR_FRAME_I_FRAME_DELIMITER        "|"
-#define MON_DATA_SENSOR_FIELD_I_FIELD_DELIMITER        ":"
+#include "protocol-control.h"
 
 namespace mon
 {

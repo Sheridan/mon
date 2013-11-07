@@ -2,14 +2,9 @@
 #ifndef CPROTOCOL_H
 #define CPROTOCOL_H
 #include "csocket.h"
-#include "cmessage.h"
+#include "cnetworkmessage.h"
+#include "protocol-control.h"
 
-#define MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT  1
-#define MON_PROTO_ID_CONNECT_ANSWER             2
-#define MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST  3
-#define MON_PROTO_ID_ANSWER_NODE_SENSORS_LIST   4
-#define MON_PROTO_ID_REQUEST_SENSOR_DEFINITION  5
-#define MON_PROTO_ID_ANSWER_SENSOR_DEFINITION   6
 
 namespace mon
 {
@@ -18,22 +13,20 @@ namespace lib
 namespace protocol
 {
 
+typedef void (*TFIncommingMsgCallback) (const std::string &);
+
 class CProtocol
 {
-  public:
-    CProtocol(mon::lib::network::CSocket *socket);
-   virtual ~CProtocol();
+public:
+  CProtocol(mon::lib::network::CSocket *socket);
+  virtual ~CProtocol();
+  void incommingMessage(const std::string &i_incoming);
 
-    // initialize messaging
+protected:
+  void sendMessage(const unsigned int &i_type, const std::string &i_text = "");
 
-
-    void incommingMessage(const std::string &i_incoming);
-
-  protected:
-    void sendMessage(const unsigned int &i_type, const std::string &i_text = "");
-
-  private:
-    mon::lib::network::CSocket *m_socket;
+private:
+  mon::lib::network::CSocket *m_socket;
 };
 
 }
