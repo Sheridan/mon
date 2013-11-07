@@ -14,9 +14,9 @@ mon::lib::logger::CLogger *logger;
 std::string sensorFile;
 std::string configFile;
 std::string object;
-int numberOfGetStatistics = 10;
+int   numberOfGetStatistics     = 10;
 float timeBetweenStatisticsCall = 1;
-bool showRawDefinition = false;
+bool  showRawDefinition         = false;
 void * sensor_handle;
 typedef void               (*TFInitSensor)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
 typedef const char        *(*TFGetName)            (const char *);
@@ -72,6 +72,7 @@ void setopts(int argc, char *argv[])
       case 'o': object                    = std::string(optarg); break;
     }
   }
+  timeBetweenStatisticsCall = timeBetweenStatisticsCall * 1000000;
 }
 
 #define MON_IMPORT_ERROR(_name) \
@@ -114,7 +115,6 @@ void unload()
 // ------------------ main -------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
-  timeBetweenStatisticsCall = timeBetweenStatisticsCall * 1000000;
   config = new mon::lib::config::CConfig();
   logger = new mon::lib::logger::CLogger();
   setopts(argc, argv);
