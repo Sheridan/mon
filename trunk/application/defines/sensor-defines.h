@@ -40,7 +40,7 @@
 #define MON_SENSOR_END int main (int argc, char* argv[]) { return 0; }
 
 #define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getStatistics     , "Request %sensor_name% statistics."    )
-#define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getExemplarsCount , "Request %sensor_name% information."   )
+#define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getExemplarsCount , "Request %sensor_name% framesets frames count."   )
 #define MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION    MON_SENSOR_IMPLEMENT_FUNCTION(const bool        , getSensorAvialable, "Request %sensor_name% avialability."  )
 #define MON_SENSOR_CALL_AVIALABILITY_FUNCTION(_object) getSensorAvialable(#_object)
 

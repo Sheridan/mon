@@ -44,7 +44,7 @@ MON_SENSOR_INITIALIZE
 {
   SCPUStat stat;
   MON_FILE_FSCANF_ALL_CPU_START(file_cpu_count, stat)
-      /*MON_LOG_DBG("fscanf: " <<
+     /* MON_LOG_DBG("fscanf: " <<
                   "cpu"           << stat.cpu_number << " -> " <<
                   "  user:"       << stat.user       <<
                   ", nice:"       << stat.nice       <<
@@ -75,7 +75,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
   if(MON_SENSOR_REQUESTED_OBJECT_IS(utilisation))
   {
     SCPUStat stat, delta;
-    int totalDelta = 0;
+    float totalDelta = 0;
     float onePercent = 0;
     MON_SENSOR_DATA_DECLARE(cpuframeset);
     MON_FILE_FSCANF_ALL_CPU_START(read_stat, stat)
@@ -92,6 +92,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
         totalDelta = delta.user + delta.nice    + delta.system + delta.idle  + delta.iowait    +
                      delta.irq  + delta.softirq + delta.steal  + delta.guest + delta.guest_nice;
         onePercent = totalDelta / 100;
+        MON_LOG_DBG(totalDelta << " " << onePercent);
         cpuframeset.newFrame(stat.cpu_number)
               << ((float)delta.user      *onePercent)
               << ((float)delta.nice      *onePercent)
