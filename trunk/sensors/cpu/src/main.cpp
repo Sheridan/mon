@@ -15,7 +15,7 @@ MON_SENSOR_BEGIN
                       cpu_##_name, \
                       &_struct.user, &_struct.nice,    &_struct.system, &_struct.idle,  &_struct.iowait, \
                       &_struct.irq,  &_struct.softirq, &_struct.steal,  &_struct.guest, &_struct.guest_nice) \
-{ if(!(cpu_##_name && strstr(cpu_##_name, "cpu"))) { break; } if(strlen(cpu_##_name) > 3) {
+{ if(!(strstr(cpu_##_name, "cpu"))) { break; } if(strlen(cpu_##_name) > 3) {
 #define MON_FILE_FSCANF_ALL_CPUSTAT_STOP(_name,_struct) _struct.cpu_number++; } } MON_FILE_CLOSE(MON_SENSOR_STAT_FILE, _name);
 
 #define MON_SENSOR_INFO_FILE "/proc/cpuinfo"

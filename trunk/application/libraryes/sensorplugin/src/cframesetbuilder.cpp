@@ -40,6 +40,7 @@ CFramesetBuilder &CFramesetBuilder::newFrame(const int &number)
   mon::lib::base::CStringBuilder::append(number);
   mon::lib::base::CStringBuilder::append(MON_DATA_SENSOR_FRAMENUMBER_I_FIELDS_DELIMITER);
   m_framesCount++;
+  return *this;
 }
 
 #define MON_APPEND_DATA_FIELD mon::lib::base::CStringBuilder::append(val); mon::lib::base::CStringBuilder::append(MON_DATA_SENSOR_FIELD_I_FIELD_DELIMITER);
