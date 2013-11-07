@@ -20,10 +20,10 @@
 #ifdef MON_DEBUG
   #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) \
                 _return_type internal_%sensor_name%_##_function_name(const char *object); \
-  extern "C" _return_type _function_name                            (const char *object) { MON_LOG_DBG(_debug_text << " Object: " << (object != NULL ? object : "none")); return internal_%sensor_name%_##_function_name(object); } \
+  extern "C" _return_type _function_name                            (const char *object = NULL) { MON_LOG_DBG(_debug_text << " Object: " << (object != NULL ? object : "none")); return internal_%sensor_name%_##_function_name(object); } \
                 _return_type internal_%sensor_name%_##_function_name(const char *object)
 #else
-  #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) extern "C" _return_type _function_name(const char *object )
+  #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) extern "C" _return_type _function_name(const char *object = NULL)
 #endif
 
 #define MON_SENSOR_BEGIN \
