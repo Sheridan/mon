@@ -12,6 +12,7 @@ namespace lib
 namespace network
 {
 
+//! Клиентский сокет
 class CSocketClient : public CSocket
 {
   public:

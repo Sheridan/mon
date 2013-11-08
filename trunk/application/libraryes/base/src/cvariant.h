@@ -23,17 +23,19 @@ std::string        toString(const double             &val);
 std::string        toString(const unsigned int       &val);
 std::string        toString(const unsigned long long &val);
 
+//! Тип контента вариант-типа
 enum EContentType
 {
-  ctUnknown,
-  ctBool,
-  ctInt,
-  ctUInt,
-  ctFloat,
-  ctULLong,
-  ctString
+  ctUnknown, //!< Неизвестный тип
+  ctBool,    //!< Булев
+  ctInt,     //!< Целое
+  ctUInt,    //!< Беззнаковое целое
+  ctFloat,   //!< Число с плавающей точкой
+  ctULLong,  //!< Очень большое число ))
+  ctString   //!< Строка
 };
 
+//! Объединение для хранения данных вариант-типа
 union UContent
 {
   bool               m_bool  ;
@@ -44,6 +46,7 @@ union UContent
   char *             m_string;
 };
 
+//! Почти классический вариант.
 class CVariant
 {
 public:

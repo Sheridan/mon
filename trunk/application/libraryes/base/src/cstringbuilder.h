@@ -55,6 +55,7 @@ namespace lib
 namespace base
 {
 
+//! Конкатенатор строк из чего попало
 class CStringBuilder
 {
     MON_STRING_BUILDER(CStringBuilder)

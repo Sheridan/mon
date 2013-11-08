@@ -10,6 +10,7 @@ namespace lib
 namespace logger
 {
 
+//! Пироритетность событий
 enum EPriority
 {
   pError   = 0,
@@ -20,7 +21,7 @@ enum EPriority
   #endif
 };
 
-
+//! Единичное событие
 class CLogMessage : public mon::lib::base::CStringBuilder
 {
     MON_STRING_BUILDER(CLogMessage)

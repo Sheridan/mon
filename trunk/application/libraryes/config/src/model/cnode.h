@@ -22,6 +22,7 @@ typedef std::pair<std::string, CFile   *> TFilePair;
 typedef std::map <std::string, CFile   *> TFilesMap;
 typedef std::list<             CFile   *> TFilesList;
 
+//! Базовая ветвь конфига
 class CNode
 {
 public:

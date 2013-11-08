@@ -9,6 +9,7 @@ namespace lib
 namespace base
 {
 
+//! Парсер, читающий исходник из строки
 class CParcerString : public CParcer
 {
     MON_READONLY_PROPERTY(std::string           , text      )

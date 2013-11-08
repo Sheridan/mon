@@ -20,6 +20,7 @@ typedef const unsigned int (*TFGetDefinitionLength)(const char *);
 typedef const char        *(*TFGetStatistics)      (const char *);
 typedef const bool         (*TFGetSensorAvialable) (const char *);
 
+//! Сенсор ноды, посредник между нодой и библиотекой
 class CSensor
 {
     MON_READONLY_PROPERTY(std::string, name)

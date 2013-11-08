@@ -19,6 +19,7 @@ namespace lib
 namespace base
 {
 
+//! Реализация синглтона приложений
 class CSingleton
 {
   MON_ST_ATOMIC(mon::lib::config::CConfig, config)

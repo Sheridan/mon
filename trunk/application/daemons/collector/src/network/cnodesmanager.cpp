@@ -24,7 +24,7 @@ CNodesManager::~CNodesManager()
 
 void CNodesManager::load()
 {
-  MON_LOG_DBG("load");
+  MON_LOG_DBG("Load nodes");
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("nodes"))
   {
     MON_LOG_DBG((*folder)->name());

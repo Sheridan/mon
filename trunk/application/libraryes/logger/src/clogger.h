@@ -19,6 +19,7 @@ namespace logger
   #define MPN_PRIO_NUM 3
 #endif
 
+//! Логгер событий
 class CLogger
 {
 

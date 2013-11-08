@@ -12,6 +12,7 @@ namespace collector
 
 class CRemoteNode;
 
+//! Сенсор удаленной ноды
 class CRemoteNodeSensor
 {
 public:
@@ -22,6 +23,7 @@ private:
   CRemoteNode *m_parentNode;
 };
 
+//! Список сенсоров удаленной ноды
 typedef std::list<CRemoteNodeSensor *> TRemoteNodeSensors;
 
 }

@@ -15,6 +15,7 @@ namespace lib
 namespace network
 {
 
+//! Базовый сокет
 class CSocket
 {
     MON_THREADED_FUNCTION_DECLARE(waitRecv)

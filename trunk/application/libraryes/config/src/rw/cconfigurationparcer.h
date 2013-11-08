@@ -12,6 +12,7 @@ namespace lib
 namespace config
 {
 
+//! Парсер конфиг-файла
 class CConfigurationParcer : mon::lib::base::CParcerFile
 {
 public:

@@ -10,6 +10,7 @@ namespace daemons
 namespace node
 {
 
+//! Менеджер сенсоров ноды
 class CSensorsManager : public mon::lib::base::CSingletonMember
 {
   public:

@@ -10,7 +10,7 @@ namespace lib
 {
 namespace config
 {
-
+//! Переменная конфига, тут хранятся значения
 class CFile : public CNode, public mon::lib::base::CVariant
 {
 public:

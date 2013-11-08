@@ -9,6 +9,7 @@ namespace lib
 namespace config
 {
 
+//! Интерфейс навигации по ветвям конфига
 class IPathInterface
 {
 public:

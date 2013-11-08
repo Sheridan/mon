@@ -17,6 +17,7 @@ namespace daemons
 namespace collector
 {
 
+//! Удаленная нода
 class CRemoteNode : public mon::lib::network::CSocketClient, public CCollectorProtocol
 {
   MON_THREADED_FUNCTION_DECLARE(connect)
@@ -28,11 +29,16 @@ private:
 
   TRemoteNodeSensors m_nodeSensors;
 
+  //! Вызывается при успешном коннекте сокета к ноде, инициализирует обмен данными по протоколу
   void connected(const std::string &to_addr, const unsigned short &to_port);
+  //! Заглушка из за архитектурного недостатка
   void incommingMessage(const std::string &message);
 
+  //! Вызывается при ответе на запрос подключения
   void incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg);
+  //! Вызывается при ответе на запрос списка сенсоров
   void incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg);
+  //! Вызывается при ответе на запрос описания сенсора
   void incomingAnswerOnrequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg);
 };
 

@@ -8,7 +8,8 @@ namespace lib
 {
 namespace sensorplugin
 {
-/** Сборщик фреймов.
+//! Сборщик фреймов.
+/**
  * Позволяет удобно собирать сообщение с статистическими данными, подготавливает для отправки
  */
 class CFramesetBuilder : public mon::lib::base::CStringBuilder

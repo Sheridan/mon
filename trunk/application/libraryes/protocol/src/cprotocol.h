@@ -17,6 +17,7 @@ typedef void (CProtocol::*TMessageCallback) (mon::lib::protocol::CNetworkMessage
 typedef std::map<TProtocolMessageID,TMessageCallback> TReplyMap;
 typedef std::map<EProtocolMessageType,TMessageCallback> TInterceptMap;
 
+//! Базовый класс описания сетевого протокола
 class CProtocol
 {
   friend class CNetworkMessage;

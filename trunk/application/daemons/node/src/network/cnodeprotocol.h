@@ -11,6 +11,7 @@ namespace daemons
 namespace node
 {
 
+//! Реализация сетевого протокола для ноды
 class CNodeProtocol : public mon::lib::protocol::CProtocol
 {
   public:

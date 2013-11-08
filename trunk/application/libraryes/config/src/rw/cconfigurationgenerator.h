@@ -10,6 +10,8 @@ namespace lib
 {
 namespace config
 {
+
+//! Генератор конфигурации, записывает данные из ветви с подветвями в файл
 class CConfigurationGenerator
 {
 public:

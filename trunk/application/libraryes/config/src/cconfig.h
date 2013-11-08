@@ -10,6 +10,7 @@ namespace lib
 namespace config
 {
 
+//! Конфиг, объект верхнего уровня
 class CConfig : public IPathInterface
 {
 public:

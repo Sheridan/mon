@@ -13,6 +13,7 @@ namespace daemons
 namespace node
 {
 
+//! Удаленный коллектор
 class CRemoteCollector : public mon::lib::network::CSocketClient, public CNodeProtocol
 {
   public:

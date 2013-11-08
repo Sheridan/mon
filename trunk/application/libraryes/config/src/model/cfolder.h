@@ -11,6 +11,7 @@ namespace lib
 namespace config
 {
 
+//! Ветвь конфига
 class CFolder : public CNode, public IPathInterface
 {
 public:

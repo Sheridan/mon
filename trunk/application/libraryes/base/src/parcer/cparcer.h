@@ -12,6 +12,7 @@ namespace base
 
 typedef std::string::value_type TStdStringCharacter;
 
+//! Базовый класс парсера
 class CParcer
 {
   public:

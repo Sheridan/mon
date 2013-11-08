@@ -12,6 +12,7 @@ namespace lib
 namespace network
 {
 
+//! Серверный сокет
 class CSocketServer : public CSocket
 {
   MON_THREADED_FUNCTION_DECLARE(listen)

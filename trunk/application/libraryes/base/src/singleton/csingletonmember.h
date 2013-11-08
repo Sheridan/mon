@@ -12,6 +12,7 @@ namespace base
 
 typedef unsigned short TSingletonMemberID;
 
+//! Класс синглтона для "динамического" добавления синглтонов
 class CSingletonMember
 {
 public:
