@@ -9,6 +9,7 @@
   #define MON_MAX_LOG_PRI mon::lib::logger::pInfo
 #endif
 
+//! Базовая инициализация приложения
 #define MON_DEFAULT_APPLICATION_INIT \
   MON_ST_CONFIG->load(MON_CONF_FILE); \
   MON_ST_CONFIG->cd(MON_ST_CONFIG->folder(MON_MODULE_NAME)); \

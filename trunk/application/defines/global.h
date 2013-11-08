@@ -2,8 +2,11 @@
 #ifndef MON_GLOBAL_H
 #define MON_GLOBAL_H
 
+//! Сетевой порт по умолчанию
 #define MON_DEFAULT_LISTEN_PORT     4848
+//! Таймаут неудачного соединения по умолчанию
 #define MON_DEFAULT_CONNECT_TIMEOUT 30
+//! Пароль по умолчанию
 #define MON_DEFAULT_PASSWORD        std::string()
 
 #ifdef MON_DEBUG
