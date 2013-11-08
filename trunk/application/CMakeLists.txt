@@ -95,7 +95,6 @@ SET(mon-sensordata-headers
     libraryes/sensordata/src/data/cstatistics.h
     libraryes/sensordata/src/data/types/cfrequency.h
     libraryes/sensordata/src/parcers/cdefinitionparcer.h
-    libraryes/sensordata/src/parcers/cinformationparcer.h
     libraryes/sensordata/src/parcers/cstatisticsparcer.h)
 SET(mon-sensordata-sources
     libraryes/sensordata/src/data/cdefinition.cpp
@@ -104,7 +103,6 @@ SET(mon-sensordata-sources
     libraryes/sensordata/src/data/cstatistics.cpp
     libraryes/sensordata/src/data/types/cfrequency.cpp
     libraryes/sensordata/src/parcers/cdefinitionparcer.cpp
-    libraryes/sensordata/src/parcers/cinformationparcer.cpp
     libraryes/sensordata/src/parcers/cstatisticsparcer.cpp
     libraryes/sensordata/src/main.cpp )
 add_library(sensordata SHARED ${mon-sensordata-headers} ${mon-sensordata-sources})
