@@ -19,6 +19,10 @@ class CCollectorProtocol : public mon::lib::protocol::CProtocol
     void connect (const std::string &password);
     void requestSensorsList();
     void requestSensorDefinition(const std::string &sensor);
+  protected:
+    virtual void incomingAnswerOnConnect(mon::lib::protocol::CNetworkMessage *msg) = 0;
+    virtual void incomingAnswerOnRequestSensorList(mon::lib::protocol::CNetworkMessage *msg) = 0;
+    virtual void incomingAnswerOnrequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg) = 0;
 };
 
 }

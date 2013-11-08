@@ -9,24 +9,27 @@ namespace collector
 {
 
 CCollectorProtocol::CCollectorProtocol(mon::lib::network::CSocket *socket) : mon::lib::protocol::CProtocol(socket)
-{}
+{
+}
 
 CCollectorProtocol::~CCollectorProtocol()
 {}
 
 void CCollectorProtocol::connect(const std::string &password)
 {
-  sendMessage(MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT, password);
+  sendMessage(static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::collector::CCollectorProtocol::incomingAnswerOnConnect),
+              mon::lib::protocol::mtConnect, password);
 }
 
 void CCollectorProtocol::requestSensorsList()
 {
-  sendMessage(MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST);
+  sendMessage(static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::collector::CCollectorProtocol::incomingAnswerOnRequestSensorList),
+              mon::lib::protocol::mtRequestSensorsList);
 }
 
 void CCollectorProtocol::requestSensorDefinition(const std::string &sensor)
 {
-    sendMessage(MON_PROTO_ID_REQUEST_SENSOR_DEFINITION, sensor);
+    //sendMessage(MON_PROTO_ID_REQUEST_SENSOR_DEFINITION, sensor);
 }
 
 }

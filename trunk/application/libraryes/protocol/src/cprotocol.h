@@ -12,28 +12,36 @@ namespace lib
 {
 namespace protocol
 {
-
-typedef void (*TFIncommingMsgCallback) (mon::lib::protocol::CNetworkMessage &);
-typedef std::map<int,TFIncommingMsgCallback> TCallMap;
+class CProtocol;
+typedef void (CProtocol::*TMessageCallback) (mon::lib::protocol::CNetworkMessage *);
+typedef std::map<TProtocolMessageID,TMessageCallback> TReplyMap;
+typedef std::map<EProtocolMessageType,TMessageCallback> TInterceptMap;
 
 class CProtocol
 {
+  friend class CNetworkMessage;
 public:
   CProtocol(mon::lib::network::CSocket *socket);
   virtual ~CProtocol();
-  void incommingMessage(const std::string &i_incoming);
+  CNetworkMessage * newMessage(TMessageCallback callback, const EProtocolMessageType &i_type);
+  CNetworkMessage * newMessage(TMessageCallback callback, const EProtocolMessageType &i_type, const std::string  &i_text);
+  void sendMessage(TMessageCallback callback, const EProtocolMessageType &i_type, const std::string  &i_text);
+  void sendMessage(TMessageCallback callback, const EProtocolMessageType &i_type);
+  void sendReply(CNetworkMessage *requestMessage, const std::string  &i_text);
 
 protected:
-  void sendMessage(const unsigned int &i_type, const std::string &i_text = "");
+  void incommingMessage(const std::string &i_incoming);
+  void registerIntercept(const EProtocolMessageType &type, TMessageCallback callback);
+  void sendMessage(CNetworkMessage *msg);
 
 private:
   mon::lib::network::CSocket *m_socket;
-  unsigned long long m_currentID; //!< Текущий идентификатор сообщения. При достижении максимума - сбрасывается в ноль
+  TProtocolMessageID m_currentID; //!< Текущий идентификатор сообщения. При достижении максимума - сбрасывается в ноль
+  TReplyMap m_replyCallbackMap;
+  TInterceptMap m_interceptCallbackMap;
 
-  unsigned long long getID();
+  TProtocolMessageID getID();     //!< Генерирование нового идентификатора сообщения
 };
-
-
 
 }
 }

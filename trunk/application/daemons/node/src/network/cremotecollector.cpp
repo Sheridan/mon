@@ -19,34 +19,28 @@ CRemoteCollector::CRemoteCollector(int socketDescriptor, const std::string &addr
 CRemoteCollector::~CRemoteCollector()
 {}
 
-void CRemoteCollector::incommingMessage(const std::string &message)
-{
-  MON_LOG_DBG("Incoming message from collector: " << message);
-  mon::lib::protocol::CNetworkMessage t_incomming_message(this, message);
-  switch(t_incomming_message.type())
-  {
-    case MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT:
-    {
-      sendMessage(MON_PROTO_ID_CONNECT_ANSWER,
-                  t_incomming_message.msg().compare(MON_ST_CONFIG->file("password")->get(MON_DEFAULT_PASSWORD)) == 0 ? "t" : "f" );
-      break;
-    }
-    case MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST:
-    {
-      sendMessage(MON_PROTO_ID_ANSWER_NODE_SENSORS_LIST, MON_ST_SENSORS_MANAGER->getGensorsNamesList());
-      break;
-    }
-    case MON_PROTO_ID_REQUEST_SENSOR_DEFINITION:
-    {
-      sendMessage(MON_PROTO_ID_ANSWER_SENSOR_DEFINITION, MON_ST_SENSORS_MANAGER->sensor(t_incomming_message.msg())->getDefinition(NULL));
-      break;
-    }
-    default: CNodeProtocol::incommingMessage(message);
-  }
-}
-
 void CRemoteCollector::connected(const std::string &to_addr, const unsigned short &to_port)
 {}
+
+void CRemoteCollector::incommingMessage(const std::string &message)
+{
+  mon::lib::protocol::CProtocol::incommingMessage(message);
+}
+
+void CRemoteCollector::requestOfConnect(lib::protocol::CNetworkMessage *msg)
+{
+  sendReply(msg, msg->msg().compare(MON_ST_CONFIG->file("password")->get(MON_DEFAULT_PASSWORD)) == 0 ? "t" : "f" );
+}
+
+void CRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
+{
+  sendReply(msg, MON_ST_SENSORS_MANAGER->getGensorsNamesList());
+}
+
+void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg)
+{
+  sendReply(msg, MON_ST_SENSORS_MANAGER->sensor(msg->msg())->getDefinition(NULL));
+}
 
 }
 }

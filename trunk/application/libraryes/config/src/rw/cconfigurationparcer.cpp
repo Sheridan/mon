@@ -137,15 +137,19 @@ void CConfigurationParcer::readValue(CFile *file)
         case mon::lib::base::ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
         case mon::lib::base::ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_PARCER_BUFFER(variable_value) << "`"); break;
         case mon::lib::base::ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::ctUInt   : MON_LOG_DBG("Value '" << file->name() << "', uint: `"   << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::ctULLong : MON_LOG_DBG("Value '" << file->name() << "', ullong: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
         case mon::lib::base::ctUnknown: parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value));
       }
       #endif
       switch(c_type)
       {
-        case mon::lib::base::ctBool   : { file->set(convertBool(            MON_PARCER_BUFFER(variable_value)))                   ; break; }
-        case mon::lib::base::ctString : { file->set(                        MON_PARCER_BUFFER(variable_value))                    ; break; }
-        case mon::lib::base::ctInt    : { file->set(mon::lib::base::toInt  (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::ctFloat  : { file->set(mon::lib::base::toFloat(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::ctBool   : { file->set(convertBool(             MON_PARCER_BUFFER(variable_value)))                   ; break; }
+        case mon::lib::base::ctString : { file->set(                         MON_PARCER_BUFFER(variable_value))                    ; break; }
+        case mon::lib::base::ctInt    : { file->set(mon::lib::base::toInt   (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::ctFloat  : { file->set(mon::lib::base::toFloat (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::ctUInt   : { file->set(mon::lib::base::toUInt  (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::ctULLong : { file->set(mon::lib::base::toULLong(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
         case mon::lib::base::ctUnknown: { parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
       }
       stepBack();

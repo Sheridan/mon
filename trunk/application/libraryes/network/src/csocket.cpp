@@ -47,6 +47,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
           {
             case '\n':
             {
+              MON_LOG_DBG("Incoming message (endl): '" << t_message << "'");
               incommingMessage(t_message);
               t_message = "";
               break;
@@ -59,6 +60,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
         {
           if(!t_message.empty())
           {
+            MON_LOG_DBG("Incoming message (eof): '" << t_message << "'");
             incommingMessage(t_message);
             t_message = "";
           }
@@ -82,6 +84,8 @@ void CSocket::write(const std::string &data)
 {
   if(m_isConnected || m_isListen)
   {
+    MON_LOG_DBG("Message to send: '" << data.substr(0, data.length()-1) << "'");
+
     int t_msg_length = data.length();
     int t_sent_bytes = 0;
     int t_total_sent_bytes = 0;
@@ -93,7 +97,7 @@ void CSocket::write(const std::string &data)
        t_total_sent_bytes += t_sent_bytes;
     }
 
-    MON_LOG_DBG("Socket bytes send: " << t_total_sent_bytes)
+    MON_LOG_DBG("Socket bytes send: " << t_total_sent_bytes);
   }
   else { MON_LOG_ERR("Write on offline socket") }
 }

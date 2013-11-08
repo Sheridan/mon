@@ -28,8 +28,12 @@ private:
 
   TRemoteNodeSensors m_nodeSensors;
 
-  void incommingMessage(const std::string &message);
   void connected(const std::string &to_addr, const unsigned short &to_port);
+  void incommingMessage(const std::string &message);
+
+  void incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg);
+  void incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg);
+  void incomingAnswerOnrequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg);
 };
 
 typedef std::list<CRemoteNode *> TRemoteNodes;

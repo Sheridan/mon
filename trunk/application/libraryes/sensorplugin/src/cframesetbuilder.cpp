@@ -12,9 +12,9 @@ CFramesetBuilder::CFramesetBuilder(const std::string &sensor, const std::string 
   :mon::lib::base::CStringBuilder(), m_totalFrames(totalFrames)
 {
   mon::lib::base::CStringBuilder::append(sensor);
-  mon::lib::base::CStringBuilder::append(MON_DATA_SENSORNAME_I_FRAMENAME_DELIMITER);
+  mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(sensorname, framename));
   mon::lib::base::CStringBuilder::append(frame);
-  mon::lib::base::CStringBuilder::append(MON_DATA_SENSOR_HEADER_I_FRAMESETS_DELIMITER);
+  mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(framename  ,frameset));
   m_framesCount = 0;
 }
 
@@ -34,16 +34,16 @@ CFramesetBuilder &CFramesetBuilder::newFrame(const int &number)
     removeLast();
     if(m_framesCount < m_totalFrames-1)
     {
-      mon::lib::base::CStringBuilder::append(MON_DATA_SENSOR_FRAME_I_FRAME_DELIMITER);
+      mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(frame, frame));
     }
   }
   mon::lib::base::CStringBuilder::append(number);
-  mon::lib::base::CStringBuilder::append(MON_DATA_SENSOR_FRAMENUMBER_I_FIELDS_DELIMITER);
+  mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(framenumber, framefields));
   m_framesCount++;
   return *this;
 }
 
-#define MON_APPEND_DATA_FIELD mon::lib::base::CStringBuilder::append(val); mon::lib::base::CStringBuilder::append(MON_DATA_SENSOR_FIELD_I_FIELD_DELIMITER);
+#define MON_APPEND_DATA_FIELD mon::lib::base::CStringBuilder::append(val); mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(field, field));
 
 void CFramesetBuilder::append(const int           &val) { MON_APPEND_DATA_FIELD }
 void CFramesetBuilder::append(const unsigned int  &val) { MON_APPEND_DATA_FIELD }

@@ -23,7 +23,7 @@ protected:
 private:
   TRemoteCollectors m_collectors;
   mon::lib::network::CSocketClient * incommingConnection(const int &clientDescriptor, const std::string &addr_from, const int & port_from);
-  void incommingMessage(const std::string &message);
+  void incommingMessage(const std::string &message) {}
 };
 
 }

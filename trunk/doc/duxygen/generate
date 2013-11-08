@@ -1,0 +1,4 @@
+#!/bin/bash
+
+doxygen 
+ln -s doc/html/index.html index.html

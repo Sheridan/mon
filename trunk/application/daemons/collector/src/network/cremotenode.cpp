@@ -43,49 +43,44 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
   MON_INFINITY_LOOP_END(reconnect_loop)
 }
 
-void CRemoteNode::incommingMessage(const std::string &message)
-{
-  MON_LOG_DBG("Incoming message from node: " << message);
-  mon::lib::protocol::CNetworkMessage t_incomming_message(this, message);
-  switch(t_incomming_message.type())
-  {
-    case MON_PROTO_ID_CONNECT_ANSWER:
-    {
-      if(t_incomming_message.msg().compare("t") == 0)
-      {
-        MON_LOG_NFO("Connection allowed");
-        requestSensorsList();
-      }
-      else if(t_incomming_message.msg().compare("f") == 0)
-      {
-        MON_LOG_ERR("Connection denyed");
-        MON_ABORT;
-      }
-      break;
-    }
-    case MON_PROTO_ID_ANSWER_NODE_SENSORS_LIST:
-    {
-      std::vector<std::string> sensorsNames;
-      mon::lib::base::split(t_incomming_message.msg(), ':', sensorsNames);
-      for(std::vector<std::string>::iterator sensorName = sensorsNames.begin(); sensorName != sensorsNames.end(); ++sensorName)
-      {
-        CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(*(sensorName), this);
-        m_nodeSensors.push_back(rnSensor);
-      }
-    }
-    case MON_PROTO_ID_ANSWER_SENSOR_DEFINITION:
-    {
-      MON_LOG_DBG(t_incomming_message.msg());
-      break;
-    }
-    default: CCollectorProtocol::incommingMessage(message);
-  }
-}
-
 void CRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
   MON_LOG_DBG("Collector connected to " << to_addr << ":" << to_port);
   CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
+}
+
+void CRemoteNode::incommingMessage(const std::string &message)
+{
+  mon::lib::protocol::CProtocol::incommingMessage(message);
+}
+
+void CRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
+{
+  if(msg->msg().compare("t") == 0)
+  {
+    MON_LOG_NFO("Connection allowed");
+    requestSensorsList();
+  }
+  else if(msg->msg().compare("f") == 0)
+  {
+    MON_LOG_ERR("Connection denyed");
+    MON_ABORT;
+  }
+}
+
+void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg)
+{
+  std::vector<std::string> sensorsNames;
+  mon::lib::base::split(msg->msg(), ':', sensorsNames);
+  for(std::vector<std::string>::iterator sensorName = sensorsNames.begin(); sensorName != sensorsNames.end(); ++sensorName)
+  {
+    CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(*(sensorName), this);
+    m_nodeSensors.push_back(rnSensor);
+  }
+}
+
+void CRemoteNode::incomingAnswerOnrequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
+{
 }
 
 }

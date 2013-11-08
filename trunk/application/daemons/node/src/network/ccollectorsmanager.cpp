@@ -45,11 +45,6 @@ mon::lib::network::CSocketClient * CCollectorsManager::incommingConnection(const
   return collector;
 }
 
-void CCollectorsManager::incommingMessage(const std::string &message)
-{
-  MON_LOG_DBG(message)
-}
-
 }
 }
 }

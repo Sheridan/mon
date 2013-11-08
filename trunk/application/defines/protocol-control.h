@@ -1,48 +1,62 @@
 #ifndef PROTOCOLCONTROLCHARACTERS_H
 #define PROTOCOLCONTROLCHARACTERS_H
+#include <climits>
 
-#define MON_PROTO_TYPE_I_MESSAGE_DELIMITER             '^'
-#define MON_PROTO_ID_I_TYPE_DELIMITER                  '@'
-#define MON_PROTO_ENDL                                 '\n'
-#define MON_DATA_SENSORNAME_I_FRAMENAME_DELIMITER      ":"
-#define MON_DATA_SENSOR_HEADER_I_FRAMESETS_DELIMITER   "!"
-#define MON_DATA_SENSOR_FRAMENUMBER_I_FIELDS_DELIMITER "#"
-#define MON_DATA_SENSOR_FRAME_I_FRAME_DELIMITER        "|"
-#define MON_DATA_SENSOR_FIELD_I_FIELD_DELIMITER        ":"
+namespace mon
+{
+namespace lib
+{
+namespace protocol
+{
 
-/*
-#define MON_PROTO_ID_COLLECTOR_TO_NODE_CONNECT  1
-#define MON_PROTO_ID_CONNECT_ANSWER             2
-#define MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST  3
-#define MON_PROTO_ID_ANSWER_NODE_SENSORS_LIST   4
-#define MON_PROTO_ID_REQUEST_SENSOR_DEFINITION  5
-#define MON_PROTO_ID_ANSWER_SENSOR_DEFINITION   6
-*/
+#define MON_PROTO_DELIMITER(_left,_right) PD##_left##_right
+#define MON_PROTOCOL_DELIMITER(_left,_right) mon::lib::protocol::MON_PROTO_DELIMITER(_left,_right)
+#define MON_DECLARE_PROTOCOL_DELIMITER(_left,_right,_delimiter) \
+  static const TProtocolDelimiter MON_PROTO_DELIMITER(_left,_right) = _delimiter
 
-/// Ответ на запросы
-#define MON_PROTO_ANSWER                        0
+typedef unsigned char TProtocolDelimiter;
+MON_DECLARE_PROTOCOL_DELIMITER(type       ,message    ,'^' ); //!< Разделитель между типом сообщения и самим сообщением
+MON_DECLARE_PROTOCOL_DELIMITER(id         ,type       ,'@' ); //!< Резделитель идентификатора и типа сообщения
+MON_DECLARE_PROTOCOL_DELIMITER(end        ,line       ,'\n'); //!< Конец сообщения
+MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,framename  ,'$' ); //!< Разделитель имени сенсора и имени фрейма
+MON_DECLARE_PROTOCOL_DELIMITER(framename  ,frameset   ,'!' ); //!< Разделитель имени фрейма и фреймсета
+MON_DECLARE_PROTOCOL_DELIMITER(framenumber,framefields,'#' ); //!< Разделитель номера фрейма в фремсете и полей фреймсета
+MON_DECLARE_PROTOCOL_DELIMITER(frame      ,frame      ,'|' ); //!< Разделитель фреймов в фреймсете
+MON_DECLARE_PROTOCOL_DELIMITER(field      ,field      ,':' ); //!< Разделитель полей фрейма
+MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,sensorname ,':' ); //!< Разделитель сенсоров в списке сенсоров
 
-/// Запрос соединения, отправляется сразу с паролем.
-/**
- * Запрос: 'id@1^qwerty'
- * Ответ:  'id@0^y' или 'id@n'
- */
-#define MON_PROTO_ID_CONNECT                    1
+enum EProtocolMessageType
+{
+  /// Ответ на запросы
+  /**
+   * Формат: 'id@0^сообщение'
+   */
+  mtAnswer,
+  /// Запрос соединения, отправляется сразу с паролем.
+  /**
+   * Запрос: 'id@1^пароль'@n
+   * Ответ:  'id@0^y' или 'id\@n'
+   */
+  mtConnect,
+  /// Запрос списка сенсоров ноды.
+  /**
+   * Запрос: 'id@2'@n
+   * Ответ:  'id@0^сенсор:сенсор:сенсор'
+   */
+  mtRequestSensorsList,
+  /// Запрос определения сенсора.
+  /**
+   * Запрос списка всех фреймов сенсора
+   * Запрос: 'id@3^'@n
+   * Ответ:  'id@0^описаниесенсора'
+   */
+  mtRequestSensorDefinition
+};
 
-/// Запрос списка сенсоров ноды.
-/**
- * Запрос: 'id@2'
- * Ответ:  'id@0^cpu:memory'
- */
-#define MON_PROTO_ID_REQUEST_NODE_SENSORS_LIST  2
+typedef unsigned long long TProtocolMessageID; //!< Тип идентификатора сообщений
+#define MON_PROTOCOL_MESSAGE_ID_MAX ULLONG_MAX
 
-
-/// Запрос определения сенсора.
-/**
- * Запрос списка всех фреймов сенсора
- * Запрос: 'id@3^'
- * Ответ:  'id@0^one{f1{...},f2{...}}; two{...}'
- */
-#define MON_PROTO_ID_REQUEST_SENSOR_DEFINITION   3
-
+}
+}
+}
 #endif // PROTOCOLCONTROLCHARACTERS_H

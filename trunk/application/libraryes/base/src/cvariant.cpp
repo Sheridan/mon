@@ -13,17 +13,18 @@ namespace base
 #define MON_VARIANT_FROM_STRING(_type) _type res; std::istringstream(val) >> res; return res;
 #define MON_VARIANT_TO_STRING std::string res; std::stringstream buf; buf << val; buf >> res; return res;
 
-int    toInt   (const std::string &val)      { MON_VARIANT_FROM_STRING(int)   ; }
-bool   toBool  (const std::string &val)      { MON_VARIANT_FROM_STRING(bool)  ; }
-float  toFloat (const std::string &val)      { MON_VARIANT_FROM_STRING(float) ; }
-double toDouble(const std::string &val)      { MON_VARIANT_FROM_STRING(double); }
-std::string toString(const int    &val)      { MON_VARIANT_TO_STRING }
-std::string toString(const bool   &val)      { MON_VARIANT_TO_STRING }
-std::string toString(const float  &val)      { MON_VARIANT_TO_STRING }
-std::string toString(const double &val)      { MON_VARIANT_TO_STRING }
-unsigned int toUInt (const std::string &val) { MON_VARIANT_FROM_STRING(unsigned int); }
-unsigned long long toULLong (const std::string &val) { MON_VARIANT_FROM_STRING(unsigned long long); }
-
+int                toInt   (const std::string &val)        { MON_VARIANT_FROM_STRING(int)   ; }
+bool               toBool  (const std::string &val)        { MON_VARIANT_FROM_STRING(bool)  ; }
+float              toFloat (const std::string &val)        { MON_VARIANT_FROM_STRING(float) ; }
+double             toDouble(const std::string &val)        { MON_VARIANT_FROM_STRING(double); }
+unsigned int       toUInt  (const std::string &val)        { MON_VARIANT_FROM_STRING(unsigned int); }
+unsigned long long toULLong(const std::string &val)        { MON_VARIANT_FROM_STRING(unsigned long long); }
+std::string        toString(const int    &val)             { MON_VARIANT_TO_STRING }
+std::string        toString(const bool   &val)             { MON_VARIANT_TO_STRING }
+std::string        toString(const float  &val)             { MON_VARIANT_TO_STRING }
+std::string        toString(const double &val)             { MON_VARIANT_TO_STRING }
+std::string        toString(const unsigned int  &val)      { MON_VARIANT_TO_STRING }
+std::string        toString(const unsigned long long &val) { MON_VARIANT_TO_STRING }
 
 CVariant::~CVariant()
 {
@@ -74,12 +75,28 @@ void CVariant::set(const std::string &val)
   strcpy(m_value.m_string, val.c_str());
 }
 
+void CVariant::set(const unsigned int &val)
+{
+  reset();
+  m_contentType = ctUInt;
+  m_value.m_uint = val;
+}
+
+void CVariant::set(const unsigned long long &val)
+{
+  reset();
+  m_contentType = ctULLong;
+  m_value.m_ull = val;
+}
+
 void CVariant::set(const CVariant &val)
 {
   switch(val.contentType())
   {
     case ctBool:    set(val.toBool  ()); break;
     case ctInt:     set(val.toInt   ()); break;
+    case ctUInt:    set(val.toUInt  ()); break;
+    case ctULLong:  set(val.toULLong()); break;
     case ctFloat:   set(val.toFloat ()); break;
     case ctString:  set(val.toString()); break;
     case ctUnknown: reset(); break;
@@ -92,6 +109,8 @@ const bool CVariant::toBool() const
   {
     case ctBool:   return  m_value.m_bool;
     case ctInt:    return  m_value.m_int   > 0;
+    case ctUInt:   return  m_value.m_uint  > 0;
+    case ctULLong: return  m_value.m_ull   > 0;
     case ctFloat:  return  m_value.m_float > 0;
     case ctString: return  m_value.m_string != NULL;
     case ctUnknown: MON_LOG_WRN("Undefined bool option, return default"); return true;
@@ -105,6 +124,8 @@ const int CVariant::toInt() const
     case ctInt:    return m_value.m_int;
     case ctBool:   return static_cast<int>(m_value.m_bool);
     case ctFloat:  return static_cast<int>(m_value.m_float);
+    case ctUInt:   return static_cast<int>(m_value.m_uint);
+    case ctULLong: return static_cast<int>(m_value.m_ull);
     case ctString: return strtol(m_value.m_string, NULL, 10);
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
   } return 0;
@@ -117,6 +138,8 @@ const double CVariant::toFloat() const
     case ctFloat:  return m_value.m_float;
     case ctInt:    return static_cast<double>(m_value.m_int);
     case ctBool:   return static_cast<double>(m_value.m_bool);
+    case ctUInt:   return static_cast<double>(m_value.m_uint);
+    case ctULLong: return static_cast<double>(m_value.m_ull);
     case ctString: return strtod(m_value.m_string, NULL);
     case ctUnknown: MON_LOG_WRN("Undefined float option, return default"); return 0;
   } return 0;
@@ -124,15 +147,45 @@ const double CVariant::toFloat() const
 
 const std::string CVariant::toString() const
 {
-
   switch(m_contentType)
   {
     case ctString:return m_value.m_string;
     case ctFloat: return mon::lib::base::toString(m_value.m_float);
     case ctInt:   return mon::lib::base::toString(m_value.m_int);
+    case ctUInt:  return mon::lib::base::toString(m_value.m_uint);
+    case ctULLong:return mon::lib::base::toString(m_value.m_ull);
     case ctBool:  return m_value.m_bool ? "true" : "false";
     case ctUnknown: MON_LOG_WRN("Undefined string option, return default"); return "undef";
   } return "undef";
+}
+
+
+const unsigned int CVariant::toUInt() const
+{
+  switch(m_contentType)
+  {
+    case ctUInt:   return m_value.m_uint;
+    case ctInt:    return static_cast<unsigned int>(m_value.m_int);
+    case ctBool:   return static_cast<unsigned int>(m_value.m_bool);
+    case ctFloat:  return static_cast<unsigned int>(m_value.m_float);
+    case ctULLong: return static_cast<unsigned int>(m_value.m_ull);
+    case ctString: return strtol(m_value.m_string, NULL, 10);
+    case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
+  } return 0;
+}
+
+const unsigned long long CVariant::toULLong() const
+{
+  switch(m_contentType)
+  {
+    case ctULLong: return m_value.m_ull;
+    case ctInt:    return static_cast<unsigned long long>(m_value.m_int);
+    case ctBool:   return static_cast<unsigned long long>(m_value.m_bool);
+    case ctFloat:  return static_cast<unsigned long long>(m_value.m_float);
+    case ctUInt:   return static_cast<unsigned long long>(m_value.m_uint);
+    case ctString: return strtol(m_value.m_string, NULL, 10);
+    case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
+  } return 0;
 }
 
 const EContentType &CVariant::contentType() const

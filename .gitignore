@@ -1,6 +1,7 @@
 work
 trunk/_*/
 trunk/doc/duxygen/doc/*
+trunk/doc/duxygen/*.html
 _*/
 trunk/doc/architecture/*.png
 *.txt.user*

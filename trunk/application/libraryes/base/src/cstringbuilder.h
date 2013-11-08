@@ -2,11 +2,13 @@
 #ifndef CSTRINGBUILDER_H
 #define CSTRINGBUILDER_H
 #include <string>
+#include "protocol-control.h"
 
 #define MON_STRING_BUILDER(_class) \
   public: \
   _class &operator<<(const int                 &val) { append(val); return *this; } \
   _class &operator<<(const unsigned int        &val) { append(val); return *this; } \
+  _class &operator<<(const unsigned long long  &val) { append(val); return *this; } \
   _class &operator<<(const double              &val) { append(val); return *this; } \
   _class &operator<<(const float               &val) { append(val); return *this; } \
   _class &operator<<(const bool                &val) { append(val); return *this; } \
@@ -16,13 +18,16 @@
   _class &operator<<(const unsigned char       &val) { append(val); return *this; } \
   _class &operator+(const int                 &val) { append(val); return *this; } \
   _class &operator+(const unsigned int        &val) { append(val); return *this; } \
+  _class &operator+(const unsigned long long  &val) { append(val); return *this; } \
   _class &operator+(const double              &val) { append(val); return *this; } \
   _class &operator+(const float               &val) { append(val); return *this; } \
   _class &operator+(const bool                &val) { append(val); return *this; } \
   _class &operator+(const std::string         &val) { append(val); return *this; } \
   _class &operator+(const char                *val) { append(val); return *this; } \
   _class &operator+(const char                &val) { append(val); return *this; } \
-  _class &operator+(const unsigned char       &val) { append(val); return *this; }
+  _class &operator+(const unsigned char       &val) { append(val); return *this; } \
+  _class &operator<<(mon::lib::protocol::EProtocolMessageType &val) { append(val); return *this; } \
+  _class &operator+(mon::lib::protocol::EProtocolMessageType &val) { append(val); return *this; } \
 
 //  _class &operator>>(const int           &val) { preface(val); return *this; }
 //  _class &operator>>(const unsigned int  &val) { preface(val); return *this; }
@@ -66,6 +71,7 @@ class CStringBuilder
     virtual void append(const char                *val);
     virtual void append(const char                &val);
     virtual void append(const unsigned char       &val);
+    virtual void append(const mon::lib::protocol::EProtocolMessageType &val);
 
     virtual void preface(const int                 &val);
     virtual void preface(const unsigned int        &val);
@@ -77,6 +83,7 @@ class CStringBuilder
     virtual void preface(const char                *val);
     virtual void preface(const char                &val);
     virtual void preface(const unsigned char       &val);
+    virtual void preface(const mon::lib::protocol::EProtocolMessageType &val);
 
     void removeLast(const int &characters = 1);
 
