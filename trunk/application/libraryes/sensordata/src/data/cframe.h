@@ -15,22 +15,24 @@ namespace lib
 namespace sensordata
 {
 
+//! Флаги фрейма
 enum EFrameFlags
 {
   ffAggregated,    //!< Данные полей статистики представляют собой часть целого. То есть например 10%, 70%, 20%
   ffCalculateTotal //!< Необходимо суммировать значения полей в отдельное, генерируемое поле
 };
 
+//! Типы фрейма
 enum EFrameType
 {
   ftInformation, //!< Информационный фрейм, предназначен для сбора нестатистической инфрмации сенсором. Например имя процессора
   ftStatistic    //!< Статистический фрейм
 };
 
-typedef std::set<EFrameFlags>       TFlags;
+typedef std::set<EFrameFlags>  TFlags;
 typedef std::set<std::string>  TTags;
 
-//!< Класс, описывающий фрейм сенсора
+//! Класс, описывающий фрейм сенсора
 class CFrame
 {
     MON_PROPERTY(std::string            , label      ) //!< Метка фрейма
