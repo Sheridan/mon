@@ -9,19 +9,22 @@ namespace lib
 namespace sensordata
 {
 
+//! Типы частот описания фрейма
 enum EFrequencyPurpose
 {
-  fpMax,
-  fpDefault,
-  fpCurrent
+  fpMax,     //!< Максимальная частота
+  fpDefault, //!< Частота по умолчанию
+  fpCurrent  //!< Текущая частота
 };
 
+//! Типы частот
 enum EFrequencyMeasurment
 {
-  ftHz, // Обычное упоминание частоты
-  ftSPP // Secunds per pulse, один раз в икс секунд
+  ftHz, //!< Обычное упоминание частоты
+  ftSPP //!< Secunds per pulse, один раз в икс секунд
 };
 
+//! Частота сбора данных с фрейма
 class CFrequency
 {
   public:

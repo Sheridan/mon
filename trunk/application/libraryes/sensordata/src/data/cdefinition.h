@@ -9,6 +9,7 @@ namespace lib
 namespace sensordata
 {
 
+//! Описание сенсора
 class CDefinition
 {
   public:
@@ -17,7 +18,7 @@ class CDefinition
     void addFrame(const std::string &name, CFrame *frame);
     CFrame * frame(const std::string &name);
   private:
-    TFrames m_frames;
+    TFrames m_frames; //!< Фреймы сенсора
 };
 
 }

@@ -51,7 +51,7 @@ class CFrame
     bool hasTag      (const std::string &tag);
 
   private:
-    CFrequency *m_frequences[3];
+    CFrequency *m_frequences[3]; //!< Частоты взятия данных с фрейма
 
 };
 

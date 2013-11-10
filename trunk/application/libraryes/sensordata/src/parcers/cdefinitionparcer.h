@@ -14,13 +14,15 @@ namespace lib
 namespace sensordata
 {
 
+//! Шаги чтения частоты обновления
 enum EFrequencyCurrentReading
 {
-  fcrKeyword,
-  fcrValue,
-  fcrMeasurment
+  fcrKeyword,   //!< Чтение ключевого слова
+  fcrValue,     //!< Чтение значения
+  fcrMeasurment //!< Чтение типа значения
 };
 
+//! Парсер описания сенсора
 class CDefinitionParcer : public mon::lib::base::CParcerString
 {
   public:
