@@ -9,28 +9,22 @@
 #include <dlfcn.h>
 #include <stdlib.h>
 #include "cdefinitionparcer.h"
+#include "cdefinitiongenerator.h"
+#include "csensor.h"
+
+#define MON_ST_LOGGER logger
+#define MON_ST_CONFIG config
+
 // ------------------ variables --------------------------------------------------------------------
 mon::lib::config::CConfig *config;
 mon::lib::logger::CLogger *logger;
+mon::daemons::node::CSensor *sensor;
 std::string sensorFile;
 std::string configFile;
-std::string object;
+std::string frame;
 int   numberOfGetStatistics     = 10;
 float timeBetweenStatisticsCall = 1;
 bool  showDefinition         = false;
-void * sensor_handle;
-typedef void               (*TFInitSensor)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
-typedef const char        *(*TFGetName)            (const char *);
-typedef const char        *(*TFGetDefinition)      (const char *);
-typedef const unsigned int (*TFGetDefinitionLength)(const char *);
-typedef const char        *(*TFGetStatistics)      (const char *);
-typedef const bool         (*TFGetSensorAvialable) (const char *);
-TFInitSensor          initSensor          = NULL;
-TFGetName             getName             = NULL;
-TFGetDefinition       getDefinition       = NULL;
-TFGetDefinitionLength getDefinitionLength = NULL;
-TFGetStatistics       getStatistics       = NULL;
-TFGetSensorAvialable  getSensorAvialable  = NULL;
 // ------------------ variables --------------------------------------------------------------------
 // ------------------ functions --------------------------------------------------------------------
 void help()
@@ -70,48 +64,11 @@ void setopts(int argc, char *argv[])
       case 'r': showDefinition            = true;                break;
       case 'n': numberOfGetStatistics     = atoi(optarg);        break;
       case 't': timeBetweenStatisticsCall = atof(optarg);        break;
-      case 'o': object                    = std::string(optarg); break;
+      case 'o': frame                     = std::string(optarg); break;
     }
   }
   timeBetweenStatisticsCall = timeBetweenStatisticsCall * 1000000;
 }
-
-#define MON_IMPORT_ERROR(_name) \
-  if ((error = dlerror()) != NULL) \
-  { \
-    printf("Error importing function `" #_name "` from sensor `%s`: %s\n", sensorFile.c_str(), error); \
-    exit(1);   \
-  }
-#define MON_IMPORT(_type, _name) _name = (_type) dlsym(sensor_handle, #_name); MON_IMPORT_ERROR(_name);
-void load()
-{
-  sensor_handle = dlopen(sensorFile.c_str(), RTLD_NOW);
-  if (!sensor_handle)
-  {
-    printf("Sensor `%s` loading error: %s\n", sensorFile.c_str(), dlerror());
-    exit(1);
-  }
-  char *error; error = NULL;
-  MON_IMPORT(TFInitSensor         , initSensor         );
-  MON_IMPORT(TFGetName            , getName            );
-  MON_IMPORT(TFGetDefinition      , getDefinition      );
-  MON_IMPORT(TFGetDefinitionLength, getDefinitionLength);
-  MON_IMPORT(TFGetStatistics      , getStatistics      );
-  MON_IMPORT(TFGetSensorAvialable , getSensorAvialable );
-  initSensor(logger, config->root());
-}
-
-void unload()
-{
-  initSensor          = NULL;
-  getName             = NULL;
-  getDefinition       = NULL;
-  getDefinitionLength = NULL;
-  getStatistics       = NULL;
-  getSensorAvialable  = NULL;
-  dlclose(sensor_handle);
-}
-
 // ------------------ functions --------------------------------------------------------------------
 // ------------------ main -------------------------------------------------------------------------
 int main(int argc, char *argv[])
@@ -120,26 +77,30 @@ int main(int argc, char *argv[])
   logger = new mon::lib::logger::CLogger();
   setopts(argc, argv);
   config->load(configFile);
-  load();
-  printf("Sensor name: %s\n", getName(NULL));
-  bool sensorAvialable = getSensorAvialable(object.c_str());
+  sensor = new mon::daemons::node::CSensor(sensorFile);
+  sensor->load();
+  //load();
+  printf("Sensor name: %s\n", sensor->getName(NULL));
+  bool sensorAvialable = sensor->getSensorAvialable(frame.c_str());
   printf("Sensor avialable? %s.\n", sensorAvialable ? "Yes" : "No");
   if(sensorAvialable)
   {
     if(showDefinition)
     {
-      printf("Sensor raw definition (%d bytes):\n%s\n", getDefinitionLength(NULL), getDefinition(NULL));
+      printf("Sensor raw definition (%d bytes):\n%s\n", sensor->getDefinitionLength(NULL), sensor->getDefinition(NULL));
       mon::lib::sensordata::CDefinition definition;
-      mon::lib::sensordata::CDefinitionParcer parcer(&definition, std::string(getDefinition(NULL)));
+      mon::lib::sensordata::CDefinitionParcer parcer(&definition, std::string(sensor->getDefinition(NULL)));
       parcer.parce();
+      mon::lib::sensordata::CDefinitionGenerator generator(&definition);
+      printf("Sensor generated definition :\n%s\n", generator.generate().c_str());
     }
     for (int a = 0; a < numberOfGetStatistics; a++)
     {
-      printf("%s\n", getStatistics(object.c_str()));
+      printf("%s\n", sensor->getStatistics(frame.c_str()));
       usleep(timeBetweenStatisticsCall);
     }
   }
-  unload();
+  delete sensor;
   delete logger;
   delete config;
   return 0;

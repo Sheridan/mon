@@ -9,8 +9,12 @@
 // main
 
 #define MON_ST        mon::lib::base::CSingleton::instance()
-#define MON_ST_LOGGER MON_ST->logger()
-#define MON_ST_CONFIG MON_ST->config()
+#ifndef MON_ST_LOGGER
+  #define MON_ST_LOGGER MON_ST->logger()
+#endif
+#ifndef MON_ST_CONFIG
+  #define MON_ST_CONFIG MON_ST->config()
+#endif
 
 // creating and destroy
 #define MON_ST_CNSTRUCT MON_ST; MON_LOG_DBG("App started");

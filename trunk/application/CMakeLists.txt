@@ -244,8 +244,11 @@ IF( BUILD_NODE )
   add_daemon(mon-node)
 
   MESSAGE ( STATUS "---> Processing sensor tester" )
-  SET(mon-sensor-test-headers  )
-  SET(mon-sensor-test-sources tools/mon-sensor-test/main.cpp )
+  SET(mon-sensor-test-headers
+      daemons/node/src/sensors/csensor.h)
+  SET(mon-sensor-test-sources
+      daemons/node/src/sensors/csensor.cpp
+      tools/mon-sensor-test/main.cpp )
   add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
   target_link_libraries(mon-sensor-test base config logger sensordata dl)
   install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
