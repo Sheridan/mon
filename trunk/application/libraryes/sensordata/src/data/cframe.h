@@ -32,11 +32,12 @@ enum EFrameType
 typedef std::set<EFrameFlags>  TFlags;
 typedef std::set<std::string>  TTags;
 
-//! Класс, описывающий фрейм сенсора
+//! Фрейм сенсора
 class CFrame
 {
     MON_PROPERTY(std::string            , label      ) //!< Метка фрейма
     MON_PROPERTY(EFrameType             , frameType  ) //!< Тип фрейма
+    MON_PROPERTY(std::string            , name       ) //!< Имя фрейма
     MON_READONLY_PROPERTY(TFlags        , flags      ) //!< Флаги фрейма
     MON_READONLY_PROPERTY(TTags         , tags       ) //!< Тэги фрейма
     MON_READONLY_PROPERTY(TFields       , fields     ) //!< Поля фрейма
@@ -57,7 +58,9 @@ class CFrame
 
 };
 
-typedef std::map<std::string, CFrame *> TFrames;
+typedef std::map<std::string, CFrame *> TFramesMap;
+typedef std::list<std::string> TFramesNames;
+typedef std::list<CFrame *> TFrames;
 
 }
 }

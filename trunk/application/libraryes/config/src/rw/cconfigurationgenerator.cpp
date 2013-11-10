@@ -9,8 +9,6 @@
   #define MON_CONFIG_GENERATOR_DEBUG(_msg)
 #endif
 
-
-
 namespace mon
 {
 namespace lib

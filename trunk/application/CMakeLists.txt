@@ -93,13 +93,15 @@ SET(mon-sensordata-headers
     libraryes/sensordata/src/data/cframe.h
     libraryes/sensordata/src/data/cfrequency.h
     libraryes/sensordata/src/data/cfield.h
-    libraryes/sensordata/src/parcers/cdefinitionparcer.h )
+    libraryes/sensordata/src/parcers/cdefinitionparcer.h
+    libraryes/sensordata/src/parcers/cdefinitiongenerator.h )
 SET(mon-sensordata-sources
     libraryes/sensordata/src/data/cdefinition.cpp
     libraryes/sensordata/src/data/cframe.cpp
     libraryes/sensordata/src/data/cfrequency.cpp
     libraryes/sensordata/src/data/cfield.cpp
     libraryes/sensordata/src/parcers/cdefinitionparcer.cpp
+    libraryes/sensordata/src/parcers/cdefinitiongenerator.cpp
     libraryes/sensordata/src/main.cpp )
 add_library(sensordata SHARED ${mon-sensordata-headers} ${mon-sensordata-sources})
 install(TARGETS sensordata LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
