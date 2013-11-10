@@ -37,11 +37,11 @@ protected:
 
 private:
   mon::lib::network::CSocket *m_socket;
-  TProtocolMessageID m_currentID; //!< Текущий идентификатор сообщения. При достижении максимума - сбрасывается в ноль
-  TReplyMap m_replyCallbackMap;
-  TInterceptMap m_interceptCallbackMap;
+  TProtocolMessageID m_currentID;      //!< Текущий идентификатор сообщения. При достижении максимума - сбрасывается в ноль
+  TReplyMap m_replyCallbackMap;        //!< Карта вызовов при ответе на сообщение
+  TInterceptMap m_interceptCallbackMap;//!< Карта вызовов при входящих сообщениях
 
-  TProtocolMessageID getID();     //!< Генерирование нового идентификатора сообщения
+  TProtocolMessageID getID();          //!< Генерирование нового идентификатора сообщения
 };
 
 }

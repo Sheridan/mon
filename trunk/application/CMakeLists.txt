@@ -91,19 +91,13 @@ MESSAGE ( STATUS "---> Processing `sensordata` library" )
 SET(mon-sensordata-headers
     libraryes/sensordata/src/data/cdefinition.h
     libraryes/sensordata/src/data/cobject.h
-    libraryes/sensordata/src/data/cinformation.h
-    libraryes/sensordata/src/data/cstatistics.h
     libraryes/sensordata/src/data/types/cfrequency.h
-    libraryes/sensordata/src/parcers/cdefinitionparcer.h
-    libraryes/sensordata/src/parcers/cstatisticsparcer.h)
+    libraryes/sensordata/src/parcers/cdefinitionparcer.h )
 SET(mon-sensordata-sources
     libraryes/sensordata/src/data/cdefinition.cpp
     libraryes/sensordata/src/data/cobject.cpp
-    libraryes/sensordata/src/data/cinformation.cpp
-    libraryes/sensordata/src/data/cstatistics.cpp
     libraryes/sensordata/src/data/types/cfrequency.cpp
     libraryes/sensordata/src/parcers/cdefinitionparcer.cpp
-    libraryes/sensordata/src/parcers/cstatisticsparcer.cpp
     libraryes/sensordata/src/main.cpp )
 add_library(sensordata SHARED ${mon-sensordata-headers} ${mon-sensordata-sources})
 install(TARGETS sensordata LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})

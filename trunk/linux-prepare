@@ -23,4 +23,5 @@ do
     mkdir -p "${ide_build_path}/sensors/${s}"
 done
 
+rm -f ../work
 ln -s ${root_path} ../work
