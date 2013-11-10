@@ -23,6 +23,7 @@ enum EFrequencyCurrentReading
 
 class CDefinitionParcer : public mon::lib::base::CParcerString
 {
+  public:
     CDefinitionParcer(CDefinition *target, const std::string &definition);
     ~CDefinitionParcer();
     void parce();
@@ -32,18 +33,18 @@ class CDefinitionParcer : public mon::lib::base::CParcerString
     int          m_currentIndex;
     CDefinition *m_definition;
 
-    CObject *parceObject();
+    CFrame *parceFrame();
 
-    void readFrequences(CObject *obj);
-    void readType      (CObject *obj);
-    void readFlags     (CObject *obj);
-    void readTags      (CObject *obj);
-    void readFields    (CObject *obj);
-    void readField     (CObject *obj, const std::string &name);
+    void readFrequences(CFrame *frame);
+    void readFlags     (CFrame *frame);
+    void readTags      (CFrame *frame);
+    void readFields    (CFrame *frame);
+    void readFrameType (CFrame *frame);
+    void readField     (CFrame *frame, const std::string &name);
 
     void skipToSemicolon();
     std::string readStringValue();
-    std::string readValue();
+    EFieldDataType readFieldType ();
 
 };
 

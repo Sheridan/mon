@@ -8,6 +8,7 @@
 #include <string.h>
 #include <dlfcn.h>
 #include <stdlib.h>
+#include "cdefinitionparcer.h"
 // ------------------ variables --------------------------------------------------------------------
 mon::lib::config::CConfig *config;
 mon::lib::logger::CLogger *logger;
@@ -16,7 +17,7 @@ std::string configFile;
 std::string object;
 int   numberOfGetStatistics     = 10;
 float timeBetweenStatisticsCall = 1;
-bool  showRawDefinition         = false;
+bool  showDefinition         = false;
 void * sensor_handle;
 typedef void               (*TFInitSensor)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
 typedef const char        *(*TFGetName)            (const char *);
@@ -66,7 +67,7 @@ void setopts(int argc, char *argv[])
       case 'h': help();                                          break;
       case 's': sensorFile                = std::string(optarg); break;
       case 'c': configFile                = std::string(optarg); break;
-      case 'r': showRawDefinition         = true;                break;
+      case 'r': showDefinition            = true;                break;
       case 'n': numberOfGetStatistics     = atoi(optarg);        break;
       case 't': timeBetweenStatisticsCall = atof(optarg);        break;
       case 'o': object                    = std::string(optarg); break;
@@ -125,7 +126,13 @@ int main(int argc, char *argv[])
   printf("Sensor avialable? %s.\n", sensorAvialable ? "Yes" : "No");
   if(sensorAvialable)
   {
-    if(showRawDefinition) { printf("Sensor definition (%d bytes):\n%s\n", getDefinitionLength(NULL), getDefinition(NULL)); }
+    if(showDefinition)
+    {
+      printf("Sensor raw definition (%d bytes):\n%s\n", getDefinitionLength(NULL), getDefinition(NULL));
+      mon::lib::sensordata::CDefinition definition;
+      mon::lib::sensordata::CDefinitionParcer parcer(&definition, std::string(getDefinition(NULL)));
+      parcer.parce();
+    }
     for (int a = 0; a < numberOfGetStatistics; a++)
     {
       printf("%s\n", getStatistics(object.c_str()));

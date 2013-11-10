@@ -10,13 +10,13 @@ utilisation
   }
   flags:
   {
-    aggregated
+    aggregated;
   }
   tags:
   {
-    system,
-    hardware,
-    baseResources
+    system;
+    hardware;
+    baseResources;
   }
   fields:
   {
@@ -26,13 +26,13 @@ utilisation
       type: %;
       description: "User usage";
     }
-    nice: 
+    nice:
     {
       label: "nice";
       type: %;
       description: "Nice usage";
     }
-    system: 
+    system:
     {
       label: "system";
       type: %;
@@ -44,25 +44,25 @@ utilisation
       type: %;
       description: "CPU idle";
     }
-    iowait: 
+    iowait:
     {
       label: "iowait";
       type: %;
       description: "I/O wait";
     }
-    irq: 
+    irq:
     {
       label: "irq";
       type: %;
       description: "IRQ";
     }
-    sirq: 
+    sirq:
     {
       label: "sirq";
       type: %;
       description: "sIRQ";
     }
-    steal: 
+    steal:
     {
       label: "steal";
       type: %;
@@ -94,9 +94,9 @@ info
   }
   tags:
   {
-    system,
-    hardware,
-    baseResources
+    system;
+    hardware;
+    baseResources;
   }
   fields:
   {
@@ -119,6 +119,7 @@ info
       description: "Cpu family, model, stepping in one string";
     }
   }
+}
 
 frequency
 {
@@ -133,13 +134,13 @@ frequency
   {}
   tags:
   {
-    system,
-    hardware,
-    baseResources
+    system;
+    hardware;
+    baseResources;
   }
   fields:
   {
-    frequency: 
+    frequency:
     {
       label: "CPU Frequency";
       type: ulong;

@@ -15,16 +15,16 @@ CDefinition::~CDefinition()
 {
 }
 
-void CDefinition::addObject(const std::string &name, CObject *obj)
+void CDefinition::addFrame(const std::string &name, CFrame *frame)
 {
-  m_objects[name] = obj;
+  m_frames[name] = frame;
 }
 
-CObject *CDefinition::object(const std::string &name)
+CFrame *CDefinition::frame(const std::string &name)
 {
-  if (m_objects.count(name) > 0)
+  if (m_frames.count(name) > 0)
   {
-    return m_objects[name];
+    return m_frames[name];
   }
   return NULL;
 }

@@ -6,9 +6,9 @@
 #include "logger-helper.h"
 
 // -----------------------------------------------  debug
-//#define MON_PARCER_PRINT_CURRENT_CHAR_ENABLED
-//#define MON_PARCER_PRINT_LOOP_STATUS_ENABLED
-//#define MON_PARCER_PRINT_VARIABLES_ENABLED
+#define MON_PARCER_PRINT_CURRENT_CHAR_ENABLED
+#define MON_PARCER_PRINT_LOOP_STATUS_ENABLED
+#define MON_PARCER_PRINT_VARIABLES_ENABLED
 
 #ifdef MON_PARCER_PRINT_LOOP_STATUS_ENABLED
   #define MON_PARCER_PRINT_LOOP_STATUS(_name,_status) MON_LOG_DBG("Loop " #_name " " #_status);
@@ -42,8 +42,12 @@
 #define MON_PARCER_BUFFER_RESET(_name)  MON_PARCER_BUFFER(_name) = "";
 // -----------------------------------------------  buffer
 
+// -----------------------------------------------  error
+#define MON_PARCER_ERROR(_name, _err_message) parcerError(_err_message  MON_PARCER_BUFFER_ERROR_PART(_name), MON_PARCER_CURRENT_CHARACTER(_name));
+// -----------------------------------------------  error
+
 // -----------------------------------------------  buffer checks
-#define MON_PARCER_CHECK_BUFFER(_name,_no,_err_message)          if( _no MON_PARCER_BUFFER(_name).empty()) { parcerError(_err_message  MON_PARCER_BUFFER_ERROR_PART(_name), MON_PARCER_CURRENT_CHARACTER(_name)); }
+#define MON_PARCER_CHECK_BUFFER(_name,_no,_err_message)          if( _no MON_PARCER_BUFFER(_name).empty()) { MON_PARCER_ERROR(_name, _err_message) }
 #define MON_PARCER_ERROR_IF_BUFFER_EMPTY(_name, _err_message)    MON_PARCER_CHECK_BUFFER(_name, ,_err_message)
 #define MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(_name, _err_message) MON_PARCER_CHECK_BUFFER(_name,!,_err_message)
 // -----------------------------------------------  buffer checks

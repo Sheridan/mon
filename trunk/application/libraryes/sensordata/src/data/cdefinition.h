@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CDEFINITION_H
 #define CDEFINITION_H
-#include "cobject.h"
+#include "cframe.h"
 namespace mon
 {
 namespace lib
@@ -14,10 +14,10 @@ class CDefinition
   public:
     CDefinition();
     virtual ~CDefinition();
-    void addObject(const std::string &name, CObject *obj);
-    CObject * object(const std::string &name);
+    void addFrame(const std::string &name, CFrame *frame);
+    CFrame * frame(const std::string &name);
   private:
-    TObjects m_objects;
+    TFrames m_frames;
 };
 
 }

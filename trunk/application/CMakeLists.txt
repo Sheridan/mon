@@ -90,13 +90,15 @@ install(TARGETS network LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 MESSAGE ( STATUS "---> Processing `sensordata` library" )
 SET(mon-sensordata-headers
     libraryes/sensordata/src/data/cdefinition.h
-    libraryes/sensordata/src/data/cobject.h
-    libraryes/sensordata/src/data/types/cfrequency.h
+    libraryes/sensordata/src/data/cframe.h
+    libraryes/sensordata/src/data/cfrequency.h
+    libraryes/sensordata/src/data/cfield.h
     libraryes/sensordata/src/parcers/cdefinitionparcer.h )
 SET(mon-sensordata-sources
     libraryes/sensordata/src/data/cdefinition.cpp
-    libraryes/sensordata/src/data/cobject.cpp
-    libraryes/sensordata/src/data/types/cfrequency.cpp
+    libraryes/sensordata/src/data/cframe.cpp
+    libraryes/sensordata/src/data/cfrequency.cpp
+    libraryes/sensordata/src/data/cfield.cpp
     libraryes/sensordata/src/parcers/cdefinitionparcer.cpp
     libraryes/sensordata/src/main.cpp )
 add_library(sensordata SHARED ${mon-sensordata-headers} ${mon-sensordata-sources})
@@ -243,7 +245,7 @@ IF( BUILD_NODE )
   SET(mon-sensor-test-headers  )
   SET(mon-sensor-test-sources tools/mon-sensor-test/main.cpp )
   add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
-  target_link_libraries(mon-sensor-test base config logger dl)
+  target_link_libraries(mon-sensor-test base config logger sensordata dl)
   install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
   add_run(mon-sensor-test)
 ENDIF( BUILD_NODE )

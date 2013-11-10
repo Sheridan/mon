@@ -9,6 +9,13 @@ namespace lib
 namespace sensordata
 {
 
+enum EFrequencyPurpose
+{
+  fpMax,
+  fpDefault,
+  fpCurrent
+};
+
 enum EFrequencyMeasurment
 {
   ftHz, // Обычное упоминание частоты

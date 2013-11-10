@@ -20,103 +20,117 @@ CDefinitionParcer::~CDefinitionParcer()
 
 void CDefinitionParcer::parce()
 {
-  MON_PARCER_LOOP_BEGIN(read_object_name)
+  MON_PARCER_LOOP_BEGIN(read_frame_name)
   {
-    MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_object_name)
+    MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_frame_name)
     {
-      MON_PARCER_BUFFER_APPEND(read_object_name);
-      MON_PARCER_LOOP_RESTART(read_object_name);
+      MON_PARCER_BUFFER_APPEND(read_frame_name);
+      MON_PARCER_LOOP_RESTART(read_frame_name);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(read_object_name)
+    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(read_frame_name)
     {
-      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_object_name, "Object name must begin only with alpha symbols");
-      MON_PARCER_BUFFER_APPEND(read_object_name);
-      MON_PARCER_LOOP_RESTART(read_object_name);
+      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_frame_name, "frame name must begin only with alpha symbols");
+      MON_PARCER_BUFFER_APPEND(read_frame_name);
+      MON_PARCER_LOOP_RESTART(read_frame_name);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(read_object_name)
+    MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(read_frame_name)
     {
-      MON_PARCER_LOOP_RESTART(read_object_name);
+      MON_PARCER_LOOP_RESTART(read_frame_name);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_object_name, '{')
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frame_name, '#')
     {
-      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_object_name, "Missed object name");
-      m_definition->addObject(MON_PARCER_BUFFER(read_object_name), parceObject());
-      MON_PARCER_BUFFER_RESET(read_object_name);
-      MON_PARCER_LOOP_RESTART(read_object_name);
+      skipComment();
+      MON_PARCER_LOOP_RESTART(read_frame_name);
     }
-    MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_object_name, "Misplaced character");
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frame_name, '{')
+    {
+      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_frame_name, "Missed frame name");
+      m_definition->addFrame(MON_PARCER_BUFFER(read_frame_name), parceFrame());
+      MON_PARCER_BUFFER_RESET(read_frame_name);
+      MON_PARCER_LOOP_RESTART(read_frame_name);
+    }
+    MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_frame_name, "Misplaced character");
   }
-  MON_PARCER_LOOP_END(read_object_name);
+  MON_PARCER_LOOP_END(read_frame_name);
 }
 
-CObject * CDefinitionParcer::parceObject()
+CFrame * CDefinitionParcer::parceFrame()
 {
-  CObject *obj = new CObject();
-  MON_PARCER_LOOP_BEGIN(read_object)
+  CFrame *frame = new CFrame();
+  MON_PARCER_LOOP_BEGIN(read_frame)
   {
-    MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_object)
+    MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_frame)
     {
-      MON_PARCER_BUFFER_APPEND(read_object);
-      MON_PARCER_LOOP_RESTART(read_object);
+      MON_PARCER_BUFFER_APPEND(read_frame);
+      MON_PARCER_LOOP_RESTART(read_frame);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(read_object)
+    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(read_frame)
     {
-      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_object, "Object keyword must begin only with alpha symbols");
-      MON_PARCER_BUFFER_APPEND(read_object);
-      MON_PARCER_LOOP_RESTART(read_object);
+      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_frame, "frame keyword must begin only with alpha symbols");
+      MON_PARCER_BUFFER_APPEND(read_frame);
+      MON_PARCER_LOOP_RESTART(read_frame);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(read_object)
+    MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(read_frame)
     {
-      MON_PARCER_LOOP_RESTART(read_object);
+      MON_PARCER_LOOP_RESTART(read_frame);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_object, ':')
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frame, '#')
     {
-      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_object, "Missed object keyword");
-      MON_PARCER_IS_KEYWORD(read_object, "label")
-      {
-        obj->setlabel(readStringValue());
-        MON_PARCER_BUFFER_RESET(read_object);
-        MON_PARCER_LOOP_RESTART(read_object);
-      }
-      MON_PARCER_IS_KEYWORD(read_object, "frequency")
-      {
-        readFrequences(obj);
-        MON_PARCER_BUFFER_RESET(read_object);
-        MON_PARCER_LOOP_RESTART(read_object);
-      }
-      MON_PARCER_IS_KEYWORD(read_object, "type")
-      {
-        readType(obj);
-        MON_PARCER_BUFFER_RESET(read_object);
-        MON_PARCER_LOOP_RESTART(read_object);
-      }
-      MON_PARCER_IS_KEYWORD(read_object, "flags")
-      {
-        readFlags(obj);
-        MON_PARCER_BUFFER_RESET(read_object);
-        MON_PARCER_LOOP_RESTART(read_object);
-      }
-      MON_PARCER_IS_KEYWORD(read_object, "tags")
-      {
-        readTags(obj);
-        MON_PARCER_BUFFER_RESET(read_object);
-        MON_PARCER_LOOP_RESTART(read_object);
-      }
-      MON_PARCER_IS_KEYWORD(read_object, "fields")
-      {}
+      skipComment();
+      MON_PARCER_LOOP_RESTART(read_frame);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_object, '}')
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frame, ':')
     {
-      MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_object, "Misplaced character");
-      MON_PARCER_LOOP_BREAK(read_object)
+      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_frame, "Missed frame keyword");
+      MON_PARCER_IS_KEYWORD(read_frame, "label")
+      {
+        frame->setlabel(readStringValue());
+        MON_PARCER_BUFFER_RESET(read_frame);
+        MON_PARCER_LOOP_RESTART(read_frame);
+      }
+      MON_PARCER_IS_KEYWORD(read_frame, "frequency")
+      {
+        readFrequences(frame);
+        MON_PARCER_BUFFER_RESET(read_frame);
+        MON_PARCER_LOOP_RESTART(read_frame);
+      }
+      MON_PARCER_IS_KEYWORD(read_frame, "type")
+      {
+        readFrameType(frame);
+        MON_PARCER_BUFFER_RESET(read_frame);
+        MON_PARCER_LOOP_RESTART(read_frame);
+      }
+      MON_PARCER_IS_KEYWORD(read_frame, "flags")
+      {
+        readFlags(frame);
+        MON_PARCER_BUFFER_RESET(read_frame);
+        MON_PARCER_LOOP_RESTART(read_frame);
+      }
+      MON_PARCER_IS_KEYWORD(read_frame, "tags")
+      {
+        readTags(frame);
+        MON_PARCER_BUFFER_RESET(read_frame);
+        MON_PARCER_LOOP_RESTART(read_frame);
+      }
+      MON_PARCER_IS_KEYWORD(read_frame, "fields")
+      {
+        readFields(frame);
+        MON_PARCER_BUFFER_RESET(read_frame);
+        MON_PARCER_LOOP_RESTART(read_frame);
+      }
     }
-    MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_object, "Misplaced character");
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frame, '}')
+    {
+      MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_frame, "Misplaced character");
+      MON_PARCER_LOOP_BREAK(read_frame)
+    }
+    MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_frame, "Misplaced character");
   }
-  MON_PARCER_LOOP_END(read_object);
-  return obj;
+  MON_PARCER_LOOP_END(read_frame);
+  return frame;
 }
 
-void CDefinitionParcer::readFields(CObject *obj)
+void CDefinitionParcer::readFields(CFrame *frame)
 {
   MON_PARCER_LOOP_BEGIN(read_fields)
   {
@@ -135,24 +149,33 @@ void CDefinitionParcer::readFields(CObject *obj)
     {
       MON_PARCER_LOOP_RESTART(read_fields);
     }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_fields, '#')
+    {
+      skipComment();
+      MON_PARCER_LOOP_RESTART(read_fields);
+    }
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_fields, ':')
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_fields, "Missed field name");
-      readField(obj, MON_PARCER_BUFFER(read_fields));
+      readField(frame, MON_PARCER_BUFFER(read_fields));
       MON_PARCER_BUFFER_RESET(read_fields);
       MON_PARCER_LOOP_RESTART(read_fields);
+    }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_fields, '}')
+    {
+      MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_fields, "Misplaced character");
+      MON_PARCER_LOOP_BREAK(read_fields)
     }
     MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_fields, "Misplaced character");
   }
   MON_PARCER_LOOP_END(read_fields);
 }
 
-void CDefinitionParcer::readField(CObject *obj, const std::string &name)
+void CDefinitionParcer::readField(CFrame *frame, const std::string &name)
 {
-  std::string label = "";
-  EDataType type = dtInteger;
-  std::string str_type = "";
-  std::string description = "";
+  std::string    label       = "";
+  EFieldDataType type        = dtInteger;
+  std::string    description = "";
   MON_PARCER_LOOP_BEGIN(read_field)
   {
     MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_field)
@@ -170,6 +193,11 @@ void CDefinitionParcer::readField(CObject *obj, const std::string &name)
     {
       MON_PARCER_LOOP_RESTART(read_field);
     }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_field, '#')
+    {
+      skipComment();
+      MON_PARCER_LOOP_RESTART(read_field);
+    }
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_field, ':')
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_field, "Missed field parameter name");
@@ -181,18 +209,7 @@ void CDefinitionParcer::readField(CObject *obj, const std::string &name)
       }
       MON_PARCER_IS_KEYWORD(read_field, "type")
       {
-        str_type = readValue();
-               if (str_type == "%"       ) { type = dtPercent         ; }
-        else { if (str_type == "bool"    ) { type = dtBool            ; }
-        else { if (str_type == "short"   ) { type = dtShort           ; }
-        else { if (str_type == "ushort"  ) { type = dtUnsignedShort   ; }
-        else { if (str_type == "integer" ) { type = dtInteger         ; }
-        else { if (str_type == "uinteger") { type = dtUnsignedIinteger; }
-        else { if (str_type == "long"    ) { type = dtLong            ; }
-        else { if (str_type == "ulong"   ) { type = dtUnsignedLong    ; }
-        else { if (str_type == "float"   ) { type = dtFloat           ; }
-        else { if (str_type == "string"  ) { type = dtString          ; }
-                                                        } } } } } } } } }
+        type = readFieldType();
         MON_PARCER_BUFFER_RESET(read_field);
         MON_PARCER_LOOP_RESTART(read_field);
       }
@@ -217,10 +234,10 @@ void CDefinitionParcer::readField(CObject *obj, const std::string &name)
     }
   }
   MON_PARCER_LOOP_END(read_field);
-  obj->addField(name, label, type, description);
+  frame->addField(name, label, type, description);
 }
 
-void CDefinitionParcer::readTags(CObject *obj)
+void CDefinitionParcer::readTags(CFrame *frame)
 {
   MON_PARCER_LOOP_BEGIN(read_tags)
   {
@@ -238,10 +255,15 @@ void CDefinitionParcer::readTags(CObject *obj)
     {
       MON_PARCER_LOOP_RESTART(read_tags);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_tags, ',')
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_tags, '#')
+    {
+      skipComment();
+      MON_PARCER_LOOP_RESTART(read_tags);
+    }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_tags, ';')
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_tags, "Missed tag");
-      obj->addTag(MON_PARCER_BUFFER(read_tags));
+      frame->addTag(MON_PARCER_BUFFER(read_tags));
       MON_PARCER_BUFFER_RESET(read_tags);
       MON_PARCER_LOOP_RESTART(read_tags);
     }
@@ -259,7 +281,7 @@ void CDefinitionParcer::readTags(CObject *obj)
   MON_PARCER_LOOP_END(read_tags);
 }
 
-void CDefinitionParcer::readFlags(CObject *obj)
+void CDefinitionParcer::readFlags(CFrame *frame)
 {
   MON_PARCER_LOOP_BEGIN(read_flags)
   {
@@ -277,16 +299,21 @@ void CDefinitionParcer::readFlags(CObject *obj)
     {
       MON_PARCER_LOOP_RESTART(read_flags);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_flags, ',')
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_flags, '#')
+    {
+      skipComment();
+      MON_PARCER_LOOP_RESTART(read_flags);
+    }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_flags, ';')
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_flags, "Missed flag");
       MON_PARCER_IS_KEYWORD(read_flags, "aggregated")
       {
-        obj->addFlag(fAggregated);
+        frame->addFlag(ffAggregated);
       }
       MON_PARCER_IS_KEYWORD(read_flags, "calculateTotal")
       {
-        obj->addFlag(fCalculateTotal);
+        frame->addFlag(ffCalculateTotal);
       }
       MON_PARCER_BUFFER_RESET(read_flags);
       MON_PARCER_LOOP_RESTART(read_flags);
@@ -305,7 +332,7 @@ void CDefinitionParcer::readFlags(CObject *obj)
   MON_PARCER_LOOP_END(read_flags);
 }
 
-void CDefinitionParcer::readType(CObject *obj)
+void CDefinitionParcer::readFrameType(CFrame *frame)
 {
   MON_PARCER_LOOP_BEGIN(read_type)
   {
@@ -324,17 +351,22 @@ void CDefinitionParcer::readType(CObject *obj)
     {
       MON_PARCER_LOOP_RESTART(read_type);
     }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_type, '#')
+    {
+      skipComment();
+      MON_PARCER_LOOP_RESTART(read_type);
+    }
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_type, ';')
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_type, "Missed type");
       MON_PARCER_IS_KEYWORD(read_type, "information")
       {
-        obj->settype(tInformation);
+        frame->setframeType(ftInformation);
         MON_PARCER_LOOP_BREAK(read_type)
       }
       MON_PARCER_IS_KEYWORD(read_type, "statistic")
       {
-        obj->settype(tStatistic);
+        frame->setframeType(ftStatistic);
         MON_PARCER_LOOP_BREAK(read_type)
       }
       parcerError("Unknown type", MON_PARCER_CURRENT_CHARACTER(read_type));
@@ -344,7 +376,7 @@ void CDefinitionParcer::readType(CObject *obj)
   MON_PARCER_LOOP_END(read_type);
 }
 
-void CDefinitionParcer::readFrequences(CObject *obj)
+void CDefinitionParcer::readFrequences(CFrame *frame)
 {
   float                    value      = 0;
   EFrequencyMeasurment     measurment = ftHz;
@@ -354,6 +386,11 @@ void CDefinitionParcer::readFrequences(CObject *obj)
   {
     MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(read_frequency)
     {
+      MON_PARCER_LOOP_RESTART(read_frequency);
+    }
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frequency, '#')
+    {
+      skipComment();
       MON_PARCER_LOOP_RESTART(read_frequency);
     }
     MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_frequency)
@@ -406,7 +443,7 @@ void CDefinitionParcer::readFrequences(CObject *obj)
       {
         measurment = ftSPP;
       }
-      obj->setFrequency(purpose, measurment, value);
+      frame->setFrequency(purpose, measurment, value);
       value      = 0;
       measurment = ftHz;
       purpose    = fpMax;
@@ -464,9 +501,10 @@ void CDefinitionParcer::skipToSemicolon()
   MON_PARCER_LOOP_END(find_semicolon);
 }
 
-std::string CDefinitionParcer::readValue()
+#define MON_PARCER_RETURN_FIELD_TYPE(_name,_keyword,_return_value) \
+  MON_PARCER_IS_KEYWORD(_name,_keyword) { return _return_value; }
+EFieldDataType CDefinitionParcer::readFieldType()
 {
-  std::string result = "";
   MON_PARCER_LOOP_BEGIN(read_value)
   {
     MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(read_value)
@@ -474,10 +512,14 @@ std::string CDefinitionParcer::readValue()
       MON_PARCER_BUFFER_APPEND(read_value);
       MON_PARCER_LOOP_RESTART(read_value);
     }
-    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(read_value)
+    MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_value, '%')
     {
       MON_PARCER_BUFFER_APPEND(read_value);
       MON_PARCER_LOOP_RESTART(read_value);
+    }
+    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(read_value)
+    {
+      MON_PARCER_ERROR(read_value, "Field type keyword must contain only alpha");
     }
     MON_PARCER_CURRENT_CHARACTER_IS_WHITESPACE(read_value)
     {
@@ -485,13 +527,24 @@ std::string CDefinitionParcer::readValue()
     }
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_value, ';')
     {
-      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_value, "Missed value");
-      result = MON_PARCER_BUFFER(read_value);
-      MON_PARCER_LOOP_BREAK(read_value)
+      MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_value, "Missed field type");
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "%"       , dtPercent         );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "bool"    , dtBool            );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "short"   , dtShort           );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "ushort"  , dtUnsignedShort   );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "integer" , dtInteger         );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "uinteger", dtUnsignedIinteger);
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "long"    , dtLong            );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "ulong"   , dtUnsignedLong    );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "float"   , dtFloat           );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "string"  , dtString          );
+      MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_value, "Unknown field type");
+      MON_PARCER_BUFFER_RESET(read_value);
+      MON_PARCER_LOOP_BREAK(read_value);
     }
   }
   MON_PARCER_LOOP_END(read_value);
-  return result;
+  return dtInteger;
 }
 
 std::string CDefinitionParcer::readStringValue()

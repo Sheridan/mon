@@ -10,13 +10,13 @@ memory
   }
   flags:
   {
-    aggregated
+    aggregated;
   }
   tags:
   {
-    system,
-    hardware,
-    baseResources
+    system;
+    hardware;
+    baseResources;
   }
   fields:
   {
@@ -50,6 +50,5 @@ memory
       type: unsigned long;
       description: "Used for cache";
     }
-    
   }
 }
