@@ -2,6 +2,7 @@
 #define CDEFINITIONGENERATOR_H
 #include <string>
 #include "cdefinition.h"
+#include "cstringbuilder.h"
 
 namespace mon
 {
@@ -19,8 +20,8 @@ class CDefinitionGenerator
     const std::string &generate();
 
   private:
-    CDefinition *m_definition;//!< Объектное описание сенсора, источник генерирования
-    std::string m_result;     //!< Сгенерированное описание сенсора
+    CDefinition *m_definition;                //!< Объектное описание сенсора, источник генерирования
+    mon::lib::base::CStringBuilder *m_result; //!< Для сборки описания сенсора
 
     void generateFrame(CFrame *frame);
 };

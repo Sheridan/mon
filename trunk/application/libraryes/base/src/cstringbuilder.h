@@ -61,6 +61,7 @@ class CStringBuilder
     MON_STRING_BUILDER(CStringBuilder)
   public:
     CStringBuilder(const std::string &init = "");
+    virtual ~CStringBuilder();
 
     virtual void append(const int                 &val);
     virtual void append(const unsigned int        &val);

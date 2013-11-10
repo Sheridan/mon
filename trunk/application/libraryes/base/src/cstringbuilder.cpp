@@ -26,6 +26,7 @@ namespace base
 {
 
 CStringBuilder::CStringBuilder(const std::string &init) : m_message(init) {}
+CStringBuilder::~CStringBuilder() {}
 
 #define MON_SB_CONCAT(_dest,_val) _dest += _val;
 void CStringBuilder::append(const int                 &val) { MON_SB_SPRINTF("%d"    , val                   ); }
