@@ -47,7 +47,7 @@ bool CFrame::hasTag (const std::string &tag)
 
 void CFrame::addField(const std::string &name, const std::string &label, const EFieldDataType &type, const std::string &description)
 {
-  m_fields.push_front(new CField(name, label, type, description));
+  m_fields.push_back(new CField(name, label, type, description));
 }
 
 void CFrame::setFrequency(const EFrequencyPurpose &purpose, const EFrequencyMeasurment &measurment, const float &value)

@@ -115,6 +115,7 @@ int main(int argc, char *argv[])
       MON_LOG_NFO(sensor->getDefinition(NULL));
       std::string first = parceAndGenerate(std::string(sensor->getDefinition(NULL)));
       std::string second = parceAndGenerate(first);
+      parceAndGenerate(parceAndGenerate(second));
       MON_LOG_NFO("Definition parcer and generator work fine? " << (first.compare(second) == 0));
     }
     for (int a = 0; a < numberOfGetStatistics; a++)
