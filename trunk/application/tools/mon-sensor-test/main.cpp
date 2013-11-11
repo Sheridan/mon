@@ -104,18 +104,18 @@ int main(int argc, char *argv[])
   config->load(configFile);
   sensor = new mon::daemons::node::CSensor(sensorFile);
   sensor->load();
-  MON_LOG_NFO("Sensor name: " << sensor->getName(NULL));
+  MON_LOG_NFO("Sensor name: " << sensor->getName(frame.c_str()));
   bool sensorAvialable = sensor->getSensorAvialable(frame.c_str());
   MON_LOG_NFO("Sensor avialable? " << sensorAvialable);
   if(sensorAvialable)
   {
     if(showDefinition)
     {
-      MON_LOG_NFO("Sensor raw definition (" << sensor->getDefinitionLength(NULL) << " bytes)");
-      MON_LOG_NFO(sensor->getDefinition(NULL));
-      std::string first = parceAndGenerate(std::string(sensor->getDefinition(NULL)));
+      MON_LOG_NFO("Sensor raw definition (" << sensor->getDefinitionLength(frame.c_str()) << " bytes)");
+      MON_LOG_NFO(sensor->getDefinition(frame.c_str()));
+      std::string first = parceAndGenerate(std::string(sensor->getDefinition(frame.c_str())));
       std::string second = parceAndGenerate(first);
-      parceAndGenerate(parceAndGenerate(second));
+      //parceAndGenerate(parceAndGenerate(second));
       MON_LOG_NFO("Definition parcer and generator work fine? " << (first.compare(second) == 0));
     }
     for (int a = 0; a < numberOfGetStatistics; a++)

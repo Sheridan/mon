@@ -19,7 +19,7 @@ CSensor::CSensor(const std::string &i_name) : m_name(i_name)
   getDefinitionLength = NULL;
   getStatistics       = NULL;
   getSensorAvialable  = NULL;
-//  MON_LOG_DBG(MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so");
+  MON_LOG_DBG("Loading sensor '" MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so'");
   m_handle = dlopen(std::string(MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so").c_str(), RTLD_NOW);
   if (!m_handle)
   {

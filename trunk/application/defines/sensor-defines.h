@@ -19,11 +19,11 @@
 
 #ifdef MON_DEBUG
   #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) \
-                _return_type internal_%sensor_name%_##_function_name(const char *object); \
-  extern "C" _return_type _function_name                            (const char *object = NULL) { MON_LOG_DBG(_debug_text << " Object: " << (object != NULL ? object : "none")); return internal_%sensor_name%_##_function_name(object); } \
-                _return_type internal_%sensor_name%_##_function_name(const char *object)
+                _return_type internal_%sensor_name%_##_function_name(const char *frame); \
+  extern "C" _return_type _function_name                            (const char *frame = NULL) { MON_LOG_DBG(_debug_text << " Frame: " << (frame != NULL ? frame : "none")); return internal_%sensor_name%_##_function_name(frame); } \
+                _return_type internal_%sensor_name%_##_function_name(const char *frame)
 #else
-  #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) extern "C" _return_type _function_name(const char *object = NULL)
+  #define MON_SENSOR_IMPLEMENT_FUNCTION(_return_type,_function_name,_debug_text) extern "C" _return_type _function_name(const char *frame = NULL)
 #endif
 
 #define MON_SENSOR_BEGIN \
@@ -39,10 +39,10 @@
 
 #define MON_SENSOR_END int main (int argc, char* argv[]) { return 0; }
 
-#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getStatistics     , "Request %sensor_name% statistics."    )
+#define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FUNCTION(const char *      , getStatistics     , "Request %sensor_name% statistics."               )
 #define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FUNCTION(const unsigned int, getExemplarsCount , "Request %sensor_name% framesets frames count."   )
-#define MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION    MON_SENSOR_IMPLEMENT_FUNCTION(const bool        , getSensorAvialable, "Request %sensor_name% avialability."  )
-#define MON_SENSOR_CALL_AVIALABILITY_FUNCTION(_object) getSensorAvialable(#_object)
+#define MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION    MON_SENSOR_IMPLEMENT_FUNCTION(const bool        , getSensorAvialable, "Request %sensor_name% avialability."             )
+#define MON_SENSOR_CALL_AVIALABILITY_FUNCTION(_frame) getSensorAvialable(#_frame "\0")
 
 #define MON_SENSOR_AVIALABLE_ALWAYS MON_SENSOR_IMPLEMENT_AVIALABILITY_FUNCTION {return true;}
 
@@ -50,13 +50,13 @@
 #define MON_SENSOR_NO_INFORMATION                     MON_SENSOR_IMPLEMENT_INFORMATION_FUNCTION     { return NULL      ; }
 #define MON_SENSOR_STATIC_EXEMPLARS_COUNT(_exemplars) MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION { return _exemplars; }
 
-#define MON_SENSOR_REQUESTED_OBJECT_IS(_name)  (strcmp(object,#_name) == 0)
-#define MON_SENSOR_REQUESTED_OBJECT_IS_NOT_SET (object == NULL)
+#define MON_SENSOR_REQUESTED_FRAME_IS(_name)  (strcmp(frame,#_name) == 0)
+#define MON_SENSOR_REQUESTED_FRAME_IS_NOT_SET (frame == NULL)
 
 #define MON_SENSOR_INITIALIZE    void initialize()
 #define MON_SENSOR_NO_INITIALIZE void initialize() {}
 
-#define MON_SENSOR_DATA_DECLARE(_name) mon::lib::sensorplugin::CFramesetBuilder _name("%sensor_name%", object, getExemplarsCount(object));
+#define MON_SENSOR_DATA_DECLARE(_name) mon::lib::sensorplugin::CFramesetBuilder _name("%sensor_name%", frame, getExemplarsCount(frame));
 
 
 #endif // SENSORDEFINES_H_%sensor_name%
