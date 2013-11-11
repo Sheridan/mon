@@ -41,7 +41,7 @@ CLogger::~CLogger()
 
 void CLogger::log(const CLogMessage &message)
 {
-  log(message.msg(), message.pri());
+  log(message.string(), message.pri());
 }
 
 void CLogger::log(const std::string &message, EPriority priority)

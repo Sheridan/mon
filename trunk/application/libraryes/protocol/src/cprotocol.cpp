@@ -29,7 +29,7 @@ void CProtocol::incommingMessage(const std::string &i_incoming)
   {
     if(m_replyCallbackMap.find(msg->id()) == m_replyCallbackMap.end())
     {
-      MON_LOG_ERR("Reply on non-exists message id " << msg->id() << " (" << msg->msg() << ")");
+      MON_LOG_ERR("Reply on non-exists message id " << msg->id() << " (" << msg->string() << ")");
     }
     else
     {
@@ -41,7 +41,7 @@ void CProtocol::incommingMessage(const std::string &i_incoming)
   {
     if(m_interceptCallbackMap.find(msg->type()) == m_interceptCallbackMap.end())
     {
-      MON_LOG_ERR("Unintercepted message type " << msg->type() << " (" << msg->msg() << ")");
+      MON_LOG_ERR("Unintercepted message type " << msg->type() << " (" << msg->string() << ")");
     }
     else
     {

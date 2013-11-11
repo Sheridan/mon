@@ -104,7 +104,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
               << ((float)delta.guest_nice*onePercent);
         prevstat[stat.cpu_number] = stat;
     MON_FILE_FSCANF_ALL_CPUSTAT_STOP(read_stat, stat)
-    return cpuframeset.msg().c_str();
+    return cpuframeset.string().c_str();
   }
   if(MON_SENSOR_REQUESTED_OBJECT_IS(info))
   {

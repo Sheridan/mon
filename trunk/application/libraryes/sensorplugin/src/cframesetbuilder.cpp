@@ -21,10 +21,10 @@ CFramesetBuilder::CFramesetBuilder(const std::string &sensor, const std::string 
 CFramesetBuilder::~CFramesetBuilder()
 {}
 
-const std::string &CFramesetBuilder::msg()
+const std::string &CFramesetBuilder::string()
 {
   removeLast();
-  return mon::lib::base::CStringBuilder::msg();
+  return mon::lib::base::CStringBuilder::string();
 }
 
 CFramesetBuilder &CFramesetBuilder::newFrame(const int &number)

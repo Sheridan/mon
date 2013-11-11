@@ -38,7 +38,7 @@ void CNodesManager::unload()
   {
     delete MON_STL_LIST_VALUE(node);
   }
-    m_nodes.clear();
+  m_nodes.clear();
 }
 
 }

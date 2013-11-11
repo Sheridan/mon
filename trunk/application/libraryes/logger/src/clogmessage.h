@@ -29,7 +29,7 @@ public:
   CLogMessage(const EPriority &priority);
   ~CLogMessage();
 
-  const EPriority   &pri() const;
+  const EPriority &pri() const;
 
 private:
   EPriority m_priority;

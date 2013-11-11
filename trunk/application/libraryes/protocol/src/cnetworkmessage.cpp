@@ -46,7 +46,7 @@ const std::string &CNetworkMessage::preparedText()
   preface(m_type);
   preface(MON_PROTOCOL_DELIMITER(id, type));
   preface(m_id);
-  return msg();
+  return string();
 }
 
 

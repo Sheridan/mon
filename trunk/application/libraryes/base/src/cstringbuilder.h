@@ -89,10 +89,10 @@ class CStringBuilder
 
     void removeLast(const int &characters = 1);
 
-    const std::string &msg() const;
+    const std::string &string() const;
 
   private:
-    std::string m_message;
+    std::string m_string;
 };
 
 }

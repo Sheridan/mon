@@ -37,7 +37,7 @@ const std::string &CDefinitionGenerator::generate()
     generateFrame(m_definition->frame(MON_STL_LIST_VALUE(frames_names)));
   }
   MON_DEFINITION_GENERATOR_DEBUG("Generating definition done");
-  return m_result->msg();
+  return m_result->string();
 }
 
 void CDefinitionGenerator::generateFrame(CFrame *frame)

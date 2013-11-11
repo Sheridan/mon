@@ -30,7 +30,7 @@ public:
   void append(const char          &val);
   void append(const unsigned char &val);
 
-  const std::string &msg();
+  const std::string &string();
 
 private:
   int  m_totalFrames; //!< Общий счетчик фреймов в фреймсете.

@@ -29,7 +29,7 @@ void CRemoteCollector::incommingMessage(const std::string &message)
 
 void CRemoteCollector::requestOfConnect(lib::protocol::CNetworkMessage *msg)
 {
-  sendReply(msg, msg->msg().compare(MON_ST_CONFIG->file("password")->get(MON_DEFAULT_PASSWORD)) == 0 ? "t" : "f" );
+  sendReply(msg, msg->string().compare(MON_ST_CONFIG->file("password")->get(MON_DEFAULT_PASSWORD)) == 0 ? "t" : "f" );
 }
 
 void CRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
@@ -39,7 +39,7 @@ void CRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
 
 void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
-  sendReply(msg, MON_ST_SENSORS_MANAGER->sensor(msg->msg())->getDefinition(NULL));
+  sendReply(msg, MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition(NULL));
 }
 
 }

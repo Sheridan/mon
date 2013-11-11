@@ -57,12 +57,12 @@ void CRemoteNode::incommingMessage(const std::string &message)
 
 void CRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
 {
-  if(msg->msg().compare("t") == 0)
+  if(msg->string().compare("t") == 0)
   {
     MON_LOG_NFO("Connection allowed");
     requestSensorsList();
   }
-  else if(msg->msg().compare("f") == 0)
+  else if(msg->string().compare("f") == 0)
   {
     MON_LOG_ERR("Connection denyed");
     MON_ABORT;
@@ -72,7 +72,7 @@ void CRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
 void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg)
 {
   std::list<std::string> sensorsNames;
-  mon::lib::base::split(msg->msg(), ':', sensorsNames);
+  mon::lib::base::split(msg->string(), ':', sensorsNames);
   MON_STL_LIST_FOREACH(sensor_name, std::list<std::string>, sensorsNames)
   {
     CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(MON_STL_LIST_VALUE(sensor_name), this);
