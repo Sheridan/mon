@@ -2,11 +2,6 @@
 #include "node_st.h"
 #include "ccollectorsmanager.h"
 
-#define MON_FOREACH_COLLECTOR(_name) \
-   for(mon::daemons::node::TRemoteCollectors::iterator _name = m_collectors.begin(); \
-    _name != m_collectors.end(); \
-    ++_name)
-
 namespace mon
 {
 namespace daemons
@@ -31,9 +26,9 @@ void CCollectorsManager::listen()
 void CCollectorsManager::unlisten()
 {
   close();
-  MON_FOREACH_COLLECTOR(collector)
+  MON_STL_LIST_FOREACH(collector, TRemoteCollectors, m_collectors)
   {
-    delete (*collector);
+    delete MON_STL_LIST_VALUE(collector);
   }
   m_collectors.clear();
 }

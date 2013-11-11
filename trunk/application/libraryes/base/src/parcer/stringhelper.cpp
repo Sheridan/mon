@@ -8,7 +8,7 @@ namespace lib
 namespace base
 {
 
-void split(const std::string &s, const char &delim, std::vector<std::string> &elems)
+void split(const std::string &s, const char &delim, std::list<std::string> &elems)
 {
   std::stringstream ss(s);
   std::string item;
@@ -18,9 +18,9 @@ void split(const std::string &s, const char &delim, std::vector<std::string> &el
   }
 }
 
-std::vector<std::string> split(const std::string &s, const char &delim)
+std::list<std::string> split(const std::string &s, const char &delim)
 {
-  std::vector<std::string> elems;
+  std::list<std::string> elems;
   split(s, delim, elems);
   return elems;
 }

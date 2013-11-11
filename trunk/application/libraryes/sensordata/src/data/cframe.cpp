@@ -1,5 +1,6 @@
 /* %Id% */
 #include "cframe.h"
+#include "stl-helper.h"
 namespace mon
 {
 namespace lib
@@ -20,9 +21,9 @@ CFrame::~CFrame()
   delete m_frequences[fpMax]    ;
   delete m_frequences[fpDefault];
   delete m_frequences[fpCurrent];
-  for(TFields::iterator i = m_fields.begin(); i != m_fields.end(); i++)
+  MON_STL_LIST_FOREACH(field, TFields, m_fields)
   {
-    delete (*i);
+    delete MON_STL_LIST_VALUE(field);
   }
 }
 

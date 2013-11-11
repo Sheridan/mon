@@ -1,6 +1,7 @@
 /* %Id% */
 #include "cfolder.h"
 #include "cfile.h"
+#include "stl-helper.h"
 
 namespace mon
 {
@@ -17,19 +18,15 @@ CFolder::CFolder(const std::string &nodeName, CNode *parentNode) : CNode(nodeNam
 
 CFolder::~CFolder()
 {
-  TFoldersMap::iterator iFolder = m_folders.begin();
-  while (iFolder != m_folders.end())
+  MON_STL_MAP_FOREACH(folder, TFoldersMap, m_folders)
   {
-    delete iFolder->second;
-    iFolder++;
+    delete MON_STL_MAP_VALUE(folder);
   }
   m_folders.clear();
 
-  TFilesMap::iterator iFile = m_files.begin();
-  while (iFile != m_files.end())
+  MON_STL_MAP_FOREACH(file, TFilesMap, m_files)
   {
-    delete iFile->second;
-    iFile++;
+    delete MON_STL_MAP_VALUE(file);
   }
   m_files.clear();
 }
@@ -47,11 +44,9 @@ int CFolder::foldersCount()
 TFoldersList CFolder::folders()
 {
   TFoldersList t_list;
-  TFoldersMap::iterator t_folder = m_folders.begin();
-  while (t_folder != m_folders.end())
+  MON_STL_MAP_FOREACH(folder, TFoldersMap, m_folders)
   {
-    t_list.push_back(t_folder->second);
-    t_folder++;
+    t_list.push_back(MON_STL_MAP_VALUE(folder));
   }
   return t_list;
 }
@@ -78,11 +73,9 @@ int CFolder::filesCount()
 TFilesList CFolder::files()
 {
   TFilesList t_list;
-  TFilesMap::iterator t_file = m_files.begin();
-  while (t_file != m_files.end())
+  MON_STL_MAP_FOREACH(file, TFilesMap, m_files)
   {
-    t_list.push_back(t_file->second);
-    t_file++;
+    t_list.push_back(MON_STL_MAP_VALUE(file));
   }
   return t_list;
 }

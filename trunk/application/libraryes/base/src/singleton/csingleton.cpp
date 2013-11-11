@@ -3,6 +3,7 @@
 #include "cconfig.h"
 #include "clogger.h"
 #include "signals-helper.h"
+#include "stl-helper.h"
 
 namespace mon
 {
@@ -23,9 +24,9 @@ CSingleton::CSingleton()
 // --------------------------------------------------------------------------------------------------------------------------------------
 CSingleton::~CSingleton()
 {
-  for(TSingletonMembers::iterator it = m_members.begin(); it != m_members.end(); ++it)
+  MON_STL_MAP_FOREACH(members, TSingletonMembers, m_members)
   {
-    delete it->second;
+    delete MON_STL_MAP_VALUE(members);
   }
   m_members.clear();
   delete MON_ST_ATOMIC_VNAME(config);

@@ -4,6 +4,7 @@
 #include "global.h"
 #include "stringhelper.h"
 #include "infinity-cycle-helper.h"
+#include "stl-helper.h"
 
 namespace mon
 {
@@ -70,11 +71,11 @@ void CRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
 
 void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg)
 {
-  std::vector<std::string> sensorsNames;
+  std::list<std::string> sensorsNames;
   mon::lib::base::split(msg->msg(), ':', sensorsNames);
-  for(std::vector<std::string>::iterator sensorName = sensorsNames.begin(); sensorName != sensorsNames.end(); ++sensorName)
+  MON_STL_LIST_FOREACH(sensor_name, std::list<std::string>, sensorsNames)
   {
-    CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(*(sensorName), this);
+    CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(MON_STL_LIST_VALUE(sensor_name), this);
     m_nodeSensors.push_back(rnSensor);
   }
 }

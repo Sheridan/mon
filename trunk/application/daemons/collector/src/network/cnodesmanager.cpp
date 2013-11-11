@@ -1,11 +1,7 @@
 /* %Id% */
 #include "collector_st.h"
 #include "cnodesmanager.h"
-
-#define MON_FOREACH_NODE(_name) \
-   for(mon::daemons::collector::TRemoteNodes::iterator _name = m_nodes.begin(); \
-    _name != m_nodes.end(); \
-    ++_name)
+#include "stl-helper.h"
 
 namespace mon
 {
@@ -27,21 +23,21 @@ void CNodesManager::load()
   MON_LOG_DBG("Load nodes");
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("nodes"))
   {
-    MON_LOG_DBG((*folder)->name());
-    m_nodes.push_back(new CRemoteNode((*folder)->name()));
+    MON_LOG_DBG(MON_STL_LIST_VALUE(folder)->name());
+    m_nodes.push_back(new CRemoteNode(MON_STL_LIST_VALUE(folder)->name()));
   }
-  MON_FOREACH_NODE(node)
+  MON_STL_LIST_FOREACH(node, TRemoteNodes, m_nodes)
   {
-    (*node)->connect();
+    MON_STL_LIST_VALUE(node)->connect();
   }
 }
 
 void CNodesManager::unload()
 {
-    MON_FOREACH_NODE(node)
-    {
-      delete (*node);
-    }
+  MON_STL_LIST_FOREACH(node, TRemoteNodes, m_nodes)
+  {
+    delete MON_STL_LIST_VALUE(node);
+  }
     m_nodes.clear();
 }
 

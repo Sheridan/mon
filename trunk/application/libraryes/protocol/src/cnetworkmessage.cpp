@@ -31,7 +31,7 @@ CNetworkMessage::CNetworkMessage(const std::string  &i_incoming)
   int type_index = i_incoming.find(MON_PROTOCOL_DELIMITER(type, message));
 
   m_id   = mon::lib::base::toULLong(i_incoming.substr(0, id_index));
-  m_type = static_cast<EProtocolMessageType>(mon::lib::base::toInt   (i_incoming.substr(id_index+1, type_index)));
+  m_type = static_cast<EProtocolMessageType>(mon::lib::base::toInt(i_incoming.substr(id_index+1, type_index)));
 
   append(i_incoming.substr(type_index+1, i_incoming.length()));
 }

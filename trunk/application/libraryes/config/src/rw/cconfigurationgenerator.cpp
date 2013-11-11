@@ -72,12 +72,12 @@ void CConfigurationGenerator::writeFolder(CFolder *folder)
 
   MON_OPTION_FOREACH_FOLDER(child_folder, folder)
   {
-    writeFolder(*child_folder);
+    writeFolder(MON_STL_LIST_VALUE(child_folder));
   }
 
   MON_OPTION_FOREACH_FILE(child_file, folder)
   {
-    writeFile(*child_file);
+    writeFile(MON_STL_LIST_VALUE(child_file));
   }
 
   if(!folder->name().empty() && !hasOneChild)

@@ -41,7 +41,6 @@ void CSocketClient::connect()
   MON_LOG_NFO("Connecting to " << addrRemote() << ":" << portRemote());
   addrinfo t_connection_info, *t_ip_addresses, *t_ip_address;
 
-
   memset(&t_connection_info, 0, sizeof(struct addrinfo));
   t_connection_info.ai_family   = AF_UNSPEC;  /* Allow IPv4 or IPv6 */
   t_connection_info.ai_socktype = SOCK_STREAM; /* Datagram socket */
