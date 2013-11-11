@@ -427,9 +427,13 @@ void CDefinitionParcer::readFrequences(CFrame *frame)
         {
           MON_PARCER_BUFFER_APPEND(read_frequency);
           MON_PARCER_LOOP_RESTART(read_frequency);
-          break;
         }
       }
+    }
+    MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC_DOT(read_frequency)
+    {
+      MON_PARCER_BUFFER_APPEND(read_frequency);
+      MON_PARCER_LOOP_RESTART(read_frequency);
     }
 
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_frequency, ';')
