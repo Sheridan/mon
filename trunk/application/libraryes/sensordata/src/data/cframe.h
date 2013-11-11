@@ -45,8 +45,8 @@ class CFrame
   public:
     CFrame();
     ~CFrame();
-    std::string generateText();
     void setFrequency(const EFrequencyPurpose &purpose, const EFrequencyMeasurment &measurment, const float &value);
+    CFrequency *frequency(const EFrequencyPurpose &purpose);
     void addField    (const std::string &name, const std::string &label, const EFieldDataType &type, const std::string &description);
     void addFlag     (const EFrameFlags &flag);
     bool hasFlag     (const EFrameFlags &flag);

@@ -24,7 +24,13 @@ class CDefinitionGenerator
     mon::lib::base::CStringBuilder *m_result; //!< Для сборки описания сенсора
 
     void generateFrame(CFrame *frame);
+    void generateFrequencyes(CFrame *frame);
+    void generateFlags(CFrame *frame);
+    void generateTags(CFrame *frame);
+    void generateFields(CFrame *frame);
+    void generateField(CField *field);
 };
+
 
 
 

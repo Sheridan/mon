@@ -13,8 +13,7 @@ namespace sensordata
 enum EFrequencyPurpose
 {
   fpMax,     //!< Максимальная частота
-  fpDefault, //!< Частота по умолчанию
-  fpCurrent  //!< Текущая частота
+  fpDefault  //!< Частота по умолчанию
 };
 
 //! Типы частот

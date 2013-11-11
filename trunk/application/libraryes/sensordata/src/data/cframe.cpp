@@ -13,14 +13,12 @@ CFrame::CFrame()
 {
   m_frequences[fpMax]     = NULL;
   m_frequences[fpDefault] = NULL;
-  m_frequences[fpCurrent] = NULL;
 }
 
 CFrame::~CFrame()
 {
   delete m_frequences[fpMax]    ;
   delete m_frequences[fpDefault];
-  delete m_frequences[fpCurrent];
   MON_STL_LIST_FOREACH(field, TFields, m_fields)
   {
     delete MON_STL_LIST_VALUE(field);
@@ -58,10 +56,11 @@ void CFrame::setFrequency(const EFrequencyPurpose &purpose, const EFrequencyMeas
   m_frequences[purpose] = new CFrequency(measurment, value);
 }
 
-std::string CFrame::generateText()
+CFrequency *CFrame::frequency(const EFrequencyPurpose &purpose)
 {
-  return "";
+  return m_frequences[purpose];
 }
+
 
 }
 }

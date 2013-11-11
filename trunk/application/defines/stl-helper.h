@@ -19,4 +19,13 @@
       MON_STL_LIST_NAME(_name) != _list.end(); \
       MON_STL_LIST_NAME(_name)++)
 // ------------------------------- list ------------------------------
+
+// ------------------------------- set ------------------------------
+#define MON_STL_SET_NAME(_name) it##_name
+#define MON_STL_SET_VALUE(_name) (*MON_STL_SET_NAME(_name))
+#define MON_STL_SET_FOREACH(_name,_settype,_list) \
+  for(_settype::iterator MON_STL_SET_NAME(_name) = _list.begin(); \
+      MON_STL_SET_NAME(_name) != _list.end(); \
+      MON_STL_SET_NAME(_name)++)
+// ------------------------------- set ------------------------------
 #endif // STLHELPER_H
