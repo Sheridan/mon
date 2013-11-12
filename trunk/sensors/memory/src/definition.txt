@@ -23,31 +23,31 @@ memory
     used:
     {
       label: "used";
-      type: unsigned long;
+      type: ulong;
       description: "Used memory";
     }
     free: 
     {
       label: "free";
-      type: unsigned long;
+      type: ulong;
       description: "Free memory";
     }
     shared: 
     {
       label: "shared";
-      type: unsigned long;
+      type: ulong;
       description: "Shared memory";
     }
     buffers:
     {
       label: "buffers";
-      type: unsigned long;
+      type: ulong;
       description: "Used for buffers";
     }
     cashe:
     {
       label: "cashe";
-      type: unsigned long;
+      type: ulong;
       description: "Used for cache";
     }
   }

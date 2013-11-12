@@ -38,7 +38,8 @@ TFramesNames CDefinition::frames()
   {
     result.push_back(MON_STL_MAP_KEY(frames));
   }
-  return result;}
+  return result;
+}
 
 }
 }

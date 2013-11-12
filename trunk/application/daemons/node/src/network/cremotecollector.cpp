@@ -39,7 +39,7 @@ void CRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
 
 void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
-  sendReply(msg, MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition(NULL));
+  sendReply(msg, MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition());
 }
 
 }

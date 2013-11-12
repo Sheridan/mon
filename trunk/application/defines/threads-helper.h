@@ -7,6 +7,7 @@
 
 #define MON_THREADED_FUNCTION_DISABLE_CANCEL pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
 #define MON_THREADED_FUNCTION_ENABLE_CANCEL  pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+#define MON_THREADED_IS_ACTIVE(_name) (thread_is_active##_name)
 
 #define MON_THREADED_FUNCTION_DECLARE(_name) \
     friend void * thread_##_name(void *data); \
