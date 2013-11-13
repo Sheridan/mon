@@ -1,7 +1,8 @@
 // %Id%
 #ifndef CFREQUENCY_H
 #define CFREQUENCY_H
-//#include "class-helper.h"
+#include <string>
+
 namespace mon
 {
 namespace lib
@@ -28,6 +29,7 @@ class CFrequency
 {
   public:
     CFrequency(const EFrequencyMeasurment &i_measurment, const float &i_frequency);
+    CFrequency(const std::string &freq);
     float asHz ();
     float asSPP();
 

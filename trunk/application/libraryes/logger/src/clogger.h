@@ -4,7 +4,7 @@
 
 #include "clogmessage.h"
 #include <stdio.h>
-#include <pthread.h>
+#include "mutex-helper.h"
 
 namespace mon
 {
@@ -23,6 +23,7 @@ namespace logger
 class CLogger
 {
 
+    MON_MUTEX_DECLARE(log)
 public:
     CLogger();
     ~CLogger();
@@ -43,7 +44,6 @@ private:
     bool m_outSyslog;
     EPriority m_maxPriority;
     char m_priorityesNames[MPN_PRIO_NUM][4];
-    pthread_mutex_t m_mutex_log;
 
     void logToFile   (const std::string &message, const EPriority &priority);
     void logToConsole(const std::string &message, const EPriority &priority);

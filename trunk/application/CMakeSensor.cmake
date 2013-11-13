@@ -12,6 +12,14 @@ string(REPLACE "%sensor_name%" ${EXECUTABLE_NAME} SENSOR_HEADER_TEXT "${SENSOR_H
 
 file(WRITE ${SENSOR_HEADER} "${SENSOR_HEADER_TEXT}")
 
+
+# --------------------- c++11 -------------------
+ADD_DEFINITIONS( -std=c++11 )
+ADD_DEFINITIONS( -g )
+#ADD_DEFINITIONS( -ftest-coverage )
+ADD_DEFINITIONS( -fprofile-arcs )
+# --------------------- c++11 ------------------- 
+
 function(add_sensor sources headers include_paths)
   MESSAGE( STATUS "---------- Processing `${EXECUTABLE_NAME}` sensor ----------" )
   add_custom_command(
@@ -24,6 +32,6 @@ function(add_sensor sources headers include_paths)
   include_directories( ${CMAKE_INSTALL_PREFIX}/include/mon ${GEN_PATH} ${include_paths})
   LINK_DIRECTORIES( ${MON_LIB_DIRECTORY} )
   add_library( ${EXECUTABLE_NAME} SHARED ${sources} ${headers} ${SENSOR_DEFINITION})
-  TARGET_LINK_LIBRARIES( ${EXECUTABLE_NAME} config logger sensorplugin base )
+  TARGET_LINK_LIBRARIES( ${EXECUTABLE_NAME} config logger sensorplugin base gcov)
   INSTALL( TARGETS ${EXECUTABLE_NAME} LIBRARY DESTINATION lib/mon/sensors )
 endfunction()

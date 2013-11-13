@@ -14,8 +14,8 @@ namespace logger
 
 CLogger::CLogger()
 {
-  pthread_mutex_init(&m_mutex_log, NULL);
-  pthread_mutex_lock(&m_mutex_log);
+  MON_MUTEX_INITIALIZE(log);
+  MON_MUTEX_LOCK(log);
   m_filename    = "";
   m_outFile     = false;
   m_outConsole  = true;
@@ -31,12 +31,12 @@ CLogger::CLogger()
 #ifdef MON_DEBUG
   strcpy(m_priorityesNames[pDebug  ], "dbg\0");
 #endif
-  pthread_mutex_unlock(&m_mutex_log);
+  MON_MUTEX_UNLOCK(log);
 }
 
 CLogger::~CLogger()
 {
-    pthread_mutex_destroy(&m_mutex_log);
+    MON_MUTEX_DESTROY(log);
 }
 
 void CLogger::log(const CLogMessage &message)
@@ -48,11 +48,11 @@ void CLogger::log(const std::string &message, EPriority priority)
 {
   if ( priority <= m_maxPriority && (m_outFile || m_outConsole || m_outSyslog))
   {
-    pthread_mutex_lock(&m_mutex_log);
+    MON_MUTEX_LOCK(log);
     if ( m_outFile &&  !m_filename.empty() ) { logToFile   (message, priority); }
     if ( m_outConsole                      ) { logToConsole(message, priority); }
     if ( m_outSyslog                       ) { logToSyslog (message, priority); }
-    pthread_mutex_unlock(&m_mutex_log);
+    MON_MUTEX_UNLOCK(log);
   }
 }
 
@@ -95,9 +95,9 @@ void CLogger::logToStream (const std::string &message, const EPriority &priority
 }
 
 #define MON_SET_LOG_OPTION(_to,_from) \
-  pthread_mutex_lock(&m_mutex_log); \
+  MON_MUTEX_LOCK(log); \
   _to = _from; \
-  pthread_mutex_unlock(&m_mutex_log);
+  MON_MUTEX_UNLOCK(log);
 
 void CLogger::setLogFilename    (const std::string &filename) { MON_SET_LOG_OPTION(m_filename   , filename); }
 void CLogger::setMaxLogPriority (const EPriority &priority  ) { MON_SET_LOG_OPTION(m_maxPriority, priority); }

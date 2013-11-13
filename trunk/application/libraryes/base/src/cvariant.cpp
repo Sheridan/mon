@@ -1,8 +1,10 @@
 /* %Id% */
 #include "cvariant.h"
 #include "st.h"
+#include "signals-helper.h"
 #include <sstream>
 #include <stdlib.h>
+
 namespace mon
 {
 namespace lib
@@ -19,12 +21,21 @@ float              toFloat (const std::string &val)        { MON_VARIANT_FROM_ST
 double             toDouble(const std::string &val)        { MON_VARIANT_FROM_STRING(double); }
 unsigned int       toUInt  (const std::string &val)        { MON_VARIANT_FROM_STRING(unsigned int); }
 unsigned long long toULLong(const std::string &val)        { MON_VARIANT_FROM_STRING(unsigned long long); }
-std::string        toString(const int    &val)             { MON_VARIANT_TO_STRING }
-std::string        toString(const bool   &val)             { MON_VARIANT_TO_STRING }
-std::string        toString(const float  &val)             { MON_VARIANT_TO_STRING }
-std::string        toString(const double &val)             { MON_VARIANT_TO_STRING }
-std::string        toString(const unsigned int  &val)      { MON_VARIANT_TO_STRING }
-std::string        toString(const unsigned long long &val) { MON_VARIANT_TO_STRING }
+std::string        toString(const int    &val)             { return std::to_string(val); }
+std::string        toString(const bool   &val)             { return std::to_string(val); }
+std::string        toString(const float  &val)             { return std::to_string(val); }
+std::string        toString(const double &val)             { return std::to_string(val); }
+std::string        toString(const unsigned int  &val)      { return std::to_string(val); }
+std::string        toString(const unsigned long long &val) { return std::to_string(val); }
+
+//std::string        toString(mon::lib::sensordata::CFrequency *frequency)
+//{
+//  std::string res;
+//  std::stringstream buf;
+//  buf << frequency->asHz();
+//  buf >> res;
+//  return res+"Hz";
+//}
 
 CVariant::~CVariant()
 {
@@ -89,30 +100,39 @@ void CVariant::set(const unsigned long long &val)
   m_value.m_ull = val;
 }
 
-void CVariant::set(const CVariant &val)
+/*void CVariant::set(const CVariant &val)
 {
   switch(val.contentType())
   {
-    case ctBool:    set(val.toBool  ()); break;
-    case ctInt:     set(val.toInt   ()); break;
-    case ctUInt:    set(val.toUInt  ()); break;
-    case ctULLong:  set(val.toULLong()); break;
-    case ctFloat:   set(val.toFloat ()); break;
-    case ctString:  set(val.toString()); break;
-    case ctUnknown: reset(); break;
+    case ctBool:      set(val.toBool  ()); break;
+    case ctInt:       set(val.toInt   ()); break;
+    case ctUInt:      set(val.toUInt  ()); break;
+    case ctULLong:    set(val.toULLong()); break;
+    case ctFloat:     set(val.toFloat ()); break;
+    case ctString:    set(val.toString()); break;
+    case ctFrequency: set(val.toFrequency()); break;
+    case ctUnknown:   reset(); break;
   }
-}
+}*/
+
+//void CVariant::set(mon::lib::sensordata::CFrequency *val)
+//{
+//  reset();
+//  m_contentType       = ctFrequency;
+//  m_value.m_frequency = val;
+//}
 
 const bool CVariant::toBool() const
 {
   switch(m_contentType)
   {
-    case ctBool:   return  m_value.m_bool;
-    case ctInt:    return  m_value.m_int   > 0;
-    case ctUInt:   return  m_value.m_uint  > 0;
-    case ctULLong: return  m_value.m_ull   > 0;
-    case ctFloat:  return  m_value.m_float > 0;
-    case ctString: return  m_value.m_string != NULL;
+    case ctBool:      return  m_value.m_bool;
+    case ctInt:       return  m_value.m_int   > 0;
+    case ctUInt:      return  m_value.m_uint  > 0;
+    case ctULLong:    return  m_value.m_ull   > 0;
+    case ctFloat:     return  m_value.m_float > 0;
+    case ctString:    return  m_value.m_string != NULL;
+//    case ctFrequency: return  m_value.m_frequency != NULL;
     case ctUnknown: MON_LOG_WRN("Undefined bool option, return default"); return true;
   } return true;
 }
@@ -121,12 +141,13 @@ const int CVariant::toInt() const
 {
   switch(m_contentType)
   {
-    case ctInt:    return m_value.m_int;
-    case ctBool:   return static_cast<int>(m_value.m_bool);
-    case ctFloat:  return static_cast<int>(m_value.m_float);
-    case ctUInt:   return static_cast<int>(m_value.m_uint);
-    case ctULLong: return static_cast<int>(m_value.m_ull);
-    case ctString: return strtol(m_value.m_string, NULL, 10);
+    case ctInt:       return m_value.m_int;
+    case ctBool:      return static_cast<int>(m_value.m_bool);
+    case ctFloat:     return static_cast<int>(m_value.m_float);
+    case ctUInt:      return static_cast<int>(m_value.m_uint);
+    case ctULLong:    return static_cast<int>(m_value.m_ull);
+    case ctString:    return strtol(m_value.m_string, NULL, 10);
+//    case ctFrequency: return static_cast<int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
   } return 0;
 }
@@ -135,12 +156,13 @@ const double CVariant::toFloat() const
 {
   switch(m_contentType)
   {
-    case ctFloat:  return m_value.m_float;
-    case ctInt:    return static_cast<double>(m_value.m_int);
-    case ctBool:   return static_cast<double>(m_value.m_bool);
-    case ctUInt:   return static_cast<double>(m_value.m_uint);
-    case ctULLong: return static_cast<double>(m_value.m_ull);
-    case ctString: return strtod(m_value.m_string, NULL);
+    case ctFloat:    return m_value.m_float;
+    case ctInt:      return static_cast<double>(m_value.m_int);
+    case ctBool:     return static_cast<double>(m_value.m_bool);
+    case ctUInt:     return static_cast<double>(m_value.m_uint);
+    case ctULLong:   return static_cast<double>(m_value.m_ull);
+    case ctString:   return strtod(m_value.m_string, NULL);
+//    case ctFrequency: m_value.m_frequency->asHz();
     case ctUnknown: MON_LOG_WRN("Undefined float option, return default"); return 0;
   } return 0;
 }
@@ -149,12 +171,13 @@ const std::string CVariant::toString() const
 {
   switch(m_contentType)
   {
-    case ctString:return m_value.m_string;
-    case ctFloat: return mon::lib::base::toString(m_value.m_float);
-    case ctInt:   return mon::lib::base::toString(m_value.m_int);
-    case ctUInt:  return mon::lib::base::toString(m_value.m_uint);
-    case ctULLong:return mon::lib::base::toString(m_value.m_ull);
-    case ctBool:  return m_value.m_bool ? "true" : "false";
+    case ctString:    return m_value.m_string;
+    case ctFloat:     return mon::lib::base::toString(m_value.m_float);
+    case ctInt:       return mon::lib::base::toString(m_value.m_int);
+    case ctUInt:      return mon::lib::base::toString(m_value.m_uint);
+    case ctULLong:    return mon::lib::base::toString(m_value.m_ull);
+    case ctBool:      return m_value.m_bool ? "true" : "false";
+//    case ctFrequency: return mon::lib::base::toString(m_value.m_frequency);
     case ctUnknown: MON_LOG_WRN("Undefined string option, return default"); return "undef";
   } return "undef";
 }
@@ -164,13 +187,14 @@ const unsigned int CVariant::toUInt() const
 {
   switch(m_contentType)
   {
-    case ctUInt:   return m_value.m_uint;
-    case ctInt:    return static_cast<unsigned int>(m_value.m_int);
-    case ctBool:   return static_cast<unsigned int>(m_value.m_bool);
-    case ctFloat:  return static_cast<unsigned int>(m_value.m_float);
-    case ctULLong: return static_cast<unsigned int>(m_value.m_ull);
-    case ctString: return strtol(m_value.m_string, NULL, 10);
-    case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
+    case ctUInt:      return m_value.m_uint;
+    case ctInt:       return static_cast<unsigned int>(m_value.m_int);
+    case ctBool:      return static_cast<unsigned int>(m_value.m_bool);
+    case ctFloat:     return static_cast<unsigned int>(m_value.m_float);
+    case ctULLong:    return static_cast<unsigned int>(m_value.m_ull);
+    case ctString:    return strtol(m_value.m_string, NULL, 10);
+//    case ctFrequency: return static_cast<unsigned int>(m_value.m_frequency->asHz());
+    case ctUnknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
   } return 0;
 }
 
@@ -178,15 +202,25 @@ const unsigned long long CVariant::toULLong() const
 {
   switch(m_contentType)
   {
-    case ctULLong: return m_value.m_ull;
-    case ctInt:    return static_cast<unsigned long long>(m_value.m_int);
-    case ctBool:   return static_cast<unsigned long long>(m_value.m_bool);
-    case ctFloat:  return static_cast<unsigned long long>(m_value.m_float);
-    case ctUInt:   return static_cast<unsigned long long>(m_value.m_uint);
-    case ctString: return strtol(m_value.m_string, NULL, 10);
+    case ctULLong:    return m_value.m_ull;
+    case ctInt:       return static_cast<unsigned long long>(m_value.m_int);
+    case ctBool:      return static_cast<unsigned long long>(m_value.m_bool);
+    case ctFloat:     return static_cast<unsigned long long>(m_value.m_float);
+    case ctUInt:      return static_cast<unsigned long long>(m_value.m_uint);
+    case ctString:    return strtol(m_value.m_string, NULL, 10);
+//    case ctFrequency: return static_cast<unsigned long int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
   } return 0;
 }
+
+//mon::lib::sensordata::CFrequency *CVariant::toFrequency()
+//{
+//  switch(m_contentType)
+//  {
+//    case ctFrequency: return m_value.m_frequency;
+//    default: MON_LOG_ERR("Can not convert value to frequency"); MON_ABORT;
+//  } return 0;
+//}
 
 const EContentType &CVariant::contentType() const
 {

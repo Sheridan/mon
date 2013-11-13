@@ -17,10 +17,11 @@ class CDefinition
     virtual ~CDefinition();
     void addFrame(const std::string &name, CFrame *frame);
     CFrame * frame(const std::string &name);
-    TFramesNames frames();
+    TFramesNames &frames();
 
   private:
-    TFramesMap m_frames; //!< Фреймы сенсора
+    TFramesMap m_frames;  //!< Фреймы сенсора
+    TFramesNames m_names; //!< Имена фреймов
 };
 
 }

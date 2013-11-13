@@ -13,9 +13,9 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
 {
   if(MON_SENSOR_REQUESTED_FRAME_IS_NOT_SET)
   {
-    return "";
+    return MON_SENSORS_EMPTY_RESULT;
   }
-  return "";
+  return MON_SENSORS_EMPTY_RESULT;
 }
 
 #define MON_SENSOR_STAT_FILE "/proc/meminfo"

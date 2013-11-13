@@ -16,6 +16,12 @@ CTimer::CTimer(const float &timeout)
   MON_THREADED_FUNCTION_INIT(ticks)
 }
 
+CTimer::CTimer()
+{
+  m_timeout = 1;
+  MON_THREADED_FUNCTION_INIT(ticks)
+}
+
 CTimer::~CTimer()
 {
   MON_THREADED_FUNCTION_ABORT(ticks)

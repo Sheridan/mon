@@ -18,6 +18,7 @@ class CTimer
 
   public:
     CTimer(const float &timeout);
+    CTimer();
     virtual ~CTimer();
 
   protected:

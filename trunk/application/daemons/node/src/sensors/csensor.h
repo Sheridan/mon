@@ -8,6 +8,7 @@
 #include "config.h"
 #include "ctimer.h"
 #include "cdefinition.h"
+#include "cstatisticcache.h"
 
 namespace mon
 {
@@ -41,6 +42,7 @@ class CSensor : mon::lib::base::CTimer
 
   private:
     void * m_handle;
+    mon::lib::sensordata::CStatisticCache m_cache;
     mon::lib::sensordata::CDefinition *m_definition;
     void onTimer();
 };

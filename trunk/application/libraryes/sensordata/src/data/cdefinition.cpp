@@ -20,6 +20,7 @@ void CDefinition::addFrame(const std::string &name, CFrame *frame)
 {
   frame->setname(name);
   m_frames[name] = frame;
+  m_names.push_back(name);
 }
 
 CFrame *CDefinition::frame(const std::string &name)
@@ -31,14 +32,15 @@ CFrame *CDefinition::frame(const std::string &name)
   return NULL;
 }
 
-TFramesNames CDefinition::frames()
+TFramesNames &CDefinition::frames()
 {
-  TFramesNames result;
+  /*TFramesNames result;
   MON_STL_MAP_FOREACH(frames, TFramesMap, m_frames)
   {
     result.push_back(MON_STL_MAP_KEY(frames));
   }
-  return result;
+  return result;*/
+  return m_names;
 }
 
 }

@@ -1,9 +1,11 @@
 /* %Id% */
 #include "cstringbuilder.h"
-#include <stdio.h>
+#include <cstdio>
+//#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+using std::snprintf;
 #define MON_SB_SPRINTF(_template,_value) \
   { \
     char *result = NULL; \
@@ -17,6 +19,8 @@
       free(result); \
     } \
   }
+
+//#define MON_SB_SPRINTF(_template,_value) MON_SB_CONCAT(m_string, std::sprintf(_template,_value));
 
 namespace mon
 {

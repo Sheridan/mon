@@ -11,6 +11,14 @@ SET(LIB_PREFIX_TARGET  "lib/mon"                     )
 SET(LIB_GLOBAL_TARGET  "${LIB_PREFIX_TARGET}/global" )
 SET(LIB_SENSORS_TARGET "${LIB_PREFIX_TARGET}/sensors")
 
+# --------------------- c++11 -------------------
+ADD_DEFINITIONS( -std=c++11 )
+ADD_DEFINITIONS( -g )
+#ADD_DEFINITIONS( -ftest-coverage )
+ADD_DEFINITIONS( -fprofile-arcs )
+SET(GLOBAL_LINK_LIBS gcov )
+# --------------------- c++11 -------------------
+
 include(CMakeDebug.cmake)
 install(FILES CMakeDebug.cmake DESTINATION include/mon)
 install(FILES CMakeSensor.cmake DESTINATION include/mon)
@@ -27,6 +35,7 @@ file(APPEND ${GEN_PATH}/generated.h "\n#endif\n" )
 # +++++++++++++++++++ tools +++++++++++++++++++
 MESSAGE ( STATUS "---> Processing tools" )
 add_executable( mon-text-to-char-array tools/mon-text-to-char-array/main.cpp)
+target_link_libraries(mon-text-to-char-array ${GLOBAL_LINK_LIBS})
 install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 # +++++++++++++++++++ tools +++++++++++++++++++
 
@@ -53,6 +62,7 @@ SET(mon-config-sources
     libraryes/config/src/model/cfile.cpp
     libraryes/config/src/model/cfolder.cpp)
 add_library(config SHARED ${mon-config-headers} ${mon-config-sources})
+target_link_libraries(config ${GLOBAL_LINK_LIBS})
 install(FILES ${mon-config-headers} DESTINATION include/mon )
 install(TARGETS config LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
@@ -67,6 +77,7 @@ SET(mon-logger-sources
     libraryes/logger/src/clogmessage.cpp
     libraryes/logger/src/clogger.cpp )
 add_library(logger SHARED ${mon-logger-headers} ${mon-logger-sources})
+target_link_libraries(logger ${GLOBAL_LINK_LIBS})
 install(FILES ${mon-logger-headers} DESTINATION include/mon )
 install(TARGETS logger LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
@@ -82,7 +93,7 @@ SET(mon-network-sources
     libraryes/network/src/cserversocket.cpp
     libraryes/network/src/cclientsocket.cpp )
 add_library(network SHARED ${mon-network-headers} ${mon-network-sources})
-target_link_libraries(network pthread)
+target_link_libraries(network pthread ${GLOBAL_LINK_LIBS})
 install(FILES ${mon-network-headers} DESTINATION include/mon )
 install(TARGETS network LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
@@ -93,6 +104,8 @@ SET(mon-sensordata-headers
     libraryes/sensordata/src/data/cframe.h
     libraryes/sensordata/src/data/cfrequency.h
     libraryes/sensordata/src/data/cfield.h
+    libraryes/sensordata/src/data/cstatisticcache.h
+    libraryes/sensordata/src/data/cstatisticdata.h
     libraryes/sensordata/src/parcers/cdefinitionparcer.h
     libraryes/sensordata/src/parcers/cdefinitiongenerator.h )
 SET(mon-sensordata-sources
@@ -100,10 +113,13 @@ SET(mon-sensordata-sources
     libraryes/sensordata/src/data/cframe.cpp
     libraryes/sensordata/src/data/cfrequency.cpp
     libraryes/sensordata/src/data/cfield.cpp
+    libraryes/sensordata/src/data/cstatisticcache.cpp
+    libraryes/sensordata/src/data/cstatisticdata.cpp
     libraryes/sensordata/src/parcers/cdefinitionparcer.cpp
     libraryes/sensordata/src/parcers/cdefinitiongenerator.cpp
     libraryes/sensordata/src/main.cpp )
 add_library(sensordata SHARED ${mon-sensordata-headers} ${mon-sensordata-sources})
+target_link_libraries(sensordata ${GLOBAL_LINK_LIBS})
 install(TARGETS sensordata LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- sensorplugin library --------------
@@ -116,6 +132,7 @@ SET(mon-sensorplugin-sources
     libraryes/sensorplugin/src/cframesetbuilder.cpp
     libraryes/sensorplugin/src/main.cpp )
 add_library(sensorplugin SHARED ${mon-sensorplugin-headers} ${mon-sensorplugin-sources})
+target_link_libraries(sensorplugin ${GLOBAL_LINK_LIBS})
 install(FILES ${mon-sensorplugin-headers} DESTINATION include/mon )
 install(TARGETS sensorplugin LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
@@ -129,6 +146,7 @@ SET(mon-protocol-sources
     libraryes/protocol/src/cnetworkmessage.cpp
     libraryes/protocol/src/main.cpp )
 add_library(protocol SHARED ${mon-protocol-headers} ${mon-protocol-sources})
+target_link_libraries(protocol ${GLOBAL_LINK_LIBS})
 install(TARGETS protocol LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
 # --------- base library --------------
@@ -156,6 +174,7 @@ SET(mon-base-sources
     libraryes/base/src/parcer/cparcerstring.cpp
     libraryes/base/src/parcer/stringhelper.cpp)
 add_library(base SHARED ${mon-base-headers} ${mon-base-sources})
+target_link_libraries(base ${GLOBAL_LINK_LIBS})
 install(FILES ${mon-base-headers} DESTINATION include/mon )
 install(TARGETS base LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
 
@@ -165,6 +184,7 @@ install(FILES defines/sensor-defines.h DESTINATION include/mon )
 install(FILES defines/logger-helper.h DESTINATION include/mon )
 install(FILES defines/file-operations-defines.h DESTINATION include/mon )
 install(FILES defines/protocol-control.h DESTINATION include/mon )
+install(FILES defines/mutex-helper.h DESTINATION include/mon )
 # +++++++++++++++++++ install some headers +++++++++++++++++++
 
 # +++++++++++++++++++ applications +++++++++++++++++++
@@ -198,7 +218,7 @@ endfunction(add_run)
 
 function(add_daemon target_name)
   add_dependencies(${target_name} base)
-  target_link_libraries(${target_name} base)
+  target_link_libraries(${target_name} base ${GLOBAL_LINK_LIBS})
   install(TARGETS ${target_name} RUNTIME DESTINATION bin )
   add_run(${target_name})
 endfunction(add_daemon)
@@ -252,7 +272,7 @@ IF( BUILD_NODE )
       daemons/node/src/sensors/csensor.cpp
       tools/mon-sensor-test/main.cpp )
   add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
-  target_link_libraries(mon-sensor-test base config logger sensordata dl)
+  target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})
   install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
   add_run(mon-sensor-test)
 ENDIF( BUILD_NODE )

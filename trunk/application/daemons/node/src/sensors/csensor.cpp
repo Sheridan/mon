@@ -14,9 +14,10 @@ namespace node
 {
 
 CSensor::CSensor(const std::string &i_name)
-  : mon::lib::base::CTimer(1),
+  : mon::lib::base::CTimer(),
     m_name(i_name)
 {
+  settimeout(1);
   m_handle            = NULL;
   initSensor          = NULL;
   getName             = NULL;
@@ -79,15 +80,25 @@ void CSensor::unload()
     getFrameAvialable   = NULL;
     dlclose(m_handle);
     m_handle = NULL;
+    delete m_definition;
   }
 }
 
 void CSensor::onTimer()
 {
-  mon::lib::sensordata::TFramesNames fn = m_definition->frames();
-  MON_STL_LIST_FOREACH(frame_name, mon::lib::sensordata::TFramesNames, fn)
+  MON_STL_LIST_FOREACH(frame_name, mon::lib::sensordata::TFramesNames, m_definition->frames())
   {
-    MON_LOG_DBG(getStatistics(MON_STL_LIST_VALUE(frame_name).c_str()));
+    if(getFrameAvialable(MON_STL_LIST_VALUE(frame_name).c_str()))
+    {
+      #ifdef MON_DEBUG
+        std::string sd = getStatistics(MON_STL_LIST_VALUE(frame_name).c_str());
+        MON_LOG_DBG("Sensor data: " << sd);
+        m_cache.store(sd);
+      #else
+        m_cache.store(getStatistics(MON_STL_LIST_VALUE(frame_name).c_str()));
+      #endif
+
+    }
   }
 }
 
