@@ -24,6 +24,7 @@ MON_DECLARE_PROTOCOL_DELIMITER(framenumber,framefields,'#' ); //!< Раздел�
 MON_DECLARE_PROTOCOL_DELIMITER(frame      ,frame      ,'|' ); //!< Разделитель фреймов в фреймсете
 MON_DECLARE_PROTOCOL_DELIMITER(field      ,field      ,':' ); //!< Разделитель полей фрейма
 MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,sensorname ,':' ); //!< Разделитель сенсоров в списке сенсоров
+MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,definition ,'#' ); //!< Разделитель имени сенсора и его описания
 
 enum EProtocolMessageType
 {

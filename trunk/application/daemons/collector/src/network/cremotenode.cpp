@@ -4,7 +4,7 @@
 #include "global.h"
 #include "stringhelper.h"
 #include "infinity-cycle-helper.h"
-#include "cdefinitionparcer.h"
+
 
 namespace mon
 {
@@ -22,14 +22,17 @@ CRemoteNode::CRemoteNode(const std::string &confLeaf)
   setTimeout                               (m_selfConfig->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
   setAddrRemote                            (m_selfConfig->folder("connection")->file("host")   ->get(std::string("localhost")));
   setPortRemote(static_cast<unsigned short>(m_selfConfig->folder("connection")->file("port")   ->get(MON_DEFAULT_LISTEN_PORT)));
-  m_definition = nullptr;
   MON_THREADED_FUNCTION_INIT(connect);
 }
 
 CRemoteNode::~CRemoteNode()
 {
   MON_THREADED_FUNCTION_ABORT(connect)
-  delete m_definition;
+  for(auto &sensor : m_nodeSensors)
+  {
+    delete sensor;
+  }
+  m_nodeSensors.clear();
 }
 
 MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
@@ -77,17 +80,17 @@ void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessa
   mon::lib::base::split(msg->string(), ':', sensorsNames);
   for(auto &sensor_name : sensorsNames)
   {
-    CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(sensor_name, this);
-    m_nodeSensors.push_back(rnSensor);
+    requestSensorDefinition(sensor_name);
   }
 }
 
 void CRemoteNode::incomingAnswerOnrequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
-  delete m_definition;
-  m_definition = new mon::lib::sensordata::CDefinition();
-  mon::lib::sensordata::CDefinitionParcer parcer = { m_definition, msg->string() };
-  parcer.parce();
+  int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
+  CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(msg->string().substr(0, index),
+                                                      msg->string().substr(index, msg->string().length()-1),
+                                                      this);
+  m_nodeSensors.push_back(rnSensor);
 }
 
 }

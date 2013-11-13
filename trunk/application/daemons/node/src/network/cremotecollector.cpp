@@ -1,7 +1,9 @@
 /* %Id% */
 #include "node_st.h"
 #include "cremotecollector.h"
+#include "protocol-control.h"
 #include "global.h"
+
 namespace mon
 {
 namespace daemons
@@ -39,7 +41,9 @@ void CRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
 
 void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
-  sendReply(msg, MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition());
+  sendReply(msg, msg->string() +
+                 std::to_string(MON_PROTOCOL_DELIMITER(sensorname ,definition)) +
+                 MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition());
 }
 
 }

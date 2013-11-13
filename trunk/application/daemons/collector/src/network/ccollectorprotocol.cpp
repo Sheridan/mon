@@ -29,7 +29,8 @@ void CCollectorProtocol::requestSensorsList()
 
 void CCollectorProtocol::requestSensorDefinition(const std::string &sensor)
 {
-    //sendMessage(MON_PROTO_ID_REQUEST_SENSOR_DEFINITION, sensor);
+    sendMessage(static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::collector::CCollectorProtocol::incomingAnswerOnrequestSensorDefinition),
+                mon::lib::protocol::mtRequestSensorDefinition);
 }
 
 }
