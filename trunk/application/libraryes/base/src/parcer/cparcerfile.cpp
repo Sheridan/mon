@@ -12,7 +12,7 @@ namespace base
 CParcerFile::CParcerFile(const std::string &i_filename) : CParcer(), m_filename(i_filename)
 {
   m_file = fopen(m_filename.c_str(), "r");
-  if(m_file == NULL)
+  if(m_file == nullptr)
   {
     m_error = true;
     MON_PRINT_FILEOP_ERRNO(m_filename, "Open file error");

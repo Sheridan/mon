@@ -26,9 +26,9 @@ void CCollectorsManager::listen()
 void CCollectorsManager::unlisten()
 {
   close();
-  MON_STL_LIST_FOREACH(collector, TRemoteCollectors, m_collectors)
+  for(auto &collector : m_collectors)
   {
-    delete MON_STL_LIST_VALUE(collector);
+    delete collector;
   }
   m_collectors.clear();
 }

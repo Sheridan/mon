@@ -12,6 +12,7 @@ namespace base
 
 void                     split(const std::string &s, const char &delim, std::list<std::string> &elems);
 std::list<std::string> split(const std::string &s, const char &delim);
+//std::list<std::string> split(const std::string &input, const std::string &regex);
 
 }
 }

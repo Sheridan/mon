@@ -20,7 +20,7 @@ MON_SENSOR_BEGIN
 
 #define MON_SENSOR_INFO_FILE "/proc/cpuinfo"
 #define MON_FILE_FSCANF_ALL_CPUINFO_START(_name,_struct) \
-  char * cpuinfo_##_name = NULL; \
+  char * cpuinfo_##_name = nullptr; \
   MON_FILE_OPEN(MON_SENSOR_INFO_FILE, _name); \
   MON_FILE_FSCANF_ALL(_name, "%s %d %d %d %d %d %d %d %d %d %d", \
                       cpu_##_name, \
@@ -69,7 +69,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
 {
   if(MON_SENSOR_REQUESTED_FRAME_IS_NOT_SET)
   {
-    return NULL;
+    return nullptr;
   }
   if(MON_SENSOR_REQUESTED_FRAME_IS(utilisation))
   {

@@ -8,7 +8,7 @@
 using std::snprintf;
 #define MON_SB_SPRINTF(_template,_value) \
   { \
-    char *result = NULL; \
+    char *result = nullptr; \
     int len = 0; \
     len = snprintf(result, 0, _template, _value); \
     if(len > 0) \

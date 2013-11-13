@@ -23,20 +23,20 @@ void CNodesManager::load()
   MON_LOG_DBG("Load nodes");
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("nodes"))
   {
-    MON_LOG_DBG(MON_STL_LIST_VALUE(folder)->name());
-    m_nodes.push_back(new CRemoteNode(MON_STL_LIST_VALUE(folder)->name()));
+    MON_LOG_DBG(folder->name());
+    m_nodes.push_back(new CRemoteNode(folder->name()));
   }
-  MON_STL_LIST_FOREACH(node, TRemoteNodes, m_nodes)
+  for(auto &node : m_nodes)
   {
-    MON_STL_LIST_VALUE(node)->connect();
+    node->connect();
   }
 }
 
 void CNodesManager::unload()
 {
-  MON_STL_LIST_FOREACH(node, TRemoteNodes, m_nodes)
+  for(auto &node : m_nodes)
   {
-    delete MON_STL_LIST_VALUE(node);
+    delete node;
   }
   m_nodes.clear();
 }

@@ -20,7 +20,7 @@ CConfigurationGenerator::CConfigurationGenerator(const std::string &filename, CF
 {
   m_error = false;
   m_file = fopen(m_filename.c_str(), "w");
-  if(m_file == NULL)
+  if(m_file == nullptr)
   {
     m_error = true;
     MON_PRINT_FILEOP_ERRNO(m_filename, "Open");
@@ -72,12 +72,12 @@ void CConfigurationGenerator::writeFolder(CFolder *folder)
 
   MON_OPTION_FOREACH_FOLDER(child_folder, folder)
   {
-    writeFolder(MON_STL_LIST_VALUE(child_folder));
+    writeFolder(child_folder);
   }
 
   MON_OPTION_FOREACH_FILE(child_file, folder)
   {
-    writeFile(MON_STL_LIST_VALUE(child_file));
+    writeFile(child_file);
   }
 
   if(!folder->name().empty() && !hasOneChild)

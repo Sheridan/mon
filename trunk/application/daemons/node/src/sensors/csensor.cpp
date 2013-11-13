@@ -18,13 +18,13 @@ CSensor::CSensor(const std::string &i_name)
     m_name(i_name)
 {
   settimeout(1);
-  m_handle            = NULL;
-  initSensor          = NULL;
-  getName             = NULL;
-  getDefinition       = NULL;
-  getDefinitionLength = NULL;
-  getStatistics       = NULL;
-  getFrameAvialable   = NULL;
+  m_handle            = nullptr;
+  initSensor          = nullptr;
+  getName             = nullptr;
+  getDefinition       = nullptr;
+  getDefinitionLength = nullptr;
+  getStatistics       = nullptr;
+  getFrameAvialable   = nullptr;
   MON_LOG_DBG("Loading sensor '" MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so'");
   m_handle = dlopen(std::string(MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so").c_str(), RTLD_NOW);
   if (!m_handle)
@@ -40,7 +40,7 @@ CSensor::~CSensor()
 }
 
 #define MON_IMPORT_ERROR(_name) \
-  if ((error = dlerror()) != NULL) \
+  if ((error = dlerror()) != nullptr) \
   { \
     MON_LOG_ERR("Error importing function `" #_name "` from sensor `" << m_name << "`: " << error); \
     MON_ABORT; \
@@ -51,7 +51,7 @@ void CSensor::load()
 {
   if (m_handle)
   {
-    char *error; error = NULL;
+    char *error; error = nullptr;
     MON_IMPORT(TFInitSensor         , initSensor         );
     MON_IMPORT(TFGetName            , getName            );
     MON_IMPORT(TFGetDefinition      , getDefinition      );
@@ -72,30 +72,30 @@ void CSensor::unload()
   {
     timerStop();
     while (timerActive()) { sleep(1); }
-    initSensor          = NULL;
-    getName             = NULL;
-    getDefinition       = NULL;
-    getDefinitionLength = NULL;
-    getStatistics       = NULL;
-    getFrameAvialable   = NULL;
+    initSensor          = nullptr;
+    getName             = nullptr;
+    getDefinition       = nullptr;
+    getDefinitionLength = nullptr;
+    getStatistics       = nullptr;
+    getFrameAvialable   = nullptr;
     dlclose(m_handle);
-    m_handle = NULL;
+    m_handle = nullptr;
     delete m_definition;
   }
 }
 
 void CSensor::onTimer()
 {
-  MON_STL_LIST_FOREACH(frame_name, mon::lib::sensordata::TFramesNames, m_definition->frames())
+  for(auto &frame_name : m_definition->frames())
   {
-    if(getFrameAvialable(MON_STL_LIST_VALUE(frame_name).c_str()))
+    if(getFrameAvialable(frame_name.c_str()))
     {
       #ifdef MON_DEBUG
-        std::string sd = getStatistics(MON_STL_LIST_VALUE(frame_name).c_str());
+        std::string sd = getStatistics(frame_name.c_str());
         MON_LOG_DBG("Sensor data: " << sd);
         m_cache.store(sd);
       #else
-        m_cache.store(getStatistics(MON_STL_LIST_VALUE(frame_name).c_str()));
+        m_cache.store(getStatistics(frame_name.c_str()));
       #endif
 
     }

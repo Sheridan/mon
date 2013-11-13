@@ -32,9 +32,9 @@ const std::string &CDefinitionGenerator::generate()
 {
   MON_DEFINITION_GENERATOR_DEBUG("Generating definition start");
   TFramesNames framesNames = m_definition->frames();
-  MON_STL_LIST_FOREACH(frames_names, TFramesNames, framesNames)
+  for(auto &frames_names : framesNames)
   {
-    generateFrame(m_definition->frame(MON_STL_LIST_VALUE(frames_names)));
+    generateFrame(m_definition->frame(frames_names));
   }
   MON_DEFINITION_GENERATOR_DEBUG("Generating definition done");
   return m_result->string();
@@ -85,7 +85,7 @@ void CDefinitionGenerator::generateTags(CFrame *frame)
   MON_DEFINITION_GENERATOR_DEBUG("Frame '" << frame->name() << "' tags start");
   TTags t_tags = frame->tags();
   (*m_result) << "tags:{";
-  MON_STL_SET_FOREACH(tags, TTags, t_tags)
+  MON_STL_SET_FOREACH(tags, t_tags)
   {
     (*m_result) << MON_STL_SET_VALUE(tags) << ";";
   }
@@ -98,9 +98,9 @@ void CDefinitionGenerator::generateFields(CFrame *frame)
   MON_DEFINITION_GENERATOR_DEBUG("Frame '" << frame->name() << "' fields start");
   TFields t_fields = frame->fields();
   (*m_result) << "fields:{";
-  MON_STL_LIST_FOREACH(field, TFields, t_fields)
+  for(auto &field : t_fields)
   {
-    generateField(MON_STL_LIST_VALUE(field));
+    generateField(field);
   }
   (*m_result) << "}";
   MON_DEFINITION_GENERATOR_DEBUG("Frame '" << frame->name() << "' fields done");

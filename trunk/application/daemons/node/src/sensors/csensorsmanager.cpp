@@ -22,11 +22,11 @@ void CSensorsManager::load()
 {
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("sensors"))
   {
-    MON_LOG_DBG("Loading sensor " << MON_STL_LIST_VALUE(folder)->name())
-    CSensor *t_sensor = new CSensor(MON_STL_LIST_VALUE(folder)->name());
+    MON_LOG_DBG("Loading sensor " << folder->name())
+    CSensor *t_sensor = new CSensor(folder->name());
     m_sensors.push_back(t_sensor);
     t_sensor->load();
-    if(t_sensor->getFrameAvialable(NULL))
+    if(t_sensor->getFrameAvialable(nullptr))
     {
       MON_LOG_NFO("Sensor " << t_sensor->getName() << " loaded");
     }
@@ -36,23 +36,23 @@ void CSensorsManager::load()
 std::string CSensorsManager::getGensorsNamesList(const std::string &delimiter)
 {
   std::string result;
-  MON_STL_LIST_FOREACH(sensor, TSensors, m_sensors)
+  for(auto &sensor : m_sensors)
   {
-    result += std::string(MON_STL_LIST_VALUE(sensor)->getName()) + delimiter;
+    result += std::string(sensor->getName()) + delimiter;
   }
   return result.substr(0, result.length()-1);
 }
 
 CSensor *CSensorsManager::sensor(const std::string &name)
 {
-    MON_STL_LIST_FOREACH(sensor, TSensors, m_sensors)
+    for(auto &sensor : m_sensors)
     {
-        if(name.compare(MON_STL_LIST_VALUE(sensor)->getName()) == 0)
+        if(name.compare(sensor->getName()) == 0)
         {
-            return MON_STL_LIST_VALUE(sensor);
+            return sensor;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 }

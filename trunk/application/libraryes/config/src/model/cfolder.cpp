@@ -10,7 +10,7 @@ namespace lib
 namespace config
 {
 
-CFolder::CFolder() : CNode("", NULL)
+CFolder::CFolder() : CNode("", nullptr)
 {}
 
 CFolder::CFolder(const std::string &nodeName, CNode *parentNode) : CNode(nodeName, parentNode)
@@ -18,15 +18,15 @@ CFolder::CFolder(const std::string &nodeName, CNode *parentNode) : CNode(nodeNam
 
 CFolder::~CFolder()
 {
-  MON_STL_MAP_FOREACH(folder, TFoldersMap, m_folders)
+  for(auto &folder : m_folders)
   {
-    delete MON_STL_MAP_VALUE(folder);
+    delete folder.second;
   }
   m_folders.clear();
 
-  MON_STL_MAP_FOREACH(file, TFilesMap, m_files)
+  for(auto &file : m_files)
   {
-    delete MON_STL_MAP_VALUE(file);
+    delete file.second;
   }
   m_files.clear();
 }
@@ -44,9 +44,9 @@ int CFolder::foldersCount()
 TFoldersList CFolder::folders()
 {
   TFoldersList t_list;
-  MON_STL_MAP_FOREACH(folder, TFoldersMap, m_folders)
+  for(auto &folder : m_folders)
   {
-    t_list.push_back(MON_STL_MAP_VALUE(folder));
+    t_list.push_back(folder.second);
   }
   return t_list;
 }
@@ -73,9 +73,9 @@ int CFolder::filesCount()
 TFilesList CFolder::files()
 {
   TFilesList t_list;
-  MON_STL_MAP_FOREACH(file, TFilesMap, m_files)
+  for(auto &file : m_files)
   {
-    t_list.push_back(MON_STL_MAP_VALUE(file));
+    t_list.push_back(file.second);
   }
   return t_list;
 }

@@ -9,7 +9,7 @@
 #define MON_ST_ATOMIC_VNAME(_name) m_##_name
 #define MON_ST_ATOMIC(_interface,_name) \
   private: _interface * MON_ST_ATOMIC_VNAME(_name); \
-  public : _interface * _name() { assert(MON_ST_ATOMIC_VNAME(_name) != NULL); return MON_ST_ATOMIC_VNAME(_name); };
+  public : _interface * _name() { assert(MON_ST_ATOMIC_VNAME(_name) != nullptr); return MON_ST_ATOMIC_VNAME(_name); };
 
 
 namespace mon

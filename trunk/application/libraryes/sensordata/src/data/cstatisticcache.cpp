@@ -19,9 +19,9 @@ CStatisticCache::CStatisticCache()
 CStatisticCache::~CStatisticCache()
 {
   MON_MUTEX_LOCK(cache);
-  MON_STL_MAP_FOREACH(cache, TCashedData, m_cachedData)
+  for( auto &cache : m_cachedData)
   {
-    delete MON_STL_MAP_VALUE(cache);
+    delete cache.second;
   }
   m_cachedData.clear();
   MON_MUTEX_UNLOCK(cache);

@@ -29,7 +29,7 @@ CFrame *CDefinition::frame(const std::string &name)
   {
     return m_frames[name];
   }
-  return NULL;
+  return nullptr;
 }
 
 TFramesNames &CDefinition::frames()

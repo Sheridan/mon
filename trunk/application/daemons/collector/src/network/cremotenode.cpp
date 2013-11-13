@@ -73,9 +73,9 @@ void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessa
 {
   std::list<std::string> sensorsNames;
   mon::lib::base::split(msg->string(), ':', sensorsNames);
-  MON_STL_LIST_FOREACH(sensor_name, std::list<std::string>, sensorsNames)
+  for(auto &sensor_name : sensorsNames)
   {
-    CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(MON_STL_LIST_VALUE(sensor_name), this);
+    CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(sensor_name, this);
     m_nodeSensors.push_back(rnSensor);
   }
 }

@@ -56,7 +56,7 @@ void CSocketClient::connect()
     MON_ABORT;
   }
 
-  for (t_ip_address = t_ip_addresses; t_ip_address != NULL; t_ip_address = t_ip_address->ai_next)
+  for (t_ip_address = t_ip_addresses; t_ip_address != nullptr; t_ip_address = t_ip_address->ai_next)
   {
     m_socketDescriptor = socket(t_ip_address->ai_family, t_ip_address->ai_socktype, t_ip_address->ai_protocol);
     if (m_socketDescriptor == -1) { continue; }
@@ -64,7 +64,7 @@ void CSocketClient::connect()
     ::close(m_socketDescriptor);
   }
 
-  if (t_ip_address == NULL) /* No address succeeded */
+  if (t_ip_address == nullptr) /* No address succeeded */
   {
     MON_LOG_ERR("Could not connect")
   }

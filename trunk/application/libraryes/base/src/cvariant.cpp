@@ -47,7 +47,7 @@ void CVariant::reset()
   if(m_contentType == ctString)
   {
     free(m_value.m_string);
-    m_value.m_string = NULL;
+    m_value.m_string = nullptr;
   }
   m_contentType = ctUnknown;
 }
@@ -131,8 +131,8 @@ const bool CVariant::toBool() const
     case ctUInt:      return  m_value.m_uint  > 0;
     case ctULLong:    return  m_value.m_ull   > 0;
     case ctFloat:     return  m_value.m_float > 0;
-    case ctString:    return  m_value.m_string != NULL;
-//    case ctFrequency: return  m_value.m_frequency != NULL;
+    case ctString:    return  m_value.m_string != nullptr;
+//    case ctFrequency: return  m_value.m_frequency != nullptr;
     case ctUnknown: MON_LOG_WRN("Undefined bool option, return default"); return true;
   } return true;
 }
@@ -146,7 +146,7 @@ const int CVariant::toInt() const
     case ctFloat:     return static_cast<int>(m_value.m_float);
     case ctUInt:      return static_cast<int>(m_value.m_uint);
     case ctULLong:    return static_cast<int>(m_value.m_ull);
-    case ctString:    return strtol(m_value.m_string, NULL, 10);
+    case ctString:    return strtol(m_value.m_string, nullptr, 10);
 //    case ctFrequency: return static_cast<int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
   } return 0;
@@ -161,7 +161,7 @@ const double CVariant::toFloat() const
     case ctBool:     return static_cast<double>(m_value.m_bool);
     case ctUInt:     return static_cast<double>(m_value.m_uint);
     case ctULLong:   return static_cast<double>(m_value.m_ull);
-    case ctString:   return strtod(m_value.m_string, NULL);
+    case ctString:   return strtod(m_value.m_string, nullptr);
 //    case ctFrequency: m_value.m_frequency->asHz();
     case ctUnknown: MON_LOG_WRN("Undefined float option, return default"); return 0;
   } return 0;
@@ -192,7 +192,7 @@ const unsigned int CVariant::toUInt() const
     case ctBool:      return static_cast<unsigned int>(m_value.m_bool);
     case ctFloat:     return static_cast<unsigned int>(m_value.m_float);
     case ctULLong:    return static_cast<unsigned int>(m_value.m_ull);
-    case ctString:    return strtol(m_value.m_string, NULL, 10);
+    case ctString:    return strtol(m_value.m_string, nullptr, 10);
 //    case ctFrequency: return static_cast<unsigned int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
   } return 0;
@@ -207,7 +207,7 @@ const unsigned long long CVariant::toULLong() const
     case ctBool:      return static_cast<unsigned long long>(m_value.m_bool);
     case ctFloat:     return static_cast<unsigned long long>(m_value.m_float);
     case ctUInt:      return static_cast<unsigned long long>(m_value.m_uint);
-    case ctString:    return strtol(m_value.m_string, NULL, 10);
+    case ctString:    return strtol(m_value.m_string, nullptr, 10);
 //    case ctFrequency: return static_cast<unsigned long int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
   } return 0;

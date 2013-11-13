@@ -20,20 +20,20 @@ CConfig::CConfig()
 CConfig::~CConfig()
 {
     delete m_root;
-    m_pwd = NULL;
+    m_pwd = nullptr;
 }
 
 void CConfig::load(const std::string &filename)
 {
   m_base_filename = filename;
-  CConfigurationParcer p(m_base_filename, m_root);
+  CConfigurationParcer p = {m_base_filename, m_root};
   p.parce();
 }
 
 void CConfig::save(const std::string &filename)
 {
   m_run_filename = filename;
-  CConfigurationGenerator g(m_run_filename, m_root);
+  CConfigurationGenerator g = {m_run_filename, m_root};
   g.generate();
 }
 

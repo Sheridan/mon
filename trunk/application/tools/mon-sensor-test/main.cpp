@@ -46,14 +46,14 @@ void setopts(int argc, char *argv[])
 {
   static const char *optString = "hs:c:rn:t:f:";
   static const struct option longOpts[] = {
-      { "help"                        , no_argument      , NULL, 'h' },
-      { "sensor"                      , required_argument, NULL, 's' },
-      { "config"                      , required_argument, NULL, 'c' },
-      { "show-raw-definition"         , no_argument      , NULL, 'r' },
-      { "number-of-get-statistics"    , required_argument, NULL, 'n' },
-      { "time-between-statistics-call", required_argument, NULL, 't' },
-      { "frame"                       , required_argument, NULL, 'f' },
-      { NULL                          , no_argument      , NULL,  0  }};
+      { "help"                        , no_argument      , nullptr, 'h' },
+      { "sensor"                      , required_argument, nullptr, 's' },
+      { "config"                      , required_argument, nullptr, 'c' },
+      { "show-raw-definition"         , no_argument      , nullptr, 'r' },
+      { "number-of-get-statistics"    , required_argument, nullptr, 'n' },
+      { "time-between-statistics-call", required_argument, nullptr, 't' },
+      { "frame"                       , required_argument, nullptr, 'f' },
+      { nullptr                       , no_argument      , nullptr,  0  }};
   int c;
   int option_index = 0;
   while ((c = getopt_long(argc, argv, optString, longOpts, &option_index)) != -1)

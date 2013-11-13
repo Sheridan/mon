@@ -11,17 +11,17 @@ namespace sensordata
 
 CFrame::CFrame()
 {
-  m_frequences[fpMax]     = NULL;
-  m_frequences[fpDefault] = NULL;
+  m_frequences[fpMax]     = nullptr;
+  m_frequences[fpDefault] = nullptr;
 }
 
 CFrame::~CFrame()
 {
   delete m_frequences[fpMax]    ;
   delete m_frequences[fpDefault];
-  MON_STL_LIST_FOREACH(field, TFields, m_fields)
+  for(auto &field : m_fields)
   {
-    delete MON_STL_LIST_VALUE(field);
+    delete field;
   }
 }
 

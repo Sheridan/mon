@@ -12,7 +12,7 @@ namespace lib
 namespace base
 {
 
-CSingleton * sm_instance = NULL;
+CSingleton * sm_instance = nullptr;
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 CSingleton::CSingleton()
@@ -24,9 +24,9 @@ CSingleton::CSingleton()
 // --------------------------------------------------------------------------------------------------------------------------------------
 CSingleton::~CSingleton()
 {
-  MON_STL_MAP_FOREACH(members, TSingletonMembers, m_members)
+  for(auto &members : m_members)
   {
-    delete MON_STL_MAP_VALUE(members);
+    delete members.second;
   }
   m_members.clear();
   delete MON_ST_ATOMIC_VNAME(config);
@@ -42,7 +42,7 @@ CSingleton *CSingleton::instance()
 void CSingleton::destroy()
 {
   delete sm_instance;
-  sm_instance = NULL;
+  sm_instance = nullptr;
 }
 
 void CSingleton::appendMember(CSingletonMember *member)
@@ -61,7 +61,7 @@ CSingletonMember * CSingleton::member(const TSingletonMemberID &id)
   if(m_members.count(id)) { return m_members[id]; }
   logger()->log(mon::lib::logger::CLogMessage(mon::lib::logger::pError)
                 << "Access to singleton member with id=" << id << " failed. Member not exists. Aborting...");
-  MON_ABORT; return NULL;
+  MON_ABORT; return nullptr;
 }
 
 }

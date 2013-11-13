@@ -29,7 +29,7 @@
 #define MON_CFILE mon::lib::config::CFile
 #define MON_OPTION_FOREACH_OPTION(_name,_list,_type) \
   mon::lib::config::_type list##_name = _list; \
-  MON_STL_LIST_FOREACH (_name, mon::lib::config::_type, list##_name)
+  for (auto &_name : list##_name)
 #define MON_OPTION_FOREACH_FOLDER(_name,_folder) MON_OPTION_FOREACH_OPTION(_name, _folder->folders(), TFoldersList)
 #define MON_OPTION_FOREACH_FILE(_name,_folder)   MON_OPTION_FOREACH_OPTION(_name, _folder->files()  , TFilesList)
 
