@@ -7,6 +7,7 @@
 #include "ccollectorprotocol.h"
 #include "cfolder.h"
 #include "cremotenodesensor.h"
+#include "cdefinition.h"
 #include <list>
 #include <string>
 
@@ -26,6 +27,7 @@ public:
   virtual ~CRemoteNode();
 private:
   mon::lib::config::CFolder *m_selfConfig;
+  mon::lib::sensordata::CDefinition *m_definition;
 
   TRemoteNodeSensors m_nodeSensors;
 

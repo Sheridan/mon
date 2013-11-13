@@ -3,6 +3,7 @@ PROJECT(mon)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 OPTION( BUILD_COLLECTOR      "Build collector"                        OFF )
+OPTION( BUILD_DEV_TOOLS      "Build node"                             ON  )
 OPTION( BUILD_NODE           "Build node"                             ON  )
 OPTION( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
 OPTION( BUILD_CLIENT_NCURSES "Build mon-client-qt"                    OFF )
@@ -32,12 +33,7 @@ file(APPEND ${GEN_PATH}/generated.h "#define MON_GENERATED_LIBRARY_PATH \"${CMAK
 file(APPEND ${GEN_PATH}/generated.h "#define MON_GENERATED_SENSORS_PATH \"${CMAKE_INSTALL_PREFIX}/${LIB_SENSORS_TARGET}\"\n" )
 file(APPEND ${GEN_PATH}/generated.h "\n#endif\n" )
 
-# +++++++++++++++++++ tools +++++++++++++++++++
-MESSAGE ( STATUS "---> Processing tools" )
-add_executable( mon-text-to-char-array tools/mon-text-to-char-array/main.cpp)
-target_link_libraries(mon-text-to-char-array ${GLOBAL_LINK_LIBS})
-install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
-# +++++++++++++++++++ tools +++++++++++++++++++
+
 
 
 # +++++++++++++++++++ libaryes +++++++++++++++++++
@@ -207,7 +203,7 @@ include_directories( ${GEN_PATH}
                      defines )
 
 function(add_run target_name)
-  file(WRITE ${GEN_PATH}/${target_name}-run "#!/bin/bash\n\nLD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/${LIB_GLOBAL_TARGET}\" ./${target_name} $@\n\n"  )
+  file(WRITE ${GEN_PATH}/${target_name}-run "#!/bin/bash\n\nLD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/${LIB_GLOBAL_TARGET}\" ${CMAKE_INSTALL_PREFIX}/bin/${target_name} $@\n\n"  )
   install(FILES ${GEN_PATH}/${target_name}-run
           DESTINATION bin
           PERMISSIONS
@@ -264,16 +260,24 @@ IF( BUILD_NODE )
   add_executable( mon-node ${mon-node-headers} ${mon-node-sources})
   target_link_libraries(mon-node dl)
   add_daemon(mon-node)
-
-  MESSAGE ( STATUS "---> Processing sensor tester" )
-  SET(mon-sensor-test-headers
-      daemons/node/src/sensors/csensor.h)
-  SET(mon-sensor-test-sources
-      daemons/node/src/sensors/csensor.cpp
-      tools/mon-sensor-test/main.cpp )
-  add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
-  target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})
-  install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
-  add_run(mon-sensor-test)
 ENDIF( BUILD_NODE )
 # +++++++++++++++++++ applications +++++++++++++++++++
+
+# +++++++++++++++++++ tools +++++++++++++++++++
+MESSAGE ( STATUS "---> Processing char array generator" )
+add_executable( mon-text-to-char-array tools/mon-text-to-char-array/main.cpp)
+target_link_libraries(mon-text-to-char-array base config logger sensordata dl ${GLOBAL_LINK_LIBS})
+install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
+add_run(mon-text-to-char-array)
+
+MESSAGE ( STATUS "---> Processing sensor tester" )
+SET(mon-sensor-test-headers
+    daemons/node/src/sensors/csensor.h)
+SET(mon-sensor-test-sources
+    daemons/node/src/sensors/csensor.cpp
+    tools/mon-sensor-test/main.cpp )
+add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
+target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})
+install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
+add_run(mon-sensor-test)
+# +++++++++++++++++++ tools +++++++++++++++++++

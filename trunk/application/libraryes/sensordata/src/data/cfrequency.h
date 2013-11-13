@@ -29,7 +29,6 @@ class CFrequency
 {
   public:
     CFrequency(const EFrequencyMeasurment &i_measurment, const float &i_frequency);
-    CFrequency(const std::string &freq);
     float asHz ();
     float asSPP();
 

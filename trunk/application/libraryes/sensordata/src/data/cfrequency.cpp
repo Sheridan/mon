@@ -14,23 +14,6 @@ CFrequency::CFrequency(const EFrequencyMeasurment &i_measurment, const float &i_
 {
 }
 
-CFrequency::CFrequency(const std::string &freq)
-{
-  int index   = freq.find(" ");
-  if (index != std::string::npos)
-  {
-    m_frequency  = mon::lib::base::toFloat(freq.substr(0, index));
-    std::string meas = freq.substr(index+1, freq.length()-1);
-         if(meas.compare("Hz") == 0) { m_measurment = ftHz; }
-    else if(meas.compare("SPP") == 0) { m_measurment = ftSPP; }
-  }
-  else
-  {
-    m_frequency  = mon::lib::base::toFloat(freq);
-    m_measurment = ftSPP;
-  }
-}
-
 float CFrequency::asHz()
 {
   switch(m_measurment)
