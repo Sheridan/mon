@@ -1,6 +1,6 @@
 /* %Id% */
 #include "cdefinition.h"
-#include "stl-helper.h"
+
 namespace mon
 {
 namespace lib

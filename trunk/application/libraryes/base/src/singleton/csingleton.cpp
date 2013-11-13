@@ -3,7 +3,6 @@
 #include "cconfig.h"
 #include "clogger.h"
 #include "signals-helper.h"
-#include "stl-helper.h"
 
 namespace mon
 {

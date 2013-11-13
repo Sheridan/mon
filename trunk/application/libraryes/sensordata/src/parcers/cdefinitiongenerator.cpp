@@ -1,5 +1,4 @@
 #include "cdefinitiongenerator.h"
-#include "stl-helper.h"
 #include "st.h"
 
 //#define MON_DEFINITION_GENERATOR_DEBUG_ENABLE
@@ -85,9 +84,9 @@ void CDefinitionGenerator::generateTags(CFrame *frame)
   MON_DEFINITION_GENERATOR_DEBUG("Frame '" << frame->name() << "' tags start");
   TTags t_tags = frame->tags();
   (*m_result) << "tags:{";
-  MON_STL_SET_FOREACH(tags, t_tags)
+  for(auto &tags : t_tags)
   {
-    (*m_result) << MON_STL_SET_VALUE(tags) << ";";
+    (*m_result) << tags << ";";
   }
   (*m_result) << "}";
   MON_DEFINITION_GENERATOR_DEBUG("Frame '" << frame->name() << "' tags done");

@@ -1,6 +1,6 @@
 /* %Id% */
 #include "cframe.h"
-#include "stl-helper.h"
+
 namespace mon
 {
 namespace lib

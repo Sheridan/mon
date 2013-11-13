@@ -4,7 +4,6 @@
 #include "global.h"
 #include "stringhelper.h"
 #include "infinity-cycle-helper.h"
-#include "stl-helper.h"
 
 namespace mon
 {

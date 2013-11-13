@@ -4,7 +4,6 @@
 #include "global.h"
 #include "csingleton.h"
 #include "generated.h"
-#include "stl-helper.h"
 #include <errno.h>
 #include <string.h>
 // main

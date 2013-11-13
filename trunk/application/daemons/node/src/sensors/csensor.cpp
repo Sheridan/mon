@@ -4,7 +4,6 @@
 #include "csensor.h"
 #include <dlfcn.h>
 #include "cdefinitionparcer.h"
-#include "stl-helper.h"
 
 namespace mon
 {

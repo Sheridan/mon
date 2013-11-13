@@ -1,7 +1,6 @@
 #include "cstatisticcache.h"
 #include <climits>
 #include "st.h"
-#include "stl-helper.h"
 
 namespace mon
 {

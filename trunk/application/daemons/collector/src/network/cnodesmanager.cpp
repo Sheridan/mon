@@ -1,7 +1,6 @@
 /* %Id% */
 #include "collector_st.h"
 #include "cnodesmanager.h"
-#include "stl-helper.h"
 
 namespace mon
 {

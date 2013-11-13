@@ -1,7 +1,6 @@
 /* %Id% */
 #include "cfolder.h"
 #include "cfile.h"
-#include "stl-helper.h"
 
 namespace mon
 {
