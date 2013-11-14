@@ -20,8 +20,8 @@ class CParcerString : public CParcer
     ~CParcerString();
 
   private:
-    TStdStringCharacter goOneCharacterForward();
-    TStdStringCharacter goOneCharacterBack();
+    TStdStringCharacter goOneCharacterForward() final;
+    TStdStringCharacter goOneCharacterBack() final;
 };
 
 }

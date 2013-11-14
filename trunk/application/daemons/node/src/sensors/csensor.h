@@ -17,12 +17,12 @@ namespace daemons
 namespace node
 {
 
-typedef void               (*TFInitSensor)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
-typedef const char        *(*TFGetName)            (void);
-typedef const char        *(*TFGetDefinition)      (void);
-typedef const unsigned int (*TFGetDefinitionLength)(void);
-typedef const char        *(*TFGetStatistics)      (const char *);
-typedef const bool         (*TFGetFrameAvialable)  (const char *);
+using TFInitSensor          = void               (*)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
+using TFGetName             = const char        *(*)(void);
+using TFGetDefinition       = const char        *(*)(void);
+using TFGetDefinitionLength = const unsigned int (*)(void);
+using TFGetStatistics       = const char        *(*)(const char *);
+using TFGetFrameAvialable   = const bool         (*)(const char *);
 
 //! Сенсор ноды, посредник между нодой и библиотекой
 class CSensor : mon::lib::base::CTimer
@@ -44,7 +44,7 @@ class CSensor : mon::lib::base::CTimer
     void * m_handle;
     mon::lib::sensordata::CStatisticCache m_cache;
     mon::lib::sensordata::CDefinition *m_definition;
-    void onTimer();
+    void onTimer() final;
 };
 
 typedef std::list<CSensor *> TSensors;

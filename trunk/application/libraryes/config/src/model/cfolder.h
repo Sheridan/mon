@@ -19,15 +19,15 @@ public:
   CFolder(const std::string &nodeName, CNode *parentNode);
   ~CFolder();
 
-  bool         containsFolder(const std::string & name);
-  CFolder    * folder        (const std::string & name);
-  int          foldersCount  ();
-  TFoldersList folders       ();
+  bool         containsFolder(const std::string & name) final;
+  CFolder    * folder        (const std::string & name) final;
+  int          foldersCount  () final;
+  TFoldersList folders       () final;
 
-  bool         containsFile(const std::string & name);
-  CFile      * file        (const std::string & name);
-  int          filesCount  ();
-  TFilesList   files       ();
+  bool         containsFile(const std::string & name) final;
+  CFile      * file        (const std::string & name) final;
+  int          filesCount  () final;
+  TFilesList   files       () final;
 
   CFolder   * parent();
 

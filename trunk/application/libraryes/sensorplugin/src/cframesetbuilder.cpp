@@ -43,7 +43,9 @@ CFramesetBuilder &CFramesetBuilder::newFrame(const int &number)
   return *this;
 }
 
-#define MON_APPEND_DATA_FIELD mon::lib::base::CStringBuilder::append(val); mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(field, field));
+#define MON_APPEND_DATA_FIELD \
+  mon::lib::base::CStringBuilder::append(val); \
+  mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(field, field));
 
 void CFramesetBuilder::append(const int           &val) { MON_APPEND_DATA_FIELD }
 void CFramesetBuilder::append(const unsigned int  &val) { MON_APPEND_DATA_FIELD }

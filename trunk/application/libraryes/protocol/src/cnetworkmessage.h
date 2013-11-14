@@ -16,7 +16,7 @@ namespace protocol
 class CProtocol;
 
 //! Форматтер сетевого сообщения
-class CNetworkMessage : public mon::lib::base::CStringBuilder
+class CNetworkMessage : public mon::lib::base::CStringBuilderBase
 {
     MON_STRING_BUILDER(CNetworkMessage)
     MON_READONLY_PROPERTY(EProtocolMessageType, type)

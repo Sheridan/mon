@@ -30,9 +30,9 @@ private:
   TRemoteNodeSensors m_nodeSensors;
 
   //! Вызывается при успешном коннекте сокета к ноде, инициализирует обмен данными по протоколу
-  void connected(const std::string &to_addr, const unsigned short &to_port);
+  void connected(const std::string &to_addr, const unsigned short &to_port) final;
   //! Заглушка из за архитектурного недостатка
-  void incommingMessage(const std::string &message);
+  void incommingMessage(const std::string &message) final;
 
   //! Вызывается при ответе на запрос подключения
   void incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg);

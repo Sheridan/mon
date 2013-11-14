@@ -22,7 +22,7 @@ enum EPriority
 };
 
 //! Единичное событие
-class CLogMessage : public mon::lib::base::CStringBuilder
+class CLogMessage : public mon::lib::base::CStringBuilderBase
 {
     MON_STRING_BUILDER(CLogMessage)
 public:

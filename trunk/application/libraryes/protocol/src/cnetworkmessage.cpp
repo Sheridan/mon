@@ -11,13 +11,13 @@ namespace protocol
 {
 
 CNetworkMessage::CNetworkMessage(const TProtocolMessageID &id, const EProtocolMessageType &i_type)
-  : mon::lib::base::CStringBuilder(),
+  : mon::lib::base::CStringBuilderBase(),
     m_type(i_type),
     m_id(id)
 {}
 
 CNetworkMessage::CNetworkMessage(const TProtocolMessageID & id, const EProtocolMessageType &i_type, const std::string  &i_text)
-  : mon::lib::base::CStringBuilder(),
+  : mon::lib::base::CStringBuilderBase(),
     m_type(i_type),
     m_id(id)
 {
@@ -25,7 +25,7 @@ CNetworkMessage::CNetworkMessage(const TProtocolMessageID & id, const EProtocolM
 }
 
 CNetworkMessage::CNetworkMessage(const std::string  &i_incoming)
-  : mon::lib::base::CStringBuilder()
+  : mon::lib::base::CStringBuilderBase()
 {
   int id_index   = i_incoming.find(MON_PROTOCOL_DELIMITER(id  , type   ));
   int type_index = i_incoming.find(MON_PROTOCOL_DELIMITER(type, message));

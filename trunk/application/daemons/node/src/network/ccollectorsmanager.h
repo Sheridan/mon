@@ -25,8 +25,8 @@ private:
   TRemoteCollectors m_collectors;
 
   //! "Отщепление" сокета при успешном входящем подключении
-  mon::lib::network::CSocketClient * incommingConnection(const int &clientDescriptor, const std::string &addr_from, const int & port_from);
-  void incommingMessage(const std::string &message) {}
+  mon::lib::network::CSocketClient * incommingConnection(const int &clientDescriptor, const std::string &addr_from, const int & port_from) final;
+  void incommingMessage(const std::string &message) final;
 };
 
 }

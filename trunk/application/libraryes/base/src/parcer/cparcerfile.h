@@ -21,8 +21,8 @@ class CParcerFile : public CParcer
   private:
     FILE    *m_file;
 
-    TStdStringCharacter goOneCharacterForward();
-    TStdStringCharacter goOneCharacterBack();
+    TStdStringCharacter goOneCharacterForward() final;
+    TStdStringCharacter goOneCharacterBack() final;
 };
 
 }

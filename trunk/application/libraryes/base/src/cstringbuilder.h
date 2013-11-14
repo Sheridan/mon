@@ -4,30 +4,33 @@
 #include <string>
 #include "protocol-control.h"
 
-#define MON_STRING_BUILDER(_class) \
+#define MON_STRING_BUILDER_BASE(_class,_implement) \
   public: \
-  _class &operator<<(const int                 &val) { append(val); return *this; } \
-  _class &operator<<(const unsigned int        &val) { append(val); return *this; } \
-  _class &operator<<(const unsigned long long  &val) { append(val); return *this; } \
-  _class &operator<<(const double              &val) { append(val); return *this; } \
-  _class &operator<<(const float               &val) { append(val); return *this; } \
-  _class &operator<<(const bool                &val) { append(val); return *this; } \
-  _class &operator<<(const std::string         &val) { append(val); return *this; } \
-  _class &operator<<(const char                *val) { append(val); return *this; } \
-  _class &operator<<(const char                &val) { append(val); return *this; } \
-  _class &operator<<(const unsigned char       &val) { append(val); return *this; } \
-  _class &operator+(const int                 &val) { append(val); return *this; } \
-  _class &operator+(const unsigned int        &val) { append(val); return *this; } \
-  _class &operator+(const unsigned long long  &val) { append(val); return *this; } \
-  _class &operator+(const double              &val) { append(val); return *this; } \
-  _class &operator+(const float               &val) { append(val); return *this; } \
-  _class &operator+(const bool                &val) { append(val); return *this; } \
-  _class &operator+(const std::string         &val) { append(val); return *this; } \
-  _class &operator+(const char                *val) { append(val); return *this; } \
-  _class &operator+(const char                &val) { append(val); return *this; } \
-  _class &operator+(const unsigned char       &val) { append(val); return *this; } \
-  _class &operator<<(mon::lib::protocol::EProtocolMessageType &val) { append(val); return *this; } \
-  _class &operator+(mon::lib::protocol::EProtocolMessageType &val) { append(val); return *this; } \
+  virtual _class &operator<<(const int                 &val) _implement; \
+  virtual _class &operator<<(const unsigned int        &val) _implement; \
+  virtual _class &operator<<(const unsigned long long  &val) _implement; \
+  virtual _class &operator<<(const double              &val) _implement; \
+  virtual _class &operator<<(const float               &val) _implement; \
+  virtual _class &operator<<(const bool                &val) _implement; \
+  virtual _class &operator<<(const std::string         &val) _implement; \
+  virtual _class &operator<<(const char                *val) _implement; \
+  virtual _class &operator<<(const char                &val) _implement; \
+  virtual _class &operator<<(const unsigned char       &val) _implement; \
+  virtual _class &operator+(const int                 &val) _implement; \
+  virtual _class &operator+(const unsigned int        &val) _implement; \
+  virtual _class &operator+(const unsigned long long  &val) _implement; \
+  virtual _class &operator+(const double              &val) _implement; \
+  virtual _class &operator+(const float               &val) _implement; \
+  virtual _class &operator+(const bool                &val) _implement; \
+  virtual _class &operator+(const std::string         &val) _implement; \
+  virtual _class &operator+(const char                *val) _implement; \
+  virtual _class &operator+(const char                &val) _implement; \
+  virtual _class &operator+(const unsigned char       &val) _implement; \
+  virtual _class &operator<<(mon::lib::protocol::EProtocolMessageType &val) _implement; \
+  virtual _class &operator+(mon::lib::protocol::EProtocolMessageType &val) _implement;
+
+#define MON_STRING_BUILDER_DEFAULT_IMPLEMENT final { append(val); return *this; }
+#define MON_STRING_BUILDER(_class) MON_STRING_BUILDER_BASE(_class, MON_STRING_BUILDER_DEFAULT_IMPLEMENT)
 
 //  _class &operator>>(const int           &val) { preface(val); return *this; }
 //  _class &operator>>(const unsigned int  &val) { preface(val); return *this; }
@@ -56,12 +59,12 @@ namespace base
 {
 
 //! Конкатенатор строк из чего попало
-class CStringBuilder
+class CStringBuilderBase
 {
-    MON_STRING_BUILDER(CStringBuilder)
+    MON_STRING_BUILDER_BASE(CStringBuilderBase,=0)
   public:
-    CStringBuilder(const std::string &init = "");
-    virtual ~CStringBuilder();
+    CStringBuilderBase(const std::string &init = "");
+    virtual ~CStringBuilderBase();
 
     virtual void append(const int                 &val);
     virtual void append(const unsigned int        &val);
@@ -93,6 +96,14 @@ class CStringBuilder
 
   private:
     std::string m_string;
+};
+
+class CStringBuilder : public CStringBuilderBase
+{
+    MON_STRING_BUILDER(CStringBuilder)
+  public:
+      CStringBuilder(const std::string &init = "") : CStringBuilderBase(init) {}
+     ~CStringBuilder() {}
 };
 
 }

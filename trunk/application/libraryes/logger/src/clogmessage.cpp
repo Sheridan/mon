@@ -9,7 +9,7 @@ namespace logger
 {
 
 CLogMessage::CLogMessage(const EPriority &priority)
-  : mon::lib::base::CStringBuilder(), m_priority(priority)
+  : mon::lib::base::CStringBuilderBase(), m_priority(priority)
 {}
 
 CLogMessage::~CLogMessage()

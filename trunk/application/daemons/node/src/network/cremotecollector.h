@@ -22,12 +22,12 @@ class CRemoteCollector : public mon::lib::network::CSocketClient, public CNodePr
 
   private:
     mon::lib::config::CFolder *m_selfConfig;
-    void incommingMessage(const std::string &message);
+    void incommingMessage(const std::string &message) final;
 
-    void connected(const std::string &to_addr, const unsigned short &to_port);
-    void requestOfConnect(lib::protocol::CNetworkMessage *msg);
-    void requestOfSensorsList(lib::protocol::CNetworkMessage *msg);
-    void requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg);
+    void connected(const std::string &to_addr, const unsigned short &to_port) final;
+    void requestOfConnect(lib::protocol::CNetworkMessage *msg) final;
+    void requestOfSensorsList(lib::protocol::CNetworkMessage *msg) final;
+    void requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg) final;
 };
 
 typedef std::list<CRemoteCollector *> TRemoteCollectors;
