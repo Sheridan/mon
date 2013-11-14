@@ -43,7 +43,7 @@ void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage 
 {
   MON_LOG_DBG(msg->string());
   sendReply(msg, msg->string() +
-                 std::to_string(MON_PROTOCOL_DELIMITER(sensorname ,definition)) +
+                 MON_PROTOCOL_DELIMITER(sensorname ,definition) +
                  MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition());
 }
 

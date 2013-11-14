@@ -16,7 +16,6 @@ CSensor::CSensor(const std::string &i_name)
   : mon::lib::base::CTimer(),
     m_name(i_name)
 {
-  settimeout(1);
   m_handle            = nullptr;
   initSensor          = nullptr;
   getName             = nullptr;
@@ -61,6 +60,9 @@ void CSensor::load()
     m_definition = new mon::lib::sensordata::CDefinition();
     mon::lib::sensordata::CDefinitionParcer parcer(m_definition, getDefinition());
     parcer.parce();
+//    float to = MON_ST_CONFIG->folder("sensors")->folder(m_name)->folder("frequency")->containsFile("hz") ?
+//                MON_ST_CONFIG->folder("sensors")->folder(m_name)->folder("frequency")->file("hz")->get(m_definition->)
+//    settimeout();
     timerStart();
   }
 }

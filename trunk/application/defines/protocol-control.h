@@ -12,9 +12,8 @@ namespace protocol
 #define MON_PROTO_DELIMITER(_left,_right) PD##_left##_right
 #define MON_PROTOCOL_DELIMITER(_left,_right) mon::lib::protocol::MON_PROTO_DELIMITER(_left,_right)
 #define MON_DECLARE_PROTOCOL_DELIMITER(_left,_right,_delimiter) \
-  static const TProtocolDelimiter MON_PROTO_DELIMITER(_left,_right) = _delimiter
+  static const char MON_PROTO_DELIMITER(_left,_right) = _delimiter
 
-typedef unsigned char TProtocolDelimiter;
 MON_DECLARE_PROTOCOL_DELIMITER(type       ,message    ,'^' ); //!< Разделитель между типом сообщения и самим сообщением
 MON_DECLARE_PROTOCOL_DELIMITER(id         ,type       ,'@' ); //!< Резделитель идентификатора и типа сообщения
 MON_DECLARE_PROTOCOL_DELIMITER(end        ,line       ,'\n'); //!< Конец сообщения
