@@ -379,7 +379,7 @@ void CDefinitionParcer::readFrameType(CFrame *frame)
 void CDefinitionParcer::readFrequences(CFrame *frame)
 {
   float                    value      = 0;
-  EFrequencyMeasurment     measurment = EFrequencyMeasurment::ftHz;
+  EFrequencyMeasurment     measurment = EFrequencyMeasurment::Hz;
   EFrequencyPurpose        purpose    = fpMax;
   EFrequencyCurrentReading fcr        = fcrKeyword;
   MON_PARCER_LOOP_BEGIN(read_frequency)
@@ -441,15 +441,15 @@ void CDefinitionParcer::readFrequences(CFrame *frame)
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_frequency, "Missed frequency");
       MON_PARCER_IS_KEYWORD(read_frequency, "Hz")
       {
-        measurment = EFrequencyMeasurment::ftHz;
+        measurment = EFrequencyMeasurment::Hz;
       }
       MON_PARCER_IS_KEYWORD(read_frequency, "SPP")
       {
-        measurment = EFrequencyMeasurment::ftSPP;
+        measurment = EFrequencyMeasurment::SPP;
       }
       frame->setFrequency(purpose, measurment, value);
       value      = 0;
-      measurment = EFrequencyMeasurment::ftHz;
+      measurment = EFrequencyMeasurment::Hz;
       purpose    = fpMax;
       fcr        = fcrKeyword;
       MON_PARCER_BUFFER_RESET(read_frequency);
