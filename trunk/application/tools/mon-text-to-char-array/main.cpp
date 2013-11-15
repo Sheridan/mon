@@ -12,9 +12,11 @@
 #define BREAK_AT 20
 namespace mon
 {
-namespace application
+namespace applications
 {
 namespace tool
+{
+namespace text2char
 {
 std::string parceAndGenerate(const std::string &def)
 {
@@ -66,5 +68,6 @@ int nsmain(int argc, char *argv[])
 }
 }
 }
+}
 
-int main(int argc, char *argv[]) { return mon::application::tool::nsmain(argc, argv); }
+int main(int argc, char *argv[]) { return mon::applications::tool::text2char::nsmain(argc, argv); }

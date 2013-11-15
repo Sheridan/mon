@@ -18,9 +18,11 @@
 #include "csensor.h"
 namespace mon
 {
-namespace application
+namespace applications
 {
 namespace tool
+{
+namespace sensortest
 {
 // ------------------ variables --------------------------------------------------------------------
 mon::lib::config::CConfig *config;
@@ -138,6 +140,7 @@ int nsmain(int argc, char *argv[])
 }
 }
 }
+}
 
-int main(int argc, char *argv[]) { return mon::application::tool::nsmain(argc, argv); }
+int main(int argc, char *argv[]) { return mon::applications::tool::sensortest::nsmain(argc, argv); }
 // ------------------ main -------------------------------------------------------------------------

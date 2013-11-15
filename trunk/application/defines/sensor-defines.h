@@ -36,6 +36,7 @@
 #endif
 
 #define MON_SENSOR_BEGIN \
+  namespace mon { namespace sensor { namespace %sensor_name% { \
   mon::lib::logger::CLogger * logger ; \
   mon::lib::config::CFolder * config ; \
   const char * sensor_name = { "%sensor_name%\0" }; \
@@ -46,7 +47,7 @@
   MON_SENSOR_IMPLEMENT_GENERIC_FUNCTION(const char *      , getDefinition      , "Request %sensor_name% definition."        ) { return definition       ; } \
   MON_SENSOR_IMPLEMENT_GENERIC_FUNCTION(const unsigned int, getDefinitionLength, "Request %sensor_name% definition length." ) { return definition_length; }
 
-#define MON_SENSOR_END int main (int argc, char* argv[]) { return 0; }
+#define MON_SENSOR_END }}} int main (int argc, char* argv[]) { return 0; }
 
 #define MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION      MON_SENSOR_IMPLEMENT_FRAME_RELATED_FUNCTION(const char *      , getStatistics    , "Request %sensor_name% statistics."               )
 #define MON_SENSOR_IMPLEMENT_EXEMPLARS_COUNT_FUNCTION MON_SENSOR_IMPLEMENT_FRAME_RELATED_FUNCTION(const unsigned int, getFramesetLength, "Request %sensor_name% framesets frames count."   )
