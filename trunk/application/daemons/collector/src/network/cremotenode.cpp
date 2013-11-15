@@ -13,12 +13,14 @@ namespace daemons
 namespace collector
 {
 
-CRemoteNode::CRemoteNode(const std::string &confLeaf)
+CRemoteNode::CRemoteNode(const std::string &name)
   : mon::lib::network::CSocketClient(),
-    CCollectorProtocol(this)
+    CCollectorProtocol(this),
+    mon::lib::base::CTimer(),
+    m_name(name)
 {
-  MON_LOG_DBG("Node " << confLeaf << " ");
-  m_selfConfig = MON_ST_CONFIG->folder("nodes")->folder(confLeaf);
+  MON_LOG_DBG("Node " << name << " ");
+  m_selfConfig = MON_ST_CONFIG->folder("nodes")->folder(name);
   setTimeout                               (m_selfConfig->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
   setAddrRemote                            (m_selfConfig->folder("connection")->file("host")   ->get(std::string("localhost")));
   setPortRemote(static_cast<unsigned short>(m_selfConfig->folder("connection")->file("port")   ->get(MON_DEFAULT_LISTEN_PORT)));
@@ -33,6 +35,14 @@ CRemoteNode::~CRemoteNode()
     delete sensor;
   }
   m_nodeSensors.clear();
+}
+
+void CRemoteNode::onTimer()
+{
+  for(CRemoteNodeSensor *sensor : m_nodeSensors)
+  {
+    requestSensorFrameStatistic(m_name, sensor->name());
+  }
 }
 
 MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
@@ -84,7 +94,7 @@ void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessa
   }
 }
 
-void CRemoteNode::incomingAnswerOnrequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
+void CRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
   CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(msg->string().substr(0, index),
@@ -92,6 +102,12 @@ void CRemoteNode::incomingAnswerOnrequestSensorDefinition(lib::protocol::CNetwor
                                                       this);
   m_nodeSensors.push_back(rnSensor);
 }
+
+void CRemoteNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
+{
+  MON_LOG_DBG(msg->string());
+}
+
 
 }
 }

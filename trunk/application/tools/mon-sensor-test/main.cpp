@@ -112,7 +112,7 @@ int nsmain(int argc, char *argv[])
   sensor = new mon::daemons::node::CSensor(sensorFile);
   sensor->load();
   MON_LOG_NFO("Sensor name: " << sensor->getName());
-  bool frameAvialable = sensor->getFrameAvialable(frame.c_str());
+  bool frameAvialable = true; //sensor->getFrameAvialable(frame.c_str());
   MON_LOG_NFO("Sensor avialable? " << frameAvialable);
   if(frameAvialable)
   {
@@ -127,7 +127,7 @@ int nsmain(int argc, char *argv[])
     }
     for (int a = 0; a < numberOfGetStatistics; a++)
     {
-      MON_LOG_NFO(sensor->getStatistics(frame.c_str()));
+      //MON_LOG_NFO(sensor->getStatistics(frame.c_str()));
       usleep(timeBetweenStatisticsCall);
     }
   }

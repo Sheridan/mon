@@ -24,12 +24,8 @@ void CSensorsManager::load()
   {
     MON_LOG_DBG("Loading sensor " << folder->name())
     CSensor *t_sensor = new CSensor(folder->name());
-    m_sensors.push_back(t_sensor);
+    m_sensors[folder->name()] = t_sensor;
     t_sensor->load();
-    if(t_sensor->getFrameAvialable(nullptr))
-    {
-      MON_LOG_NFO("Sensor " << t_sensor->getName() << " loaded");
-    }
   }
 }
 
@@ -38,21 +34,19 @@ std::string CSensorsManager::getGensorsNamesList(const std::string &delimiter)
   std::string result;
   for(auto &sensor : m_sensors)
   {
-    result += std::string(sensor->getName()) + delimiter;
+    result += std::string(sensor.second->getName()) + delimiter;
   }
   return result.substr(0, result.length()-1);
 }
 
 CSensor *CSensorsManager::sensor(const std::string &name)
 {
-    for(auto &sensor : m_sensors)
-    {
-        if(name.compare(sensor->getName()) == 0)
-        {
-            return sensor;
-        }
-    }
-    return nullptr;
+  if(m_sensors.count(name) == 0)
+  {
+    MON_LOG_ERR("Requested sensor ("<< name <<") not exists");
+    MON_ABORT;
+  }
+  return m_sensors[name];
 }
 
 }

@@ -13,16 +13,13 @@ namespace node
 {
 
 CSensor::CSensor(const std::string &i_name)
-  : mon::lib::base::CTimer(),
-    m_name(i_name)
+  : m_name(i_name)
 {
   m_handle            = nullptr;
   initSensor          = nullptr;
   getName             = nullptr;
   getDefinition       = nullptr;
   getDefinitionLength = nullptr;
-  getStatistics       = nullptr;
-  getFrameAvialable   = nullptr;
   MON_LOG_DBG("Loading sensor '" MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so'");
   m_handle = dlopen(std::string(MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so").c_str(), RTLD_NOW);
   if (!m_handle)
@@ -50,20 +47,46 @@ void CSensor::load()
   if (m_handle)
   {
     char *error; error = nullptr;
+    TFGetStatistics       getStatistics;
+    TFGetFrameAvialable   getFrameAvialable;
     MON_IMPORT(TFInitSensor         , initSensor         );
     MON_IMPORT(TFGetName            , getName            );
     MON_IMPORT(TFGetDefinition      , getDefinition      );
     MON_IMPORT(TFGetDefinitionLength, getDefinitionLength);
     MON_IMPORT(TFGetStatistics      , getStatistics      );
-    MON_IMPORT(TFGetFrameAvialable  , getFrameAvialable );
+    MON_IMPORT(TFGetFrameAvialable  , getFrameAvialable  );
     initSensor(MON_ST_LOGGER, MON_ST_CONFIG->folder("sensors")->folder(m_name));
     m_definition = new mon::lib::sensordata::CDefinition();
-    mon::lib::sensordata::CDefinitionParcer parcer(m_definition, getDefinition());
+    mon::lib::sensordata::CDefinitionParcer parcer = {m_definition, getDefinition()};
     parcer.parce();
-//    float to = MON_ST_CONFIG->folder("sensors")->folder(m_name)->folder("frequency")->containsFile("hz") ?
-//                MON_ST_CONFIG->folder("sensors")->folder(m_name)->folder("frequency")->file("hz")->get(m_definition->)
-//    settimeout();
-    timerStart();
+    float timeout = 1;
+    mon::lib::config::CFolder *frameConfig;
+    for(auto &frame : m_definition->frames())
+    {
+      frameConfig = MON_ST_CONFIG->folder("sensors")->folder(m_name)->folder("frames")->folder(frame);
+      if(frameConfig->folder("frequency")->containsFile("hz"))
+      {
+        timeout = mon::lib::sensordata::Hz2SPP(frameConfig->folder("frequency")->file("hz")->get(m_definition->frame(frame)->frequency(mon::lib::sensordata::fpDefault)->asHz()));
+      }
+      else if(frameConfig->folder("frequency")->containsFile("spp"))
+      {
+        timeout = frameConfig->folder("frequency")->file("spp")->get(m_definition->frame(frame)->frequency(mon::lib::sensordata::fpDefault)->asSPP());
+      }
+      else
+      {
+        timeout = m_definition->frame(frame)->frequency(mon::lib::sensordata::fpDefault)->asSPP();
+        frameConfig->folder("frequency")->file("spp")->set(timeout);
+      }
+      if(timeout < m_definition->frame(frame)->frequency(mon::lib::sensordata::fpMax)->asSPP())
+      {
+        MON_LOG_WRN("Sensor frame (" << m_name << ":" << frame << ") request frequency above maximum "
+                    "(" << timeout << ">" << m_definition->frame(frame)->frequency(mon::lib::sensordata::fpMax)->asSPP() << "). Using maximum value")
+        timeout = m_definition->frame(frame)->frequency(mon::lib::sensordata::fpMax)->asSPP();
+      }
+      MON_LOG_NFO("Starting sensor frame (" << m_name << ":" << frame << ") statistics mine with frequency " <<
+                  mon::lib::sensordata::Hz2SPP(timeout) << "Hz (one tick in " << timeout << " secunds)")
+      m_frames[frame] = new CFrame(getStatistics, getFrameAvialable, frame, timeout);
+    }
   }
 }
 
@@ -71,37 +94,22 @@ void CSensor::unload()
 {
   if (m_handle)
   {
-    timerStop();
-    while (timerActive()) { sleep(1); }
+    for(auto frame : m_frames)
+    {
+      delete frame.second;
+    }
+    m_frames.clear();
     initSensor          = nullptr;
     getName             = nullptr;
     getDefinition       = nullptr;
     getDefinitionLength = nullptr;
-    getStatistics       = nullptr;
-    getFrameAvialable   = nullptr;
     dlclose(m_handle);
     m_handle = nullptr;
     delete m_definition;
   }
 }
 
-void CSensor::onTimer()
-{
-  for(auto &frame_name : m_definition->frames())
-  {
-    if(getFrameAvialable(frame_name.c_str()))
-    {
-      #ifdef MON_DEBUG
-        std::string sd = getStatistics(frame_name.c_str());
-        MON_LOG_DBG("Sensor data: " << sd);
-        m_cache.store(sd);
-      #else
-        m_cache.store(getStatistics(frame_name.c_str()));
-      #endif
 
-    }
-  }
-}
 
 }
 }

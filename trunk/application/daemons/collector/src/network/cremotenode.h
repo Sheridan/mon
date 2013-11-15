@@ -6,6 +6,7 @@
 #include "class-helper.h"
 #include "ccollectorprotocol.h"
 #include "cfolder.h"
+#include "ctimer.h"
 #include "cremotenodesensor.h"
 #include <list>
 #include <string>
@@ -18,16 +19,21 @@ namespace collector
 {
 
 //! Удаленная нода
-class CRemoteNode : public mon::lib::network::CSocketClient, public CCollectorProtocol
+class CRemoteNode : public mon::lib::network::CSocketClient,
+                    public CCollectorProtocol,
+                    public mon::lib::base::CTimer
 {
   MON_THREADED_FUNCTION_DECLARE(connect)
+  MON_READONLY_PROPERTY(std::string, name)
 public:
-  CRemoteNode(const std::string &confLeaf);
+  CRemoteNode(const std::string &name);
   virtual ~CRemoteNode();
 private:
   mon::lib::config::CFolder *m_selfConfig;
 
   TRemoteNodeSensors m_nodeSensors;
+
+  void onTimer() final;
 
   //! Вызывается при успешном коннекте сокета к ноде, инициализирует обмен данными по протоколу
   void connected(const std::string &to_addr, const unsigned short &to_port) final;
@@ -39,7 +45,9 @@ private:
   //! Вызывается при ответе на запрос списка сенсоров
   void incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg);
   //! Вызывается при ответе на запрос описания сенсора
-  void incomingAnswerOnrequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg);
+  void incomingAnswerOnRequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg);
+  //! Вызывается при ответе на запрос статистики фрейма сенсора
+  void incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg);
 };
 
 typedef std::list<CRemoteNode *> TRemoteNodes;

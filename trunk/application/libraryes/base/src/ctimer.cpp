@@ -16,9 +16,8 @@ CTimer::CTimer(const float &timeout)
   MON_THREADED_FUNCTION_INIT(ticks)
 }
 
-CTimer::CTimer()
+CTimer::CTimer() : CTimer(1)
 {
-  m_timeout = 1;
   MON_THREADED_FUNCTION_INIT(ticks)
 }
 
@@ -33,7 +32,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CTimer, ticks)
       MON_THREADED_ABORT_IF_NEED(ticks);
       usleep(m_timeout * 1000000);
       MON_THREADED_FUNCTION_DISABLE_CANCEL
-      MON_LOG_DBG("Timer tick")
+//      MON_LOG_DBG("Timer tick")
       onTimer();
       MON_THREADED_FUNCTION_ENABLE_CANCEL
   MON_INFINITY_LOOP_END(ticks_loop)

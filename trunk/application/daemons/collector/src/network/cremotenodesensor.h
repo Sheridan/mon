@@ -3,6 +3,7 @@
 #include <string>
 #include <list>
 #include "cdefinition.h"
+#include "class-helper.h"
 
 namespace mon
 {
@@ -16,11 +17,11 @@ class CRemoteNode;
 //! Сенсор удаленной ноды
 class CRemoteNodeSensor
 {
+    MON_READONLY_PROPERTY(std::string, name)
 public:
   CRemoteNodeSensor(const std::string &name, const std::string &definition, CRemoteNode *parentNode);
   ~CRemoteNodeSensor();
 private:
-  std::string m_sensorName;
   CRemoteNode *m_parentNode;
   mon::lib::sensordata::CDefinition *m_definition;
 };

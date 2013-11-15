@@ -6,7 +6,7 @@ utilisation
   frequency:
   {
     max: 2Hz;
-    default: 0.5Hz;
+    default: 0.9Hz;
   }
   flags:
   {

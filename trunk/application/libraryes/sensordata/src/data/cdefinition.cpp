@@ -1,5 +1,7 @@
 /* %Id% */
 #include "cdefinition.h"
+#include "st.h"
+#include "signals-helper.h"
 
 namespace mon
 {
@@ -29,6 +31,8 @@ CFrame *CDefinition::frame(const std::string &name)
   {
     return m_frames[name];
   }
+  MON_LOG_ERR("Requested sensor ("<< name <<") not exists");
+  MON_ABORT;
   return nullptr;
 }
 

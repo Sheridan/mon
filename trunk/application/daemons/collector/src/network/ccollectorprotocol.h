@@ -23,6 +23,8 @@ class CCollectorProtocol : public mon::lib::protocol::CProtocol
     void requestSensorsList();
     //! Запрос описания сенсора
     void requestSensorDefinition(const std::string &sensor);
+    //! Запрос статистики фрейма сенсора
+    void requestSensorFrameStatistic(const std::string &sensor, const std::string &frame);
 
   protected:
     //! Вызывается при ответе на подключение
@@ -30,7 +32,9 @@ class CCollectorProtocol : public mon::lib::protocol::CProtocol
     //! Вызывается при ответе на запрос списка сенсоров ноды
     virtual void incomingAnswerOnRequestSensorList(mon::lib::protocol::CNetworkMessage *msg) = 0;
     //! Вызывается при ответе на запрос описания сенсора
-    virtual void incomingAnswerOnrequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg) = 0;
+    virtual void incomingAnswerOnRequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg) = 0;
+    //! Вызывается при ответе на запрос статистики фрейма сенсора
+    virtual void incomingAnswerOnRequestSensorFrameStatistic(mon::lib::protocol::CNetworkMessage *msg) = 0;
 };
 
 }

@@ -5,8 +5,8 @@ memory
   type: statistic;
   frequency:
   {
-    max: 10Hz;
-    default: 1SPP;
+    max: 2Hz;
+    default: 0.2Hz;
   }
   flags:
   {

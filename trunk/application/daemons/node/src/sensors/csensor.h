@@ -3,12 +3,12 @@
 #define CSENSOR_H
 #include <string>
 #include "class-helper.h"
-#include <list>
+#include <map>
 #include "logger.h"
 #include "config.h"
-#include "ctimer.h"
+
 #include "cdefinition.h"
-#include "cstatisticcache.h"
+#include "cframe.h"
 
 namespace mon
 {
@@ -21,11 +21,9 @@ using TFInitSensor          = void               (*)(mon::lib::logger::CLogger *
 using TFGetName             = const char        *(*)(void);
 using TFGetDefinition       = const char        *(*)(void);
 using TFGetDefinitionLength = const unsigned int (*)(void);
-using TFGetStatistics       = const char        *(*)(const char *);
-using TFGetFrameAvialable   = const bool         (*)(const char *);
 
 //! Сенсор ноды, посредник между нодой и библиотекой
-class CSensor : mon::lib::base::CTimer
+class CSensor
 {
     MON_READONLY_PROPERTY(std::string, name)
   public:
@@ -37,17 +35,15 @@ class CSensor : mon::lib::base::CTimer
     TFGetName             getName;
     TFGetDefinition       getDefinition;
     TFGetDefinitionLength getDefinitionLength;
-    TFGetStatistics       getStatistics;
-    TFGetFrameAvialable   getFrameAvialable;
 
   private:
     void * m_handle;
-    mon::lib::sensordata::CStatisticCache m_cache;
+    TFramesMap m_frames;
     mon::lib::sensordata::CDefinition *m_definition;
-    void onTimer() final;
+
 };
 
-typedef std::list<CSensor *> TSensors;
+typedef std::map<std::string, CSensor *> TSensorsMap;
 
 }
 }

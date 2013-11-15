@@ -29,8 +29,13 @@ void CCollectorProtocol::requestSensorsList()
 
 void CCollectorProtocol::requestSensorDefinition(const std::string &sensor)
 {
-    sendMessage(static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::collector::CCollectorProtocol::incomingAnswerOnrequestSensorDefinition),
+    sendMessage(static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::collector::CCollectorProtocol::incomingAnswerOnRequestSensorDefinition),
                 mon::lib::protocol::mtRequestSensorDefinition, sensor);
+}
+
+void CCollectorProtocol::requestSensorFrameStatistic(const std::string &sensor, const std::string &frame)
+{
+
 }
 
 }

@@ -24,6 +24,9 @@ enum class EFrequencyMeasurment
   SPP //!< Secunds per pulse, один раз в икс секунд
 };
 
+float SPP2Hz(float val);
+float Hz2SPP(float val);
+
 //! Частота сбора данных с фрейма
 class CFrequency
 {

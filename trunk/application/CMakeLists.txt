@@ -247,6 +247,7 @@ IF( BUILD_NODE )
       daemons/node/src/network/cremotecollector.h
       daemons/node/src/network/cnodeprotocol.h
       daemons/node/src/sensors/csensor.h
+      daemons/node/src/sensors/cframe.h
       daemons/node/src/sensors/csensorsmanager.h
   )
   SET(mon-node-sources
@@ -254,6 +255,7 @@ IF( BUILD_NODE )
       daemons/node/src/network/cremotecollector.cpp
       daemons/node/src/network/cnodeprotocol.cpp
       daemons/node/src/sensors/csensor.cpp
+      daemons/node/src/sensors/cframe.cpp
       daemons/node/src/sensors/csensorsmanager.cpp
       daemons/node/src/main.cpp )
   include_directories( daemons/node/src daemons/node/src/network daemons/node/src/sensors )
@@ -272,9 +274,11 @@ add_run(mon-text-to-char-array)
 
 MESSAGE ( STATUS "---> Processing sensor tester" )
 SET(mon-sensor-test-headers
-    daemons/node/src/sensors/csensor.h)
+    daemons/node/src/sensors/csensor.h
+    daemons/node/src/sensors/cframe.h)
 SET(mon-sensor-test-sources
     daemons/node/src/sensors/csensor.cpp
+    daemons/node/src/sensors/cframe.cpp
     tools/mon-sensor-test/main.cpp )
 add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
 target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})
