@@ -2,7 +2,6 @@
 #ifndef CVARIANT_H
 #define CVARIANT_H
 #include <string>
-//#include "cfrequency.h"
 
 namespace mon
 {
@@ -23,7 +22,6 @@ std::string        toString(const float              &val);
 std::string        toString(const double             &val);
 std::string        toString(const unsigned int       &val);
 std::string        toString(const unsigned long long &val);
-//std::string        toString(mon::lib::sensordata::CFrequency *frequency);
 
 //! Тип контента вариант-типа
 enum EContentType
@@ -35,7 +33,6 @@ enum EContentType
   ctFloat,   //!< Число с плавающей точкой
   ctULLong,  //!< Очень большое число ))
   ctString  //!< Строка
-//  ctFrequency//!< Частота
 };
 
 //! Объединение для хранения данных вариант-типа
@@ -47,7 +44,6 @@ union UContent
   unsigned int       m_uint  ;
   unsigned long long m_ull   ;
   char *             m_string;
-//  mon::lib::sensordata::CFrequency *m_frequency;
 };
 
 //! Почти классический вариант.
@@ -62,7 +58,6 @@ public:
   CVariant(const unsigned int               &val) { set(val); }
   CVariant(const unsigned long long         &val) { set(val); }
   //CVariant(const CVariant                   &val) { set(val); }
-//  CVariant(mon::lib::sensordata::CFrequency *val) { set(val); }
   virtual ~CVariant();
   void reset();
   bool isEmpty();
@@ -73,7 +68,6 @@ public:
   const EContentType &     contentType () const;
   const unsigned int       toUInt      () const;
   const unsigned long long toULLong    () const;
-//  mon::lib::sensordata::CFrequency *toFrequency();
 
   void set(const bool                       &val);
   void set(const int                        &val);
@@ -81,8 +75,6 @@ public:
   void set(const unsigned long long         &val);
   void set(const double                     &val);
   void set(const std::string                &val);
-  //void set(const CVariant                   &val);
-//  void set(mon::lib::sensordata::CFrequency *val);
 
 protected:
   EContentType m_contentType;

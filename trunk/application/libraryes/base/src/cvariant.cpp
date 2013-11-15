@@ -28,15 +28,6 @@ std::string        toString(const double &val)             { return std::to_stri
 std::string        toString(const unsigned int  &val)      { return std::to_string(val); }
 std::string        toString(const unsigned long long &val) { return std::to_string(val); }
 
-//std::string        toString(mon::lib::sensordata::CFrequency *frequency)
-//{
-//  std::string res;
-//  std::stringstream buf;
-//  buf << frequency->asHz();
-//  buf >> res;
-//  return res+"Hz";
-//}
-
 CVariant::~CVariant()
 {
   reset();
@@ -100,28 +91,6 @@ void CVariant::set(const unsigned long long &val)
   m_value.m_ull = val;
 }
 
-/*void CVariant::set(const CVariant &val)
-{
-  switch(val.contentType())
-  {
-    case ctBool:      set(val.toBool  ()); break;
-    case ctInt:       set(val.toInt   ()); break;
-    case ctUInt:      set(val.toUInt  ()); break;
-    case ctULLong:    set(val.toULLong()); break;
-    case ctFloat:     set(val.toFloat ()); break;
-    case ctString:    set(val.toString()); break;
-    case ctFrequency: set(val.toFrequency()); break;
-    case ctUnknown:   reset(); break;
-  }
-}*/
-
-//void CVariant::set(mon::lib::sensordata::CFrequency *val)
-//{
-//  reset();
-//  m_contentType       = ctFrequency;
-//  m_value.m_frequency = val;
-//}
-
 const bool CVariant::toBool() const
 {
   switch(m_contentType)
@@ -132,7 +101,6 @@ const bool CVariant::toBool() const
     case ctULLong:    return  m_value.m_ull   > 0;
     case ctFloat:     return  m_value.m_float > 0;
     case ctString:    return  m_value.m_string != nullptr;
-//    case ctFrequency: return  m_value.m_frequency != nullptr;
     case ctUnknown: MON_LOG_WRN("Undefined bool option, return default"); return true;
   } return true;
 }
@@ -147,7 +115,6 @@ const int CVariant::toInt() const
     case ctUInt:      return static_cast<int>(m_value.m_uint);
     case ctULLong:    return static_cast<int>(m_value.m_ull);
     case ctString:    return strtol(m_value.m_string, nullptr, 10);
-//    case ctFrequency: return static_cast<int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
   } return 0;
 }
@@ -162,7 +129,6 @@ const double CVariant::toFloat() const
     case ctUInt:     return static_cast<double>(m_value.m_uint);
     case ctULLong:   return static_cast<double>(m_value.m_ull);
     case ctString:   return strtod(m_value.m_string, nullptr);
-//    case ctFrequency: m_value.m_frequency->asHz();
     case ctUnknown: MON_LOG_WRN("Undefined float option, return default"); return 0;
   } return 0;
 }
@@ -177,7 +143,6 @@ const std::string CVariant::toString() const
     case ctUInt:      return mon::lib::base::toString(m_value.m_uint);
     case ctULLong:    return mon::lib::base::toString(m_value.m_ull);
     case ctBool:      return m_value.m_bool ? "true" : "false";
-//    case ctFrequency: return mon::lib::base::toString(m_value.m_frequency);
     case ctUnknown: MON_LOG_WRN("Undefined string option, return default"); return "undef";
   } return "undef";
 }
@@ -193,7 +158,6 @@ const unsigned int CVariant::toUInt() const
     case ctFloat:     return static_cast<unsigned int>(m_value.m_float);
     case ctULLong:    return static_cast<unsigned int>(m_value.m_ull);
     case ctString:    return strtol(m_value.m_string, nullptr, 10);
-//    case ctFrequency: return static_cast<unsigned int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
   } return 0;
 }
@@ -208,19 +172,9 @@ const unsigned long long CVariant::toULLong() const
     case ctFloat:     return static_cast<unsigned long long>(m_value.m_float);
     case ctUInt:      return static_cast<unsigned long long>(m_value.m_uint);
     case ctString:    return strtol(m_value.m_string, nullptr, 10);
-//    case ctFrequency: return static_cast<unsigned long int>(m_value.m_frequency->asHz());
     case ctUnknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
   } return 0;
 }
-
-//mon::lib::sensordata::CFrequency *CVariant::toFrequency()
-//{
-//  switch(m_contentType)
-//  {
-//    case ctFrequency: return m_value.m_frequency;
-//    default: MON_LOG_ERR("Can not convert value to frequency"); MON_ABORT;
-//  } return 0;
-//}
 
 const EContentType &CVariant::contentType() const
 {
