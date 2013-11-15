@@ -57,7 +57,6 @@ public:
   CVariant(const std::string                &val) { set(val); }
   CVariant(const unsigned int               &val) { set(val); }
   CVariant(const unsigned long long         &val) { set(val); }
-  //CVariant(const CVariant                   &val) { set(val); }
   virtual ~CVariant();
   void reset();
   bool isEmpty();
