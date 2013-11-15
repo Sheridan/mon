@@ -13,7 +13,7 @@ namespace base
 {
 
 #define MON_VARIANT_FROM_STRING(_type) _type res; std::istringstream(val) >> res; return res;
-#define MON_VARIANT_TO_STRING std::string res; std::stringstream buf; buf << val; buf >> res; return res;
+//#define MON_VARIANT_TO_STRING std::string res; std::stringstream buf; buf << val; buf >> res; return res;
 
 int                toInt   (const std::string &val)        { MON_VARIANT_FROM_STRING(int)   ; }
 bool               toBool  (const std::string &val)        { MON_VARIANT_FROM_STRING(bool)  ; }
