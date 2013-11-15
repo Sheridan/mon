@@ -18,7 +18,7 @@ enum EFrequencyPurpose
 };
 
 //! Типы частот
-enum EFrequencyMeasurment
+enum class EFrequencyMeasurment
 {
   ftHz, //!< Обычное упоминание частоты
   ftSPP //!< Secunds per pulse, один раз в икс секунд
