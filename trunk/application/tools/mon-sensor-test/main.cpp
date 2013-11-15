@@ -16,7 +16,12 @@
 #include "cdefinitionparcer.h"
 #include "cdefinitiongenerator.h"
 #include "csensor.h"
-
+namespace mon
+{
+namespace application
+{
+namespace tool
+{
 // ------------------ variables --------------------------------------------------------------------
 mon::lib::config::CConfig *config;
 mon::lib::logger::CLogger *logger;
@@ -93,7 +98,7 @@ std::string parceAndGenerate(const std::string &def)
 
 // ------------------ functions --------------------------------------------------------------------
 // ------------------ main -------------------------------------------------------------------------
-int main(int argc, char *argv[])
+int nsmain(int argc, char *argv[])
 {
   config = new mon::lib::config::CConfig();
   logger = new mon::lib::logger::CLogger();
@@ -129,4 +134,10 @@ int main(int argc, char *argv[])
   delete config;
   return 0;
 }
+
+}
+}
+}
+
+int main(int argc, char *argv[]) { return mon::application::tool::nsmain(argc, argv); }
 // ------------------ main -------------------------------------------------------------------------
