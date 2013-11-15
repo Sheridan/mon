@@ -113,16 +113,16 @@ void CDefinitionGenerator::generateField(CField *field)
               << "type:";
   switch (field->type())
   {
-    case dtPercent:         (*m_result) << "%"       ; break;
-    case dtBool:            (*m_result) << "bool"    ; break;
-    case dtShort:           (*m_result) << "short"   ; break;
-    case dtUnsignedShort:   (*m_result) << "ushort"  ; break;
-    case dtInteger:         (*m_result) << "integer" ; break;
-    case dtUnsignedIinteger:(*m_result) << "uinteger"; break;
-    case dtLong:            (*m_result) << "long"    ; break;
-    case dtUnsignedLong:    (*m_result) << "ulong"   ; break;
-    case dtFloat:           (*m_result) << "float"   ; break;
-    case dtString:          (*m_result) << "string"   ; break;
+    case EFieldDataType::Percent: (*m_result) << "%"       ; break;
+    case EFieldDataType::Bool:    (*m_result) << "bool"    ; break;
+    case EFieldDataType::Short:   (*m_result) << "short"   ; break;
+    case EFieldDataType::UShort:  (*m_result) << "ushort"  ; break;
+    case EFieldDataType::Int:     (*m_result) << "integer" ; break;
+    case EFieldDataType::UInt:    (*m_result) << "uinteger"; break;
+    case EFieldDataType::Long:    (*m_result) << "long"    ; break;
+    case EFieldDataType::ULong:   (*m_result) << "ulong"   ; break;
+    case EFieldDataType::Float:   (*m_result) << "float"   ; break;
+    case EFieldDataType::String:  (*m_result) << "string"  ; break;
   }
   (*m_result) << ";description:\"" << field->description() << "\";"
               << "}";

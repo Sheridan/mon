@@ -11,7 +11,7 @@ CField::CField()
   m_name = "";
   m_label = "";
   m_description = "";
-  m_type = dtInteger;
+  m_type = EFieldDataType::Int;
 }
 
 CField::CField(const std::string &name, const std::string &label, const EFieldDataType &type, const std::string &description)

@@ -12,18 +12,18 @@ namespace sensordata
 {
 
 //! Тип данных поля фрейма
-enum EFieldDataType
+enum class EFieldDataType
 {
-  dtPercent,          //!< Процент
-  dtBool,             //!< bool
-  dtShort,            //!< short
-  dtUnsignedShort,    //!< unsigned short
-  dtInteger,          //!< int
-  dtUnsignedIinteger, //!< unsigned int
-  dtLong,             //!< long int
-  dtUnsignedLong,     //!< unsigned long
-  dtFloat,            //!< float
-  dtString            //!< Строка
+  Percent, //!< Процент
+  Bool,    //!< bool
+  Short,   //!< short
+  UShort,  //!< unsigned short
+  Int,     //!< int
+  UInt,    //!< unsigned int
+  Long,    //!< long int
+  ULong,   //!< unsigned long
+  Float,   //!< float
+  String   //!< Строка
 };
 
 //! Поле фрейма

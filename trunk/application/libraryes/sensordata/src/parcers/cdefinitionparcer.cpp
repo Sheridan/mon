@@ -174,7 +174,7 @@ void CDefinitionParcer::readFields(CFrame *frame)
 void CDefinitionParcer::readField(CFrame *frame, const std::string &name)
 {
   std::string    label       = "";
-  EFieldDataType type        = dtInteger;
+  EFieldDataType type        = EFieldDataType::Int;
   std::string    description = "";
   MON_PARCER_LOOP_BEGIN(read_field)
   {
@@ -532,23 +532,23 @@ EFieldDataType CDefinitionParcer::readFieldType()
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(read_value, ';')
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(read_value, "Missed field type");
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "%"       , dtPercent         );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "bool"    , dtBool            );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "short"   , dtShort           );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "ushort"  , dtUnsignedShort   );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "integer" , dtInteger         );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "uinteger", dtUnsignedIinteger);
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "long"    , dtLong            );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "ulong"   , dtUnsignedLong    );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "float"   , dtFloat           );
-      MON_PARCER_RETURN_FIELD_TYPE(read_value, "string"  , dtString          );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "%"       , EFieldDataType::Percent);
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "bool"    , EFieldDataType::Bool   );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "short"   , EFieldDataType::Short  );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "ushort"  , EFieldDataType::UShort );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "integer" , EFieldDataType::Int    );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "uinteger", EFieldDataType::UInt   );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "long"    , EFieldDataType::Long   );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "ulong"   , EFieldDataType::ULong  );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "float"   , EFieldDataType::Float  );
+      MON_PARCER_RETURN_FIELD_TYPE(read_value, "string"  , EFieldDataType::String );
       MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(read_value, "Unknown field type");
       MON_PARCER_BUFFER_RESET(read_value);
       MON_PARCER_LOOP_BREAK(read_value);
     }
   }
   MON_PARCER_LOOP_END(read_value);
-  return dtInteger;
+  return EFieldDataType::Int;
 }
 
 std::string CDefinitionParcer::readStringValue()

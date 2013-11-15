@@ -34,12 +34,6 @@ CFrame *CDefinition::frame(const std::string &name)
 
 TFramesNames &CDefinition::frames()
 {
-  /*TFramesNames result;
-  MON_STL_MAP_FOREACH(frames, TFramesMap, m_frames)
-  {
-    result.push_back(MON_STL_MAP_KEY(frames));
-  }
-  return result;*/
   return m_names;
 }
 
