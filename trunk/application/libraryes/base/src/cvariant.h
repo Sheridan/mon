@@ -24,15 +24,15 @@ std::string        toString(const unsigned int       &val);
 std::string        toString(const unsigned long long &val);
 
 //! Тип контента вариант-типа
-enum EContentType
+enum class EContentType
 {
-  ctUnknown, //!< Неизвестный тип
-  ctBool,    //!< Булев
-  ctInt,     //!< Целое
-  ctUInt,    //!< Беззнаковое целое
-  ctFloat,   //!< Число с плавающей точкой
-  ctULLong,  //!< Очень большое число ))
-  ctString  //!< Строка
+  Unknown, //!< Неизвестный тип
+  Bool,    //!< Булев
+  Int,     //!< Целое
+  UInt,    //!< Беззнаковое целое
+  Float,   //!< Число с плавающей точкой
+  ULLong,  //!< Очень большое число ))
+  String  //!< Строка
 };
 
 //! Объединение для хранения данных вариант-типа

@@ -99,7 +99,7 @@ void CConfigurationGenerator::writeFile(CFile *file)
   fprintf(m_file, "%s=", file->name().c_str());
   switch(file->contentType())
   {
-    case mon::lib::base::ctString: fprintf(m_file, "\"%s\";", replaceSpetial(file->toString()).c_str()); break;
+    case mon::lib::base::EContentType::String: fprintf(m_file, "\"%s\";", replaceSpetial(file->toString()).c_str()); break;
     default: fprintf(m_file, "%s;", file->toString().c_str()); break;
   }
   fprintf(m_file, "\n");

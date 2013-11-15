@@ -113,7 +113,7 @@ void CConfigurationParcer::readFolder(CFolder *folder, const mon::lib::base::TSt
 
 void CConfigurationParcer::readValue(CFile *file)
 {
-  mon::lib::base::EContentType c_type = mon::lib::base::ctUnknown;
+  mon::lib::base::EContentType c_type = mon::lib::base::EContentType::Unknown;
   bool underZero = false;
   MON_PARCER_LOOP_BEGIN(variable_value)
   {
@@ -125,7 +125,7 @@ void CConfigurationParcer::readValue(CFile *file)
     {
       MON_PARCER_ERROR_IF_BUFFER_NO_EMPTY(variable_value, "Junk before string");
       MON_PARCER_BUFFER(variable_value) = readString(MON_PARCER_CURRENT_CHARACTER(variable_value));
-      c_type = mon::lib::base::ctString;
+      c_type = mon::lib::base::EContentType::String;
       MON_PARCER_LOOP_RESTART(variable_value);
     }
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(variable_value, ';')
@@ -133,24 +133,24 @@ void CConfigurationParcer::readValue(CFile *file)
       #ifdef MON_PARCER_PRINT_VARIABLES_ENABLED
       switch(c_type)
       {
-        case mon::lib::base::ctBool   : MON_LOG_DBG("Value '" << file->name() << "', bool: `"   << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::ctUInt   : MON_LOG_DBG("Value '" << file->name() << "', uint: `"   << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::ctULLong : MON_LOG_DBG("Value '" << file->name() << "', ullong: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::ctUnknown: parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value));
+        case mon::lib::base::EContentType::ctBool   : MON_LOG_DBG("Value '" << file->name() << "', bool: `"   << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::EContentType::ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::EContentType::ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::EContentType::ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::EContentType::ctUInt   : MON_LOG_DBG("Value '" << file->name() << "', uint: `"   << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::EContentType::ctULLong : MON_LOG_DBG("Value '" << file->name() << "', ullong: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
+        case mon::lib::base::EContentType::ctUnknown: parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value));
       }
       #endif
       switch(c_type)
       {
-        case mon::lib::base::ctBool   : { file->set(convertBool(             MON_PARCER_BUFFER(variable_value)))                   ; break; }
-        case mon::lib::base::ctString : { file->set(                         MON_PARCER_BUFFER(variable_value))                    ; break; }
-        case mon::lib::base::ctInt    : { file->set(mon::lib::base::toInt   (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::ctFloat  : { file->set(mon::lib::base::toFloat (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::ctUInt   : { file->set(mon::lib::base::toUInt  (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::ctULLong : { file->set(mon::lib::base::toULLong(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::ctUnknown: { parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
+        case mon::lib::base::EContentType::Bool   : { file->set(convertBool(             MON_PARCER_BUFFER(variable_value)))                   ; break; }
+        case mon::lib::base::EContentType::String : { file->set(                         MON_PARCER_BUFFER(variable_value))                    ; break; }
+        case mon::lib::base::EContentType::Int    : { file->set(mon::lib::base::toInt   (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::EContentType::Float  : { file->set(mon::lib::base::toFloat (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::EContentType::UInt   : { file->set(mon::lib::base::toUInt  (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::EContentType::ULLong : { file->set(mon::lib::base::toULLong(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
+        case mon::lib::base::EContentType::Unknown: { parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
       }
       stepBack();
       MON_PARCER_LOOP_BREAK(variable_value);
@@ -164,21 +164,21 @@ void CConfigurationParcer::readValue(CFile *file)
     MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC(variable_value)
     {
       MON_PARCER_BUFFER_APPEND(variable_value);
-      if(c_type == mon::lib::base::ctUnknown)  { c_type = mon::lib::base::ctInt; }
+      if(c_type == mon::lib::base::EContentType::Unknown)  { c_type = mon::lib::base::EContentType::Int; }
       MON_PARCER_LOOP_RESTART(variable_value);
     }
     MON_PARCER_CURRENT_CHARACTER_IS_NUMERIC_DOT(variable_value)
     {
       MON_PARCER_ERROR_IF_BUFFER_EMPTY(variable_value, "Missing numeric before dot");
-      if(c_type == mon::lib::base::ctFloat) { parcerError("Double numeric dot?" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
+      if(c_type == mon::lib::base::EContentType::Float) { parcerError("Double numeric dot?" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
       MON_PARCER_BUFFER_RESET(variable_value);
-      c_type = mon::lib::base::ctFloat;
+      c_type = mon::lib::base::EContentType::Float;
       MON_PARCER_LOOP_RESTART(variable_value);
     }
     MON_PARCER_CURRENT_CHARACTER_IS_ALPHA(variable_value)
     {
       MON_PARCER_BUFFER_APPEND(variable_value);
-      if(c_type == mon::lib::base::ctUnknown)  { c_type = mon::lib::base::ctBool; }
+      if(c_type == mon::lib::base::EContentType::Unknown)  { c_type = mon::lib::base::EContentType::Bool; }
       MON_PARCER_LOOP_RESTART(variable_value);
     }
     parcerError("Misplaced character" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value));
@@ -190,7 +190,7 @@ void CConfigurationParcer::includeFile(CFolder *folder)
 {
     CFile file("include", folder);
     readValue(&file);
-    if (file.contentType() != mon::lib::base::ctString)
+    if (file.contentType() != mon::lib::base::EContentType::String)
     {
         parcerError("Include file path must be a string");
     }
