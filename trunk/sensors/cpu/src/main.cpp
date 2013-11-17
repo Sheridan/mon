@@ -90,7 +90,7 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
         delta.guest_nice = stat.guest_nice - prevstat[stat.cpu_number].guest_nice;
         totalDelta = delta.user + delta.nice    + delta.system + delta.idle  + delta.iowait    +
                      delta.irq  + delta.softirq + delta.steal  + delta.guest + delta.guest_nice;
-        onePercent = totalDelta / 100;
+        onePercent = 100 / totalDelta;
         cpuframeset.newFrame(stat.cpu_number)
               << ((float)delta.user      *onePercent)
               << ((float)delta.nice      *onePercent)
@@ -102,6 +102,19 @@ MON_SENSOR_IMPLEMENT_STATISTICS_FUNCTION
               << ((float)delta.steal     *onePercent)
               << ((float)delta.guest     *onePercent)
               << ((float)delta.guest_nice*onePercent);
+//        MON_LOG_DBG("fscanf: " <<
+//                     "cpu"           << stat.cpu_number                    << "\n" <<
+//                     "1%: "        << onePercent                           << "\n" <<
+//                     "user:"       << ((float)delta.user      *onePercent) << "\n" <<
+//                     "nice:"       << ((float)delta.nice      *onePercent) << "\n" <<
+//                     "system:"     << ((float)delta.system    *onePercent) << "\n" <<
+//                     "idle:"       << ((float)delta.idle      *onePercent) << "\n" <<
+//                     "iowait:"     << ((float)delta.iowait    *onePercent) << "\n" <<
+//                     "irq:"        << ((float)delta.irq       *onePercent) << "\n" <<
+//                     "softirq:"    << ((float)delta.softirq   *onePercent) << "\n" <<
+//                     "steal:"      << ((float)delta.steal     *onePercent) << "\n" <<
+//                     "guest:"      << ((float)delta.guest     *onePercent) << "\n" <<
+//                     "guest_nice:" << ((float)delta.guest_nice*onePercent));
         prevstat[stat.cpu_number] = stat;
     MON_FILE_FSCANF_ALL_CPUSTAT_STOP(read_stat, stat)
     return cpuframeset.string().c_str();

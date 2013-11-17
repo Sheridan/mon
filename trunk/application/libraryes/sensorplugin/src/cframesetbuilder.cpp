@@ -11,9 +11,9 @@ namespace sensorplugin
 
 CFramesetBuilder::CFramesetBuilder(const std::string &sensor, const std::string &frame, const int &totalFrames)
   :mon::lib::base::CStringBuilder(),
-    m_totalFrames(totalFrames),
     m_sensor(sensor),
-    m_frame(frame)
+    m_frame(frame),
+    m_totalFrames(totalFrames)
 {
   mon::lib::base::CStringBuilder::append(std::time(NULL));
   mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(date,frameset));

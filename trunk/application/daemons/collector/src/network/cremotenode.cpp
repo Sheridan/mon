@@ -39,7 +39,6 @@ CRemoteNode::CRemoteNode(const std::string &name)
   {
     selfCfg->folder("request")->folder("frequency")->file("hz")->set(mon::lib::sensordata::SPP2Hz(timerTimeout));
   }
-  MON_LOG_DBG("!---------------------" << timerTimeout << "---------------------!")
   settimeout(timerTimeout);
 }
 
