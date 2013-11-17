@@ -3,6 +3,7 @@
 #define CSENSORSMANAGER_H
 #include "csensor.h"
 #include "csingletonmember.h"
+#include "protocol-control.h"
 namespace mon
 {
 namespace daemons
@@ -17,7 +18,7 @@ class CSensorsManager : public mon::lib::base::CSingletonMember
     CSensorsManager();
     ~CSensorsManager();
     void load();
-    std::string getGensorsNamesList(const std::string &delimiter = ":");
+    std::string getGensorsNamesList(const char &delimiter);
     CSensor *sensor(const std::string &name);
   private:
     TSensorsMap m_sensors;

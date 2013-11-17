@@ -24,7 +24,8 @@ MON_DECLARE_PROTOCOL_DELIMITER(frame      ,frame      ,'|' ); //!< Раздел�
 MON_DECLARE_PROTOCOL_DELIMITER(field      ,field      ,':' ); //!< Разделитель полей фрейма
 MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,sensorname ,':' ); //!< Разделитель сенсоров в списке сенсоров
 MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,definition ,'#' ); //!< Разделитель имени сенсора и его описания
-
+MON_DECLARE_PROTOCOL_DELIMITER(framename  ,statistic  ,'!' ); //!< Разделитель имени фрейма и списка статистических данных
+MON_DECLARE_PROTOCOL_DELIMITER(statistic  ,statistic  ,'~' ); //!< Разделитель статистических данных в их списке
 enum EProtocolMessageType
 {
   /// Ответ на запросы

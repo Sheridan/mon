@@ -36,15 +36,25 @@ void CRemoteCollector::requestOfConnect(lib::protocol::CNetworkMessage *msg)
 
 void CRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
 {
-  sendReply(msg, MON_ST_SENSORS_MANAGER->getGensorsNamesList());
+  sendReply(msg, MON_ST_SENSORS_MANAGER->getGensorsNamesList(MON_PROTOCOL_DELIMITER(sensorname ,sensorname)));
 }
 
 void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
-  MON_LOG_DBG(msg->string());
   sendReply(msg, msg->string() +
                  MON_PROTOCOL_DELIMITER(sensorname ,definition) +
                  MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition());
+}
+
+void CRemoteCollector::requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
+{
+  MON_LOG_DBG(msg->string());
+  int sensorIndex = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,framename));
+  std::string sensor = msg->string().substr(0, sensorIndex);
+  std::string frame  = msg->string().substr(sensorIndex+1, msg->string().length()-1);
+  sendReply(msg, msg->string() +
+            MON_PROTOCOL_DELIMITER(framename  ,statistic) +
+            MON_ST_SENSORS_MANAGER->sensor(sensor)->frame(frame)->requestCachedData());
 }
 
 }

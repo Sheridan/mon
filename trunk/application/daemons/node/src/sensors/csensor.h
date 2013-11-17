@@ -31,6 +31,7 @@ class CSensor
     ~CSensor();
     void load();
     void unload();
+    CFrame *frame(const std::string &name);
     TFInitSensor          initSensor;
     TFGetName             getName;
     TFGetDefinition       getDefinition;

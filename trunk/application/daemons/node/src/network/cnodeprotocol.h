@@ -21,6 +21,7 @@ class CNodeProtocol : public mon::lib::protocol::CProtocol
     virtual void requestOfConnect(lib::protocol::CNetworkMessage *msg) = 0;
     virtual void requestOfSensorsList(lib::protocol::CNetworkMessage *msg) = 0;
     virtual void requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg) = 0;
+    virtual void requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) = 0;
 };
 
 }

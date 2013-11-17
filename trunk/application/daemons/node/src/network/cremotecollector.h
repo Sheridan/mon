@@ -28,6 +28,7 @@ class CRemoteCollector : public mon::lib::network::CSocketClient, public CNodePr
     void requestOfConnect(lib::protocol::CNetworkMessage *msg) final;
     void requestOfSensorsList(lib::protocol::CNetworkMessage *msg) final;
     void requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg) final;
+    void requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) final;
 };
 
 typedef std::list<CRemoteCollector *> TRemoteCollectors;

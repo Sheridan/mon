@@ -22,9 +22,10 @@ class CFrame : mon::lib::base::CTimer
   public:
     CFrame(TFGetStatistics getstat, TFGetFrameAvialable getfa, const std::string &name, const float &timeout);
     virtual ~CFrame();
+    std::string requestCachedData();
+  private:
     TFGetStatistics       getStatistics;
     TFGetFrameAvialable   getFrameAvialable;
-  private:
     mon::lib::sensordata::CStatisticCache *m_cache;
     void onTimer() final;
 };

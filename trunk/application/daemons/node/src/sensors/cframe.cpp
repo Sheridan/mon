@@ -1,5 +1,6 @@
 #include "st.h"
 #include "cframe.h"
+#include "protocol-control.h"
 
 namespace mon
 {
@@ -23,6 +24,18 @@ CFrame::~CFrame()
 {
   timerStop();
   delete m_cache;
+}
+
+std::string CFrame::requestCachedData()
+{
+  std::string result = "";
+  lib::sensordata::CStatisticData * data = m_cache->requestData();
+  for(std::string dataString : data->data())
+  {
+    result += dataString + MON_PROTOCOL_DELIMITER(statistic,statistic);
+  }
+  m_cache->freeData(data);
+  return result.substr(0, result.length() - 1);
 }
 
 void CFrame::onTimer()

@@ -19,33 +19,57 @@ CRemoteNode::CRemoteNode(const std::string &name)
     mon::lib::base::CTimer(),
     m_name(name)
 {
-  MON_LOG_DBG("Node " << name << " ");
-  mon::lib::config::CFolder *selfCfg  = MON_ST_CONFIG->folder("nodes")->folder(name);
+  MON_MUTEX_INITIALIZE(node_sensors)
+  MON_LOG_DBG("Node " << m_name << " ");
+  mon::lib::config::CFolder *selfCfg  = MON_ST_CONFIG->folder("nodes")->folder(m_name);
   setTimeout   (selfCfg->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
   setAddrRemote(selfCfg->folder("connection")->file("host")   ->get(std::string("localhost")));
   setPortRemote(selfCfg->folder("connection")->file("port")   ->get(MON_DEFAULT_LISTEN_PORT));
   MON_THREADED_FUNCTION_INIT(connect);
-
+  float timerTimeout = MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT;
+  if(selfCfg->folder("request")->folder("frequency")->containsFile("hz"))
+  {
+    timerTimeout = selfCfg->folder("request")->folder("frequency")->file("hz")->get(mon::lib::sensordata::SPP2Hz(MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT));
+  }
+  else if(selfCfg->folder("request")->folder("frequency")->containsFile("spp"))
+  {
+    timerTimeout = selfCfg->folder("request")->folder("frequency")->file("spp")->get(MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT);
+  }
+  else
+  {
+    selfCfg->folder("request")->folder("frequency")->file("hz")->set(mon::lib::sensordata::SPP2Hz(timerTimeout));
+  }
+  MON_LOG_DBG("!---------------------" << timerTimeout << "---------------------!")
+  settimeout(timerTimeout);
 }
 
 CRemoteNode::~CRemoteNode()
 {
+  timerStop();
   MON_THREADED_FUNCTION_ABORT(connect)
+  MON_MUTEX_LOCK(node_sensors)
   for(auto &sensor : m_nodeSensors)
   {
     delete sensor;
   }
   m_nodeSensors.clear();
+  MON_MUTEX_UNLOCK(node_sensors)
+  MON_MUTEX_DESTROY(node_sensors)
 }
 
 void CRemoteNode::onTimer()
 {
   if(isConnected())
   {
+    MON_MUTEX_LOCK(node_sensors)
     for(CRemoteNodeSensor *sensor : m_nodeSensors)
     {
-      requestSensorFrameStatistic(m_name, sensor->name());
+      for(std::string &frameName : sensor->frames())
+      {
+        requestSensorFrameStatistic(sensor->name(), frameName);
+      }
     }
+    MON_MUTEX_UNLOCK(node_sensors)
   }
 }
 
@@ -59,7 +83,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
       mon::lib::network::CSocketClient::connect();
       MON_THREADED_FUNCTION_ENABLE_CANCEL
     }
-    sleep(1);
+    usleep(500000);
   MON_INFINITY_LOOP_END(reconnect_loop)
 }
 
@@ -80,6 +104,7 @@ void CRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
   {
     MON_LOG_NFO("Connection allowed");
     requestSensorsList();
+    timerStart();
   }
   else if(msg->string().compare("f") == 0)
   {
@@ -92,7 +117,7 @@ void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessa
 {
   std::list<std::string> sensorsNames;
   mon::lib::base::split(msg->string(), ':', sensorsNames);
-  for(auto &sensor_name : sensorsNames)
+  for(std::string &sensor_name : sensorsNames)
   {
     requestSensorDefinition(sensor_name);
   }
@@ -101,10 +126,14 @@ void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessa
 void CRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
+//  MON_LOG_DBG("Sensor name: " << msg->string().substr(0, index)
+//              << ", definition: " << msg->string().substr(index, msg->string().length()-1))
   CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(msg->string().substr(0, index),
-                                                      msg->string().substr(index, msg->string().length()-1),
+                                                      msg->string().substr(index+1, msg->string().length()-1),
                                                       this);
+  MON_MUTEX_LOCK(node_sensors)
   m_nodeSensors.push_back(rnSensor);
+  MON_MUTEX_UNLOCK(node_sensors)
 }
 
 void CRemoteNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)

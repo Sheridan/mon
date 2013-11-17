@@ -18,12 +18,13 @@ class CRemoteNode;
 class CRemoteNodeSensor
 {
     MON_READONLY_PROPERTY(std::string, name)
-public:
-  CRemoteNodeSensor(const std::string &name, const std::string &definition, CRemoteNode *parentNode);
-  ~CRemoteNodeSensor();
-private:
-  CRemoteNode *m_parentNode;
-  mon::lib::sensordata::CDefinition *m_definition;
+  public:
+    CRemoteNodeSensor(const std::string &name, const std::string &definition, CRemoteNode *parentNode);
+    ~CRemoteNodeSensor();
+    mon::lib::sensordata::TFramesNames &frames();
+  private:
+    CRemoteNode *m_parentNode;
+    mon::lib::sensordata::CDefinition *m_definition;
 };
 
 //! Список сенсоров удаленной ноды

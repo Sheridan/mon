@@ -23,6 +23,7 @@ void CDefinition::addFrame(const std::string &name, CFrame *frame)
   frame->setname(name);
   m_frames[name] = frame;
   m_names.push_back(name);
+//  MON_LOG_DBG("Frame ("<< name <<") added");
 }
 
 CFrame *CDefinition::frame(const std::string &name)

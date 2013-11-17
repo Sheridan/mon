@@ -9,6 +9,7 @@
 #include "cremotenodesensor.h"
 #include <list>
 #include <string>
+#include "mutex-helper.h"
 
 namespace mon
 {
@@ -24,6 +25,7 @@ class CRemoteNode : public mon::lib::network::CSocketClient,
 {
   MON_THREADED_FUNCTION_DECLARE(connect)
   MON_READONLY_PROPERTY(std::string, name)
+  MON_MUTEX_DECLARE(node_sensors)
 public:
   CRemoteNode(const std::string &name);
   virtual ~CRemoteNode();

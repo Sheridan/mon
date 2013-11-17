@@ -33,11 +33,7 @@ file(APPEND ${GEN_PATH}/generated.h "#define MON_GENERATED_LIBRARY_PATH \"${CMAK
 file(APPEND ${GEN_PATH}/generated.h "#define MON_GENERATED_SENSORS_PATH \"${CMAKE_INSTALL_PREFIX}/${LIB_SENSORS_TARGET}\"\n" )
 file(APPEND ${GEN_PATH}/generated.h "\n#endif\n" )
 
-
-
-
 # +++++++++++++++++++ libaryes +++++++++++++++++++
-
 # --------- config library --------------
 MESSAGE( STATUS "---> Processing `config` library" )
 SET(mon-config-headers
@@ -181,6 +177,7 @@ install(FILES defines/logger-helper.h DESTINATION include/mon )
 install(FILES defines/file-operations-defines.h DESTINATION include/mon )
 install(FILES defines/protocol-control.h DESTINATION include/mon )
 install(FILES defines/mutex-helper.h DESTINATION include/mon )
+install(FILES defines/class-helper.h DESTINATION include/mon )
 # +++++++++++++++++++ install some headers +++++++++++++++++++
 
 # +++++++++++++++++++ applications +++++++++++++++++++

@@ -109,6 +109,15 @@ void CSensor::unload()
   }
 }
 
+CFrame *CSensor::frame(const std::string &name)
+{
+  if(m_handle)
+  {
+    return m_frames[name];
+  }
+  return nullptr;
+}
+
 
 
 }

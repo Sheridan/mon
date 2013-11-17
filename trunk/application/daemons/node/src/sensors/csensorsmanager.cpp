@@ -29,7 +29,7 @@ void CSensorsManager::load()
   }
 }
 
-std::string CSensorsManager::getGensorsNamesList(const std::string &delimiter)
+std::string CSensorsManager::getGensorsNamesList(const char &delimiter)
 {
   std::string result;
   for(auto &sensor : m_sensors)

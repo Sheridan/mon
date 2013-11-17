@@ -35,7 +35,8 @@ void CCollectorProtocol::requestSensorDefinition(const std::string &sensor)
 
 void CCollectorProtocol::requestSensorFrameStatistic(const std::string &sensor, const std::string &frame)
 {
-
+  sendMessage(static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::collector::CCollectorProtocol::incomingAnswerOnRequestSensorFrameStatistic),
+              mon::lib::protocol::mtRequestSensorFrameStatistic, sensor + MON_PROTOCOL_DELIMITER(sensorname ,framename) + frame);
 }
 
 }

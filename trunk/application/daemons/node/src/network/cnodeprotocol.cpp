@@ -15,6 +15,8 @@ CNodeProtocol::CNodeProtocol(mon::lib::network::CSocket *socket) : mon::lib::pro
                     static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::node::CNodeProtocol::requestOfSensorsList));
   registerIntercept(mon::lib::protocol::mtRequestSensorDefinition,
                     static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::node::CNodeProtocol::requestOfSensorDefinition));
+  registerIntercept(mon::lib::protocol::mtRequestSensorFrameStatistic,
+                    static_cast<mon::lib::protocol::TMessageCallback>(&mon::daemons::node::CNodeProtocol::requestSensorFrameStatistic));
 }
 
 CNodeProtocol::~CNodeProtocol()
