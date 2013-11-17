@@ -1,6 +1,6 @@
 #ifndef PROTOCOLCONTROLCHARACTERS_H
 #define PROTOCOLCONTROLCHARACTERS_H
-#include <climits>
+#include <limits>
 
 namespace mon
 {
@@ -50,11 +50,17 @@ enum EProtocolMessageType
    * Запрос: 'id@3^'@n
    * Ответ:  'id@0^описаниесенсора'
    */
-  mtRequestSensorDefinition
+  mtRequestSensorDefinition,
+  /// Запрос статистики фрейма сенсора .
+  /**
+   * Запрос: 'id@4^сенсор$фрейм'@n
+   * Ответ:  'id@0^статистика'
+   */
+  mtRequestSensorFrameStatistic
 };
 
-typedef unsigned long long TProtocolMessageID; //!< Тип идентификатора сообщений
-#define MON_PROTOCOL_MESSAGE_ID_MAX ULLONG_MAX
+#define MON_PROTOCOL_MESSAGE_ID_TYPE unsigned long long //!< Тип идентификатора сообщений
+#define MON_PROTOCOL_MESSAGE_ID_MAX (std::numeric_limits<MON_PROTOCOL_MESSAGE_ID_TYPE>::max())
 
 }
 }

@@ -14,7 +14,7 @@ namespace protocol
 {
 class CProtocol;
 typedef void (CProtocol::*TMessageCallback) (mon::lib::protocol::CNetworkMessage *);
-typedef std::map<TProtocolMessageID,TMessageCallback> TReplyMap;
+typedef std::map<MON_PROTOCOL_MESSAGE_ID_TYPE,TMessageCallback> TReplyMap;
 typedef std::map<EProtocolMessageType,TMessageCallback> TInterceptMap;
 
 //! Базовый класс описания сетевого протокола
@@ -37,11 +37,11 @@ protected:
 
 private:
   mon::lib::network::CSocket *m_socket;
-  TProtocolMessageID m_currentID;      //!< Текущий идентификатор сообщения. При достижении максимума - сбрасывается в ноль
+  MON_PROTOCOL_MESSAGE_ID_TYPE m_currentID;      //!< Текущий идентификатор сообщения. При достижении максимума - сбрасывается в ноль
   TReplyMap m_replyCallbackMap;        //!< Карта вызовов при ответе на сообщение
   TInterceptMap m_interceptCallbackMap;//!< Карта вызовов при входящих сообщениях
 
-  TProtocolMessageID getID();          //!< Генерирование нового идентификатора сообщения
+  MON_PROTOCOL_MESSAGE_ID_TYPE getID();          //!< Генерирование нового идентификатора сообщения
 };
 
 }

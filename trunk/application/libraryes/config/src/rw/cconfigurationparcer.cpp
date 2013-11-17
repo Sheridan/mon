@@ -2,7 +2,6 @@
 #include "cconfigurationparcer.h"
 #include "parcer-helper.h"
 #include <string.h>
-//#include <climits>
 #include <limits>
 
 namespace mon

@@ -73,9 +73,9 @@ void CProtocol::sendReply(CNetworkMessage *requestMessage, const std::string &i_
   sendMessage(msg);
 }
 
-TProtocolMessageID CProtocol::getID()
+MON_PROTOCOL_MESSAGE_ID_TYPE CProtocol::getID()
 {
-  if(m_currentID == ULLONG_MAX) { m_currentID = 1; }
+  if(m_currentID == MON_PROTOCOL_MESSAGE_ID_MAX) { m_currentID = 1; }
   return m_currentID++;
 }
 

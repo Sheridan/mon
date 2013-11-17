@@ -10,13 +10,13 @@ namespace lib
 namespace protocol
 {
 
-CNetworkMessage::CNetworkMessage(const TProtocolMessageID &id, const EProtocolMessageType &i_type)
+CNetworkMessage::CNetworkMessage(const MON_PROTOCOL_MESSAGE_ID_TYPE &id, const EProtocolMessageType &i_type)
   : mon::lib::base::CStringBuilderBase(),
     m_type(i_type),
     m_id(id)
 {}
 
-CNetworkMessage::CNetworkMessage(const TProtocolMessageID & id, const EProtocolMessageType &i_type, const std::string  &i_text)
+CNetworkMessage::CNetworkMessage(const MON_PROTOCOL_MESSAGE_ID_TYPE & id, const EProtocolMessageType &i_type, const std::string  &i_text)
   : mon::lib::base::CStringBuilderBase(),
     m_type(i_type),
     m_id(id)
