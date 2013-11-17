@@ -3,11 +3,11 @@
 #define MON_GLOBAL_H
 
 //! Сетевой порт по умолчанию
-#define MON_DEFAULT_LISTEN_PORT     4848
+#define MON_DEFAULT_LISTEN_PORT     ((unsigned short)4848)
 //! Таймаут неудачного соединения по умолчанию
-#define MON_DEFAULT_CONNECT_TIMEOUT 30
+#define MON_DEFAULT_CONNECT_TIMEOUT ((unsigned short)30)
 //! Пароль по умолчанию
-#define MON_DEFAULT_PASSWORD        std::string()
+#define MON_DEFAULT_PASSWORD        std::string("password")
 
 #ifdef MON_DEBUG
   #define MON_DEBUG_PATH_PREFIX "/tmp/mon/root"

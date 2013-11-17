@@ -15,13 +15,14 @@ CFrame::CFrame(TFGetStatistics getstat, TFGetFrameAvialable getfa, const std::st
     getFrameAvialable(getfa)
 
 {
+  m_cache = new mon::lib::sensordata::CStatisticCache();
   timerStart();
 }
 
 CFrame::~CFrame()
 {
   timerStop();
-  while (timerActive()) { usleep(timeout()*2); }
+  delete m_cache;
 }
 
 void CFrame::onTimer()
@@ -31,7 +32,7 @@ void CFrame::onTimer()
 #ifdef MON_DEBUG
     std::string sd = getStatistics(m_name.c_str());
     MON_LOG_DBG("Sensor data: " << sd);
-    m_cache.store(sd);
+    m_cache->store(sd);
 #else
     m_cache.store(getStatistics(m_name.c_str()));
 #endif

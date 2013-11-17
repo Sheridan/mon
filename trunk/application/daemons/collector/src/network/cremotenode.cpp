@@ -4,7 +4,7 @@
 #include "global.h"
 #include "stringhelper.h"
 #include "infinity-cycle-helper.h"
-
+#include "cfrequency.h"
 
 namespace mon
 {
@@ -20,11 +20,12 @@ CRemoteNode::CRemoteNode(const std::string &name)
     m_name(name)
 {
   MON_LOG_DBG("Node " << name << " ");
-  m_selfConfig = MON_ST_CONFIG->folder("nodes")->folder(name);
-  setTimeout                               (m_selfConfig->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
-  setAddrRemote                            (m_selfConfig->folder("connection")->file("host")   ->get(std::string("localhost")));
-  setPortRemote(static_cast<unsigned short>(m_selfConfig->folder("connection")->file("port")   ->get(MON_DEFAULT_LISTEN_PORT)));
+  mon::lib::config::CFolder *selfCfg  = MON_ST_CONFIG->folder("nodes")->folder(name);
+  setTimeout   (selfCfg->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
+  setAddrRemote(selfCfg->folder("connection")->file("host")   ->get(std::string("localhost")));
+  setPortRemote(selfCfg->folder("connection")->file("port")   ->get(MON_DEFAULT_LISTEN_PORT));
   MON_THREADED_FUNCTION_INIT(connect);
+
 }
 
 CRemoteNode::~CRemoteNode()
@@ -39,9 +40,12 @@ CRemoteNode::~CRemoteNode()
 
 void CRemoteNode::onTimer()
 {
-  for(CRemoteNodeSensor *sensor : m_nodeSensors)
+  if(isConnected())
   {
-    requestSensorFrameStatistic(m_name, sensor->name());
+    for(CRemoteNodeSensor *sensor : m_nodeSensors)
+    {
+      requestSensorFrameStatistic(m_name, sensor->name());
+    }
   }
 }
 
@@ -62,7 +66,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
 void CRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
   MON_LOG_DBG("Collector connected to " << to_addr << ":" << to_port);
-  CCollectorProtocol::connect(m_selfConfig->file("password")->get(MON_DEFAULT_PASSWORD));
+  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_name)->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 
 void CRemoteNode::incommingMessage(const std::string &message)

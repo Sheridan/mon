@@ -2,6 +2,8 @@
 #include "cconfigurationparcer.h"
 #include "parcer-helper.h"
 #include <string.h>
+//#include <climits>
+#include <limits>
 
 namespace mon
 {
@@ -130,27 +132,45 @@ void CConfigurationParcer::readValue(CFile *file)
     }
     MON_PARCER_CURRENT_CHARACTER_IS_EQUAL(variable_value, ';')
     {
-      #ifdef MON_PARCER_PRINT_VARIABLES_ENABLED
       switch(c_type)
       {
-        case mon::lib::base::EContentType::ctBool   : MON_LOG_DBG("Value '" << file->name() << "', bool: `"   << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::EContentType::ctString : MON_LOG_DBG("Value '" << file->name() << "', string: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::EContentType::ctInt    : MON_LOG_DBG("Value '" << file->name() << "', int: `"    << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::EContentType::ctFloat  : MON_LOG_DBG("Value '" << file->name() << "', float: `"  << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::EContentType::ctUInt   : MON_LOG_DBG("Value '" << file->name() << "', uint: `"   << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::EContentType::ctULLong : MON_LOG_DBG("Value '" << file->name() << "', ullong: `" << MON_PARCER_BUFFER(variable_value) << "`"); break;
-        case mon::lib::base::EContentType::ctUnknown: parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value));
-      }
-      #endif
-      switch(c_type)
-      {
-        case mon::lib::base::EContentType::Bool   : { file->set(convertBool(             MON_PARCER_BUFFER(variable_value)))                   ; break; }
-        case mon::lib::base::EContentType::String : { file->set(                         MON_PARCER_BUFFER(variable_value))                    ; break; }
-        case mon::lib::base::EContentType::Int    : { file->set(mon::lib::base::toInt   (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::EContentType::Float  : { file->set(mon::lib::base::toFloat (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::EContentType::UInt   : { file->set(mon::lib::base::toUInt  (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::EContentType::ULLong : { file->set(mon::lib::base::toULLong(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); break; }
-        case mon::lib::base::EContentType::Unknown: { parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
+        case mon::lib::base::EContentType::Bool  : { file->set(convertBool(MON_PARCER_BUFFER(variable_value))); break; }
+        case mon::lib::base::EContentType::String: { file->set(            MON_PARCER_BUFFER(variable_value)) ; break; }
+        case mon::lib::base::EContentType::Int:
+        {
+          if(underZero)
+          {
+            long long val = mon::lib::base::toLLong(MON_PARCER_BUFFER(variable_value)) * -1;
+                   if(val >= std::numeric_limits<short>    ::min()) { file->set(mon::lib::base::toShort (MON_PARCER_BUFFER(variable_value)) * -1); }
+            else { if(val >= std::numeric_limits<int>      ::min()) { file->set(mon::lib::base::toInt   (MON_PARCER_BUFFER(variable_value)) * -1); }
+            else { if(val >= std::numeric_limits<long>     ::min()) { file->set(mon::lib::base::toLong  (MON_PARCER_BUFFER(variable_value)) * -1); }
+            else { if(val >= std::numeric_limits<long long>::min()) { file->set(mon::lib::base::toLLong (MON_PARCER_BUFFER(variable_value)) * -1); }
+                                                                                                                                               } } }
+          }
+          else
+          {
+            unsigned long long val = mon::lib::base::toULLong(MON_PARCER_BUFFER(variable_value));
+                   if(val <= std::numeric_limits<short>             ::max()) { file->set(mon::lib::base::toShort (MON_PARCER_BUFFER(variable_value))); }
+            else { if(val <= std::numeric_limits<unsigned short>    ::max()) { file->set(mon::lib::base::toUShort(MON_PARCER_BUFFER(variable_value))); }
+            else { if(val <= std::numeric_limits<int>               ::max()) { file->set(mon::lib::base::toInt   (MON_PARCER_BUFFER(variable_value))); }
+            else { if(val <= std::numeric_limits<unsigned int>      ::max()) { file->set(mon::lib::base::toUInt  (MON_PARCER_BUFFER(variable_value))); }
+            else { if(val <= std::numeric_limits<long>              ::max()) { file->set(mon::lib::base::toLong  (MON_PARCER_BUFFER(variable_value))); }
+            else { if(val <= std::numeric_limits<unsigned long>     ::max()) { file->set(mon::lib::base::toULong (MON_PARCER_BUFFER(variable_value))); }
+            else { if(val <= std::numeric_limits<long long>         ::max()) { file->set(mon::lib::base::toLLong (MON_PARCER_BUFFER(variable_value))); }
+            else { if(val <= std::numeric_limits<unsigned long long>::max()) { file->set(mon::lib::base::toULLong(MON_PARCER_BUFFER(variable_value))); }
+                                                                                                                                           } } } } } } }
+          }
+          break;
+        }
+        case mon::lib::base::EContentType::Float:
+        {
+          double val = mon::lib::base::toDouble(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1);
+                 if(val >= std::numeric_limits<float> ::min() and val <= std::numeric_limits<float> ::max()) { mon::lib::base::toFloat (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1); }
+          else { if(val >= std::numeric_limits<double>::min() and val <= std::numeric_limits<double>::max()) { mon::lib::base::toDouble(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1); }
+                                                                                                                                                                                               }
+          break;
+        }
+        default: { parcerError("Value '" + file->name() + "', Unknown value type" MON_PARCER_BUFFER_ERROR_PART(variable_value), MON_PARCER_CURRENT_CHARACTER(variable_value)); }
       }
       stepBack();
       MON_PARCER_LOOP_BREAK(variable_value);

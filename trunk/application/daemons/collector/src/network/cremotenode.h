@@ -5,7 +5,6 @@
 #include "threads-helper.h"
 #include "class-helper.h"
 #include "ccollectorprotocol.h"
-#include "cfolder.h"
 #include "ctimer.h"
 #include "cremotenodesensor.h"
 #include <list>
@@ -29,8 +28,6 @@ public:
   CRemoteNode(const std::string &name);
   virtual ~CRemoteNode();
 private:
-  mon::lib::config::CFolder *m_selfConfig;
-
   TRemoteNodeSensors m_nodeSensors;
 
   void onTimer() final;

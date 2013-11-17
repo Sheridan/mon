@@ -25,7 +25,7 @@ class CFrame : mon::lib::base::CTimer
     TFGetStatistics       getStatistics;
     TFGetFrameAvialable   getFrameAvialable;
   private:
-    mon::lib::sensordata::CStatisticCache m_cache;
+    mon::lib::sensordata::CStatisticCache *m_cache;
     void onTimer() final;
 };
 
