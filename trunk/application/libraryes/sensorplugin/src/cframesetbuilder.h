@@ -24,17 +24,23 @@ public:
 
   CFramesetBuilder &newFrame(const int &number);
 
-  void append(const int            &val);
-  void append(const unsigned int   &val);
-  void append(const short          &val);
-  void append(const unsigned short &val);
-  void append(const double         &val);
-  void append(const float          &val);
-  void append(const bool           &val);
-  void append(const std::string    &val);
-  void append(const char           *val);
-  void append(const char           &val);
-  void append(const unsigned char  &val);
+  void append(const bool               &val);
+  void append(const int                &val);
+  void append(const unsigned int       &val);
+  void append(const short              &val);
+  void append(const unsigned short     &val);
+  void append(const long               &val);
+  void append(const unsigned long      &val);
+  void append(const long long          &val);
+  void append(const unsigned long long &val);
+  void append(const std::string        &val);
+  void append(const char               *val);
+  void append(const char               &val);
+  void append(const unsigned char      &val);
+
+
+  void append(const float              &val);
+  void append(const double             &val);
 
   const std::string &string();
 

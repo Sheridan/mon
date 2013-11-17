@@ -1,5 +1,6 @@
 #include "cframesetbuilder.h"
 #include "protocol-control.h"
+#include <chrono>
 
 namespace mon
 {
@@ -14,6 +15,8 @@ CFramesetBuilder::CFramesetBuilder(const std::string &sensor, const std::string 
     m_sensor(sensor),
     m_frame(frame)
 {
+  mon::lib::base::CStringBuilder::append(std::time(NULL));
+  mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(date,frameset));
 //  mon::lib::base::CStringBuilder::append(sensor);
 //  mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(sensorname, framename));
 //  mon::lib::base::CStringBuilder::append(frame);
@@ -50,17 +53,21 @@ CFramesetBuilder &CFramesetBuilder::newFrame(const int &number)
   mon::lib::base::CStringBuilder::append(val); \
   mon::lib::base::CStringBuilder::append(MON_PROTOCOL_DELIMITER(field, field));
 
-void CFramesetBuilder::append(const bool           &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const int            &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const unsigned int   &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const short          &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const unsigned short &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const double         &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const float          &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const std::string    &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const char           *val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const char           &val) { MON_APPEND_DATA_FIELD }
-void CFramesetBuilder::append(const unsigned char  &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const bool               &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const int                &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const unsigned int       &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const short              &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const unsigned short     &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const long               &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const unsigned long      &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const long long          &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const unsigned long long &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const double             &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const float              &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const std::string        &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const char               *val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const char               &val) { MON_APPEND_DATA_FIELD }
+void CFramesetBuilder::append(const unsigned char      &val) { MON_APPEND_DATA_FIELD }
 
 }
 }

@@ -17,6 +17,7 @@ namespace protocol
 MON_DECLARE_PROTOCOL_DELIMITER(type       ,message    ,'^' ); //!< Разделитель между типом сообщения и самим сообщением
 MON_DECLARE_PROTOCOL_DELIMITER(id         ,type       ,'@' ); //!< Резделитель идентификатора и типа сообщения
 MON_DECLARE_PROTOCOL_DELIMITER(end        ,line       ,'\n'); //!< Конец сообщения
+MON_DECLARE_PROTOCOL_DELIMITER(date       ,frameset   ,'*' ); //!< Разделитель между датой и фреймсетом
 MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,framename  ,'$' ); //!< Разделитель имени сенсора и имени фрейма
 MON_DECLARE_PROTOCOL_DELIMITER(framename  ,frameset   ,'!' ); //!< Разделитель имени фрейма и фреймсета
 MON_DECLARE_PROTOCOL_DELIMITER(framenumber,framefields,'#' ); //!< Разделитель номера фрейма в фремсете и полей фреймсета

@@ -41,7 +41,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CTimer, ticks)
 void CTimer::timerStop()
 {
   MON_THREADED_FUNCTION_ABORT(ticks)
-  while (timerActive()) { usleep(m_timeout*2*1000000); }
+  while (timerActive()) { usleep(1000000); }
 }
 
 void CTimer::timerStart()
