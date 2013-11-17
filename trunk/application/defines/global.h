@@ -7,7 +7,7 @@
 //! Таймаут неудачного соединения по умолчанию
 #define MON_DEFAULT_CONNECT_TIMEOUT ((unsigned short)30)
 //! Таймаут запроса данных из удаленной ноды умолчанию (интервал, сек)
-#define MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT ((float)2)
+#define MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT ((float)10)
 //! Пароль по умолчанию
 #define MON_DEFAULT_PASSWORD        std::string("password")
 

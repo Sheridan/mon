@@ -68,11 +68,11 @@ class CStringBuilderBase
 
     virtual void append(const int                 &val);
     virtual void append(const unsigned int        &val);
-    virtual void append(const short                 &val);
-    virtual void append(const unsigned short        &val);
-    virtual void append(const long  &val);
-    virtual void append(const unsigned long  &val);
-    virtual void append(const long long  &val);
+    virtual void append(const short               &val);
+    virtual void append(const unsigned short      &val);
+    virtual void append(const long                &val);
+    virtual void append(const unsigned long       &val);
+    virtual void append(const long long           &val);
     virtual void append(const unsigned long long  &val);
     virtual void append(const double              &val);
     virtual void append(const float               &val);
@@ -85,11 +85,11 @@ class CStringBuilderBase
 
     virtual void preface(const int                 &val);
     virtual void preface(const unsigned int        &val);
-    virtual void preface(const short                 &val);
-    virtual void preface(const unsigned short        &val);
-    virtual void preface(const long  &val);
-    virtual void preface(const unsigned long  &val);
-    virtual void preface(const long long  &val);
+    virtual void preface(const short               &val);
+    virtual void preface(const unsigned short      &val);
+    virtual void preface(const long                &val);
+    virtual void preface(const unsigned long       &val);
+    virtual void preface(const long long           &val);
     virtual void preface(const unsigned long long  &val);
     virtual void preface(const double              &val);
     virtual void preface(const float               &val);

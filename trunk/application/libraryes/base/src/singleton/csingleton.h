@@ -22,20 +22,18 @@ namespace base
 //! Реализация синглтона приложений
 class CSingleton
 {
-  MON_ST_ATOMIC(mon::lib::config::CConfig, config)
-  MON_ST_ATOMIC(mon::lib::logger::CLogger, logger)
-private:
-  CSingleton();
-  ~CSingleton();
+    MON_ST_ATOMIC(mon::lib::config::CConfig, config)
+    MON_ST_ATOMIC(mon::lib::logger::CLogger, logger)
+  private:
+    CSingleton();
+    ~CSingleton();
+    TSingletonMembers m_members;
 
-  TSingletonMembers m_members;
-
-public:
-
-  void appendMember(CSingletonMember *member);
-  CSingletonMember *member(const TSingletonMemberID &id);
-  static CSingleton *instance();
-  static void destroy();
+  public:
+    void appendMember(CSingletonMember *member);
+    CSingletonMember *member(const TSingletonMemberID &id);
+    static CSingleton *instance();
+    static void destroy();
 };
 
 }

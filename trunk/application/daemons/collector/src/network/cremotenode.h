@@ -40,13 +40,13 @@ private:
   void incommingMessage(const std::string &message) final;
 
   //! Вызывается при ответе на запрос подключения
-  void incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg);
+  void incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg) final;
   //! Вызывается при ответе на запрос списка сенсоров
-  void incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg);
+  void incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg) final;
   //! Вызывается при ответе на запрос описания сенсора
-  void incomingAnswerOnRequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg);
+  void incomingAnswerOnRequestSensorDefinition(mon::lib::protocol::CNetworkMessage *msg) final;
   //! Вызывается при ответе на запрос статистики фрейма сенсора
-  void incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg);
+  void incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) final;
 };
 
 typedef std::list<CRemoteNode *> TRemoteNodes;

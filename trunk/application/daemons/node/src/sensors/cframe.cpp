@@ -42,13 +42,13 @@ void CFrame::onTimer()
 {
   if(getFrameAvialable(m_name.c_str()))
   {
-#ifdef MON_DEBUG
-    std::string sd = getStatistics(m_name.c_str());
-    MON_LOG_DBG("Sensor data: " << sd);
-    m_cache->store(sd);
-#else
-    m_cache.store(getStatistics(m_name.c_str()));
-#endif
+//#ifdef MON_DEBUG
+//    std::string sd = getStatistics(m_name.c_str());
+//    MON_LOG_DBG("Sensor data: " << sd);
+//    m_cache->store(sd);
+//#else
+    m_cache->store(getStatistics(m_name.c_str()));
+//#endif
 
   }
 }

@@ -26,7 +26,7 @@ void CCollectorsManager::listen()
 void CCollectorsManager::unlisten()
 {
   close();
-  for(auto &collector : m_collectors)
+  for(CRemoteCollector *collector : m_collectors)
   {
     delete collector;
   }
@@ -38,11 +38,6 @@ mon::lib::network::CSocketClient * CCollectorsManager::incommingConnection(const
   CRemoteCollector *collector = new CRemoteCollector(clientDescriptor, addr_from, port_from);
   m_collectors.push_back(collector);
   return collector;
-}
-
-void CCollectorsManager::incommingMessage(const std::string &message)
-{
-
 }
 
 }

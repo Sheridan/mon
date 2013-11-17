@@ -16,7 +16,7 @@ CRemoteNodeSensor::CRemoteNodeSensor(const std::string &name, const std::string 
   m_definition = new mon::lib::sensordata::CDefinition();
   mon::lib::sensordata::CDefinitionParcer parcer = { m_definition, definition };
   parcer.parce();
-  MON_LOG_DBG("Remote Node Sensor: '" << m_name << "' prepared");
+//  MON_LOG_DBG("Remote Node Sensor: '" << m_name << "' prepared");
 }
 
 CRemoteNodeSensor::~CRemoteNodeSensor()

@@ -137,7 +137,8 @@ void CRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetwor
 
 void CRemoteNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
 {
-  MON_LOG_DBG(msg->string());
+//  MON_LOG_DBG(msg->string());
+  //TODO: Парсинг и хранение статданных
 }
 
 

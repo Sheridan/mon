@@ -23,9 +23,9 @@ CSingleton::CSingleton()
 // --------------------------------------------------------------------------------------------------------------------------------------
 CSingleton::~CSingleton()
 {
-  for(auto &members : m_members)
+  for(auto &member : m_members)
   {
-    delete members.second;
+    delete member.second;
   }
   m_members.clear();
   delete MON_ST_ATOMIC_VNAME(config);
@@ -60,7 +60,8 @@ CSingletonMember * CSingleton::member(const TSingletonMemberID &id)
   if(m_members.count(id)) { return m_members[id]; }
   logger()->log(mon::lib::logger::CLogMessage(mon::lib::logger::pError)
                 << "Access to singleton member with id=" << id << " failed. Member not exists. Aborting...");
-  MON_ABORT; return nullptr;
+  MON_ABORT;
+  return nullptr;
 }
 
 }
