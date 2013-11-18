@@ -148,6 +148,7 @@ SET(mon-base-headers
     libraryes/base/src/singleton/csingleton.h
     libraryes/base/src/cvariant.h
     libraryes/base/src/ctimer.h
+    libraryes/base/src/systemrights.h
     libraryes/base/src/cstringbuilder.h
     libraryes/base/src/parcer/cparcer.h
     libraryes/base/src/parcer/cparcerfile.h
@@ -160,6 +161,7 @@ SET(mon-base-sources
     libraryes/base/src/singleton/csingleton.cpp
     libraryes/base/src/cvariant.cpp
     libraryes/base/src/ctimer.cpp
+    libraryes/base/src/systemrights.cpp
     libraryes/base/src/cstringbuilder.cpp
     libraryes/base/src/parcer/cparcer.cpp
     libraryes/base/src/parcer/cparcerfile.cpp

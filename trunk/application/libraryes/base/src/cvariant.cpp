@@ -380,7 +380,7 @@ const std::string CVariant::toString()
     case EContentType::ULLong:  result = mon::lib::base::toString(m_value.m_ullong)   ; break;
     case EContentType::Float:   result = mon::lib::base::toString(m_value.m_float)    ; break;
     case EContentType::Double:  result = mon::lib::base::toString(m_value.m_double)   ; break;
-    case EContentType::String:  result = m_value.m_string                             ; break;
+    case EContentType::String:  result = std::string(m_value.m_string)                ; break;
     case EContentType::Unknown: MON_LOG_WRN("Undefined string option, return default"); break;
   }
   MON_MUTEX_UNLOCK(variant);

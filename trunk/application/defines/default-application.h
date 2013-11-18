@@ -2,6 +2,7 @@
 #ifndef defaulMonApplication
 #define defaulMonApplication
 #include "global.h"
+#include "systemrights.h"
 
 #ifdef MON_DEBUG
   #define MON_MAX_LOG_PRI mon::lib::logger::pDebug
@@ -19,7 +20,9 @@
   init_fldr = init_fldr->folder("destination"); \
   MON_ST_LOGGER->enableOutToFile   (init_fldr->file("file")   ->get(true)); \
   MON_ST_LOGGER->enableOutToConsole(init_fldr->file("console")->get(true)); \
-  MON_ST_LOGGER->enableOutToSyslog (init_fldr->file("syslog") ->get(true));
+  MON_ST_LOGGER->enableOutToSyslog (init_fldr->file("syslog") ->get(true)); \
+  mon::lib::base::CSystemRights::setGroup(MON_ST_CONFIG->folder("runas")->file("group")->get(mon::lib::base::CSystemRights::currentGroupName())); \
+  mon::lib::base::CSystemRights::setUser (MON_ST_CONFIG->folder("runas")->file("user" )->get(mon::lib::base::CSystemRights::currentUserName ()));
 
 //
 
