@@ -15,15 +15,16 @@ namespace base
 
 bool               toBool  (const std::string &val)        { return val.compare("true") == 0; }
 int                toInt   (const std::string &val)        { return std::stoi(val)     ; }
-unsigned int       toUInt  (const std::string &val)        { return static_cast<unsigned int>(std::stoul(val))    ; }
-short              toShort (const std::string &val)        { return static_cast<short>(std::stoi(val)); }
-unsigned short     toUShort(const std::string &val)        { return static_cast<unsigned short>(std::stoi(val)); }
-long               toLong  (const std::string &val)        { return std::stol(val)   ; }
-unsigned long      toULong (const std::string &val)        { return std::stoul(val)   ; }
-long long          toLLong (const std::string &val)        { return std::stoll(val)   ; }
+unsigned int       toUInt  (const std::string &val)        { return static_cast<unsigned int>  (std::stoul(val)); }
+short              toShort (const std::string &val)        { return static_cast<short>         (std::stoi(val)) ; }
+unsigned short     toUShort(const std::string &val)        { return static_cast<unsigned short>(std::stoi(val)) ; }
+long               toLong  (const std::string &val)        { return std::stol  (val)   ; }
+unsigned long      toULong (const std::string &val)        { return std::stoul (val)   ; }
+long long          toLLong (const std::string &val)        { return std::stoll (val)   ; }
 unsigned long long toULLong(const std::string &val)        { return std::stoull(val)   ; }
-float              toFloat (const std::string &val)        { return std::stof(val)     ; }
-double             toDouble(const std::string &val)        { return std::stod(val)     ; }
+float              toFloat (const std::string &val)        { return std::stof  (val)   ; }
+double             toDouble(const std::string &val)        { return std::stod  (val)   ; }
+
 std::string        toString(const bool               &val) { return val ? "true" : "false"; }
 std::string        toString(const int                &val) { return std::to_string(val); }
 std::string        toString(const unsigned int       &val) { return std::to_string(val); }
@@ -80,18 +81,18 @@ void CVariant::set(const std::string        &val)
   MON_MUTEX_UNLOCK(variant);
 }
 
-bool CVariant::tryConvert(const bool               &val) { if(!isEmpty()) { set(toBool   ()); return true; } return false; }
-bool CVariant::tryConvert(const int                &val) { if(!isEmpty()) { set(toInt    ()); return true; } return false; }
-bool CVariant::tryConvert(const unsigned int       &val) { if(!isEmpty()) { set(toUInt   ()); return true; } return false; }
-bool CVariant::tryConvert(const short              &val) { if(!isEmpty()) { set(toShort  ()); return true; } return false; }
-bool CVariant::tryConvert(const unsigned short     &val) { if(!isEmpty()) { set(toUShort ()); return true; } return false; }
-bool CVariant::tryConvert(const long               &val) { if(!isEmpty()) { set(toLong   ()); return true; } return false; }
-bool CVariant::tryConvert(const unsigned long      &val) { if(!isEmpty()) { set(toULong  ()); return true; } return false; }
-bool CVariant::tryConvert(const long long          &val) { if(!isEmpty()) { set(toLLong  ()); return true; } return false; }
-bool CVariant::tryConvert(const unsigned long long &val) { if(!isEmpty()) { set(toULLong ()); return true; } return false; }
-bool CVariant::tryConvert(const float              &val) { if(!isEmpty()) { set(toFloat  ()); return true; } return false; }
-bool CVariant::tryConvert(const double             &val) { if(!isEmpty()) { set(toDouble ()); return true; } return false; }
-bool CVariant::tryConvert(const std::string        &val) { if(!isEmpty()) { set(toString ()); return true; } return false; }
+bool CVariant::tryConvert(const bool               &val) { if(!isEmpty()) { if(m_contentType != EContentType::Bool  ) { set(toBool   ()); } return true; } return false; }
+bool CVariant::tryConvert(const int                &val) { if(!isEmpty()) { if(m_contentType != EContentType::Int   ) { set(toInt    ()); } return true; } return false; }
+bool CVariant::tryConvert(const unsigned int       &val) { if(!isEmpty()) { if(m_contentType != EContentType::UInt  ) { set(toUInt   ()); } return true; } return false; }
+bool CVariant::tryConvert(const short              &val) { if(!isEmpty()) { if(m_contentType != EContentType::Short ) { set(toShort  ()); } return true; } return false; }
+bool CVariant::tryConvert(const unsigned short     &val) { if(!isEmpty()) { if(m_contentType != EContentType::UShort) { set(toUShort ()); } return true; } return false; }
+bool CVariant::tryConvert(const long               &val) { if(!isEmpty()) { if(m_contentType != EContentType::Long  ) { set(toLong   ()); } return true; } return false; }
+bool CVariant::tryConvert(const unsigned long      &val) { if(!isEmpty()) { if(m_contentType != EContentType::ULong ) { set(toULong  ()); } return true; } return false; }
+bool CVariant::tryConvert(const long long          &val) { if(!isEmpty()) { if(m_contentType != EContentType::LLong ) { set(toLLong  ()); } return true; } return false; }
+bool CVariant::tryConvert(const unsigned long long &val) { if(!isEmpty()) { if(m_contentType != EContentType::ULLong) { set(toULLong ()); } return true; } return false; }
+bool CVariant::tryConvert(const float              &val) { if(!isEmpty()) { if(m_contentType != EContentType::Float ) { set(toFloat  ()); } return true; } return false; }
+bool CVariant::tryConvert(const double             &val) { if(!isEmpty()) { if(m_contentType != EContentType::Double) { set(toDouble ()); } return true; } return false; }
+bool CVariant::tryConvert(const std::string        &val) { if(!isEmpty()) { if(m_contentType != EContentType::String) { set(toString ()); } return true; } return false; }
 
 void CVariant::initialize()
 {
@@ -105,16 +106,16 @@ const bool CVariant::toBool()
   switch(m_contentType)
   {
     case EContentType::Bool:    result = m_value.m_bool                             ; break;
-    case EContentType::Int:     result = m_value.m_int   > 0                        ; break;
-    case EContentType::UInt:    result = m_value.m_uint  > 0                        ; break;
-    case EContentType::Short:   result = m_value.m_short > 0                        ; break;
-    case EContentType::UShort:  result = m_value.m_ushort> 0                        ; break;
-    case EContentType::Long:    result = m_value.m_long  > 0                        ; break;
-    case EContentType::ULong:   result = m_value.m_ulong > 0                        ; break;
-    case EContentType::LLong:   result = m_value.m_llong > 0                        ; break;
-    case EContentType::ULLong:  result = m_value.m_ullong> 0                        ; break;
-    case EContentType::Float:   result = m_value.m_float > 0                        ; break;
-    case EContentType::Double:  result = m_value.m_double> 0                        ; break;
+    case EContentType::Int:     result = m_value.m_int    > 0                       ; break;
+    case EContentType::UInt:    result = m_value.m_uint   > 0                       ; break;
+    case EContentType::Short:   result = m_value.m_short  > 0                       ; break;
+    case EContentType::UShort:  result = m_value.m_ushort > 0                       ; break;
+    case EContentType::Long:    result = m_value.m_long   > 0                       ; break;
+    case EContentType::ULong:   result = m_value.m_ulong  > 0                       ; break;
+    case EContentType::LLong:   result = m_value.m_llong  > 0                       ; break;
+    case EContentType::ULLong:  result = m_value.m_ullong > 0                       ; break;
+    case EContentType::Float:   result = m_value.m_float  > 0                       ; break;
+    case EContentType::Double:  result = m_value.m_double > 0                       ; break;
     case EContentType::String:  result = mon::lib::base::toBool(m_value.m_string)   ; break;
     case EContentType::Unknown: MON_LOG_WRN("Undefined bool option, return default"); break;
   }

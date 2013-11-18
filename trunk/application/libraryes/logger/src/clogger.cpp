@@ -36,7 +36,7 @@ CLogger::CLogger()
 
 CLogger::~CLogger()
 {
-    MON_MUTEX_DESTROY(log);
+  MON_MUTEX_DESTROY(log);
 }
 
 void CLogger::log(const CLogMessage &message)

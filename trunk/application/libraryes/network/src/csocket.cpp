@@ -21,12 +21,14 @@ CSocket::CSocket()
   m_timeout    = MON_DEFAULT_CONNECT_TIMEOUT;
   m_addrLocal  = "";
   m_addrRemote = "";
+  MON_MUTEX_INITIALIZE(write)
   MON_THREADED_FUNCTION_INIT(waitRecv);
 }
 
 CSocket::~CSocket()
 {
   close();
+  MON_MUTEX_DESTROY(write)
 }
 
 MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
@@ -37,6 +39,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
     MON_THREADED_ABORT_IF_NEED(waitRecv);
     if(m_isConnected || m_isListen)
     {
+
       int  t_recv_bytes = 0;
       MON_INFINITY_LOOP_BEGIN(read_all)
         MON_THREADED_ABORT_IF_NEED(waitRecv);
@@ -72,6 +75,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CSocket, waitRecv)
           MON_INFINITY_LOOP_BREAK(read_all)
         }
       MON_INFINITY_LOOP_END(read_all)
+
     }
     else
     {
@@ -90,12 +94,14 @@ void CSocket::write(const std::string &data)
     int t_sent_bytes = 0;
     int t_total_sent_bytes = 0;
 
+    MON_MUTEX_LOCK(write)
     while(t_total_sent_bytes < t_msg_length)
     {
        t_sent_bytes = ::send(m_socketDescriptor, data.c_str()+t_total_sent_bytes, t_msg_length-t_total_sent_bytes, 0);
        if (t_sent_bytes == -1) { MON_PRINT_ERRNO("Error writing to socket"); break; }
        t_total_sent_bytes += t_sent_bytes;
     }
+    MON_MUTEX_UNLOCK(write)
 
     MON_LOG_DBG("Socket bytes send: " << t_total_sent_bytes);
   }
@@ -106,6 +112,7 @@ void CSocket::close()
 {
   if(m_isListen || m_isConnected)
   {
+    MON_MUTEX_LOCK(write)
     if(::shutdown(m_socketDescriptor, SHUT_RDWR) == -1)
     {
       MON_PRINT_ERRNO("Socket shutdown error")
@@ -114,6 +121,7 @@ void CSocket::close()
     {
       MON_PRINT_ERRNO("Socket close error")
     }
+    MON_MUTEX_UNLOCK(write)
     m_isListen    = false;
     m_isConnected = false;
   }

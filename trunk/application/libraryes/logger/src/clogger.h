@@ -22,9 +22,8 @@ namespace logger
 //! Логгер событий
 class CLogger
 {
-
     MON_MUTEX_DECLARE(log)
-public:
+  public:
     CLogger();
     ~CLogger();
     void setLogFilename    (const std::string &filename);
@@ -37,7 +36,7 @@ public:
     void log(const std::string &message, EPriority priority = pInfo);
     void log(const CLogMessage &message);
 
-private:
+  private:
     std::string m_filename;
     bool m_outFile;
     bool m_outConsole;
