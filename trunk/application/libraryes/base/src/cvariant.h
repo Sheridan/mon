@@ -120,6 +120,19 @@ class CVariant
     void set(const double             &val);
     void set(const std::string        &val);
 
+    bool tryConvert(const bool               &val);
+    bool tryConvert(const int                &val);
+    bool tryConvert(const unsigned int       &val);
+    bool tryConvert(const short              &val);
+    bool tryConvert(const unsigned short     &val);
+    bool tryConvert(const long               &val);
+    bool tryConvert(const unsigned long      &val);
+    bool tryConvert(const long long          &val);
+    bool tryConvert(const unsigned long long &val);
+    bool tryConvert(const float              &val);
+    bool tryConvert(const double             &val);
+    bool tryConvert(const std::string        &val);
+
   protected:
     EContentType m_contentType;
     UContent     m_value;

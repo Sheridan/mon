@@ -80,6 +80,19 @@ void CVariant::set(const std::string        &val)
   MON_MUTEX_UNLOCK(variant);
 }
 
+bool CVariant::tryConvert(const bool               &val) { if(!isEmpty()) { set(toBool   ()); return true; } return false; }
+bool CVariant::tryConvert(const int                &val) { if(!isEmpty()) { set(toInt    ()); return true; } return false; }
+bool CVariant::tryConvert(const unsigned int       &val) { if(!isEmpty()) { set(toUInt   ()); return true; } return false; }
+bool CVariant::tryConvert(const short              &val) { if(!isEmpty()) { set(toShort  ()); return true; } return false; }
+bool CVariant::tryConvert(const unsigned short     &val) { if(!isEmpty()) { set(toUShort ()); return true; } return false; }
+bool CVariant::tryConvert(const long               &val) { if(!isEmpty()) { set(toLong   ()); return true; } return false; }
+bool CVariant::tryConvert(const unsigned long      &val) { if(!isEmpty()) { set(toULong  ()); return true; } return false; }
+bool CVariant::tryConvert(const long long          &val) { if(!isEmpty()) { set(toLLong  ()); return true; } return false; }
+bool CVariant::tryConvert(const unsigned long long &val) { if(!isEmpty()) { set(toULLong ()); return true; } return false; }
+bool CVariant::tryConvert(const float              &val) { if(!isEmpty()) { set(toFloat  ()); return true; } return false; }
+bool CVariant::tryConvert(const double             &val) { if(!isEmpty()) { set(toDouble ()); return true; } return false; }
+bool CVariant::tryConvert(const std::string        &val) { if(!isEmpty()) { set(toString ()); return true; } return false; }
+
 void CVariant::initialize()
 {
   MON_MUTEX_INITIALIZE(variant)
