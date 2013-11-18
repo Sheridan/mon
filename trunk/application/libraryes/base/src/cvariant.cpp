@@ -39,16 +39,19 @@ std::string        toString(const double             &val) { return std::to_stri
 CVariant::~CVariant()
 {
   reset();
+  MON_MUTEX_DESTROY(variant)
 }
 
 void CVariant::reset()
 {
+  MON_MUTEX_LOCK(variant)
   if(m_contentType == EContentType::String)
   {
     free(m_value.m_string);
     m_value.m_string = nullptr;
   }
   m_contentType = EContentType::Unknown;
+  MON_MUTEX_UNLOCK(variant)
 }
 
 bool CVariant::isEmpty()
@@ -56,263 +59,318 @@ bool CVariant::isEmpty()
   return m_contentType == EContentType::Unknown;
 }
 
-void CVariant::set(const bool               &val) { reset(); m_contentType = EContentType::Bool  ; m_value.m_bool   = val; }
-void CVariant::set(const int                &val) { reset(); m_contentType = EContentType::Int   ; m_value.m_int    = val; }
-void CVariant::set(const unsigned int       &val) { reset(); m_contentType = EContentType::UInt  ; m_value.m_uint   = val; }
-void CVariant::set(const short              &val) { reset(); m_contentType = EContentType::Short ; m_value.m_short  = val; }
-void CVariant::set(const unsigned short     &val) { reset(); m_contentType = EContentType::UShort; m_value.m_ushort = val; }
-void CVariant::set(const long               &val) { reset(); m_contentType = EContentType::Long  ; m_value.m_long   = val; }
-void CVariant::set(const unsigned long      &val) { reset(); m_contentType = EContentType::ULong ; m_value.m_ulong  = val; }
-void CVariant::set(const long long          &val) { reset(); m_contentType = EContentType::LLong ; m_value.m_llong  = val; }
-void CVariant::set(const unsigned long long &val) { reset(); m_contentType = EContentType::ULLong; m_value.m_ullong = val; }
-void CVariant::set(const float              &val) { reset(); m_contentType = EContentType::Float ; m_value.m_float  = val; }
-void CVariant::set(const double             &val) { reset(); m_contentType = EContentType::Double; m_value.m_double = val; }
+void CVariant::set(const bool               &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::Bool  ; m_value.m_bool   = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const int                &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::Int   ; m_value.m_int    = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const unsigned int       &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::UInt  ; m_value.m_uint   = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const short              &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::Short ; m_value.m_short  = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const unsigned short     &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::UShort; m_value.m_ushort = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const long               &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::Long  ; m_value.m_long   = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const unsigned long      &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::ULong ; m_value.m_ulong  = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const long long          &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::LLong ; m_value.m_llong  = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const unsigned long long &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::ULLong; m_value.m_ullong = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const float              &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::Float ; m_value.m_float  = val; MON_MUTEX_UNLOCK(variant); }
+void CVariant::set(const double             &val) { reset(); MON_MUTEX_LOCK(variant); m_contentType = EContentType::Double; m_value.m_double = val; MON_MUTEX_UNLOCK(variant); }
 void CVariant::set(const std::string        &val)
 {
   reset();
+  MON_MUTEX_LOCK(variant);
   m_contentType = mon::lib::base::EContentType::String;
   m_value.m_string = static_cast<char *>(malloc(strlen(val.c_str()) + 1));
   strcpy(m_value.m_string, val.c_str());
+  MON_MUTEX_UNLOCK(variant);
 }
 
-const bool CVariant::toBool() const
+void CVariant::initialize()
 {
-  switch(m_contentType)
-  {
-    case EContentType::Bool:    return  m_value.m_bool;
-    case EContentType::Int:     return  m_value.m_int   > 0;
-    case EContentType::UInt:    return  m_value.m_uint  > 0;
-    case EContentType::Short:   return  m_value.m_short > 0;
-    case EContentType::UShort:  return  m_value.m_ushort> 0;
-    case EContentType::Long:    return  m_value.m_long  > 0;
-    case EContentType::ULong:   return  m_value.m_ulong > 0;
-    case EContentType::LLong:   return  m_value.m_llong > 0;
-    case EContentType::ULLong:  return  m_value.m_ullong> 0;
-    case EContentType::Float:   return  m_value.m_float > 0;
-    case EContentType::Double:  return  m_value.m_double> 0;
-    case EContentType::String:  return  mon::lib::base::toBool(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined bool option, return default"); return false;
-  } return false;
+  MON_MUTEX_INITIALIZE(variant)
 }
 
-const int CVariant::toInt() const
+const bool CVariant::toBool()
 {
+  bool result = false;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<int>(m_value.m_bool);
-    case EContentType::Int:     return m_value.m_int;
-    case EContentType::UInt:    return static_cast<int>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<int>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<int>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<int>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<int>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<int>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<int>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<int>(m_value.m_float);
-    case EContentType::Double:  return static_cast<int>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toInt(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = m_value.m_bool                             ; break;
+    case EContentType::Int:     result = m_value.m_int   > 0                        ; break;
+    case EContentType::UInt:    result = m_value.m_uint  > 0                        ; break;
+    case EContentType::Short:   result = m_value.m_short > 0                        ; break;
+    case EContentType::UShort:  result = m_value.m_ushort> 0                        ; break;
+    case EContentType::Long:    result = m_value.m_long  > 0                        ; break;
+    case EContentType::ULong:   result = m_value.m_ulong > 0                        ; break;
+    case EContentType::LLong:   result = m_value.m_llong > 0                        ; break;
+    case EContentType::ULLong:  result = m_value.m_ullong> 0                        ; break;
+    case EContentType::Float:   result = m_value.m_float > 0                        ; break;
+    case EContentType::Double:  result = m_value.m_double> 0                        ; break;
+    case EContentType::String:  result = mon::lib::base::toBool(m_value.m_string)   ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined bool option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const unsigned int CVariant::toUInt() const
+const int CVariant::toInt()
 {
+  int result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<unsigned int>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<unsigned int>(m_value.m_int);
-    case EContentType::UInt:    return m_value.m_uint;
-    case EContentType::Short:   return static_cast<unsigned int>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<unsigned int>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<unsigned int>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<unsigned int>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<unsigned int>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<unsigned int>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<unsigned int>(m_value.m_float);
-    case EContentType::Double:  return static_cast<unsigned int>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toUInt(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<int>(m_value.m_bool)          ; break;
+    case EContentType::Int:     result = m_value.m_int                             ; break;
+    case EContentType::UInt:    result = static_cast<int>(m_value.m_uint)          ; break;
+    case EContentType::Short:   result = static_cast<int>(m_value.m_short)         ; break;
+    case EContentType::UShort:  result = static_cast<int>(m_value.m_ushort)        ; break;
+    case EContentType::Long:    result = static_cast<int>(m_value.m_long)          ; break;
+    case EContentType::ULong:   result = static_cast<int>(m_value.m_ulong)         ; break;
+    case EContentType::LLong:   result = static_cast<int>(m_value.m_llong)         ; break;
+    case EContentType::ULLong:  result = static_cast<int>(m_value.m_ullong)        ; break;
+    case EContentType::Float:   result = static_cast<int>(m_value.m_float)         ; break;
+    case EContentType::Double:  result = static_cast<int>(m_value.m_double)        ; break;
+    case EContentType::String:  result = mon::lib::base::toInt(m_value.m_string)   ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined int option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const short CVariant::toShort() const
+const unsigned int CVariant::toUInt()
 {
+  unsigned int result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<short>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<short>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<short>(m_value.m_uint);
-    case EContentType::Short:   return m_value.m_short;
-    case EContentType::UShort:  return static_cast<short>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<short>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<short>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<short>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<short>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<short>(m_value.m_float);
-    case EContentType::Double:  return static_cast<short>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toShort(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<unsigned int>(m_value.m_bool)     ; break;
+    case EContentType::Int:     result = static_cast<unsigned int>(m_value.m_int)      ; break;
+    case EContentType::UInt:    result = m_value.m_uint                                ; break;
+    case EContentType::Short:   result = static_cast<unsigned int>(m_value.m_short)    ; break;
+    case EContentType::UShort:  result = static_cast<unsigned int>(m_value.m_ushort)   ; break;
+    case EContentType::Long:    result = static_cast<unsigned int>(m_value.m_long)     ; break;
+    case EContentType::ULong:   result = static_cast<unsigned int>(m_value.m_ulong)    ; break;
+    case EContentType::LLong:   result = static_cast<unsigned int>(m_value.m_llong)    ; break;
+    case EContentType::ULLong:  result = static_cast<unsigned int>(m_value.m_ullong)   ; break;
+    case EContentType::Float:   result = static_cast<unsigned int>(m_value.m_float)    ; break;
+    case EContentType::Double:  result = static_cast<unsigned int>(m_value.m_double)   ; break;
+    case EContentType::String:  result = mon::lib::base::toUInt(m_value.m_string)      ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const unsigned short CVariant::toUShort() const
+const short CVariant::toShort()
 {
+  short result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<unsigned short>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<unsigned short>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<unsigned short>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<unsigned short>(m_value.m_short);
-    case EContentType::UShort:  return m_value.m_ushort;
-    case EContentType::Long:    return static_cast<unsigned short>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<unsigned short>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<unsigned short>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<unsigned short>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<unsigned short>(m_value.m_float);
-    case EContentType::Double:  return static_cast<unsigned short>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toUShort(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<short>(m_value.m_bool)            ; break;
+    case EContentType::Int:     result = static_cast<short>(m_value.m_int)             ; break;
+    case EContentType::UInt:    result = static_cast<short>(m_value.m_uint)            ; break;
+    case EContentType::Short:   result = m_value.m_short                               ; break;
+    case EContentType::UShort:  result = static_cast<short>(m_value.m_ushort)          ; break;
+    case EContentType::Long:    result = static_cast<short>(m_value.m_long)            ; break;
+    case EContentType::ULong:   result = static_cast<short>(m_value.m_ulong)           ; break;
+    case EContentType::LLong:   result = static_cast<short>(m_value.m_llong)           ; break;
+    case EContentType::ULLong:  result = static_cast<short>(m_value.m_ullong)          ; break;
+    case EContentType::Float:   result = static_cast<short>(m_value.m_float)           ; break;
+    case EContentType::Double:  result = static_cast<short>(m_value.m_double)          ; break;
+    case EContentType::String:  result = mon::lib::base::toShort(m_value.m_string)     ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const long CVariant::toLong() const
+const unsigned short CVariant::toUShort()
 {
+  unsigned short result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<long>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<long>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<long>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<long>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<long>(m_value.m_ushort);
-    case EContentType::Long:    return m_value.m_long;
-    case EContentType::ULong:   return static_cast<long>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<long>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<long>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<long>(m_value.m_float);
-    case EContentType::Double:  return static_cast<long>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toLong(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<unsigned short>(m_value.m_bool)   ; break;
+    case EContentType::Int:     result = static_cast<unsigned short>(m_value.m_int)    ; break;
+    case EContentType::UInt:    result = static_cast<unsigned short>(m_value.m_uint)   ; break;
+    case EContentType::Short:   result = static_cast<unsigned short>(m_value.m_short)  ; break;
+    case EContentType::UShort:  result = m_value.m_ushort                              ; break;
+    case EContentType::Long:    result = static_cast<unsigned short>(m_value.m_long)   ; break;
+    case EContentType::ULong:   result = static_cast<unsigned short>(m_value.m_ulong)  ; break;
+    case EContentType::LLong:   result = static_cast<unsigned short>(m_value.m_llong)  ; break;
+    case EContentType::ULLong:  result = static_cast<unsigned short>(m_value.m_ullong) ; break;
+    case EContentType::Float:   result = static_cast<unsigned short>(m_value.m_float)  ; break;
+    case EContentType::Double:  result = static_cast<unsigned short>(m_value.m_double) ; break;
+    case EContentType::String:  result = mon::lib::base::toUShort(m_value.m_string)    ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const unsigned long CVariant::toULong() const
+const long CVariant::toLong()
 {
+  long result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<unsigned long>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<unsigned long>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<unsigned long>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<unsigned long>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<unsigned long>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<unsigned long>(m_value.m_long);
-    case EContentType::ULong:   return m_value.m_ulong;
-    case EContentType::LLong:   return static_cast<unsigned long>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<unsigned long>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<unsigned long>(m_value.m_float);
-    case EContentType::Double:  return static_cast<unsigned long>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toULong(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<long>(m_value.m_bool)             ; break;
+    case EContentType::Int:     result = static_cast<long>(m_value.m_int)              ; break;
+    case EContentType::UInt:    result = static_cast<long>(m_value.m_uint)             ; break;
+    case EContentType::Short:   result = static_cast<long>(m_value.m_short)            ; break;
+    case EContentType::UShort:  result = static_cast<long>(m_value.m_ushort)           ; break;
+    case EContentType::Long:    result = m_value.m_long                                ; break;
+    case EContentType::ULong:   result = static_cast<long>(m_value.m_ulong)            ; break;
+    case EContentType::LLong:   result = static_cast<long>(m_value.m_llong)            ; break;
+    case EContentType::ULLong:  result = static_cast<long>(m_value.m_ullong)           ; break;
+    case EContentType::Float:   result = static_cast<long>(m_value.m_float)            ; break;
+    case EContentType::Double:  result = static_cast<long>(m_value.m_double)           ; break;
+    case EContentType::String:  result = mon::lib::base::toLong(m_value.m_string)      ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const long long CVariant::toLLong() const
+const unsigned long CVariant::toULong()
 {
+  unsigned long result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<long long>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<long long>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<long long>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<long long>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<long long>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<long long>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<long long>(m_value.m_ulong);
-    case EContentType::LLong:   return m_value.m_llong;
-    case EContentType::ULLong:  return static_cast<long long>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<long long>(m_value.m_float);
-    case EContentType::Double:  return static_cast<long long>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toULong(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<unsigned long>(m_value.m_bool)    ; break;
+    case EContentType::Int:     result = static_cast<unsigned long>(m_value.m_int)     ; break;
+    case EContentType::UInt:    result = static_cast<unsigned long>(m_value.m_uint)    ; break;
+    case EContentType::Short:   result = static_cast<unsigned long>(m_value.m_short)   ; break;
+    case EContentType::UShort:  result = static_cast<unsigned long>(m_value.m_ushort)  ; break;
+    case EContentType::Long:    result = static_cast<unsigned long>(m_value.m_long)    ; break;
+    case EContentType::ULong:   result = m_value.m_ulong                               ; break;
+    case EContentType::LLong:   result = static_cast<unsigned long>(m_value.m_llong)   ; break;
+    case EContentType::ULLong:  result = static_cast<unsigned long>(m_value.m_ullong)  ; break;
+    case EContentType::Float:   result = static_cast<unsigned long>(m_value.m_float)   ; break;
+    case EContentType::Double:  result = static_cast<unsigned long>(m_value.m_double)  ; break;
+    case EContentType::String:  result = mon::lib::base::toULong(m_value.m_string)     ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const unsigned long long CVariant::toULLong() const
+const long long CVariant::toLLong()
 {
+  long long result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<unsigned long long>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<unsigned long long>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<unsigned long long>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<unsigned long long>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<unsigned long long>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<unsigned long long>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<unsigned long long>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<unsigned long long>(m_value.m_llong);
-    case EContentType::ULLong:  return m_value.m_ullong;
-    case EContentType::Float:   return static_cast<unsigned long long>(m_value.m_float);
-    case EContentType::Double:  return static_cast<unsigned long long>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toULLong(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined int option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<long long>(m_value.m_bool)        ; break;
+    case EContentType::Int:     result = static_cast<long long>(m_value.m_int)         ; break;
+    case EContentType::UInt:    result = static_cast<long long>(m_value.m_uint)        ; break;
+    case EContentType::Short:   result = static_cast<long long>(m_value.m_short)       ; break;
+    case EContentType::UShort:  result = static_cast<long long>(m_value.m_ushort)      ; break;
+    case EContentType::Long:    result = static_cast<long long>(m_value.m_long)        ; break;
+    case EContentType::ULong:   result = static_cast<long long>(m_value.m_ulong)       ; break;
+    case EContentType::LLong:   result = m_value.m_llong                               ; break;
+    case EContentType::ULLong:  result = static_cast<long long>(m_value.m_ullong)      ; break;
+    case EContentType::Float:   result = static_cast<long long>(m_value.m_float)       ; break;
+    case EContentType::Double:  result = static_cast<long long>(m_value.m_double)      ; break;
+    case EContentType::String:  result = mon::lib::base::toULong(m_value.m_string)     ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined variant option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const float CVariant::toFloat() const
+const unsigned long long CVariant::toULLong()
 {
+  unsigned long long result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<float>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<float>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<float>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<float>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<float>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<float>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<float>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<float>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<float>(m_value.m_ullong);
-    case EContentType::Float:   return m_value.m_float;
-    case EContentType::Double:  return static_cast<float>(m_value.m_double);
-    case EContentType::String:  return mon::lib::base::toDouble(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined float option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<unsigned long long>(m_value.m_bool)  ; break;
+    case EContentType::Int:     result = static_cast<unsigned long long>(m_value.m_int)   ; break;
+    case EContentType::UInt:    result = static_cast<unsigned long long>(m_value.m_uint)  ; break;
+    case EContentType::Short:   result = static_cast<unsigned long long>(m_value.m_short) ; break;
+    case EContentType::UShort:  result = static_cast<unsigned long long>(m_value.m_ushort); break;
+    case EContentType::Long:    result = static_cast<unsigned long long>(m_value.m_long)  ; break;
+    case EContentType::ULong:   result = static_cast<unsigned long long>(m_value.m_ulong) ; break;
+    case EContentType::LLong:   result = static_cast<unsigned long long>(m_value.m_llong) ; break;
+    case EContentType::ULLong:  result = m_value.m_ullong                                 ; break;
+    case EContentType::Float:   result = static_cast<unsigned long long>(m_value.m_float) ; break;
+    case EContentType::Double:  result = static_cast<unsigned long long>(m_value.m_double); break;
+    case EContentType::String:  result = mon::lib::base::toULLong(m_value.m_string)       ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined int option, return default")       ; break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const double CVariant::toDouble() const
+const float CVariant::toFloat()
 {
+  float result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return static_cast<double>(m_value.m_bool);
-    case EContentType::Int:     return static_cast<double>(m_value.m_int);
-    case EContentType::UInt:    return static_cast<double>(m_value.m_uint);
-    case EContentType::Short:   return static_cast<double>(m_value.m_short);
-    case EContentType::UShort:  return static_cast<double>(m_value.m_ushort);
-    case EContentType::Long:    return static_cast<double>(m_value.m_long);
-    case EContentType::ULong:   return static_cast<double>(m_value.m_ulong);
-    case EContentType::LLong:   return static_cast<double>(m_value.m_llong);
-    case EContentType::ULLong:  return static_cast<double>(m_value.m_ullong);
-    case EContentType::Float:   return static_cast<double>(m_value.m_float);
-    case EContentType::Double:  return m_value.m_double;
-    case EContentType::String:  return mon::lib::base::toDouble(m_value.m_string);
-    case EContentType::Unknown: MON_LOG_WRN("Undefined float option, return default"); return 0;
-  } return 0;
+    case EContentType::Bool:    result = static_cast<float>(m_value.m_bool)          ; break;
+    case EContentType::Int:     result = static_cast<float>(m_value.m_int)           ; break;
+    case EContentType::UInt:    result = static_cast<float>(m_value.m_uint)          ; break;
+    case EContentType::Short:   result = static_cast<float>(m_value.m_short)         ; break;
+    case EContentType::UShort:  result = static_cast<float>(m_value.m_ushort)        ; break;
+    case EContentType::Long:    result = static_cast<float>(m_value.m_long)          ; break;
+    case EContentType::ULong:   result = static_cast<float>(m_value.m_ulong)         ; break;
+    case EContentType::LLong:   result = static_cast<float>(m_value.m_llong)         ; break;
+    case EContentType::ULLong:  result = static_cast<float>(m_value.m_ullong)        ; break;
+    case EContentType::Float:   result = m_value.m_float                             ; break;
+    case EContentType::Double:  result = static_cast<float>(m_value.m_double)        ; break;
+    case EContentType::String:  result = mon::lib::base::toDouble(m_value.m_string)  ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined float option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
-const std::string CVariant::toString() const
+const double CVariant::toDouble()
 {
+  double result = 0;
+  MON_MUTEX_LOCK(variant);
   switch(m_contentType)
   {
-    case EContentType::Bool:    return mon::lib::base::toString(m_value.m_bool);
-    case EContentType::Int:     return mon::lib::base::toString(m_value.m_int);
-    case EContentType::UInt:    return mon::lib::base::toString(m_value.m_uint);
-    case EContentType::Short:   return mon::lib::base::toString(m_value.m_short);
-    case EContentType::UShort:  return mon::lib::base::toString(m_value.m_ushort);
-    case EContentType::Long:    return mon::lib::base::toString(m_value.m_long);
-    case EContentType::ULong:   return mon::lib::base::toString(m_value.m_ulong);
-    case EContentType::LLong:   return mon::lib::base::toString(m_value.m_llong);
-    case EContentType::ULLong:  return mon::lib::base::toString(m_value.m_ullong);
-    case EContentType::Float:   return mon::lib::base::toString(m_value.m_float);
-    case EContentType::Double:  return mon::lib::base::toString(m_value.m_double);
-    case EContentType::String:  return m_value.m_string;
-    case EContentType::Unknown: MON_LOG_WRN("Undefined string option, return default"); return std::string();
-  } return std::string();
+    case EContentType::Bool:    result = static_cast<double>(m_value.m_bool)         ; break;
+    case EContentType::Int:     result = static_cast<double>(m_value.m_int)          ; break;
+    case EContentType::UInt:    result = static_cast<double>(m_value.m_uint)         ; break;
+    case EContentType::Short:   result = static_cast<double>(m_value.m_short)        ; break;
+    case EContentType::UShort:  result = static_cast<double>(m_value.m_ushort)       ; break;
+    case EContentType::Long:    result = static_cast<double>(m_value.m_long)         ; break;
+    case EContentType::ULong:   result = static_cast<double>(m_value.m_ulong)        ; break;
+    case EContentType::LLong:   result = static_cast<double>(m_value.m_llong)        ; break;
+    case EContentType::ULLong:  result = static_cast<double>(m_value.m_ullong)       ; break;
+    case EContentType::Float:   result = static_cast<double>(m_value.m_float)        ; break;
+    case EContentType::Double:  result = m_value.m_double                            ; break;
+    case EContentType::String:  result = mon::lib::base::toDouble(m_value.m_string)  ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined float option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
+}
+
+const std::string CVariant::toString()
+{
+  std::string result = std::string();
+  MON_MUTEX_LOCK(variant);
+  switch(m_contentType)
+  {
+    case EContentType::Bool:    result = mon::lib::base::toString(m_value.m_bool)     ; break;
+    case EContentType::Int:     result = mon::lib::base::toString(m_value.m_int)      ; break;
+    case EContentType::UInt:    result = mon::lib::base::toString(m_value.m_uint)     ; break;
+    case EContentType::Short:   result = mon::lib::base::toString(m_value.m_short)    ; break;
+    case EContentType::UShort:  result = mon::lib::base::toString(m_value.m_ushort)   ; break;
+    case EContentType::Long:    result = mon::lib::base::toString(m_value.m_long)     ; break;
+    case EContentType::ULong:   result = mon::lib::base::toString(m_value.m_ulong)    ; break;
+    case EContentType::LLong:   result = mon::lib::base::toString(m_value.m_llong)    ; break;
+    case EContentType::ULLong:  result = mon::lib::base::toString(m_value.m_ullong)   ; break;
+    case EContentType::Float:   result = mon::lib::base::toString(m_value.m_float)    ; break;
+    case EContentType::Double:  result = mon::lib::base::toString(m_value.m_double)   ; break;
+    case EContentType::String:  result = m_value.m_string                             ; break;
+    case EContentType::Unknown: MON_LOG_WRN("Undefined string option, return default"); break;
+  }
+  MON_MUTEX_UNLOCK(variant);
+  return result;
 }
 
 const EContentType &CVariant::contentType() const

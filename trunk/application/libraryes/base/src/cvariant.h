@@ -2,6 +2,7 @@
 #ifndef CVARIANT_H
 #define CVARIANT_H
 #include <string>
+#include "mutex-helper.h"
 
 namespace mon
 {
@@ -71,56 +72,60 @@ union UContent
 //! Почти классический вариант.
 class CVariant
 {
-public:
-  CVariant(                             ) { reset();  }
-  CVariant(const bool               &val) { set(val); }
-  CVariant(const int                &val) { set(val); }
-  CVariant(const unsigned int       &val) { set(val); }
-  CVariant(const short              &val) { set(val); }
-  CVariant(const unsigned short     &val) { set(val); }
-  CVariant(const long               &val) { set(val); }
-  CVariant(const unsigned long      &val) { set(val); }
-  CVariant(const long long          &val) { set(val); }
-  CVariant(const unsigned long long &val) { set(val); }
-  CVariant(const float              &val) { set(val); }
-  CVariant(const double             &val) { set(val); }
-  CVariant(const std::string        &val) { set(val); }
-  virtual ~CVariant();
+    MON_MUTEX_DECLARE(variant)
+  public:
+    CVariant(                             ) { initialize(); reset();  }
+    CVariant(const bool               &val) { initialize(); set(val); }
+    CVariant(const int                &val) { initialize(); set(val); }
+    CVariant(const unsigned int       &val) { initialize(); set(val); }
+    CVariant(const short              &val) { initialize(); set(val); }
+    CVariant(const unsigned short     &val) { initialize(); set(val); }
+    CVariant(const long               &val) { initialize(); set(val); }
+    CVariant(const unsigned long      &val) { initialize(); set(val); }
+    CVariant(const long long          &val) { initialize(); set(val); }
+    CVariant(const unsigned long long &val) { initialize(); set(val); }
+    CVariant(const float              &val) { initialize(); set(val); }
+    CVariant(const double             &val) { initialize(); set(val); }
+    CVariant(const std::string        &val) { initialize(); set(val); }
+    virtual ~CVariant();
 
-  void reset();
-  bool isEmpty();
+    void reset();
+    bool isEmpty();
 
-  const bool               toBool      () const;
-  const int                toInt       () const;
-  const unsigned int       toUInt      () const;
-  const short              toShort     () const;
-  const unsigned short     toUShort    () const;
-  const long               toLong      () const;
-  const unsigned long      toULong     () const;
-  const long long          toLLong     () const;
-  const unsigned long long toULLong    () const;
-  const float              toFloat     () const;
-  const double             toDouble    () const;
-  const std::string        toString    () const;
+    const bool               toBool      ();
+    const int                toInt       ();
+    const unsigned int       toUInt      ();
+    const short              toShort     ();
+    const unsigned short     toUShort    ();
+    const long               toLong      ();
+    const unsigned long      toULong     ();
+    const long long          toLLong     ();
+    const unsigned long long toULLong    ();
+    const float              toFloat     ();
+    const double             toDouble    ();
+    const std::string        toString    ();
 
-  const EContentType &     contentType () const;
+    const EContentType &     contentType () const;
 
-  void set(const bool               &val);
-  void set(const int                &val);
-  void set(const unsigned int       &val);
-  void set(const short              &val);
-  void set(const unsigned short     &val);
-  void set(const long               &val);
-  void set(const unsigned long      &val);
-  void set(const long long          &val);
-  void set(const unsigned long long &val);
-  void set(const float              &val);
-  void set(const double             &val);
-  void set(const std::string        &val);
+    void set(const bool               &val);
+    void set(const int                &val);
+    void set(const unsigned int       &val);
+    void set(const short              &val);
+    void set(const unsigned short     &val);
+    void set(const long               &val);
+    void set(const unsigned long      &val);
+    void set(const long long          &val);
+    void set(const unsigned long long &val);
+    void set(const float              &val);
+    void set(const double             &val);
+    void set(const std::string        &val);
 
-protected:
-  EContentType m_contentType;
-  UContent     m_value;
+  protected:
+    EContentType m_contentType;
+    UContent     m_value;
+
+  private:
+    void initialize();
 };
 
 }

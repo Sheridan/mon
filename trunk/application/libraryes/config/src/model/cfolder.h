@@ -3,6 +3,7 @@
 #define CFOLDER_H
 #include "cnode.h"
 #include "pathinterface.h"
+#include "mutex-helper.h"
 
 namespace mon
 {
@@ -14,6 +15,8 @@ namespace config
 //! Ветвь конфига
 class CFolder : public CNode, public IPathInterface
 {
+    MON_MUTEX_DECLARE(folder)
+    MON_MUTEX_DECLARE(file)
 public:
   CFolder();
   CFolder(const std::string &nodeName, CNode *parentNode);
