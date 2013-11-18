@@ -201,21 +201,21 @@ include_directories( ${GEN_PATH}
                      libraryes/protocol/src
                      defines )
 
-function(add_run target_name)
-  file(WRITE ${GEN_PATH}/${target_name}-run "#!/bin/bash\n\nLD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/${LIB_GLOBAL_TARGET}\" ${CMAKE_INSTALL_PREFIX}/bin/${target_name} $@\n\n"  )
-  install(FILES ${GEN_PATH}/${target_name}-run
-          DESTINATION bin
-          PERMISSIONS
-            OWNER_READ OWNER_WRITE OWNER_EXECUTE
-            GROUP_READ GROUP_EXECUTE
-            WORLD_READ WORLD_EXECUTE)
-endfunction(add_run)
+#function(add_run target_name)
+#  file(WRITE ${GEN_PATH}/${target_name}-run "#!/bin/bash\n\nLD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/${LIB_GLOBAL_TARGET}\" ${CMAKE_INSTALL_PREFIX}/bin/${target_name} $@\n\n"  )
+#  install(FILES ${GEN_PATH}/${target_name}-run
+#          DESTINATION bin
+#          PERMISSIONS
+#            OWNER_READ OWNER_WRITE OWNER_EXECUTE
+#            GROUP_READ GROUP_EXECUTE
+#            WORLD_READ WORLD_EXECUTE)
+#endfunction(add_run)
 
 function(add_daemon target_name)
   add_dependencies(${target_name} base)
   target_link_libraries(${target_name} base ${GLOBAL_LINK_LIBS})
   install(TARGETS ${target_name} RUNTIME DESTINATION bin )
-  add_run(${target_name})
+#  add_run(${target_name})
 endfunction(add_daemon)
 
 IF( BUILD_COLLECTOR )
@@ -269,7 +269,7 @@ MESSAGE ( STATUS "---> Processing char array generator" )
 add_executable( mon-text-to-char-array tools/mon-text-to-char-array/main.cpp)
 target_link_libraries(mon-text-to-char-array base config logger sensordata dl ${GLOBAL_LINK_LIBS})
 install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
-add_run(mon-text-to-char-array)
+#add_run(mon-text-to-char-array)
 
 MESSAGE ( STATUS "---> Processing sensor tester" )
 SET(mon-sensor-test-headers
@@ -282,5 +282,5 @@ SET(mon-sensor-test-sources
 add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
 target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})
 install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
-add_run(mon-sensor-test)
+#add_run(mon-sensor-test)
 # +++++++++++++++++++ tools +++++++++++++++++++
