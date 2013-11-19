@@ -5,6 +5,8 @@
 . ./linux-environment
 
 debug_off=${1:-"ON"}
+use_clang=${2:-"OFF"}
+verbose_build=${3:-"OFF"}
 current_path=$PWD
 function run_cmd
 {
@@ -24,10 +26,11 @@ function build()
   path=$1
   echo "-------------------> Building $path <-------------------"
   object_build_path="$console_build_path/$path"
+  rm -rf ${object_build_path}
   object_path="$current_path/$path"
   mkdir -p $object_build_path
   cd $object_build_path
-  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='$install_path' -DBUILD_DEBUG=$debug_off $object_path"
+  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='$install_path' -DMON_VERBOSE_BUILD=$verbose_build -DBUILD_DEBUG=$debug_off -DMON_USE_CLANG=$use_clang  $object_path"
   run_cmd "make" "make -j$build_threads"
   run_cmd "install" "make install"
   cd $build_path

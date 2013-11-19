@@ -1,7 +1,5 @@
 language: cpp
-compiler:
-  - gcc
-  - clang
+compiler: clang
 script: cmake trunk/application && make
 notifications:
   recipients:

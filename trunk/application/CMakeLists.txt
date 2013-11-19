@@ -1,4 +1,5 @@
 # %Id%
+include(CMakeCompiler.cmake)
 PROJECT(mon)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
@@ -13,17 +14,12 @@ SET(LIB_PREFIX_TARGET  "lib/mon"                     )
 SET(LIB_GLOBAL_TARGET  "${LIB_PREFIX_TARGET}/global" )
 SET(LIB_SENSORS_TARGET "${LIB_PREFIX_TARGET}/sensors")
 
-# --------------------- c++11 -------------------
-ADD_DEFINITIONS( -std=c++11 )
-ADD_DEFINITIONS( -g )
-#ADD_DEFINITIONS( -ftest-coverage )
-ADD_DEFINITIONS( -fprofile-arcs )
-SET(GLOBAL_LINK_LIBS gcov )
-# --------------------- c++11 -------------------
 
 include(CMakeDebug.cmake)
+
 install(FILES CMakeDebug.cmake DESTINATION include/mon)
 install(FILES CMakeSensor.cmake DESTINATION include/mon)
+install(FILES CMakeCompiler.cmake DESTINATION include/mon)
 
 MESSAGE( STATUS "---> Processing base" )
 
