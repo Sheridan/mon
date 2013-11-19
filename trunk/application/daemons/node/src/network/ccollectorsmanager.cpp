@@ -10,7 +10,8 @@ namespace node
 {
 
 CCollectorsManager::CCollectorsManager()
-  : mon::lib::network::CSocketServer(), mon::lib::base::CSingletonMember(MON_COLLECTORS_MANAGER_ST_MEMBER_ID)
+  : mon::lib::network::CSocketServer(),
+    mon::lib::base::CSingletonMember(MON_COLLECTORS_MANAGER_ST_MEMBER_ID)
 {}
 
 CCollectorsManager::~CCollectorsManager()
@@ -20,7 +21,7 @@ CCollectorsManager::~CCollectorsManager()
 
 void CCollectorsManager::listen()
 {
-  mon::lib::network::CSocketServer::listen(MON_ST_CONFIG->folder("network")->folder("listen")->file("port")->get(MON_DEFAULT_LISTEN_PORT));
+  mon::lib::network::CSocketServer::listen(MON_ST_CONFIG->folder("network")->folder("listen")->file("port")->get(MON_DEFAULT_COLLECTOR_LISTEN_PORT));
 }
 
 void CCollectorsManager::unlisten()

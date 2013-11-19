@@ -2,9 +2,10 @@
 PROJECT(mon)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-OPTION( BUILD_COLLECTOR      "Build collector"                        OFF )
+OPTION( BUILD_COLLECTOR      "Build collector"                        ON  )
 OPTION( BUILD_DEV_TOOLS      "Build node"                             ON  )
 OPTION( BUILD_NODE           "Build node"                             ON  )
+OPTION( BUILD_STORAGE        "Build storage"                          ON  )
 OPTION( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
 OPTION( BUILD_CLIENT_NCURSES "Build mon-client-qt"                    OFF )
 
@@ -262,6 +263,21 @@ IF( BUILD_NODE )
   target_link_libraries(mon-node dl)
   add_daemon(mon-node)
 ENDIF( BUILD_NODE )
+
+IF( BUILD_STORAGE )
+  MESSAGE ( STATUS "---> Processing storage" )
+  SET(mon-storage-headers
+      daemons/storage/src/storage_st.h
+      daemons/storage/src/cstorage.h
+  )
+  SET(mon-storage-sources
+      daemons/storage/src/cstorage.cpp
+      daemons/storage/src/main.cpp )
+  include_directories( daemons/storage/src )
+  add_executable( mon-storage ${mon-storage-headers} ${mon-storage-sources})
+  target_link_libraries(mon-storage dl)
+  add_daemon(mon-storage)
+ENDIF( BUILD_STORAGE )
 # +++++++++++++++++++ applications +++++++++++++++++++
 
 # +++++++++++++++++++ tools +++++++++++++++++++

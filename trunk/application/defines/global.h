@@ -2,10 +2,12 @@
 #ifndef MON_GLOBAL_H
 #define MON_GLOBAL_H
 
-//! Сетевой порт по умолчанию
-#define MON_DEFAULT_LISTEN_PORT     ((unsigned short)4848)
+//! Сетевой порт сборщика по умолчанию
+#define MON_DEFAULT_COLLECTOR_LISTEN_PORT     ((unsigned short)4848)
+//! Сетевой порт хранилища по умолчанию
+#define MON_DEFAULT_STORAGE_LISTEN_PORT       ((unsigned short)4949)
 //! Таймаут неудачного соединения по умолчанию
-#define MON_DEFAULT_CONNECT_TIMEOUT ((unsigned short)30)
+#define MON_DEFAULT_CONNECT_TIMEOUT           ((unsigned short)30)
 //! Таймаут запроса данных из удаленной ноды умолчанию (интервал, сек)
 #define MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT ((float)10)
 //! Пароль по умолчанию

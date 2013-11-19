@@ -24,7 +24,7 @@ CRemoteNode::CRemoteNode(const std::string &name)
   mon::lib::config::CFolder *selfCfg  = MON_ST_CONFIG->folder("nodes")->folder(m_name);
   setTimeout   (selfCfg->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
   setAddrRemote(selfCfg->folder("connection")->file("host")   ->get(std::string("localhost")));
-  setPortRemote(selfCfg->folder("connection")->file("port")   ->get(MON_DEFAULT_LISTEN_PORT));
+  setPortRemote(selfCfg->folder("connection")->file("port")   ->get(MON_DEFAULT_COLLECTOR_LISTEN_PORT));
   MON_THREADED_FUNCTION_INIT(connect);
   float timerTimeout = MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT;
   if(selfCfg->folder("request")->folder("frequency")->containsFile("hz"))
