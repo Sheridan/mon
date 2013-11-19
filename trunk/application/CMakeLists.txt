@@ -178,7 +178,7 @@ SET(mon-base-lib-headers
     libraryes/base/parcer/cparcer.h
     libraryes/base/parcer/cparcerfile.h
     libraryes/base/parcer/cparcerstring.h
-    libraryes/base/parcer/stringhelper.h
+    libraryes/base/string/stringhelper.h
     libraryes/base/parcer/parcer-helper.h)
 SET(mon-base-lib-sources
     libraryes/base/main.cpp
@@ -191,7 +191,7 @@ SET(mon-base-lib-sources
     libraryes/base/parcer/cparcer.cpp
     libraryes/base/parcer/cparcerfile.cpp
     libraryes/base/parcer/cparcerstring.cpp
-    libraryes/base/parcer/stringhelper.cpp)
+    libraryes/base/string/stringhelper.cpp)
 add_library(base SHARED ${mon-base-lib-headers} ${mon-base-lib-sources})
 target_link_libraries(base ${GLOBAL_LINK_LIBS})
 install(FILES ${mon-base-lib-headers} DESTINATION include/mon )
