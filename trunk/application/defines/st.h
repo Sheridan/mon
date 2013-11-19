@@ -8,7 +8,7 @@
 #include <string.h>
 // main
 
-#define MON_ST        mon::lib::base::CSingleton::instance()
+#define MON_ST          mon::lib::base::CSingleton::instance()
 #ifndef MON_ST_LOGGER
   #define MON_ST_LOGGER MON_ST->logger()
 #endif
