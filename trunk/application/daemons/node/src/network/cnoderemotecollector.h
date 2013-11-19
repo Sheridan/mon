@@ -1,6 +1,6 @@
 /* %Id% */
-#ifndef CREMOTECOLLECTOR_H
-#define CREMOTECOLLECTOR_H
+#ifndef CNODEREMOTECOLLECTOR_H
+#define CNODEREMOTECOLLECTOR_H
 #include "cclientsocket.h"
 #include "class-helper.h"
 #include "cnodeprotocol.h"
@@ -14,11 +14,11 @@ namespace node
 {
 
 //! Удаленный коллектор
-class CRemoteCollector : public mon::lib::network::CSocketClient, public CNodeProtocol
+class CNodeRemoteCollector : public mon::lib::network::CSocketClient, public CNodeProtocol
 {
   public:
-    CRemoteCollector(int socketDescriptor, const std::string &addr_from, const int & port_from);
-    virtual ~CRemoteCollector();
+    CNodeRemoteCollector(int socketDescriptor, const std::string &addr_from, const int & port_from);
+    virtual ~CNodeRemoteCollector();
 
   private:
     //! Заглушка из за архитектурного недостатка
@@ -35,9 +35,9 @@ class CRemoteCollector : public mon::lib::network::CSocketClient, public CNodePr
     void requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) final;
 };
 
-typedef std::list<CRemoteCollector *> TRemoteCollectors;
+typedef std::list<CNodeRemoteCollector *> TNodeRemoteCollectors;
 
 }
 }
 }
-#endif // CREMOTECOLLECTOR_H
+#endif // CNODEREMOTECOLLECTOR_H

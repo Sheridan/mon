@@ -12,23 +12,23 @@ namespace daemons
 namespace collector
 {
 
-class CRemoteNode;
+class CCollectorRemoteNode;
 
 //! Сенсор удаленной ноды
-class CRemoteNodeSensor
+class CCollectorRemoteNodeSensor
 {
     MON_READONLY_PROPERTY(std::string, name)
   public:
-    CRemoteNodeSensor(const std::string &name, const std::string &definition, CRemoteNode *parentNode);
-    ~CRemoteNodeSensor();
+    CCollectorRemoteNodeSensor(const std::string &name, const std::string &definition, CCollectorRemoteNode *parentNode);
+    ~CCollectorRemoteNodeSensor();
     mon::lib::sensordata::TFramesNames &frames();
   private:
-    CRemoteNode *m_parentNode;
+    CCollectorRemoteNode *m_parentNode;
     mon::lib::sensordata::CDefinition *m_definition;
 };
 
 //! Список сенсоров удаленной ноды
-typedef std::list<CRemoteNodeSensor *> TRemoteNodeSensors;
+typedef std::list<CCollectorRemoteNodeSensor *> TCollectorRemoteNodeSensors;
 
 }
 }

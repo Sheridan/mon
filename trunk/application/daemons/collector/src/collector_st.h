@@ -6,6 +6,6 @@
 
 #include "st.h"
 
-#define MON_COLLECTOR_ST_NODES_MANAGER MON_ST_MEMBER(mon::daemons::collector::CNodesManager,MON_NODES_MANAGER_ST_MEMBER_ID)
+#define MON_COLLECTOR_ST_NODES_MANAGER MON_ST_MEMBER(mon::daemons::collector::CCollectorNodesManager,MON_NODES_MANAGER_ST_MEMBER_ID)
 
 #endif // COLLECTOR_ST_H_INCLUDED

@@ -1,6 +1,6 @@
 /* %Id% */
 #include "collector_st.h"
-#include "cremotenode.h"
+#include "ccollectorremotenode.h"
 #include "global.h"
 #include "stringhelper.h"
 #include "infinity-cycle-helper.h"
@@ -13,7 +13,7 @@ namespace daemons
 namespace collector
 {
 
-CRemoteNode::CRemoteNode(const std::string &name)
+CCollectorRemoteNode::CCollectorRemoteNode(const std::string &name)
   : mon::lib::network::CSocketClient(),
     CCollectorProtocol(this),
     mon::lib::base::CTimer(),
@@ -42,7 +42,7 @@ CRemoteNode::CRemoteNode(const std::string &name)
   settimeout(timerTimeout);
 }
 
-CRemoteNode::~CRemoteNode()
+CCollectorRemoteNode::~CCollectorRemoteNode()
 {
   timerStop();
   MON_THREADED_FUNCTION_ABORT(connect)
@@ -56,12 +56,12 @@ CRemoteNode::~CRemoteNode()
   MON_MUTEX_DESTROY(node_sensors)
 }
 
-void CRemoteNode::onTimer()
+void CCollectorRemoteNode::onTimer()
 {
   if(isConnected())
   {
     MON_MUTEX_LOCK(node_sensors)
-    for(CRemoteNodeSensor *sensor : m_nodeSensors)
+    for(CCollectorRemoteNodeSensor *sensor : m_nodeSensors)
     {
       for(std::string &frameName : sensor->frames())
       {
@@ -72,7 +72,7 @@ void CRemoteNode::onTimer()
   }
 }
 
-MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
+MON_THREADED_FUNCTION_IMPLEMENT(CCollectorRemoteNode, connect)
 {
   MON_INFINITY_LOOP_BEGIN(reconnect_loop)
     MON_THREADED_ABORT_IF_NEED(connect);
@@ -86,18 +86,18 @@ MON_THREADED_FUNCTION_IMPLEMENT(CRemoteNode, connect)
   MON_INFINITY_LOOP_END(reconnect_loop)
 }
 
-void CRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
+void CCollectorRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
   MON_LOG_DBG("Collector connected to " << to_addr << ":" << to_port);
   CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_name)->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 
-void CRemoteNode::incommingMessage(const std::string &message)
+void CCollectorRemoteNode::incommingMessage(const std::string &message)
 {
   mon::lib::protocol::CProtocol::incommingMessage(message);
 }
 
-void CRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
+void CCollectorRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
 {
   if(msg->string().compare("t") == 0)
   {
@@ -112,7 +112,7 @@ void CRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
   }
 }
 
-void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg)
+void CCollectorRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg)
 {
   std::list<std::string> sensorsNames;
   mon::lib::base::split(msg->string(), ':', sensorsNames);
@@ -122,12 +122,12 @@ void CRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessa
   }
 }
 
-void CRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
+void CCollectorRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
 //  MON_LOG_DBG("Sensor name: " << msg->string().substr(0, index)
 //              << ", definition: " << msg->string().substr(index, msg->string().length()-1))
-  CRemoteNodeSensor *rnSensor = new CRemoteNodeSensor(msg->string().substr(0, index),
+  CCollectorRemoteNodeSensor *rnSensor = new CCollectorRemoteNodeSensor(msg->string().substr(0, index),
                                                       msg->string().substr(index+1, msg->string().length()-1),
                                                       this);
   MON_MUTEX_LOCK(node_sensors)
@@ -135,7 +135,7 @@ void CRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetwor
   MON_MUTEX_UNLOCK(node_sensors)
 }
 
-void CRemoteNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
+void CCollectorRemoteNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
 {
 //  MON_LOG_DBG(msg->string());
   //TODO: Парсинг и хранение статданных

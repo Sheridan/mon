@@ -1,6 +1,6 @@
 /* %Id% */
 #include "node_st.h"
-#include "cremotecollector.h"
+#include "cnoderemotecollector.h"
 #include "protocol-control.h"
 #include "global.h"
 
@@ -11,42 +11,42 @@ namespace daemons
 namespace node
 {
 
-CRemoteCollector::CRemoteCollector(int socketDescriptor, const std::string &addr_from, const int &port_from)
+CNodeRemoteCollector::CNodeRemoteCollector(int socketDescriptor, const std::string &addr_from, const int &port_from)
   : mon::lib::network::CSocketClient(socketDescriptor, addr_from, port_from),
     CNodeProtocol(this)
 {
   connected(addrRemote(), portRemote());
 }
 
-CRemoteCollector::~CRemoteCollector()
+CNodeRemoteCollector::~CNodeRemoteCollector()
 {}
 
-void CRemoteCollector::connected(const std::string &to_addr, const unsigned short &to_port)
+void CNodeRemoteCollector::connected(const std::string &to_addr, const unsigned short &to_port)
 {}
 
-void CRemoteCollector::incommingMessage(const std::string &message)
+void CNodeRemoteCollector::incommingMessage(const std::string &message)
 {
   mon::lib::protocol::CProtocol::incommingMessage(message);
 }
 
-void CRemoteCollector::requestOfConnect(lib::protocol::CNetworkMessage *msg)
+void CNodeRemoteCollector::requestOfConnect(lib::protocol::CNetworkMessage *msg)
 {
   sendReply(msg, msg->string().compare(MON_ST_CONFIG->file("password")->get(MON_DEFAULT_PASSWORD)) == 0 ? "t" : "f" );
 }
 
-void CRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
+void CNodeRemoteCollector::requestOfSensorsList(lib::protocol::CNetworkMessage *msg)
 {
   sendReply(msg, MON_ST_SENSORS_MANAGER->getGensorsNamesList(MON_PROTOCOL_DELIMITER(sensorname ,sensorname)));
 }
 
-void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg)
+void CNodeRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   sendReply(msg, msg->string() +
                  MON_PROTOCOL_DELIMITER(sensorname ,definition) +
                  MON_ST_SENSORS_MANAGER->sensor(msg->string())->getDefinition());
 }
 
-void CRemoteCollector::requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
+void CNodeRemoteCollector::requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
 {
   int sensorIndex = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,framename));
   std::string sensor = msg->string().substr(0, sensorIndex);

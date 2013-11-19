@@ -223,15 +223,15 @@ IF( BUILD_COLLECTOR )
   MESSAGE ( STATUS "---> Processing collector" )
   SET(mon-collector-headers
         daemons/collector/src/collector_st.h
-        daemons/collector/src/network/cremotenode.h
-        daemons/collector/src/network/cremotenodesensor.h
-        daemons/collector/src/network/cnodesmanager.h
+        daemons/collector/src/network/ccollectorremotenode.h
+        daemons/collector/src/network/ccollectorremotenodesensor.h
+        daemons/collector/src/network/ccollectornodesmanager.h
         daemons/collector/src/network/ccollectorprotocol.h
      )
   SET(mon-collector-sources
-      daemons/collector/src/network/cremotenode.cpp
-      daemons/collector/src/network/cremotenodesensor.cpp
-      daemons/collector/src/network/cnodesmanager.cpp
+      daemons/collector/src/network/ccollectorremotenode.cpp
+      daemons/collector/src/network/ccollectorremotenodesensor.cpp
+      daemons/collector/src/network/ccollectornodesmanager.cpp
       daemons/collector/src/network/ccollectorprotocol.cpp
       daemons/collector/src/main.cpp )
   include_directories( daemons/collector/src daemons/collector/src/network )
@@ -243,16 +243,16 @@ IF( BUILD_NODE )
   MESSAGE ( STATUS "---> Processing node" )
   SET(mon-node-headers
       daemons/node/src/node_st.h
-      daemons/node/src/network/ccollectorsmanager.h
-      daemons/node/src/network/cremotecollector.h
+      daemons/node/src/network/cnodecollectorsmanager.h
+      daemons/node/src/network/cnoderemotecollector.h
       daemons/node/src/network/cnodeprotocol.h
       daemons/node/src/sensors/csensor.h
       daemons/node/src/sensors/cframe.h
       daemons/node/src/sensors/csensorsmanager.h
   )
   SET(mon-node-sources
-      daemons/node/src/network/ccollectorsmanager.cpp
-      daemons/node/src/network/cremotecollector.cpp
+      daemons/node/src/network/cnodecollectorsmanager.cpp
+      daemons/node/src/network/cnoderemotecollector.cpp
       daemons/node/src/network/cnodeprotocol.cpp
       daemons/node/src/sensors/csensor.cpp
       daemons/node/src/sensors/cframe.cpp

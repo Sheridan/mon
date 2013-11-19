@@ -2,7 +2,7 @@
 #ifndef CMONNODESMANAGER_H
 #define CMONNODESMANAGER_H
 #include "csingletonmember.h"
-#include "cremotenode.h"
+#include "ccollectorremotenode.h"
 
 namespace mon
 {
@@ -12,17 +12,17 @@ namespace collector
 {
 
 //! Менеджер нод коллектора
-class CNodesManager : public mon::lib::base::CSingletonMember
+class CCollectorNodesManager : public mon::lib::base::CSingletonMember
 {
 public:
-  CNodesManager();
-  virtual ~CNodesManager();
+  CCollectorNodesManager();
+  virtual ~CCollectorNodesManager();
   //! Ориентируясь на конфиг загружает список нод и инициализирует подключение
   void load();
   //! Удаляет ноды из списка, рарывая подключение
   void unload();
 private:
-  TRemoteNodes m_nodes;
+  TCollectorRemoteNodes m_nodes;
 };
 
 }
