@@ -5,7 +5,7 @@
 #include "class-helper.h"
 #include "ctimer.h"
 #include "cstatisticcache.h"
-#include "systemrights.h"
+#include "csystemrights.h"
 
 namespace mon
 {

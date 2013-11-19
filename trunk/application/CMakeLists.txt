@@ -147,10 +147,10 @@ MESSAGE ( STATUS "---> Processing `base` library" )
 SET(mon-base-headers
     libraryes/base/src/singleton/csingletonmember.h
     libraryes/base/src/singleton/csingleton.h
-    libraryes/base/src/cvariant.h
-    libraryes/base/src/ctimer.h
-    libraryes/base/src/systemrights.h
-    libraryes/base/src/cstringbuilder.h
+    libraryes/base/src/string/cvariant.h
+    libraryes/base/src/timer/ctimer.h
+    libraryes/base/src/sequrity/csystemrights.h
+    libraryes/base/src/string/cstringbuilder.h
     libraryes/base/src/parcer/cparcer.h
     libraryes/base/src/parcer/cparcerfile.h
     libraryes/base/src/parcer/cparcerstring.h
@@ -160,10 +160,10 @@ SET(mon-base-sources
     libraryes/base/src/main.cpp
     libraryes/base/src/singleton/csingletonmember.cpp
     libraryes/base/src/singleton/csingleton.cpp
-    libraryes/base/src/cvariant.cpp
-    libraryes/base/src/ctimer.cpp
-    libraryes/base/src/systemrights.cpp
-    libraryes/base/src/cstringbuilder.cpp
+    libraryes/base/src/string/cvariant.cpp
+    libraryes/base/src/timer/ctimer.cpp
+    libraryes/base/src/sequrity/csystemrights.cpp
+    libraryes/base/src/string/cstringbuilder.cpp
     libraryes/base/src/parcer/cparcer.cpp
     libraryes/base/src/parcer/cparcerfile.cpp
     libraryes/base/src/parcer/cparcerstring.cpp
@@ -190,6 +190,9 @@ include_directories( ${GEN_PATH}
                      libraryes/base/src
                      libraryes/base/src/singleton
                      libraryes/base/src/parcer
+                     libraryes/base/src/string
+                     libraryes/base/src/timer
+                     libraryes/base/src/sequrity
                      libraryes/network/src
                      libraryes/logger/src
                      libraryes/config/src

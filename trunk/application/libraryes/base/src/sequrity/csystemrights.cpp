@@ -1,4 +1,4 @@
-#include "systemrights.h"
+#include "csystemrights.h"
 #include "st.h"
 #include "logger-helper.h"
 #include "signals-helper.h"

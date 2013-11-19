@@ -2,7 +2,7 @@
 #ifndef defaulMonApplication
 #define defaulMonApplication
 #include "global.h"
-#include "systemrights.h"
+#include "csystemrights.h"
 
 #ifdef MON_DEBUG
   #define MON_MAX_LOG_PRI mon::lib::logger::pDebug
