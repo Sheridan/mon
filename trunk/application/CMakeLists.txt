@@ -239,18 +239,18 @@ IF( BUILD_COLLECTOR )
   MESSAGE ( STATUS "---> Processing collector" )
   SET(mon-collector-headers
         daemons/collector/src/collector_st.h
-        daemons/collector/src/network/ccollectorremotenode.h
-        daemons/collector/src/network/ccollectorremotenodesensor.h
-        daemons/collector/src/network/ccollectornodesmanager.h
-        daemons/collector/src/network/ccollectorprotocol.h
+        daemons/collector/src/collector/node/cnode.h
+        daemons/collector/src/collector/node/csensor.h
+        daemons/collector/src/collector/node/cnodes.h
+        daemons/collector/src/collector/protocol/ccollectorprotocol.h
      )
   SET(mon-collector-sources
-      daemons/collector/src/network/ccollectorremotenode.cpp
-      daemons/collector/src/network/ccollectorremotenodesensor.cpp
-      daemons/collector/src/network/ccollectornodesmanager.cpp
-      daemons/collector/src/network/ccollectorprotocol.cpp
+      daemons/collector/src/collector/node/cnode.cpp
+      daemons/collector/src/collector/node/csensor.cpp
+      daemons/collector/src/collector/node/cnodes.cpp
+      daemons/collector/src/collector/protocol/ccollectorprotocol.cpp
       daemons/collector/src/main.cpp )
-  include_directories( daemons/collector/src daemons/collector/src/network )
+  include_directories( daemons/collector/src )
   add_executable( mon-collector ${mon-collector-headers} ${mon-collector-sources})
   add_daemon(mon-collector)
 ENDIF( BUILD_COLLECTOR )
@@ -259,22 +259,21 @@ IF( BUILD_NODE )
   MESSAGE ( STATUS "---> Processing node" )
   SET(mon-node-headers
       daemons/node/src/node_st.h
-      daemons/node/src/network/cnodecollectorsmanager.h
-      daemons/node/src/network/cnoderemotecollector.h
-      daemons/node/src/network/cnodeprotocol.h
-      daemons/node/src/sensors/csensor.h
-      daemons/node/src/sensors/cframe.h
-      daemons/node/src/sensors/csensorsmanager.h
-  )
+      daemons/node/src/node/collector/ccollectors.h
+      daemons/node/src/node/collector/ccollector.h
+      daemons/node/src/node/protocol/cnodeprotocol.h
+      daemons/node/src/node/sensor/csensor.h
+      daemons/node/src/node/sensor/cframe.h
+      daemons/node/src/node/sensor/csensorsmanager.h)
   SET(mon-node-sources
-      daemons/node/src/network/cnodecollectorsmanager.cpp
-      daemons/node/src/network/cnoderemotecollector.cpp
-      daemons/node/src/network/cnodeprotocol.cpp
-      daemons/node/src/sensors/csensor.cpp
-      daemons/node/src/sensors/cframe.cpp
-      daemons/node/src/sensors/csensorsmanager.cpp
+      daemons/node/src/node/collector/ccollectors.cpp
+      daemons/node/src/node/collector/ccollector.cpp
+      daemons/node/src/node/protocol/cnodeprotocol.cpp
+      daemons/node/src/node/sensor/csensor.cpp
+      daemons/node/src/node/sensor/cframe.cpp
+      daemons/node/src/node/sensor/csensorsmanager.cpp
       daemons/node/src/main.cpp )
-  include_directories( daemons/node/src daemons/node/src/network daemons/node/src/sensors )
+  include_directories( daemons/node/src )
   add_executable( mon-node ${mon-node-headers} ${mon-node-sources})
   target_link_libraries(mon-node dl)
   add_daemon(mon-node)
@@ -304,11 +303,11 @@ install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 
 MESSAGE ( STATUS "---> Processing sensor tester" )
 SET(mon-sensor-test-headers
-    daemons/node/src/sensors/csensor.h
-    daemons/node/src/sensors/cframe.h)
+    daemons/node/src/node/sensor/csensor.h
+    daemons/node/src/node/sensor/cframe.h)
 SET(mon-sensor-test-sources
-    daemons/node/src/sensors/csensor.cpp
-    daemons/node/src/sensors/cframe.cpp
+    daemons/node/src/node/sensor/csensor.cpp
+    daemons/node/src/node/sensor/cframe.cpp
     tools/mon-sensor-test/main.cpp )
 add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
 target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})

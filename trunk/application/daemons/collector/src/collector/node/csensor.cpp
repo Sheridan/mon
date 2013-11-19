@@ -1,5 +1,5 @@
-#include "ccollectorremotenodesensor.h"
-#include "ccollectorremotenode.h"
+#include "collector/node/csensor.h"
+#include "collector/node/cnode.h"
 #include "collector_st.h"
 #include "cdefinitionparcer.h"
 
@@ -10,7 +10,7 @@ namespace daemons
 namespace collector
 {
 
-CCollectorRemoteNodeSensor::CCollectorRemoteNodeSensor(const std::string &name, const std::string &definition, CCollectorRemoteNode *parentNode) :
+CSensor::CSensor(const std::string &name, const std::string &definition, CNode *parentNode) :
   m_name(name), m_parentNode(parentNode)
 {
   m_definition = new mon::lib::sensordata::CDefinition();
@@ -19,12 +19,12 @@ CCollectorRemoteNodeSensor::CCollectorRemoteNodeSensor(const std::string &name, 
 //  MON_LOG_DBG("Remote Node Sensor: '" << m_name << "' prepared");
 }
 
-CCollectorRemoteNodeSensor::~CCollectorRemoteNodeSensor()
+CSensor::~CSensor()
 {
   delete m_definition;
 }
 
-lib::sensordata::TFramesNames &CCollectorRemoteNodeSensor::frames()
+lib::sensordata::TFramesNames &CSensor::frames()
 {
   return m_definition->frames();
 }

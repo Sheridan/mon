@@ -1,6 +1,6 @@
 /* %Id% */
 #include "collector_st.h"
-#include "ccollectorremotenode.h"
+#include "collector/node/cnode.h"
 #include "global.h"
 #include "stringhelper.h"
 #include "infinity-cycle-helper.h"
@@ -13,7 +13,7 @@ namespace daemons
 namespace collector
 {
 
-CCollectorRemoteNode::CCollectorRemoteNode(const std::string &name)
+CNode::CNode(const std::string &name)
   : mon::lib::network::CSocketClient(),
     CCollectorProtocol(this),
     mon::lib::base::CTimer(),
@@ -42,7 +42,7 @@ CCollectorRemoteNode::CCollectorRemoteNode(const std::string &name)
   settimeout(timerTimeout);
 }
 
-CCollectorRemoteNode::~CCollectorRemoteNode()
+CNode::~CNode()
 {
   timerStop();
   MON_THREADED_FUNCTION_ABORT(connect)
@@ -56,12 +56,12 @@ CCollectorRemoteNode::~CCollectorRemoteNode()
   MON_MUTEX_DESTROY(node_sensors)
 }
 
-void CCollectorRemoteNode::onTimer()
+void CNode::onTimer()
 {
   if(isConnected())
   {
     MON_MUTEX_LOCK(node_sensors)
-    for(CCollectorRemoteNodeSensor *sensor : m_nodeSensors)
+    for(CSensor *sensor : m_nodeSensors)
     {
       for(std::string &frameName : sensor->frames())
       {
@@ -72,7 +72,7 @@ void CCollectorRemoteNode::onTimer()
   }
 }
 
-MON_THREADED_FUNCTION_IMPLEMENT(CCollectorRemoteNode, connect)
+MON_THREADED_FUNCTION_IMPLEMENT(CNode, connect)
 {
   MON_INFINITY_LOOP_BEGIN(reconnect_loop)
     MON_THREADED_ABORT_IF_NEED(connect);
@@ -86,18 +86,18 @@ MON_THREADED_FUNCTION_IMPLEMENT(CCollectorRemoteNode, connect)
   MON_INFINITY_LOOP_END(reconnect_loop)
 }
 
-void CCollectorRemoteNode::connected(const std::string &to_addr, const unsigned short &to_port)
+void CNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
   MON_LOG_DBG("Collector connected to " << to_addr << ":" << to_port);
   CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_name)->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 
-void CCollectorRemoteNode::incommingMessage(const std::string &message)
+void CNode::incommingMessage(const std::string &message)
 {
   mon::lib::protocol::CProtocol::incommingMessage(message);
 }
 
-void CCollectorRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
+void CNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
 {
   if(msg->string().compare("t") == 0)
   {
@@ -112,7 +112,7 @@ void CCollectorRemoteNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessag
   }
 }
 
-void CCollectorRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg)
+void CNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *msg)
 {
   std::list<std::string> sensorsNames;
   mon::lib::base::split(msg->string(), ':', sensorsNames);
@@ -122,12 +122,12 @@ void CCollectorRemoteNode::incomingAnswerOnRequestSensorList(lib::protocol::CNet
   }
 }
 
-void CCollectorRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
+void CNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
 //  MON_LOG_DBG("Sensor name: " << msg->string().substr(0, index)
 //              << ", definition: " << msg->string().substr(index, msg->string().length()-1))
-  CCollectorRemoteNodeSensor *rnSensor = new CCollectorRemoteNodeSensor(msg->string().substr(0, index),
+  CSensor *rnSensor = new CSensor(msg->string().substr(0, index),
                                                       msg->string().substr(index+1, msg->string().length()-1),
                                                       this);
   MON_MUTEX_LOCK(node_sensors)
@@ -135,7 +135,7 @@ void CCollectorRemoteNode::incomingAnswerOnRequestSensorDefinition(lib::protocol
   MON_MUTEX_UNLOCK(node_sensors)
 }
 
-void CCollectorRemoteNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
+void CNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
 {
 //  MON_LOG_DBG(msg->string());
   //TODO: Парсинг и хранение статданных

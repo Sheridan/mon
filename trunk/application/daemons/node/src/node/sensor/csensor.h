@@ -6,7 +6,6 @@
 #include <map>
 #include "logger.h"
 #include "config.h"
-
 #include "cdefinition.h"
 #include "cframe.h"
 

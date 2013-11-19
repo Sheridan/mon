@@ -2,8 +2,8 @@
 #include "node_st.h"
 #include "default-application.h"
 #include "signals-helper.h"
-#include "cnodecollectorsmanager.h"
-#include "csensorsmanager.h"
+#include "node/collector/ccollectors.h"
+#include "node/sensor/csensorsmanager.h"
 
 void mon_exit(int returnValue)
 {
@@ -25,7 +25,7 @@ int main (int argc, char* argv[])
 
   MON_DEFAULT_APPLICATION_INIT;
 
-  MON_ST_APPEND_MEMBER(mon::daemons::node::CNodeCollectorsManager);
+  MON_ST_APPEND_MEMBER(mon::daemons::node::CCollectors);
   MON_ST_NODE_COLLECTOR_SOCKET->listen();
   MON_ST_APPEND_MEMBER(mon::daemons::node::CSensorsManager);
   MON_ST_SENSORS_MANAGER->load();

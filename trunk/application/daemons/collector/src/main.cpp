@@ -2,7 +2,7 @@
 #include "collector_st.h"
 #include "default-application.h"
 #include "signals-helper.h"
-#include "ccollectornodesmanager.h"
+#include "collector/node/cnodes.h"
 
 void mon_exit(int returnValue)
 {
@@ -24,7 +24,7 @@ int main (int argc, char* argv[])
 
   MON_DEFAULT_APPLICATION_INIT;
 
-  MON_ST_APPEND_MEMBER(mon::daemons::collector::CCollectorNodesManager);
+  MON_ST_APPEND_MEMBER(mon::daemons::collector::CNodes);
   MON_COLLECTOR_ST_NODES_MANAGER->load();
 
   MON_SIGNAL_LOOP;

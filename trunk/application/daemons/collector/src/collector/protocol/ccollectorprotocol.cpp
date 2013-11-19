@@ -1,5 +1,5 @@
 /* %Id% */
-#include "ccollectorprotocol.h"
+#include "collector/protocol/ccollectorprotocol.h"
 #include "collector_st.h"
 namespace mon
 {

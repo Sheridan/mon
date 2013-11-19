@@ -4,9 +4,9 @@
 #include "cclientsocket.h"
 #include "threads-helper.h"
 #include "class-helper.h"
-#include "ccollectorprotocol.h"
+#include "collector/protocol/ccollectorprotocol.h"
 #include "ctimer.h"
-#include "ccollectorremotenodesensor.h"
+#include "collector/node/csensor.h"
 #include <list>
 #include <string>
 #include "mutex-helper.h"
@@ -19,7 +19,7 @@ namespace collector
 {
 
 //! Удаленная нода
-class CCollectorRemoteNode : public mon::lib::network::CSocketClient,
+class CNode : public mon::lib::network::CSocketClient,
                     public CCollectorProtocol,
                     public mon::lib::base::CTimer
 {
@@ -27,10 +27,10 @@ class CCollectorRemoteNode : public mon::lib::network::CSocketClient,
   MON_READONLY_PROPERTY(std::string, name)
   MON_MUTEX_DECLARE(node_sensors)
 public:
-  CCollectorRemoteNode(const std::string &name);
-  virtual ~CCollectorRemoteNode();
+  CNode(const std::string &name);
+  virtual ~CNode();
 private:
-  TCollectorRemoteNodeSensors m_nodeSensors;
+  TSensors m_nodeSensors;
 
   void onTimer() final;
 
@@ -49,7 +49,7 @@ private:
   void incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) final;
 };
 
-typedef std::list<CCollectorRemoteNode *> TCollectorRemoteNodes;
+typedef std::list<CNode *> TNodes;
 
 }
 }

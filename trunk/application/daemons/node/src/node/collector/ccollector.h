@@ -3,7 +3,7 @@
 #define CNODEREMOTECOLLECTOR_H
 #include "cclientsocket.h"
 #include "class-helper.h"
-#include "cnodeprotocol.h"
+#include "node/protocol/cnodeprotocol.h"
 #include <list>
 #include <string>
 namespace mon
@@ -14,11 +14,11 @@ namespace node
 {
 
 //! Удаленный коллектор
-class CNodeRemoteCollector : public mon::lib::network::CSocketClient, public CNodeProtocol
+class CCollector : public mon::lib::network::CSocketClient, public CNodeProtocol
 {
   public:
-    CNodeRemoteCollector(int socketDescriptor, const std::string &addr_from, const int & port_from);
-    virtual ~CNodeRemoteCollector();
+    CCollector(int socketDescriptor, const std::string &addr_from, const int & port_from);
+    virtual ~CCollector();
 
   private:
     //! Заглушка из за архитектурного недостатка
@@ -35,7 +35,7 @@ class CNodeRemoteCollector : public mon::lib::network::CSocketClient, public CNo
     void requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) final;
 };
 
-typedef std::list<CNodeRemoteCollector *> TNodeRemoteCollectors;
+typedef std::list<CCollector *> TCollectors;
 
 }
 }
