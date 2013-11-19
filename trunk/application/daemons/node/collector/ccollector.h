@@ -3,7 +3,7 @@
 #define CNODEREMOTECOLLECTOR_H
 #include "cclientsocket.h"
 #include "class-helper.h"
-#include "node/protocol/cnodeprotocol.h"
+#include "daemons/node/protocol/cnodeprotocol.h"
 #include <list>
 #include <string>
 namespace mon

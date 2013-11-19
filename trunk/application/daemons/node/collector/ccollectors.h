@@ -3,7 +3,7 @@
 #define CNODECOLLECTORSSMANAGER_H
 #include "cserversocket.h"
 #include "csingletonmember.h"
-#include "node/collector/ccollector.h"
+#include "daemons/node/collector/ccollector.h"
 
 namespace mon
 {

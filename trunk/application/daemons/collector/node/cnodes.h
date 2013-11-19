@@ -2,7 +2,7 @@
 #ifndef CMONNODESMANAGER_H
 #define CMONNODESMANAGER_H
 #include "csingletonmember.h"
-#include "collector/node/cnode.h"
+#include "daemons/collector/node/cnode.h"
 
 namespace mon
 {

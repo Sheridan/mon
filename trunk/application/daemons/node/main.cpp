@@ -2,8 +2,8 @@
 #include "node_st.h"
 #include "default-application.h"
 #include "signals-helper.h"
-#include "node/collector/ccollectors.h"
-#include "node/sensor/csensorsmanager.h"
+#include "daemons/node/collector/ccollectors.h"
+#include "daemons/node/sensor/csensorsmanager.h"
 
 void mon_exit(int returnValue)
 {

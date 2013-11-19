@@ -4,9 +4,9 @@
 #include "cclientsocket.h"
 #include "threads-helper.h"
 #include "class-helper.h"
-#include "collector/protocol/ccollectorprotocol.h"
+#include "daemons/collector/protocol/ccollectorprotocol.h"
 #include "ctimer.h"
-#include "collector/node/csensor.h"
+#include "daemons/collector/node/csensor.h"
 #include <list>
 #include <string>
 #include "mutex-helper.h"

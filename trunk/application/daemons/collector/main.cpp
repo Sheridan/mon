@@ -2,7 +2,7 @@
 #include "collector_st.h"
 #include "default-application.h"
 #include "signals-helper.h"
-#include "collector/node/cnodes.h"
+#include "daemons/collector/node/cnodes.h"
 
 void mon_exit(int returnValue)
 {

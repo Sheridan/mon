@@ -1,6 +1,6 @@
 /* %Id% */
-#include "collector_st.h"
-#include "collector/node/cnode.h"
+#include "daemons/collector/collector_st.h"
+#include "daemons/collector/node/cnode.h"
 #include "global.h"
 #include "stringhelper.h"
 #include "infinity-cycle-helper.h"

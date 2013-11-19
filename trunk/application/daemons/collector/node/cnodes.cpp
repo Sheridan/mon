@@ -1,6 +1,6 @@
 /* %Id% */
-#include "collector_st.h"
-#include "collector/node/cnodes.h"
+#include "daemons/collector/collector_st.h"
+#include "daemons/collector/node/cnodes.h"
 
 namespace mon
 {

@@ -1,6 +1,6 @@
 /* %Id% */
-#include "collector/protocol/ccollectorprotocol.h"
-#include "collector_st.h"
+#include "daemons/collector/protocol/ccollectorprotocol.h"
+#include "daemons/collector/collector_st.h"
 namespace mon
 {
 namespace daemons

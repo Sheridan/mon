@@ -1,6 +1,6 @@
-#include "collector/node/csensor.h"
-#include "collector/node/cnode.h"
-#include "collector_st.h"
+#include "daemons/collector/node/csensor.h"
+#include "daemons/collector/node/cnode.h"
+#include "daemons/collector/collector_st.h"
 #include "cdefinitionparcer.h"
 
 namespace mon

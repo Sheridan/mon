@@ -15,7 +15,7 @@
 #include "logger-helper.h"
 #include "cdefinitionparcer.h"
 #include "cdefinitiongenerator.h"
-#include "node/sensor/csensor.h"
+#include "daemons/node/sensor/csensor.h"
 namespace mon
 {
 namespace applications

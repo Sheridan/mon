@@ -1,6 +1,6 @@
 /* %Id% */
-#include "node_st.h"
-#include "node/collector/ccollector.h"
+#include "daemons/node/node_st.h"
+#include "daemons/node/collector/ccollector.h"
 #include "protocol-control.h"
 #include "global.h"
 

@@ -3,7 +3,7 @@ PROJECT(mon)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 OPTION( BUILD_COLLECTOR      "Build collector"                        ON  )
-OPTION( BUILD_DEV_TOOLS      "Build node"                             ON  )
+OPTION( BUILD_DEV_TOOLS      "Build development tools"                ON  )
 OPTION( BUILD_NODE           "Build node"                             ON  )
 OPTION( BUILD_STORAGE        "Build storage"                          ON  )
 OPTION( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
@@ -238,19 +238,18 @@ endfunction(add_daemon)
 IF( BUILD_COLLECTOR )
   MESSAGE ( STATUS "---> Processing collector" )
   SET(mon-collector-headers
-        daemons/collector/src/collector_st.h
-        daemons/collector/src/collector/node/cnode.h
-        daemons/collector/src/collector/node/csensor.h
-        daemons/collector/src/collector/node/cnodes.h
-        daemons/collector/src/collector/protocol/ccollectorprotocol.h
-     )
+        daemons/collector/node/cnode.h
+        daemons/collector/node/csensor.h
+        daemons/collector/node/cnodes.h
+        daemons/collector/protocol/ccollectorprotocol.h
+        daemons/collector/collector_st.h)
   SET(mon-collector-sources
-      daemons/collector/src/collector/node/cnode.cpp
-      daemons/collector/src/collector/node/csensor.cpp
-      daemons/collector/src/collector/node/cnodes.cpp
-      daemons/collector/src/collector/protocol/ccollectorprotocol.cpp
-      daemons/collector/src/main.cpp )
-  include_directories( daemons/collector/src )
+      daemons/collector/node/cnode.cpp
+      daemons/collector/node/csensor.cpp
+      daemons/collector/node/cnodes.cpp
+      daemons/collector/protocol/ccollectorprotocol.cpp
+      daemons/collector/main.cpp )
+  include_directories( . )
   add_executable( mon-collector ${mon-collector-headers} ${mon-collector-sources})
   add_daemon(mon-collector)
 ENDIF( BUILD_COLLECTOR )
@@ -258,22 +257,22 @@ ENDIF( BUILD_COLLECTOR )
 IF( BUILD_NODE )
   MESSAGE ( STATUS "---> Processing node" )
   SET(mon-node-headers
-      daemons/node/src/node_st.h
-      daemons/node/src/node/collector/ccollectors.h
-      daemons/node/src/node/collector/ccollector.h
-      daemons/node/src/node/protocol/cnodeprotocol.h
-      daemons/node/src/node/sensor/csensor.h
-      daemons/node/src/node/sensor/cframe.h
-      daemons/node/src/node/sensor/csensorsmanager.h)
+      daemons/node/collector/ccollectors.h
+      daemons/node/collector/ccollector.h
+      daemons/node/protocol/cnodeprotocol.h
+      daemons/node/sensor/csensor.h
+      daemons/node/sensor/cframe.h
+      daemons/node/sensor/csensorsmanager.h
+      daemons/node/node_st.h)
   SET(mon-node-sources
-      daemons/node/src/node/collector/ccollectors.cpp
-      daemons/node/src/node/collector/ccollector.cpp
-      daemons/node/src/node/protocol/cnodeprotocol.cpp
-      daemons/node/src/node/sensor/csensor.cpp
-      daemons/node/src/node/sensor/cframe.cpp
-      daemons/node/src/node/sensor/csensorsmanager.cpp
-      daemons/node/src/main.cpp )
-  include_directories( daemons/node/src )
+      daemons/node/collector/ccollectors.cpp
+      daemons/node/collector/ccollector.cpp
+      daemons/node/protocol/cnodeprotocol.cpp
+      daemons/node/sensor/csensor.cpp
+      daemons/node/sensor/cframe.cpp
+      daemons/node/sensor/csensorsmanager.cpp
+      daemons/node/main.cpp )
+  include_directories( . )
   add_executable( mon-node ${mon-node-headers} ${mon-node-sources})
   target_link_libraries(mon-node dl)
   add_daemon(mon-node)
@@ -282,13 +281,13 @@ ENDIF( BUILD_NODE )
 IF( BUILD_STORAGE )
   MESSAGE ( STATUS "---> Processing storage" )
   SET(mon-storage-headers
-      daemons/storage/src/storage_st.h
-      daemons/storage/src/cstorage.h
+      daemons/storage/storage_st.h
+      daemons/storage/cstorage.h
   )
   SET(mon-storage-sources
-      daemons/storage/src/cstorage.cpp
-      daemons/storage/src/main.cpp )
-  include_directories( daemons/storage/src )
+      daemons/storage/cstorage.cpp
+      daemons/storage/main.cpp )
+  include_directories( . )
   add_executable( mon-storage ${mon-storage-headers} ${mon-storage-sources})
   target_link_libraries(mon-storage dl)
   add_daemon(mon-storage)
@@ -296,20 +295,22 @@ ENDIF( BUILD_STORAGE )
 # +++++++++++++++++++ applications +++++++++++++++++++
 
 # +++++++++++++++++++ tools +++++++++++++++++++
+IF( BUILD_DEV_TOOLS )
 MESSAGE ( STATUS "---> Processing char array generator" )
-add_executable( mon-text-to-char-array tools/mon-text-to-char-array/main.cpp)
-target_link_libraries(mon-text-to-char-array base config logger sensordata dl ${GLOBAL_LINK_LIBS})
-install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
+  add_executable( mon-text-to-char-array tools/mon-text-to-char-array/main.cpp)
+  target_link_libraries(mon-text-to-char-array base config logger sensordata dl ${GLOBAL_LINK_LIBS})
+  install(TARGETS mon-text-to-char-array RUNTIME DESTINATION bin )
 
-MESSAGE ( STATUS "---> Processing sensor tester" )
-SET(mon-sensor-test-headers
-    daemons/node/src/node/sensor/csensor.h
-    daemons/node/src/node/sensor/cframe.h)
-SET(mon-sensor-test-sources
-    daemons/node/src/node/sensor/csensor.cpp
-    daemons/node/src/node/sensor/cframe.cpp
-    tools/mon-sensor-test/main.cpp )
-add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
-target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})
-install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
+  MESSAGE ( STATUS "---> Processing sensor tester" )
+  SET(mon-sensor-test-headers
+      daemons/node/sensor/csensor.h
+      daemons/node/sensor/cframe.h)
+  SET(mon-sensor-test-sources
+      daemons/node/sensor/csensor.cpp
+      daemons/node/sensor/cframe.cpp
+      tools/mon-sensor-test/main.cpp )
+  add_executable(mon-sensor-test ${mon-sensor-test-headers} ${mon-sensor-test-sources})
+  target_link_libraries(mon-sensor-test base config logger sensordata dl ${GLOBAL_LINK_LIBS})
+  install(TARGETS mon-sensor-test RUNTIME DESTINATION bin )
+ENDIF( BUILD_DEV_TOOLS )
 # +++++++++++++++++++ tools +++++++++++++++++++
