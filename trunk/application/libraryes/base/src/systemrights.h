@@ -21,13 +21,15 @@ class CSystemRights
     static bool setGroup(const std::string &name);
     bool resetUser();
     bool resetGroup();
+    bool resetUserGroup();
     static uid_t currentUID();
     static gid_t currentGID();
     static std::string currentUserName();
     static std::string currentGroupName();
+    static bool setUserGroup(const std::string &user, const std::string &group);
   private:
-    uid_t m_currentUID;
-    gid_t m_currentGID;
+    uid_t m_startupUID;
+    gid_t m_startupGID;
     static std::string getUName(const uid_t &id);
     static std::string getGName(const gid_t &id);
     static uid_t getUID(const std::string &name);

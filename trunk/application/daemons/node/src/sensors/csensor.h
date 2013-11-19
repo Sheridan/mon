@@ -26,6 +26,7 @@ using TFGetDefinitionLength = const unsigned int (*)(void);
 class CSensor
 {
     MON_READONLY_PROPERTY(std::string, name)
+    MON_READONLY_PROPERTY(mon::lib::sensordata::CDefinition *, definition)
   public:
     CSensor(const std::string &i_name);
     ~CSensor();
@@ -40,7 +41,7 @@ class CSensor
   private:
     void * m_handle;
     TFramesMap m_frames;
-    mon::lib::sensordata::CDefinition *m_definition;
+
 
 };
 

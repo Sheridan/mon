@@ -3,8 +3,8 @@
 #define SENSORDEFINES_H_%sensor_name%
 
 #include "definition.h"
-#include "clogger.h"
-#include "cconfig.h"
+#include "logger.h"
+#include "config.h"
 #include "logger-helper.h"
 #include "file-operations-defines.h"
 #include "csensorplugin.h"

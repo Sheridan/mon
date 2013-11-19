@@ -1,5 +1,6 @@
 #include "st.h"
 #include "cframe.h"
+#include "csensor.h"
 #include "protocol-control.h"
 
 namespace mon
@@ -9,13 +10,42 @@ namespace daemons
 namespace node
 {
 
-CFrame::CFrame(TFGetStatistics getstat, TFGetFrameAvialable getfa, const std::string &name, const float &timeout)
-  : CTimer(timeout),
+CFrame::CFrame(CSensor *parent, TFGetStatistics getstat, TFGetFrameAvialable getfa, const std::string &name)
+  : CTimer(),
+    mon::lib::base::CSystemRights(),
     m_name(name),
     getStatistics(getstat),
-    getFrameAvialable(getfa)
+    getFrameAvialable(getfa),
+    m_parentSensor(parent)
 
 {
+  mon::lib::config::CFolder *frameConfig;
+  float timeout = 1;
+  frameConfig = MON_ST_CONFIG->folder("sensors")->folder(m_parentSensor->name())->folder("frames")->folder(m_name);
+  if(frameConfig->folder("frequency")->containsFile("hz"))
+  {
+    timeout = mon::lib::sensordata::Hz2SPP(frameConfig->folder("frequency")->file("hz")->get(m_parentSensor->definition()->frame(m_name)->frequency(mon::lib::sensordata::fpDefault)->asHz()));
+  }
+  else if(frameConfig->folder("frequency")->containsFile("spp"))
+  {
+    timeout = frameConfig->folder("frequency")->file("spp")->get(m_parentSensor->definition()->frame(m_name)->frequency(mon::lib::sensordata::fpDefault)->asSPP());
+  }
+  else
+  {
+    timeout = m_parentSensor->definition()->frame(m_name)->frequency(mon::lib::sensordata::fpDefault)->asSPP();
+    frameConfig->folder("frequency")->file("spp")->set(timeout);
+  }
+  if(timeout < m_parentSensor->definition()->frame(m_name)->frequency(mon::lib::sensordata::fpMax)->asSPP())
+  {
+    MON_LOG_WRN("Sensor frame (" << m_parentSensor->name() << ":" << m_name << ") request frequency above maximum "
+                "(" << timeout << ">" << m_parentSensor->definition()->frame(m_name)->frequency(mon::lib::sensordata::fpMax)->asSPP() << "). Using maximum value")
+    timeout = m_parentSensor->definition()->frame(m_name)->frequency(mon::lib::sensordata::fpMax)->asSPP();
+  }
+  MON_LOG_NFO("Starting sensor frame (" << m_parentSensor->name() << ":" << m_name << ") statistics mine with frequency " <<
+              mon::lib::sensordata::Hz2SPP(timeout) << "Hz (one tick in " << timeout << " secunds)");
+  settimeout(timeout);
+  m_effectiveUser  = frameConfig->folder("runas")->file("user" )->get(currentUserName ());
+  m_effectiveGroup = frameConfig->folder("runas")->file("group")->get(currentGroupName());
   m_cache = new mon::lib::sensordata::CStatisticCache();
   timerStart();
 }
@@ -40,6 +70,7 @@ std::string CFrame::requestCachedData()
 
 void CFrame::onTimer()
 {
+  setUserGroup(m_effectiveUser, m_effectiveGroup);
   if(getFrameAvialable(m_name.c_str()))
   {
 //#ifdef MON_DEBUG
@@ -51,6 +82,7 @@ void CFrame::onTimer()
 //#endif
 
   }
+  resetUserGroup();
 }
 
 }

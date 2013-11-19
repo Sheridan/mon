@@ -22,7 +22,6 @@ void CSensorsManager::load()
 {
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("sensors"))
   {
-//    MON_LOG_DBG("Loading sensor " << folder->name())
     CSensor *t_sensor = new CSensor(folder->name());
     m_sensors[folder->name()] = t_sensor;
     t_sensor->load();

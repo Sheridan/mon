@@ -10,12 +10,6 @@ file(READ ${CMAKE_INSTALL_PREFIX}/include/mon/sensor-defines.h SENSOR_HEADER_TEX
 string(REPLACE "%sensor_name%" ${EXECUTABLE_NAME} SENSOR_HEADER_TEXT "${SENSOR_HEADER_TEXT}" )
 file(WRITE ${SENSOR_HEADER} "${SENSOR_HEADER_TEXT}")
 
-IF( BUILD_DEBUG )
-  set(mttca_run ${CMAKE_INSTALL_PREFIX}/bin/mon-text-to-char-array-run )
-ELSE( BUILD_DEBUG )
-  set(mttca_run ${CMAKE_INSTALL_PREFIX}/bin/mon-text-to-char-array )
-ENDIF( BUILD_DEBUG )
-
 # --------------------- c++11 -------------------
 ADD_DEFINITIONS( -std=c++11 )
 ADD_DEFINITIONS( -g )
@@ -27,7 +21,7 @@ function(add_sensor sources headers include_paths)
   MESSAGE( STATUS "---------- Processing `${EXECUTABLE_NAME}` sensor ----------" )
   add_custom_command(
     OUTPUT    ${GEN_PATH}/definition.h
-    COMMAND   ${mttca_run}
+    COMMAND   ${CMAKE_INSTALL_PREFIX}/bin/mon-text-to-char-array
     ARGS      ${CMAKE_SOURCE_DIR}/src/definition.txt ${SENSOR_DEFINITION} definition
     DEPENDS   ${CMAKE_SOURCE_DIR}/src/definition.txt
     COMMENT   "Convert sensor definition to C char array"
