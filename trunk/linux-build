@@ -27,7 +27,7 @@ function build()
   object_path="$current_path/$path"
   mkdir -p $object_build_path
   cd $object_build_path
-  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='$install_path' -DBUILD_COLLECTOR=ON -DBUILD_DEBUG=$debug_off $object_path"
+  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='$install_path' -DBUILD_DEBUG=$debug_off $object_path"
   run_cmd "make" "make -j$build_threads"
   run_cmd "install" "make install"
   cd $build_path
