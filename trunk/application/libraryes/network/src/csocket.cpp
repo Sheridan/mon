@@ -103,7 +103,7 @@ void CSocket::write(const std::string &data)
     }
     MON_MUTEX_UNLOCK(write)
 
-    MON_LOG_DBG("Socket bytes send: " << t_total_sent_bytes);
+    //MON_LOG_DBG("Socket bytes send: " << t_total_sent_bytes);
   }
   else { MON_LOG_ERR("Write on offline socket") }
 }

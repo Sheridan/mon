@@ -48,7 +48,6 @@ void CRemoteCollector::requestOfSensorDefinition(lib::protocol::CNetworkMessage 
 
 void CRemoteCollector::requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
 {
-  MON_LOG_DBG(msg->string());
   int sensorIndex = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,framename));
   std::string sensor = msg->string().substr(0, sensorIndex);
   std::string frame  = msg->string().substr(sensorIndex+1, msg->string().length()-1);
