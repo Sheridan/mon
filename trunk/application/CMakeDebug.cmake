@@ -1,5 +1,6 @@
 OPTION ( BUILD_DEBUG "Build the project using debugging code" OFF )
 OPTION ( MON_VERBOSE_BUILD "Verbose build project" OFF )
+
 if(MON_VERBOSE_BUILD)
   SET( CMAKE_VERBOSE_MAKEFILE ON )
 endif(MON_VERBOSE_BUILD)

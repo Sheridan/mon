@@ -24,8 +24,8 @@ function run_cmd
 function build()
 {
   path=$1
-  echo "-------------------> Building $path <-------------------"
   object_build_path="$console_build_path/$path"
+  echo "------------------- Building ${path} in ${object_build_path} -------------------"
   rm -rf ${object_build_path}
   object_path="$current_path/$path"
   mkdir -p $object_build_path
