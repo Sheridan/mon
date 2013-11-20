@@ -27,7 +27,7 @@ TStdStringCharacter CParcerString::goOneCharacterForward()
 
 TStdStringCharacter CParcerString::goOneCharacterBack()
 {
-  if(m_textIndex-1 < 0)
+  if(m_textIndex == 0)
   {
     m_error = true;
     return 0;

@@ -32,7 +32,7 @@ class CDefinitionParcer : public mon::lib::base::CParcerString
 
   private:
     std::string  m_definitionText;
-    int          m_currentIndex;
+    //int          m_currentIndex;
     CDefinition *m_definition;
 
     CFrame *parceFrame();

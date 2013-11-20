@@ -164,8 +164,8 @@ void CConfigurationParcer::readValue(CFile *file)
         case mon::lib::base::EContentType::Float:
         {
           double val = mon::lib::base::toDouble(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1);
-                 if(val >= std::numeric_limits<float> ::min() and val <= std::numeric_limits<float> ::max()) { mon::lib::base::toFloat (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1); }
-          else { if(val >= std::numeric_limits<double>::min() and val <= std::numeric_limits<double>::max()) { mon::lib::base::toDouble(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1); }
+                 if(val >= std::numeric_limits<float> ::min() and val <= std::numeric_limits<float> ::max()) { file->set(mon::lib::base::toFloat (MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); }
+          else { if(val >= std::numeric_limits<double>::min() and val <= std::numeric_limits<double>::max()) { file->set(mon::lib::base::toDouble(MON_PARCER_BUFFER(variable_value)) * (underZero?-1:1)); }
                                                                                                                                                                                                }
           break;
         }
