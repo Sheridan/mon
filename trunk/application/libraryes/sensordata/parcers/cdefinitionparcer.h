@@ -2,8 +2,8 @@
 #ifndef CDEFINITIONPARCER_H
 #define CDEFINITIONPARCER_H
 #include <string>
-#include "libraryes/sensordata/data/cdefinition.h"
 #include "defines/class-helper.h"
+#include "libraryes/sensordata/data/cdefinition.h"
 #include "libraryes/base/parcer/cparcerstring.h"
 #include "libraryes/sensordata/data/cfrequency.h"
 

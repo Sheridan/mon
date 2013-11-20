@@ -1,9 +1,9 @@
 /* %Id% */
 #ifndef CFOLDER_H
 #define CFOLDER_H
+#include "defines/mutex-helper.h"
 #include "libraryes/config/model/cnode.h"
 #include "libraryes/config/model/pathinterface.h"
-#include "defines/mutex-helper.h"
 
 namespace mon
 {

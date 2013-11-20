@@ -1,4 +1,5 @@
 #include "daemons/storage/cstorage.h"
+
 namespace mon
 {
 namespace daemons

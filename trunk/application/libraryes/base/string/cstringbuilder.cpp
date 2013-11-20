@@ -1,8 +1,8 @@
 /* %Id% */
-#include "libraryes/base/string/cstringbuilder.h"
 #include <cstdio>
 #include <stdlib.h>
 #include <string.h>
+#include "libraryes/base/string/cstringbuilder.h"
 
 using std::snprintf;
 #define MON_SB_SPRINTF(_template,_value) \

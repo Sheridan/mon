@@ -2,6 +2,7 @@
 #ifndef PATHINTERFACE_H_INCLUDED
 #define PATHINTERFACE_H_INCLUDED
 #include "libraryes/config/model/cnode.h"
+
 namespace mon
 {
 namespace lib

@@ -1,8 +1,8 @@
 /* %Id% */
-#include "libraryes/config/rw/cconfigurationparcer.h"
-#include "libraryes/base/parcer/parcer-helper.h"
 #include <string.h>
 #include <limits>
+#include "libraryes/config/rw/cconfigurationparcer.h"
+#include "libraryes/base/parcer/parcer-helper.h"
 
 namespace mon
 {

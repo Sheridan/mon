@@ -1,8 +1,8 @@
 /* %Id% */
+#include "defines/st.h"
 #include "libraryes/config/cconfig.h"
 #include "libraryes/config/rw/cconfigurationparcer.h"
 #include "libraryes/config/rw/cconfigurationgenerator.h"
-#include "defines/st.h"
 
 namespace mon
 {

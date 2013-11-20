@@ -1,7 +1,7 @@
 #ifndef CNODESENSORFRAME_H
 #define CNODESENSORFRAME_H
-#include <string>
 #include <map>
+#include <string>
 #include "defines/class-helper.h"
 #include "libraryes/base/timer/ctimer.h"
 #include "libraryes/sensordata/data/cstatisticcache.h"

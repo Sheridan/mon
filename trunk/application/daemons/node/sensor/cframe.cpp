@@ -1,7 +1,7 @@
 #include "defines/st.h"
+#include "defines/protocol-control.h"
 #include "daemons/node/sensor/cframe.h"
 #include "daemons/node/sensor/csensor.h"
-#include "defines/protocol-control.h"
 
 namespace mon
 {

@@ -1,8 +1,8 @@
 /* %Id% */
+#include "defines/global.h"
+#include "defines/protocol-control.h"
 #include "daemons/node/node_st.h"
 #include "daemons/node/collector/ccollector.h"
-#include "defines/protocol-control.h"
-#include "defines/global.h"
 
 namespace mon
 {

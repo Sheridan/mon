@@ -1,5 +1,6 @@
 /* %Id% */
 #include "daemons/node/protocol/cnodeprotocol.h"
+
 namespace mon
 {
 namespace daemons

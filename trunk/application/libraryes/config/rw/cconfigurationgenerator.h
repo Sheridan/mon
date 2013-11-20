@@ -1,8 +1,8 @@
 /* %Id% */
 #ifndef CGENERATOR_H
 #define CGENERATOR_H
-#include "libraryes/config/model/cfolder.h"
 #include <stdio.h>
+#include "libraryes/config/model/cfolder.h"
 
 namespace mon
 {

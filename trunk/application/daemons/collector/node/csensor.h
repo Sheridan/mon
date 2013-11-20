@@ -1,9 +1,9 @@
 #ifndef CREMOTENODESENSOR_H
 #define CREMOTENODESENSOR_H
-#include <string>
 #include <list>
-#include "libraryes/sensordata/data/cdefinition.h"
+#include <string>
 #include "defines/class-helper.h"
+#include "libraryes/sensordata/data/cdefinition.h"
 
 namespace mon
 {

@@ -1,11 +1,12 @@
 /* %Id% */
 #ifndef CNODEREMOTECOLLECTOR_H
 #define CNODEREMOTECOLLECTOR_H
-#include "libraryes/network/cclientsocket.h"
-#include "defines/class-helper.h"
-#include "daemons/node/protocol/cnodeprotocol.h"
 #include <list>
 #include <string>
+#include "defines/class-helper.h"
+#include "libraryes/network/cclientsocket.h"
+#include "daemons/node/protocol/cnodeprotocol.h"
+
 namespace mon
 {
 namespace daemons

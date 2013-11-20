@@ -1,6 +1,6 @@
-#include "libraryes/sensordata/data/cstatisticcache.h"
 #include <climits>
 #include "defines/st.h"
+#include "libraryes/sensordata/data/cstatisticcache.h"
 
 namespace mon
 {

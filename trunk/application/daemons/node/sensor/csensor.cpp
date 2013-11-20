@@ -1,9 +1,9 @@
 /* %Id% */
+#include <dlfcn.h>
 #include "defines/st.h"
 #include "defines/signals-helper.h"
-#include "daemons/node/sensor/csensor.h"
-#include <dlfcn.h>
 #include "libraryes/sensordata/parcers/cdefinitionparcer.h"
+#include "daemons/node/sensor/csensor.h"
 
 namespace mon
 {

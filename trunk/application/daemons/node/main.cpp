@@ -1,7 +1,7 @@
 /* %Id% */
-#include "daemons/node/node_st.h"
 #include "defines/default-application.h"
 #include "defines/signals-helper.h"
+#include "daemons/node/node_st.h"
 #include "daemons/node/collector/ccollectors.h"
 #include "daemons/node/sensor/csensorsmanager.h"
 

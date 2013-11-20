@@ -10,9 +10,9 @@
 #define MON_ST_LOGGER logger
 #define MON_ST_CONFIG config
 
+#include "defines/logger-helper.h"
 #include "libraryes/config/config.h"
 #include "libraryes/logger/logger.h"
-#include "defines/logger-helper.h"
 #include "libraryes/sensordata/parcers/cdefinitionparcer.h"
 #include "libraryes/sensordata/parcers/cdefinitiongenerator.h"
 #include "daemons/node/sensor/csensor.h"

@@ -2,7 +2,7 @@
 #ifndef CSENSOR_HH
 #define CSENSOR_HH
 
-#include "cframesetbuilder.h"
+#include "libraryes/sensorplugin/cframesetbuilder.h"
 
 namespace mon
 {

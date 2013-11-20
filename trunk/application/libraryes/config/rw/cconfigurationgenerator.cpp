@@ -1,6 +1,6 @@
 /* %Id% */
-#include "libraryes/config/rw/cconfigurationgenerator.h"
 #include "defines/st.h"
+#include "libraryes/config/rw/cconfigurationgenerator.h"
 
 //#define MON_CONFIG_GENERATOR_DEBUG_ENABLE
 #ifdef MON_CONFIG_GENERATOR_DEBUG_ENABLE

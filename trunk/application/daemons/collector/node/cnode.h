@@ -1,15 +1,15 @@
 /* %Id% */
 #ifndef CREMOTEMONNODE_H
 #define CREMOTEMONNODE_H
-#include "libraryes/network/cclientsocket.h"
-#include "defines/threads-helper.h"
-#include "defines/class-helper.h"
-#include "daemons/collector/protocol/ccollectorprotocol.h"
-#include "libraryes/base/timer/ctimer.h"
-#include "daemons/collector/node/csensor.h"
 #include <list>
 #include <string>
+#include "defines/threads-helper.h"
+#include "defines/class-helper.h"
 #include "defines/mutex-helper.h"
+#include "daemons/collector/protocol/ccollectorprotocol.h"
+#include "daemons/collector/node/csensor.h"
+#include "libraryes/base/timer/ctimer.h"
+#include "libraryes/network/cclientsocket.h"
 
 namespace mon
 {

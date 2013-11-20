@@ -1,13 +1,14 @@
 /* %Id% */
 #ifndef COBJECT_H
 #define COBJECT_H
-#include <string>
 #include <set>
-#include <list>
 #include <map>
+#include <list>
+#include <string>
+#include "defines/class-helper.h"
 #include "libraryes/sensordata/data/cfrequency.h"
 #include "libraryes/sensordata/data/cfield.h"
-#include "defines/class-helper.h"
+
 namespace mon
 {
 namespace lib

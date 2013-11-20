@@ -1,7 +1,6 @@
 /* %Id% */
 #ifndef CCOLLECTORPROTOCOL_H
 #define CCOLLECTORPROTOCOL_H
-
 #include "libraryes/protocol/cprotocol.h"
 
 namespace mon

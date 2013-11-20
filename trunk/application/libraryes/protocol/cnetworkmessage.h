@@ -1,9 +1,9 @@
 /* %Id% */
 #ifndef CMESSAGE_H
 #define CMESSAGE_H
-#include "libraryes/base/string/cstringbuilder.h"
 #include "defines/class-helper.h"
 #include "defines/protocol-control.h"
+#include "libraryes/base/string/cstringbuilder.h"
 #include "libraryes/network/csocket.h"
 
 namespace mon

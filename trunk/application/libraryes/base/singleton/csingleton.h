@@ -1,10 +1,10 @@
 /* %Id% */
 #ifndef LIB_SINGLETON_H
 #define LIB_SINGLETON_H
+#include <assert.h>
 #include "libraryes/config/config.h"
 #include "libraryes/logger/logger.h"
 #include "libraryes/base/singleton/csingletonmember.h"
-#include <assert.h>
 
 #define MON_ST_ATOMIC_VNAME(_name) m_##_name
 #define MON_ST_ATOMIC(_interface,_name) \

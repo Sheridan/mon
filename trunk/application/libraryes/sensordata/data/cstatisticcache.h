@@ -1,8 +1,8 @@
 #ifndef CSTATISTICCACHE_H
 #define CSTATISTICCACHE_H
-#include <string>
-#include <list>
 #include <map>
+#include <list>
+#include <string>
 #include "defines/mutex-helper.h"
 #include "libraryes/sensordata/data/cstatisticdata.h"
 

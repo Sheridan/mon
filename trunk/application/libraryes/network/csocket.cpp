@@ -1,8 +1,8 @@
 /* %Id% */
 #include <stdlib.h>
+#include "defines/st.h"
 #include "defines/infinity-cycle-helper.h"
 #include "libraryes/network/csocket.h"
-#include "defines/st.h"
 
 namespace mon
 {

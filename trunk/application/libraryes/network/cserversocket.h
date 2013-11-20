@@ -1,9 +1,9 @@
 /* %Id% */
 #ifndef CSERVERSOCKET_H
 #define CSERVERSOCKET_H
+#include "defines/threads-helper.h"
 #include "libraryes/network/csocket.h"
 #include "libraryes/network/cclientsocket.h"
-#include "defines/threads-helper.h"
 
 namespace mon
 {

@@ -2,6 +2,7 @@
 #ifndef CDEFINITION_H
 #define CDEFINITION_H
 #include "libraryes/sensordata/data/cframe.h"
+
 namespace mon
 {
 namespace lib

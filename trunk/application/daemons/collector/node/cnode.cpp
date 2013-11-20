@@ -1,9 +1,9 @@
 /* %Id% */
+#include "defines/global.h"
+#include "defines/infinity-cycle-helper.h"
 #include "daemons/collector/collector_st.h"
 #include "daemons/collector/node/cnode.h"
-#include "defines/global.h"
 #include "libraryes/base/string/stringhelper.h"
-#include "defines/infinity-cycle-helper.h"
 #include "libraryes/sensordata/data/cfrequency.h"
 
 namespace mon

@@ -1,8 +1,8 @@
 #ifndef CFRAMESETBUILDER_H
 #define CFRAMESETBUILDER_H
 #include <string>
-#include "libraryes/base/string/cstringbuilder.h"
 #include "defines/class-helper.h"
+#include "libraryes/base/string/cstringbuilder.h"
 
 namespace mon
 {

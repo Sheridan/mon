@@ -1,4 +1,5 @@
 #include "libraryes/sensordata/data/cstatisticdata.h"
+
 namespace mon
 {
 namespace lib

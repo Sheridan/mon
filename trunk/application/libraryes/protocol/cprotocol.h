@@ -1,10 +1,10 @@
 /* %Id% */
 #ifndef CPROTOCOL_H
 #define CPROTOCOL_H
+#include <map>
+#include "defines/protocol-control.h"
 #include "libraryes/network/csocket.h"
 #include "libraryes/protocol/cnetworkmessage.h"
-#include "defines/protocol-control.h"
-#include <map>
 
 namespace mon
 {

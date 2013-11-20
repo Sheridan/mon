@@ -1,10 +1,9 @@
 /* %Id% */
 #ifndef CLOGGER_H
 #define CLOGGER_H
-
-#include "libraryes/logger/clogmessage.h"
 #include <stdio.h>
 #include "defines/mutex-helper.h"
+#include "libraryes/logger/clogmessage.h"
 
 namespace mon
 {

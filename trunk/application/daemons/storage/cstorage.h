@@ -2,6 +2,7 @@
 #define CSTORAGE_H
 #include "libraryes/base/singleton/csingletonmember.h"
 #include "libraryes/network/cserversocket.h"
+
 namespace mon
 {
 namespace daemons

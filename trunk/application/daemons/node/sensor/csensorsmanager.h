@@ -1,9 +1,10 @@
 /* %Id% */
 #ifndef CSENSORSMANAGER_H
 #define CSENSORSMANAGER_H
-#include "daemons/node/sensor/csensor.h"
-#include "libraryes/base/singleton/csingletonmember.h"
 #include "defines/protocol-control.h"
+#include "libraryes/base/singleton/csingletonmember.h"
+#include "daemons/node/sensor/csensor.h"
+
 namespace mon
 {
 namespace daemons
