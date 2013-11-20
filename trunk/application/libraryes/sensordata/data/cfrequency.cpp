@@ -1,6 +1,6 @@
 // %Id%
-#include "cfrequency.h"
-#include "cvariant.h"
+#include "libraryes/sensordata/data/cfrequency.h"
+#include "libraryes/base/string/cvariant.h"
 
 namespace mon
 {

@@ -1,5 +1,5 @@
 /* %Id% */
-#include "clogmessage.h"
+#include "libraryes/logger/clogmessage.h"
 
 namespace mon
 {

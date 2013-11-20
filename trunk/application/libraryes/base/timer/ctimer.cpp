@@ -1,6 +1,6 @@
-#include "ctimer.h"
-#include "st.h"
-#include "infinity-cycle-helper.h"
+#include "libraryes/base/timer/ctimer.h"
+#include "defines/st.h"
+#include "defines/infinity-cycle-helper.h"
 #include <unistd.h>
 
 namespace mon

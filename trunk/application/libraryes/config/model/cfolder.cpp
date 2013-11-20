@@ -1,6 +1,6 @@
 /* %Id% */
-#include "cfolder.h"
-#include "cfile.h"
+#include "libraryes/config/model/cfolder.h"
+#include "libraryes/config/model/cfile.h"
 
 namespace mon
 {

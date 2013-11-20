@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef PATHINTERFACE_H_INCLUDED
 #define PATHINTERFACE_H_INCLUDED
-#include "cnode.h"
+#include "libraryes/config/model/cnode.h"
 namespace mon
 {
 namespace lib

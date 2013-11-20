@@ -3,8 +3,8 @@
 #include <string>
 #include <list>
 #include <map>
-#include "mutex-helper.h"
-#include "cstatisticdata.h"
+#include "defines/mutex-helper.h"
+#include "libraryes/sensordata/data/cstatisticdata.h"
 
 namespace mon
 {

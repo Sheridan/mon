@@ -2,7 +2,7 @@
 #ifndef CNODEPROTOCOL_H
 #define CNODEPROTOCOL_H
 
-#include "cprotocol.h"
+#include "libraryes/protocol/cprotocol.h"
 
 namespace mon
 {

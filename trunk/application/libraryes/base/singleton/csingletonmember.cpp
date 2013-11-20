@@ -1,5 +1,5 @@
 /* %Id% */
-#include "csingletonmember.h"
+#include "libraryes/base/singleton/csingletonmember.h"
 namespace mon
 {
 namespace lib

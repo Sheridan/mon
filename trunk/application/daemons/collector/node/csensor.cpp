@@ -1,7 +1,7 @@
 #include "daemons/collector/node/csensor.h"
 #include "daemons/collector/node/cnode.h"
 #include "daemons/collector/collector_st.h"
-#include "cdefinitionparcer.h"
+#include "libraryes/sensordata/parcers/cdefinitionparcer.h"
 
 namespace mon
 {

@@ -1,7 +1,7 @@
 /* %Id% */
-#include "cdefinition.h"
-#include "st.h"
-#include "signals-helper.h"
+#include "libraryes/sensordata/data/cdefinition.h"
+#include "defines/st.h"
+#include "defines/signals-helper.h"
 
 namespace mon
 {

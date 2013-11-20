@@ -1,7 +1,7 @@
 #ifndef CTIMER_H
 #define CTIMER_H
-#include "class-helper.h"
-#include "threads-helper.h"
+#include "defines/class-helper.h"
+#include "defines/threads-helper.h"
 
 namespace mon
 {

@@ -1,6 +1,6 @@
 /* %Id% */
-#include "cconfigurationparcer.h"
-#include "parcer-helper.h"
+#include "libraryes/config/rw/cconfigurationparcer.h"
+#include "libraryes/base/parcer/parcer-helper.h"
 #include <string.h>
 #include <limits>
 

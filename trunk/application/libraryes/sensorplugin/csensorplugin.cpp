@@ -1,5 +1,5 @@
 /* %Id% */
-#include "csensorplugin.h"
+#include "libraryes/sensorplugin/csensorplugin.h"
 namespace mon
 {
 namespace lib

@@ -1,8 +1,8 @@
 /* %Id% */
 #ifndef CNODECOLLECTORSSMANAGER_H
 #define CNODECOLLECTORSSMANAGER_H
-#include "cserversocket.h"
-#include "csingletonmember.h"
+#include "libraryes/network/cserversocket.h"
+#include "libraryes/base/singleton/csingletonmember.h"
 #include "daemons/node/collector/ccollector.h"
 
 namespace mon

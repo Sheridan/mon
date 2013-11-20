@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CCONFIG_H
 #define CCONFIG_H
-#include "cfolder.h"
+#include "libraryes/config/model/cfolder.h"
 #include <queue>
 namespace mon
 {

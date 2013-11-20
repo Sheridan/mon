@@ -1,7 +1,7 @@
 #ifndef CPARCER_H
 #define CPARCER_H
 #include <string>
-#include "class-helper.h"
+#include "defines/class-helper.h"
 
 namespace mon
 {

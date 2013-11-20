@@ -2,9 +2,9 @@
 #ifndef CLOGGER_H
 #define CLOGGER_H
 
-#include "clogmessage.h"
+#include "libraryes/logger/clogmessage.h"
 #include <stdio.h>
-#include "mutex-helper.h"
+#include "defines/mutex-helper.h"
 
 namespace mon
 {

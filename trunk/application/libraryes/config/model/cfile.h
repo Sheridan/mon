@@ -1,8 +1,8 @@
 /* %Id% */
 #ifndef CVALUE_H
 #define CVALUE_H
-#include "cnode.h"
-#include "cvariant.h"
+#include "libraryes/config/model/cnode.h"
+#include "libraryes/base/string/cvariant.h"
 
 namespace mon
 {

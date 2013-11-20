@@ -5,9 +5,9 @@
 #include <set>
 #include <list>
 #include <map>
-#include "cfrequency.h"
-#include "cfield.h"
-#include "class-helper.h"
+#include "libraryes/sensordata/data/cfrequency.h"
+#include "libraryes/sensordata/data/cfield.h"
+#include "defines/class-helper.h"
 namespace mon
 {
 namespace lib

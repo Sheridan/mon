@@ -7,7 +7,7 @@ set( SENSOR_HEADER "${GEN_PATH}/mon-sensor-${EXECUTABLE_NAME}.h" )
 set( MON_LIB_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib/mon/global")
 file(MAKE_DIRECTORY ${GEN_PATH})
 
-file(READ ${CMAKE_INSTALL_PREFIX}/include/mon/sensor-defines.h SENSOR_HEADER_TEXT)
+file(READ ${CMAKE_INSTALL_PREFIX}/include/mon/defines/sensor-defines.h SENSOR_HEADER_TEXT)
 string(REPLACE "%sensor_name%" ${EXECUTABLE_NAME} SENSOR_HEADER_TEXT "${SENSOR_HEADER_TEXT}" )
 file(WRITE ${SENSOR_HEADER} "${SENSOR_HEADER_TEXT}")
 

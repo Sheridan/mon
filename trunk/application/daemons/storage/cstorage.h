@@ -1,7 +1,7 @@
 #ifndef CSTORAGE_H
 #define CSTORAGE_H
-#include "csingletonmember.h"
-#include "cserversocket.h"
+#include "libraryes/base/singleton/csingletonmember.h"
+#include "libraryes/network/cserversocket.h"
 namespace mon
 {
 namespace daemons

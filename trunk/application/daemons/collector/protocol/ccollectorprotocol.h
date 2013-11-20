@@ -2,7 +2,7 @@
 #ifndef CCOLLECTORPROTOCOL_H
 #define CCOLLECTORPROTOCOL_H
 
-#include "cprotocol.h"
+#include "libraryes/protocol/cprotocol.h"
 
 namespace mon
 {

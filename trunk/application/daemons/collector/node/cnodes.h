@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CMONNODESMANAGER_H
 #define CMONNODESMANAGER_H
-#include "csingletonmember.h"
+#include "libraryes/base/singleton/csingletonmember.h"
 #include "daemons/collector/node/cnode.h"
 
 namespace mon

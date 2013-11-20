@@ -1,8 +1,8 @@
 /* %Id% */
 #ifndef CNODEREMOTECOLLECTOR_H
 #define CNODEREMOTECOLLECTOR_H
-#include "cclientsocket.h"
-#include "class-helper.h"
+#include "libraryes/network/cclientsocket.h"
+#include "defines/class-helper.h"
 #include "daemons/node/protocol/cnodeprotocol.h"
 #include <list>
 #include <string>

@@ -5,8 +5,8 @@
 #include <string>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "threads-helper.h"
-#include "mutex-helper.h"
+#include "defines/threads-helper.h"
+#include "defines/mutex-helper.h"
 
 namespace mon
 {

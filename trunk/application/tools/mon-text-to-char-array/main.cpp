@@ -5,9 +5,9 @@
 #include <iostream>
 #include <ostream>
 #include <string>
-#include "cdefinition.h"
-#include "cdefinitionparcer.h"
-#include "cdefinitiongenerator.h"
+#include "libraryes/sensordata/data/cdefinition.h"
+#include "libraryes/sensordata/parcers/cdefinitionparcer.h"
+#include "libraryes/sensordata/parcers/cdefinitiongenerator.h"
 
 #define BREAK_AT 20
 namespace mon

@@ -1,9 +1,9 @@
 #ifndef PARCERHELPER_H
 #define PARCERHELPER_H
-#include "st.h"
-#include "signals-helper.h"
-#include "infinity-cycle-helper.h"
-#include "logger-helper.h"
+#include "defines/st.h"
+#include "defines/signals-helper.h"
+#include "defines/infinity-cycle-helper.h"
+#include "defines/logger-helper.h"
 
 // -----------------------------------------------  debug
 //#define MON_PARCER_PRINT_CURRENT_CHAR_ENABLED

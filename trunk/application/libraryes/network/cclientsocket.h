@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CCLIENTSOCKET_H
 #define CCLIENTSOCKET_H
-#include "csocket.h"
+#include "libraryes/network/csocket.h"
 #include <map>
 
 namespace mon

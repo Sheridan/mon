@@ -1,5 +1,5 @@
 /* %Id% */
-#include "cframe.h"
+#include "libraryes/sensordata/data/cframe.h"
 
 namespace mon
 {

@@ -2,10 +2,10 @@
 #ifndef CDEFINITIONPARCER_H
 #define CDEFINITIONPARCER_H
 #include <string>
-#include "cdefinition.h"
-#include "class-helper.h"
-#include "cparcerstring.h"
-#include "cfrequency.h"
+#include "libraryes/sensordata/data/cdefinition.h"
+#include "defines/class-helper.h"
+#include "libraryes/base/parcer/cparcerstring.h"
+#include "libraryes/sensordata/data/cfrequency.h"
 
 namespace mon
 {

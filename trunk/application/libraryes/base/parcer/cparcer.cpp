@@ -1,7 +1,7 @@
-#include "cparcer.h"
-#include "st.h"
-#include "signals-helper.h"
-#include "parcer-helper.h"
+#include "libraryes/base/parcer/cparcer.h"
+#include "defines/st.h"
+#include "defines/signals-helper.h"
+#include "libraryes/base/parcer/parcer-helper.h"
 
 namespace mon
 {

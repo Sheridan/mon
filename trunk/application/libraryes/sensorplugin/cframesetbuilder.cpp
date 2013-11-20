@@ -1,5 +1,5 @@
-#include "cframesetbuilder.h"
-#include "protocol-control.h"
+#include "libraryes/sensorplugin/cframesetbuilder.h"
+#include "defines/protocol-control.h"
 #include <chrono>
 
 namespace mon

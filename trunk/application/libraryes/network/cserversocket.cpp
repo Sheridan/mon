@@ -1,8 +1,8 @@
 /* %Id% */
-#include "cserversocket.h"
-#include "signals-helper.h"
-#include "infinity-cycle-helper.h"
-#include "st.h"
+#include "libraryes/network/cserversocket.h"
+#include "defines/signals-helper.h"
+#include "defines/infinity-cycle-helper.h"
+#include "defines/st.h"
 #include <arpa/inet.h>
 
 namespace mon

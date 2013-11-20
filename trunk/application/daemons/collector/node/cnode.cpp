@@ -1,10 +1,10 @@
 /* %Id% */
 #include "daemons/collector/collector_st.h"
 #include "daemons/collector/node/cnode.h"
-#include "global.h"
-#include "stringhelper.h"
-#include "infinity-cycle-helper.h"
-#include "cfrequency.h"
+#include "defines/global.h"
+#include "libraryes/base/string/stringhelper.h"
+#include "defines/infinity-cycle-helper.h"
+#include "libraryes/sensordata/data/cfrequency.h"
 
 namespace mon
 {

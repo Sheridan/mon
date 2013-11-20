@@ -2,12 +2,12 @@
 #ifndef CSENSOR_H
 #define CSENSOR_H
 #include <string>
-#include "class-helper.h"
+#include "defines/class-helper.h"
 #include <map>
-#include "logger.h"
-#include "config.h"
-#include "cdefinition.h"
-#include "cframe.h"
+#include "libraryes/logger/logger.h"
+#include "libraryes/config/config.h"
+#include "libraryes/sensordata/data/cdefinition.h"
+#include "daemons/node/sensor/cframe.h"
 
 namespace mon
 {

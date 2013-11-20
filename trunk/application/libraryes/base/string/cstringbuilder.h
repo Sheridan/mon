@@ -2,7 +2,7 @@
 #ifndef CSTRINGBUILDER_H
 #define CSTRINGBUILDER_H
 #include <string>
-#include "protocol-control.h"
+#include "defines/protocol-control.h"
 
 #define MON_STRING_BUILDER_BASE(_class,_implement) \
   public: \

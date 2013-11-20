@@ -1,8 +1,8 @@
 #ifndef CDEFINITIONGENERATOR_H
 #define CDEFINITIONGENERATOR_H
 #include <string>
-#include "cdefinition.h"
-#include "cstringbuilder.h"
+#include "libraryes/sensordata/data/cdefinition.h"
+#include "libraryes/base/string/cstringbuilder.h"
 
 namespace mon
 {

@@ -1,5 +1,5 @@
 /* %Id% */
-#include "cnode.h"
+#include "libraryes/config/model/cnode.h"
 namespace mon
 {
 namespace lib

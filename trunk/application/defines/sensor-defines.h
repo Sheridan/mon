@@ -3,11 +3,11 @@
 #define SENSORDEFINES_H_%sensor_name%
 
 #include "definition.h"
-#include "logger.h"
-#include "config.h"
-#include "logger-helper.h"
-#include "file-operations-defines.h"
-#include "csensorplugin.h"
+#include "libraryes/logger/logger.h"
+#include "libraryes/config/config.h"
+#include "defines/logger-helper.h"
+#include "defines/file-operations-defines.h"
+#include "libraryes/sensorplugin/csensorplugin.h"
 #include <string>
 #include <iostream>
 #include <sstream>

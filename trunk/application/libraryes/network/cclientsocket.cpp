@@ -1,10 +1,10 @@
 /* %Id% */
-#include "cclientsocket.h"
-#include "st.h"
-#include "signals-helper.h"
+#include "libraryes/network/cclientsocket.h"
+#include "defines/st.h"
+#include "defines/signals-helper.h"
 #include <arpa/inet.h>
 #include <netdb.h>
-#include "cvariant.h"
+#include "libraryes/base/string/cvariant.h"
 
 namespace mon
 {

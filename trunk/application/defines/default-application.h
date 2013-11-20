@@ -1,8 +1,8 @@
 /* %Id% */
 #ifndef defaulMonApplication
 #define defaulMonApplication
-#include "global.h"
-#include "csystemrights.h"
+#include "defines/global.h"
+#include "libraryes/base/sequrity/csystemrights.h"
 
 #ifdef MON_DEBUG
   #define MON_MAX_LOG_PRI mon::lib::logger::pDebug

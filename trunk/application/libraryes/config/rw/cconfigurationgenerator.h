@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CGENERATOR_H
 #define CGENERATOR_H
-#include "cfolder.h"
+#include "libraryes/config/model/cfolder.h"
 #include <stdio.h>
 
 namespace mon

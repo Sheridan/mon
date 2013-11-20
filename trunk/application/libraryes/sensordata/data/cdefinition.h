@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CDEFINITION_H
 #define CDEFINITION_H
-#include "cframe.h"
+#include "libraryes/sensordata/data/cframe.h"
 namespace mon
 {
 namespace lib

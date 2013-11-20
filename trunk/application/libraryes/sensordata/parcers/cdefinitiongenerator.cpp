@@ -1,5 +1,5 @@
-#include "cdefinitiongenerator.h"
-#include "st.h"
+#include "libraryes/sensordata/parcers/cdefinitiongenerator.h"
+#include "defines/st.h"
 
 //#define MON_DEFINITION_GENERATOR_DEBUG_ENABLE
 #ifdef MON_DEFINITION_GENERATOR_DEBUG_ENABLE

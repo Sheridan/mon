@@ -2,8 +2,8 @@
 #ifndef CCONFIGURATIONPARCER_H
 #define CCONFIGURATIONPARCER_H
 #include <string>
-#include "cfolder.h"
-#include "cparcerfile.h"
+#include "libraryes/config/model/cfolder.h"
+#include "libraryes/base/parcer/cparcerfile.h"
 
 namespace mon
 {

@@ -4,7 +4,7 @@
 
 #define MON_MODULE_NAME "node"
 
-#include "st.h"
+#include "defines/st.h"
 #include "daemons/node/sensor/csensorsmanager.h"
 #include "daemons/node/collector/ccollectors.h"
 

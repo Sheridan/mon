@@ -1,7 +1,7 @@
 /* %Id% */
-#include "collector_st.h"
-#include "default-application.h"
-#include "signals-helper.h"
+#include "daemons/collector/collector_st.h"
+#include "defines/default-application.h"
+#include "defines/signals-helper.h"
 #include "daemons/collector/node/cnodes.h"
 
 void mon_exit(int returnValue)

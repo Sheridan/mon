@@ -1,6 +1,6 @@
 /* %Id% */
-#include "csensorsmanager.h"
-#include "st.h"
+#include "daemons/node/sensor/csensorsmanager.h"
+#include "defines/st.h"
 #include <unistd.h>
 
 namespace mon

@@ -1,8 +1,8 @@
 /* %Id% */
 #ifndef MON_ST_H
 #define MON_ST_H
-#include "global.h"
-#include "csingleton.h"
+#include "defines/global.h"
+#include "libraryes/base/singleton/csingleton.h"
 #include "generated.h"
 #include <errno.h>
 #include <string.h>

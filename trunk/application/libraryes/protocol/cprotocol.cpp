@@ -1,7 +1,7 @@
 /* %Id% */
-#include "cprotocol.h"
-#include "cvariant.h"
-#include "st.h"
+#include "libraryes/protocol/cprotocol.h"
+#include "libraryes/base/string/cvariant.h"
+#include "defines/st.h"
 
 
 namespace mon

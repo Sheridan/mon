@@ -1,7 +1,7 @@
 /* %Id% */
-#include "cdefinitionparcer.h"
-#include "parcer-helper.h"
-#include "cvariant.h"
+#include "libraryes/sensordata/parcers/cdefinitionparcer.h"
+#include "libraryes/base/parcer/parcer-helper.h"
+#include "libraryes/base/string/cvariant.h"
 
 namespace mon
 {

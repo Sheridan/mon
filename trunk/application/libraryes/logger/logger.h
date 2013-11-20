@@ -2,8 +2,8 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "clogmessage.h"
-#include "clogger.h"
+#include "libraryes/logger/clogmessage.h"
+#include "libraryes/logger/clogger.h"
 
 namespace mon
 {

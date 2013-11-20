@@ -2,8 +2,8 @@
 #ifndef THREADSHELPER_H_INCLUDED
 #define THREADSHELPER_H_INCLUDED
 #include <pthread.h>
-#include "st.h"
-#include "signals-helper.h"
+#include "defines/st.h"
+#include "defines/signals-helper.h"
 
 #define MON_THREADED_FUNCTION_DISABLE_CANCEL pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
 #define MON_THREADED_FUNCTION_ENABLE_CANCEL  pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);

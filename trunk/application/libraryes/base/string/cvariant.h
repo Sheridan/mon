@@ -2,7 +2,7 @@
 #ifndef CVARIANT_H
 #define CVARIANT_H
 #include <string>
-#include "mutex-helper.h"
+#include "defines/mutex-helper.h"
 
 namespace mon
 {

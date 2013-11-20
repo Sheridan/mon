@@ -1,7 +1,7 @@
-#include "csystemrights.h"
-#include "st.h"
-#include "logger-helper.h"
-#include "signals-helper.h"
+#include "libraryes/base/sequrity/csystemrights.h"
+#include "defines/st.h"
+#include "defines/logger-helper.h"
+#include "defines/signals-helper.h"
 
 #define _OPEN_SYS
 #include <unistd.h>

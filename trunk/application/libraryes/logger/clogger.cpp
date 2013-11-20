@@ -1,6 +1,6 @@
 /* %Id% */
-#include "clogger.h"
-#include "clogmessage.h"
+#include "libraryes/logger/clogger.h"
+#include "libraryes/logger/clogmessage.h"
 #include <string.h>
 #include <syslog.h>
 #include <time.h>

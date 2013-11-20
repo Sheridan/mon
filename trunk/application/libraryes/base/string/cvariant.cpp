@@ -1,7 +1,7 @@
 /* %Id% */
-#include "cvariant.h"
-#include "st.h"
-#include "signals-helper.h"
+#include "libraryes/base/string/cvariant.h"
+#include "defines/st.h"
+#include "defines/signals-helper.h"
 #include <sstream>
 #include <stdlib.h>
 #include <string>

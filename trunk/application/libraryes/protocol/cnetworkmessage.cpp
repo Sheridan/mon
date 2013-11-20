@@ -1,7 +1,7 @@
 /* %Id% */
-#include "cnetworkmessage.h"
-#include "cvariant.h"
-#include "protocol-control.h"
+#include "libraryes/protocol/cnetworkmessage.h"
+#include "libraryes/base/string/cvariant.h"
+#include "defines/protocol-control.h"
 
 namespace mon
 {

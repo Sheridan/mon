@@ -1,7 +1,7 @@
 /* %Id% */
 #ifndef CLOGMESSAGE_H
 #define CLOGMESSAGE_H
-#include "cstringbuilder.h"
+#include "libraryes/base/string/cstringbuilder.h"
 
 namespace mon
 {

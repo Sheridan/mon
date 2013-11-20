@@ -1,8 +1,8 @@
 /* %Id% */
-#include "storage_st.h"
-#include "default-application.h"
-#include "signals-helper.h"
-#include "cstorage.h"
+#include "daemons/storage/storage_st.h"
+#include "defines/default-application.h"
+#include "defines/signals-helper.h"
+#include "daemons/storage/cstorage.h"
 
 void mon_exit(int returnValue)
 {

@@ -1,8 +1,8 @@
 /* %Id% */
-#include "csingleton.h"
-#include "cconfig.h"
-#include "clogger.h"
-#include "signals-helper.h"
+#include "libraryes/base/singleton/csingleton.h"
+#include "libraryes/config/cconfig.h"
+#include "libraryes/logger/clogger.h"
+#include "defines/signals-helper.h"
 
 namespace mon
 {

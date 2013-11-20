@@ -2,7 +2,7 @@
 #define CFIELD_H
 #include <list>
 #include <string>
-#include "class-helper.h"
+#include "defines/class-helper.h"
 
 namespace mon
 {

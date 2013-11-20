@@ -2,10 +2,10 @@
 #define CNODESENSORFRAME_H
 #include <string>
 #include <map>
-#include "class-helper.h"
-#include "ctimer.h"
-#include "cstatisticcache.h"
-#include "csystemrights.h"
+#include "defines/class-helper.h"
+#include "libraryes/base/timer/ctimer.h"
+#include "libraryes/sensordata/data/cstatisticcache.h"
+#include "libraryes/base/sequrity/csystemrights.h"
 
 namespace mon
 {
