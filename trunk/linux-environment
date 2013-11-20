@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# %Id%
-root_path="/tmp/mon"
+root_path=${1:-"/tmp/mon"}
 build_path="${root_path}/build"
 console_build_path="${build_path}/console"
 ide_build_path="${build_path}/ide"

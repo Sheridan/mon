@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./linux-environment
+. ./linux-environment $1
 
 mkdir -p ${root_path}
 mkdir -p ${build_path}

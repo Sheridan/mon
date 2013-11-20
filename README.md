@@ -1,6 +1,5 @@
-mon
+mon [![Build Status](https://travis-ci.org/Sheridan/mon.png?branch=master)](https://travis-ci.org/Sheridan/mon)
 ===
 
-Monitoryng tool
+Инструмент для слежения за работой серверов, рабочих станций и прочего железа
 
-[![Build Status](https://travis-ci.org/Sheridan/mon.png?branch=master)](https://travis-ci.org/Sheridan/mon)
