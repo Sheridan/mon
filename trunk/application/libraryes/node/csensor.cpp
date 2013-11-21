@@ -23,6 +23,10 @@ CSensor::~CSensor()
   delete m_definition;
 }
 
+lib::sensordata::TFramesNames &CSensor::frames()
+{
+  return m_definition->frames();
+}
 
 
 }

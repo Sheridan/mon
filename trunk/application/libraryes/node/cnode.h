@@ -18,12 +18,13 @@ class CNode
     MON_READONLY_PROPERTY(std::string, name)
     MON_MUTEX_DECLARE(sensors)
   public:
-    CNode();
+    CNode(const std::string &name);
     virtual ~CNode();
     CSensor *sensor(const std::string &name);
 
   protected:
     void addSensor(const std::string &name, const std::string &definition);
+    TSensors &sensors();
 
   private:
     TSensors m_sensors;

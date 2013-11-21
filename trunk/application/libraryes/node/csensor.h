@@ -23,6 +23,7 @@ class CSensor
   public:
     CSensor(CNode *parent, const std::string &sensorName, const std::string &definitionText);
     virtual ~CSensor();
+    mon::lib::sensordata::TFramesNames &frames();
 
 };
 

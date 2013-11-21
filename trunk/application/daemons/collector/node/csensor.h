@@ -4,6 +4,7 @@
 #include <string>
 #include "defines/class-helper.h"
 #include "libraryes/sensordata/data/cdefinition.h"
+#include "libraryes/node/csensor.h"
 
 namespace mon
 {
@@ -15,20 +16,13 @@ namespace collector
 class CNode;
 
 //! Сенсор удаленной ноды
-class CSensor
+class CSensor : public mon::lib::node::CSensor
 {
-    MON_READONLY_PROPERTY(std::string, name)
   public:
-    CSensor(const std::string &name, const std::string &definition, CNode *parentNode);
+    CSensor(CNode *parentNode, const std::string &name, const std::string &definition);
     ~CSensor();
-    mon::lib::sensordata::TFramesNames &frames();
-  private:
-    CNode *m_parentNode;
-    mon::lib::sensordata::CDefinition *m_definition;
-};
 
-//! Список сенсоров удаленной ноды
-typedef std::list<CSensor *> TSensors;
+};
 
 }
 }

@@ -24,15 +24,15 @@ void CNodes::load()
   {
     m_nodes.push_back(new CNode(folder->name()));
   }
-  for(CNode *node : m_nodes)
+  for(mon::lib::node::CNode *node : m_nodes)
   {
-    node->connect();
+    static_cast<CNode *>(node)->connect();
   }
 }
 
 void CNodes::unload()
 {
-  for(CNode *node : m_nodes)
+  for(mon::lib::node::CNode *node : m_nodes)
   {
     delete node;
   }

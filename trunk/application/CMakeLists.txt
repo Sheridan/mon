@@ -194,7 +194,6 @@ set(mon-base-lib-link-libraryes "")
 add_mon_library(base
              "${mon-base-lib-headers}"
              "${mon-base-lib-sources}")
-#add_dependencies(base config logger network sensordata protocol)
 
 # +++++++++++++++++++ libaryes +++++++++++++++++++
 # +++++++++++++++++++ install some headers +++++++++++++++++++
@@ -264,7 +263,7 @@ IF( BUILD_COLLECTOR )
       daemons/collector/node/cnodes.cpp
       daemons/collector/protocol/ccollectorprotocol.cpp
       daemons/collector/main.cpp )
-  set(mon-collector-dependencies base config logger network protocol sensordata)
+  set(mon-collector-dependencies base config logger network protocol sensordata node)
   set(mon-collector-link-libraryes "${mon-collector-dependencies}")
   add_daemon(mon-collector
              "${mon-collector-dependencies}"

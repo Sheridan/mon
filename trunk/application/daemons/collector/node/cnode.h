@@ -10,6 +10,7 @@
 #include "daemons/collector/node/csensor.h"
 #include "libraryes/base/timer/ctimer.h"
 #include "libraryes/network/cclientsocket.h"
+#include "libraryes/node/cnode.h"
 
 namespace mon
 {
@@ -19,18 +20,16 @@ namespace collector
 {
 
 //! Удаленная нода
-class CNode : public mon::lib::network::CSocketClient,
-                    public CCollectorProtocol,
-                    public mon::lib::base::CTimer
+class CNode : public lib::node::CNode,
+              public mon::lib::network::CSocketClient,
+              public CCollectorProtocol,
+              public mon::lib::base::CTimer
 {
   MON_THREADED_FUNCTION_DECLARE(connect)
-  MON_READONLY_PROPERTY(std::string, name)
-  MON_MUTEX_DECLARE(node_sensors)
 public:
-  CNode(const std::string &name);
+  CNode(const std::string &nodeName);
   virtual ~CNode();
 private:
-  TSensors m_nodeSensors;
 
   void onTimer() final;
 
@@ -48,8 +47,6 @@ private:
   //! Вызывается при ответе на запрос статистики фрейма сенсора
   void incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) final;
 };
-
-typedef std::list<CNode *> TNodes;
 
 }
 }

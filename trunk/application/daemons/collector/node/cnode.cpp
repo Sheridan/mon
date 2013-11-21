@@ -13,15 +13,13 @@ namespace daemons
 namespace collector
 {
 
-CNode::CNode(const std::string &name)
-  : mon::lib::network::CSocketClient(),
+CNode::CNode(const std::string &nodeName)
+  : mon::lib::node::CNode(nodeName),
+    mon::lib::network::CSocketClient(),
     CCollectorProtocol(this),
-    mon::lib::base::CTimer(),
-    m_name(name)
+    mon::lib::base::CTimer()
 {
-  MON_MUTEX_INITIALIZE(node_sensors)
-  MON_LOG_DBG("Node " << m_name << " ");
-  mon::lib::config::CFolder *selfCfg  = MON_ST_CONFIG->folder("nodes")->folder(m_name);
+  mon::lib::config::CFolder *selfCfg  = MON_ST_CONFIG->folder("nodes")->folder(name());
   setTimeout   (selfCfg->folder("connection")->file("timeout")->get(MON_DEFAULT_CONNECT_TIMEOUT));
   setAddrRemote(selfCfg->folder("connection")->file("host")   ->get(std::string("localhost")));
   setPortRemote(selfCfg->folder("connection")->file("port")   ->get(MON_DEFAULT_COLLECTOR_LISTEN_PORT));
@@ -46,29 +44,19 @@ CNode::~CNode()
 {
   timerStop();
   MON_THREADED_FUNCTION_ABORT(connect)
-  MON_MUTEX_LOCK(node_sensors)
-  for(auto &sensor : m_nodeSensors)
-  {
-    delete sensor;
-  }
-  m_nodeSensors.clear();
-  MON_MUTEX_UNLOCK(node_sensors)
-  MON_MUTEX_DESTROY(node_sensors)
 }
 
 void CNode::onTimer()
 {
   if(isConnected())
   {
-    MON_MUTEX_LOCK(node_sensors)
-    for(CSensor *sensor : m_nodeSensors)
+    for(mon::lib::node::CSensor *sensor : sensors())
     {
       for(std::string &frameName : sensor->frames())
       {
         requestSensorFrameStatistic(sensor->name(), frameName);
       }
     }
-    MON_MUTEX_UNLOCK(node_sensors)
   }
 }
 
@@ -89,7 +77,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CNode, connect)
 void CNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
   MON_LOG_DBG("Collector connected to " << to_addr << ":" << to_port);
-  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(m_name)->file("password")->get(MON_DEFAULT_PASSWORD));
+  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(name())->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 
 void CNode::incommingMessage(const std::string &message)
@@ -125,14 +113,8 @@ void CNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *ms
 void CNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
-//  MON_LOG_DBG("Sensor name: " << msg->string().substr(0, index)
-//              << ", definition: " << msg->string().substr(index, msg->string().length()-1))
-  CSensor *rnSensor = new CSensor(msg->string().substr(0, index),
-                                                      msg->string().substr(index+1, msg->string().length()-1),
-                                                      this);
-  MON_MUTEX_LOCK(node_sensors)
-  m_nodeSensors.push_back(rnSensor);
-  MON_MUTEX_UNLOCK(node_sensors)
+  addSensor(msg->string().substr(0, index),
+            msg->string().substr(index+1, msg->string().length()-1));
 }
 
 void CNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)

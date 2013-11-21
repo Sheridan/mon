@@ -1,4 +1,6 @@
+#include "defines/st.h"
 #include "libraryes/node/cnode.h"
+
 namespace mon
 {
 namespace lib
@@ -6,8 +8,10 @@ namespace lib
 namespace node
 {
 
-CNode::CNode()
+CNode::CNode(const std::string &name)
+  : m_name(name)
 {
+  MON_LOG_DBG("Node `" << m_name << "` class");
   MON_MUTEX_INITIALIZE(sensors)
 }
 
@@ -45,6 +49,11 @@ void CNode::addSensor(const std::string &name, const std::string &definition)
   MON_MUTEX_LOCK(sensors)
   m_sensors.push_back(s);
   MON_MUTEX_UNLOCK(sensors)
+}
+
+TSensors &CNode::sensors()
+{
+  return m_sensors;
 }
 
 }
