@@ -1,11 +1,11 @@
-#include "libraryes/node/csensor.h"
-#include "libraryes/node/cnode.h"
+#include "libraryes/model/csensor.h"
+#include "libraryes/model/cnode.h"
 #include "libraryes/sensordata/parcers/cdefinitionparcer.h"
 namespace mon
 {
 namespace lib
 {
-namespace node
+namespace model
 {
 
 CSensor::CSensor(CNode *parent, const std::string &sensorName, const std::string &definitionText)

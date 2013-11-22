@@ -10,7 +10,7 @@
 #include "daemons/collector/node/csensor.h"
 #include "libraryes/base/timer/ctimer.h"
 #include "libraryes/network/cclientsocket.h"
-#include "libraryes/node/cnode.h"
+#include "libraryes/model/cnode.h"
 
 namespace mon
 {
@@ -20,7 +20,7 @@ namespace collector
 {
 
 //! Удаленная нода
-class CNode : public lib::node::CNode,
+class CNode : public lib::model::CNode,
               public mon::lib::network::CSocketClient,
               public CCollectorProtocol,
               public mon::lib::base::CTimer

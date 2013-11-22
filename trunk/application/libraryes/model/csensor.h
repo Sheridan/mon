@@ -9,7 +9,7 @@ namespace mon
 {
 namespace lib
 {
-namespace node
+namespace model
 {
 
 class CNode;

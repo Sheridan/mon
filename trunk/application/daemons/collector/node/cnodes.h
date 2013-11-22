@@ -22,7 +22,7 @@ public:
   //! Удаляет ноды из списка, рарывая подключение
   void unload();
 private:
-  mon::lib::node::TNodes m_nodes;
+  mon::lib::model::TNodes m_nodes;
 };
 
 }

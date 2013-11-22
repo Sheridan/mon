@@ -11,7 +11,7 @@ namespace collector
 {
 
 CSensor::CSensor(CNode *parentNode, const std::string &name, const std::string &definition)
-  : mon::lib::node::CSensor(parentNode, name, definition)
+  : mon::lib::model::CSensor(parentNode, name, definition)
 {}
 
 CSensor::~CSensor()

@@ -4,13 +4,13 @@
 #include <string>
 #include "defines/class-helper.h"
 #include "defines/mutex-helper.h"
-#include "libraryes/node/csensor.h"
+#include "libraryes/model/csensor.h"
 
 namespace mon
 {
 namespace lib
 {
-namespace node
+namespace model
 {
 
 class CNode

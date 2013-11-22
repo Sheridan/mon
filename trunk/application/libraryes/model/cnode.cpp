@@ -1,11 +1,11 @@
 #include "defines/st.h"
-#include "libraryes/node/cnode.h"
+#include "libraryes/model/cnode.h"
 
 namespace mon
 {
 namespace lib
 {
-namespace node
+namespace model
 {
 
 CNode::CNode(const std::string &name)

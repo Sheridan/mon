@@ -14,7 +14,7 @@ namespace collector
 {
 
 CNode::CNode(const std::string &nodeName)
-  : mon::lib::node::CNode(nodeName),
+  : mon::lib::model::CNode(nodeName),
     mon::lib::network::CSocketClient(),
     CCollectorProtocol(this),
     mon::lib::base::CTimer()
@@ -50,7 +50,7 @@ void CNode::onTimer()
 {
   if(isConnected())
   {
-    for(mon::lib::node::CSensor *sensor : sensors())
+    for(mon::lib::model::CSensor *sensor : sensors())
     {
       for(std::string &frameName : sensor->frames())
       {

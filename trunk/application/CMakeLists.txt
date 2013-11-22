@@ -142,28 +142,17 @@ add_mon_library(protocol
              "${mon-protocol-lib-sources}")
 
 # --------- node library --------------
-SET(mon-node-lib-headers
-    libraryes/node/csensor.h
-    libraryes/node/cnode.h
+SET(mon-model-lib-headers
+    libraryes/model/csensor.h
+    libraryes/model/cnode.h
     )
-SET(mon-node-lib-sources
-    libraryes/node/csensor.cpp
-    libraryes/node/cnode.cpp
-    libraryes/node/main.cpp )
-add_mon_library(node
-             "${mon-node-lib-headers}"
-             "${mon-node-lib-sources}")
-
-# --------- collector library --------------
-#MESSAGE ( STATUS "---> Processing `collector` library" )
-#SET(mon-collector-lib-headers
-#    )
-#SET(mon-collector-lib-sources
-#    libraryes/collector/main.cpp )
-#add_library(collector SHARED ${mon-collector-lib-headers} ${mon-collector-lib-sources})
-#target_link_libraries(collector ${GLOBAL_LINK_LIBS})
-##install_headers_with_subdirs("${mon-collector-lib-headers}")
-#install(TARGETS collector LIBRARY DESTINATION ${LIB_GLOBAL_TARGET})
+SET(mon-model-lib-sources
+    libraryes/model/csensor.cpp
+    libraryes/model/cnode.cpp
+    libraryes/model/main.cpp )
+add_mon_library(model
+             "${mon-model-lib-headers}"
+             "${mon-model-lib-sources}")
 
 # --------- base library --------------
 SET(mon-base-lib-headers
@@ -263,7 +252,7 @@ IF( BUILD_COLLECTOR )
       daemons/collector/node/cnodes.cpp
       daemons/collector/protocol/ccollectorprotocol.cpp
       daemons/collector/main.cpp )
-  set(mon-collector-dependencies base config logger network protocol sensordata node)
+  set(mon-collector-dependencies base config logger network protocol sensordata model)
   set(mon-collector-link-libraryes "${mon-collector-dependencies}")
   add_daemon(mon-collector
              "${mon-collector-dependencies}"
@@ -289,7 +278,7 @@ IF( BUILD_NODE )
       daemons/node/sensor/cframe.cpp
       daemons/node/sensor/csensorsmanager.cpp
       daemons/node/main.cpp )
-  set(mon-node-dependencies base config logger network protocol sensordata)
+  set(mon-node-dependencies base config logger network protocol sensordata model)
   set(mon-node-link-libraryes "${mon-node-dependencies}" dl)
   add_daemon(mon-node
              "${mon-node-dependencies}"
