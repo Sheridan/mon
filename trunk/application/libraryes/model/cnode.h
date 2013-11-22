@@ -1,5 +1,5 @@
-#ifndef ClibNODE_H
-#define ClibNODE_H
+#ifndef CNODE_H_LIB
+#define CNODE_H_LIB
 #include <list>
 #include <string>
 #include "defines/class-helper.h"
@@ -35,4 +35,4 @@ typedef std::list<CNode *> TNodes;
 }
 }
 }
-#endif // ClibNODE_H
+#endif // CNODE_H_LIB

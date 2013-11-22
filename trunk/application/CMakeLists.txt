@@ -145,10 +145,16 @@ add_mon_library(protocol
 SET(mon-model-lib-headers
     libraryes/model/csensor.h
     libraryes/model/cnode.h
+    libraryes/model/cnodes.h
+    libraryes/model/ccollector.h
+    libraryes/model/ccollectors.h
     )
 SET(mon-model-lib-sources
     libraryes/model/csensor.cpp
     libraryes/model/cnode.cpp
+    libraryes/model/cnodes.cpp
+    libraryes/model/ccollector.cpp
+    libraryes/model/ccollectors.cpp
     libraryes/model/main.cpp )
 add_mon_library(model
              "${mon-model-lib-headers}"

@@ -9,35 +9,26 @@ namespace daemons
 namespace collector
 {
 
-CNodes::CNodes() : mon::lib::base::CSingletonMember(MON_NODES_MANAGER_ST_MEMBER_ID)
+CNodes::CNodes()
+  : mon::lib::model::CNodes(),
+    mon::lib::base::CSingletonMember(MON_NODES_MANAGER_ST_MEMBER_ID)
 {}
 
 CNodes::~CNodes()
-{
-  unload();
-}
+{}
 
 void CNodes::load()
 {
   MON_LOG_DBG("Load nodes");
+  CNode *n;
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("nodes"))
   {
-    m_nodes.push_back(new CNode(folder->name()));
-  }
-  for(mon::lib::model::CNode *node : m_nodes)
-  {
-    static_cast<CNode *>(node)->connect();
+    n = new CNode(folder->name());
+    addNode(n);
+    n->connect();
   }
 }
 
-void CNodes::unload()
-{
-  for(mon::lib::model::CNode *node : m_nodes)
-  {
-    delete node;
-  }
-  m_nodes.clear();
-}
 
 }
 }

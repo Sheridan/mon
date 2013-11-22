@@ -5,6 +5,7 @@
 #include <string>
 #include "defines/class-helper.h"
 #include "libraryes/network/cclientsocket.h"
+#include "libraryes/model/ccollector.h"
 #include "daemons/node/protocol/cnodeprotocol.h"
 
 namespace mon
@@ -15,7 +16,10 @@ namespace node
 {
 
 //! Удаленный коллектор
-class CCollector : public mon::lib::network::CSocketClient, public CNodeProtocol
+class CCollector :
+    public mon::lib::model::CCollector,
+    public mon::lib::network::CSocketClient,
+    public CNodeProtocol
 {
   public:
     CCollector(int socketDescriptor, const std::string &addr_from, const int & port_from);
@@ -36,7 +40,7 @@ class CCollector : public mon::lib::network::CSocketClient, public CNodeProtocol
     void requestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg) final;
 };
 
-typedef std::list<CCollector *> TCollectors;
+
 
 }
 }

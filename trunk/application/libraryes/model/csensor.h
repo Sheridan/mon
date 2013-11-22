@@ -1,5 +1,5 @@
-#ifndef CSENSOR_H
-#define CSENSOR_H
+#ifndef CSENSOR_H_LIB
+#define CSENSOR_H_LIB
 #include <string>
 #include <list>
 #include "defines/class-helper.h"
@@ -32,4 +32,4 @@ typedef std::list<CSensor *> TSensors;
 }
 }
 }
-#endif // CSENSOR_H
+#endif // CSENSOR_H_LIB
