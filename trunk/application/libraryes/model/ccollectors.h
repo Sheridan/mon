@@ -10,6 +10,7 @@ namespace lib
 namespace model
 {
 
+//! Модель коллекторов
 class CCollectors
 {
     MON_MUTEX_DECLARE(collectors)

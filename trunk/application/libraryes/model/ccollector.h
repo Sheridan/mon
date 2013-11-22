@@ -12,6 +12,7 @@ namespace lib
 namespace model
 {
 
+//! Модель коллектора
 class CCollector : public CNodes
 {
     MON_READONLY_PROPERTY(std::string, name)
@@ -20,6 +21,7 @@ class CCollector : public CNodes
     virtual ~CCollector();
 };
 
+//! Список коллекторов
 typedef std::list<CCollector *> TCollectors;
 
 }

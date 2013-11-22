@@ -13,6 +13,7 @@ namespace lib
 namespace model
 {
 
+//! Модель ноды
 class CNode
 {
     MON_READONLY_PROPERTY(std::string, name)
@@ -30,6 +31,7 @@ class CNode
     TSensors m_sensors;
 };
 
+//! Список нод
 typedef std::list<CNode *> TNodes;
 
 }

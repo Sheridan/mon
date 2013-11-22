@@ -14,6 +14,7 @@ namespace model
 
 class CNode;
 
+//! Модель сенсора
 class CSensor
 {
     MON_READONLY_PROPERTY(std::string, name)
@@ -27,6 +28,7 @@ class CSensor
 
 };
 
+//! Список сенсоров
 typedef std::list<CSensor *> TSensors;
 
 }

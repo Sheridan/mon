@@ -12,6 +12,7 @@ namespace lib
 namespace model
 {
 
+//! Модель нод
 class CNodes
 {
     MON_MUTEX_DECLARE(nodes)

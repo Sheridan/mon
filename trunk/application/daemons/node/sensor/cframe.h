@@ -18,7 +18,10 @@ using TFGetStatistics       = const char        *(*)(const char *);
 using TFGetFrameAvialable   = const bool         (*)(const char *);
 class CSensor;
 
-class CFrame : mon::lib::base::CTimer, mon::lib::base::CSystemRights
+//! Фрейм ноды, непосредственно берущий данные из сенсора
+class CFrame :
+    mon::lib::base::CTimer,
+    mon::lib::base::CSystemRights
 {
     MON_READONLY_PROPERTY(std::string, name)
   public:
