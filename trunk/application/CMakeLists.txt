@@ -250,13 +250,13 @@ IF( BUILD_COLLECTOR )
       daemons/collector/node/cnode.h
       daemons/collector/node/csensor.h
       daemons/collector/node/cnodes.h
-      daemons/collector/protocol/ccollectorprotocol.h
+      daemons/collector/protocol/cprotocol.h
       daemons/collector/collector_st.h)
   SET(mon-collector-sources
       daemons/collector/node/cnode.cpp
       daemons/collector/node/csensor.cpp
       daemons/collector/node/cnodes.cpp
-      daemons/collector/protocol/ccollectorprotocol.cpp
+      daemons/collector/protocol/cprotocol.cpp
       daemons/collector/main.cpp )
   set(mon-collector-dependencies base config logger network protocol sensordata model)
   set(mon-collector-link-libraryes "${mon-collector-dependencies}")
@@ -271,7 +271,7 @@ IF( BUILD_NODE )
   SET(mon-node-headers
       daemons/node/collector/ccollectors.h
       daemons/node/collector/ccollector.h
-      daemons/node/protocol/cnodeprotocol.h
+      daemons/node/protocol/cprotocol.h
       daemons/node/sensor/csensor.h
       daemons/node/sensor/cframe.h
       daemons/node/sensor/csensorsmanager.h
@@ -279,7 +279,7 @@ IF( BUILD_NODE )
   SET(mon-node-sources
       daemons/node/collector/ccollectors.cpp
       daemons/node/collector/ccollector.cpp
-      daemons/node/protocol/cnodeprotocol.cpp
+      daemons/node/protocol/cprotocol.cpp
       daemons/node/sensor/csensor.cpp
       daemons/node/sensor/cframe.cpp
       daemons/node/sensor/csensorsmanager.cpp
@@ -296,11 +296,15 @@ ENDIF( BUILD_NODE )
 IF( BUILD_STORAGE )
   SET(mon-storage-headers
       daemons/storage/storage_st.h
+      daemons/storage/protocol/cprotocol.h
+      daemons/storage/database/cdatabase.h
       daemons/storage/cstorage.h)
   SET(mon-storage-sources
       daemons/storage/cstorage.cpp
+      daemons/storage/protocol/cprotocol.cpp
+      daemons/storage/database/cdatabase.cpp
       daemons/storage/main.cpp )
-  set(mon-storage-dependencies base config logger network protocol sensordata)
+  set(mon-storage-dependencies base config logger network protocol sensordata model)
   set(mon-storage-link-libraryes "${mon-storage-dependencies}" dl)
   add_daemon(mon-storage
              "${mon-storage-dependencies}"

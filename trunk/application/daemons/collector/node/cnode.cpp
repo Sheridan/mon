@@ -16,7 +16,7 @@ namespace collector
 CNode::CNode(const std::string &nodeName)
   : mon::lib::model::CNode(nodeName),
     mon::lib::network::CSocketClient(),
-    CCollectorProtocol(this),
+    CProtocol(this),
     mon::lib::base::CTimer()
 {
   mon::lib::config::CFolder *selfCfg  = MON_ST_CONFIG->folder("nodes")->folder(name());
@@ -77,7 +77,7 @@ MON_THREADED_FUNCTION_IMPLEMENT(CNode, connect)
 void CNode::connected(const std::string &to_addr, const unsigned short &to_port)
 {
   MON_LOG_DBG("Collector connected to " << to_addr << ":" << to_port);
-  CCollectorProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(name())->file("password")->get(MON_DEFAULT_PASSWORD));
+  CProtocol::connect(MON_ST_CONFIG->folder("nodes")->folder(name())->file("password")->get(MON_DEFAULT_PASSWORD));
 }
 
 void CNode::incommingMessage(const std::string &message)

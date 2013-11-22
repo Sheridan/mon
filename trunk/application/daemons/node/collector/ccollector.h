@@ -6,7 +6,7 @@
 #include "defines/class-helper.h"
 #include "libraryes/network/cclientsocket.h"
 #include "libraryes/model/ccollector.h"
-#include "daemons/node/protocol/cnodeprotocol.h"
+#include "daemons/node/protocol/cprotocol.h"
 
 namespace mon
 {
@@ -19,7 +19,7 @@ namespace node
 class CCollector :
     public mon::lib::model::CCollector,
     public mon::lib::network::CSocketClient,
-    public CNodeProtocol
+    public CProtocol
 {
   public:
     CCollector(int socketDescriptor, const std::string &addr_from, const int & port_from);

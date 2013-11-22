@@ -16,7 +16,8 @@ namespace collector
 class CNode;
 
 //! Сенсор удаленной ноды
-class CSensor : public mon::lib::model::CSensor
+class CSensor :
+    public mon::lib::model::CSensor
 {
   public:
     CSensor(CNode *parentNode, const std::string &name, const std::string &definition);

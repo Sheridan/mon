@@ -11,11 +11,11 @@ namespace collector
 {
 
 //! Реализация сетевого протокола для коллектора
-class CCollectorProtocol : public mon::lib::protocol::CProtocol
+class CProtocol : public mon::lib::protocol::CProtocol
 {
   public:
-    CCollectorProtocol(mon::lib::network::CSocket *socket);
-    ~CCollectorProtocol();
+    CProtocol(mon::lib::network::CSocket *socket);
+    ~CProtocol();
     //! Запрос подключения
     void connect (const std::string &password);
     //! Запрос списка сенсоров ноды

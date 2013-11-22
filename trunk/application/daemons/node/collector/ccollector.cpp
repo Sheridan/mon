@@ -14,7 +14,7 @@ namespace node
 CCollector::CCollector(int socketDescriptor, const std::string &addr_from, const int &port_from)
   : mon::lib::model::CCollector("collector"),
     mon::lib::network::CSocketClient(socketDescriptor, addr_from, port_from),
-    CNodeProtocol(this)
+    CProtocol(this)
 {
   connected(addrRemote(), portRemote());
 }

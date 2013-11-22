@@ -6,7 +6,7 @@
 #include "defines/threads-helper.h"
 #include "defines/class-helper.h"
 #include "defines/mutex-helper.h"
-#include "daemons/collector/protocol/ccollectorprotocol.h"
+#include "daemons/collector/protocol/cprotocol.h"
 #include "daemons/collector/node/csensor.h"
 #include "libraryes/base/timer/ctimer.h"
 #include "libraryes/network/cclientsocket.h"
@@ -22,7 +22,7 @@ namespace collector
 //! Удаленная нода
 class CNode : public lib::model::CNode,
               public mon::lib::network::CSocketClient,
-              public CCollectorProtocol,
+              public CProtocol,
               public mon::lib::base::CTimer
 {
   MON_THREADED_FUNCTION_DECLARE(connect)
