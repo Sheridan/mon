@@ -2,8 +2,8 @@
 #include <dlfcn.h>
 #include "defines/st.h"
 #include "defines/signals-helper.h"
-#include "libraryes/sensordata/parcers/cdefinitionparcer.h"
 #include "daemons/node/sensor/csensor.h"
+#include "daemons/node/sensor/csensorsmanager.h"
 
 namespace mon
 {
@@ -12,19 +12,19 @@ namespace daemons
 namespace node
 {
 
-CSensor::CSensor(const std::string &i_name)
-  : m_name(i_name)
+CSensor::CSensor(CSensors *parent, const std::string &name)
+  : mon::lib::model::CSensor(parent, name)
 {
   m_handle            = nullptr;
   initSensor          = nullptr;
   getName             = nullptr;
   getDefinition       = nullptr;
   getDefinitionLength = nullptr;
-  MON_LOG_DBG("Loading sensor '" MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so'");
-  m_handle = dlopen(std::string(MON_GENERATED_SENSORS_PATH "/lib"+m_name+".so").c_str(), RTLD_NOW);
+  MON_LOG_DBG("Loading sensor '" MON_GENERATED_SENSORS_PATH "/lib"+name+".so'");
+  m_handle = dlopen(std::string(MON_GENERATED_SENSORS_PATH "/lib"+name+".so").c_str(), RTLD_NOW);
   if (!m_handle)
   {
-    MON_LOG_ERR("Sensor " << m_name << " loading error: " << dlerror());
+    MON_LOG_ERR("Sensor " << name << " loading error: " << dlerror());
     MON_ABORT;
   }
 }
@@ -37,7 +37,7 @@ CSensor::~CSensor()
 #define MON_IMPORT_ERROR(_name) \
   if ((error = dlerror()) != nullptr) \
   { \
-    MON_LOG_ERR("Error importing function `" #_name "` from sensor `" << m_name << "`: " << error); \
+    MON_LOG_ERR("Error importing function `" #_name "` from sensor `" << name() << "`: " << error); \
     MON_ABORT; \
   }
 #define MON_IMPORT(_type, _name) _name = (_type) dlsym(m_handle, #_name); MON_IMPORT_ERROR(_name);
@@ -55,11 +55,13 @@ void CSensor::load()
     MON_IMPORT(TFGetDefinitionLength, getDefinitionLength);
     MON_IMPORT(TFGetStatistics      , getStatistics      );
     MON_IMPORT(TFGetFrameAvialable  , getFrameAvialable  );
-    initSensor(MON_ST_LOGGER, MON_ST_CONFIG->folder("sensors")->folder(m_name));
-    m_definition = new mon::lib::sensordata::CDefinition();
-    mon::lib::sensordata::CDefinitionParcer parcer = {m_definition, getDefinition()};
-    parcer.parce();
-    for(auto &frame : m_definition->frames())
+    initSensor(MON_ST_LOGGER, MON_ST_CONFIG->folder("sensors")->folder(name()));
+    setDefinition(getDefinition());
+    if(name().compare(getName()) != 0)
+    {
+      MON_LOG_ERR("Detected try to load sensor " << getName() << ", renamed to " << name());
+    }
+    for(auto &frame : definition()->frames())
     {
       m_frames[frame] = new CFrame(this, getStatistics, getFrameAvialable, frame);
     }
@@ -81,7 +83,6 @@ void CSensor::unload()
     getDefinitionLength = nullptr;
     dlclose(m_handle);
     m_handle = nullptr;
-    delete m_definition;
   }
 }
 

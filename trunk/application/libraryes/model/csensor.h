@@ -23,13 +23,14 @@ class CSensor
     MON_READONLY_PROPERTY(std::string, definitionText)
   public:
     CSensor(CNode *parent, const std::string &sensorName, const std::string &definitionText);
+    CSensor(CNode *parent, const std::string &sensorName);
     virtual ~CSensor();
     mon::lib::sensordata::TFramesNames &frames();
 
-};
+  protected:
+    void setDefinition(const std::string &def);
 
-//! Список сенсоров
-typedef std::list<CSensor *> TSensors;
+};
 
 }
 }

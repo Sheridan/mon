@@ -2,7 +2,11 @@
 #define CITEMS_H_MODEL
 #include <list>
 #include <string>
+#include <assert.h>
+#include "defines/st.h"
 #include "defines/mutex-helper.h"
+#include "defines/logger-helper.h"
+#include "defines/signals-helper.h"
 
 namespace mon
 {
@@ -39,17 +43,25 @@ class CItems
 
     T *item(const std::string &name)
     {
-      T *result;
+      T *result = nullptr;
       MON_MUTEX_LOCK(items);
       for(T *tmpItem : m_items)
       {
-        if(name.compare(tmpItem->name()))
+        MON_LOG_DBG(tmpItem->name())
+        if(name.compare(tmpItem->name()) == 0)
         {
           result = tmpItem;
           break;
         }
       }
       MON_MUTEX_UNLOCK(items);
+      #ifdef MON_DEBUG
+      if(result == nullptr)
+      {
+        MON_LOG_ERR("Some troubles with items... Pointer to null.");
+        MON_ABORT;
+      }
+      #endif
       return result;
     }
 

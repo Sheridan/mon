@@ -1,13 +1,13 @@
 /* %Id% */
 #ifndef CSENSOR_H
 #define CSENSOR_H
-#include <map>
 #include <string>
 #include "defines/class-helper.h"
 #include "libraryes/logger/logger.h"
 #include "libraryes/config/config.h"
 #include "libraryes/sensordata/data/cdefinition.h"
 #include "daemons/node/sensor/cframe.h"
+#include "libraryes/model/csensor.h"
 
 namespace mon
 {
@@ -16,18 +16,18 @@ namespace daemons
 namespace node
 {
 
+class CSensors;
+
 using TFInitSensor          = void               (*)(mon::lib::logger::CLogger *, mon::lib::config::CFolder *);
 using TFGetName             = const char        *(*)(void);
 using TFGetDefinition       = const char        *(*)(void);
 using TFGetDefinitionLength = const unsigned int (*)(void);
 
 //! Сенсор ноды, посредник между нодой и библиотекой
-class CSensor
+class CSensor : public mon::lib::model::CSensor
 {
-    MON_READONLY_PROPERTY(std::string, name)
-    MON_READONLY_PROPERTY(mon::lib::sensordata::CDefinition *, definition)
   public:
-    CSensor(const std::string &i_name);
+    CSensor(CSensors *parent, const std::string &name);
     ~CSensor();
     void load();
     void unload();
@@ -44,7 +44,6 @@ class CSensor
 
 };
 
-typedef std::map<std::string, CSensor *> TSensorsMap;
 
 }
 }

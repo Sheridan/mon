@@ -10,7 +10,8 @@ namespace node
 {
 
 CCollectors::CCollectors()
-  : mon::lib::network::CSocketServer(),
+  : mon::lib::model::CCollectors(),
+    mon::lib::network::CSocketServer(),
     mon::lib::base::CSingletonMember(MON_COLLECTORS_MANAGER_ST_MEMBER_ID)
 {}
 

@@ -4,6 +4,7 @@
 #include "defines/protocol-control.h"
 #include "libraryes/base/singleton/csingletonmember.h"
 #include "daemons/node/sensor/csensor.h"
+#include "libraryes/model/cnode.h"
 
 namespace mon
 {
@@ -13,7 +14,9 @@ namespace node
 {
 
 //! Менеджер сенсоров ноды
-class CSensors : public mon::lib::base::CSingletonMember
+class CSensors :
+    public mon::lib::base::CSingletonMember,
+    public mon::lib::model::CNode
 {
   public:
     CSensors();
@@ -21,8 +24,6 @@ class CSensors : public mon::lib::base::CSingletonMember
     void load();
     std::string getGensorsNamesList(const char &delimiter);
     CSensor *sensor(const std::string &name);
-  private:
-    TSensorsMap m_sensors;
 };
 
 }

@@ -3,7 +3,6 @@
 #include <list>
 #include <string>
 #include "defines/class-helper.h"
-#include "defines/mutex-helper.h"
 #include "libraryes/model/csensor.h"
 #include "libraryes/model/citems.h"
 
@@ -18,14 +17,13 @@ namespace model
 class CNode : public CItems<CSensor>
 {
     MON_READONLY_PROPERTY(std::string, name)
-    MON_MUTEX_DECLARE(sensors)
   public:
     CNode(const std::string &name);
     virtual ~CNode();
     CSensor *sensor(const std::string &name);
 
   protected:
-    void addSensor(const std::string &name, const std::string &definition);
+    void addSensor(const std::string &sensorName, const std::string &definitionText);
 };
 
 }

@@ -10,12 +10,18 @@ namespace model
 
 CSensor::CSensor(CNode *parent, const std::string &sensorName, const std::string &definitionText)
   : m_name(sensorName),
-    m_parentNode(parent),
-    m_definitionText(definitionText)
+    m_parentNode(parent)
 {
-  m_definition = new mon::lib::sensordata::CDefinition();
-  mon::lib::sensordata::CDefinitionParcer p = {m_definition, m_definitionText};
-  p.parce();
+  setDefinition(m_definitionText);
+}
+
+CSensor::CSensor(CNode *parent, const std::string &sensorName)
+  : m_name(sensorName),
+    m_parentNode(parent),
+    m_definition(nullptr),
+    m_definitionText("")
+{
+
 }
 
 CSensor::~CSensor()
@@ -26,6 +32,15 @@ CSensor::~CSensor()
 lib::sensordata::TFramesNames &CSensor::frames()
 {
   return m_definition->frames();
+}
+
+void CSensor::setDefinition(const std::string &def)
+{
+  m_definitionText = def;
+  MON_LOG_DBG("--------------<<<<<<<<<<<<" << m_definitionText)
+  m_definition = new mon::lib::sensordata::CDefinition();
+  mon::lib::sensordata::CDefinitionParcer p = {m_definition, m_definitionText};
+  p.parce();
 }
 
 

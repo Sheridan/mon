@@ -16,11 +16,11 @@
   #else
     #define LOG_FL
   #endif
-#ifdef LOG_PF_ENABLED
-  #define LOG_PF << "Function: " << __PRETTY_FUNCTION__ << "; "
-#else
-  #define LOG_PF
-#endif
+  #ifdef LOG_PF_ENABLED
+    #define LOG_PF << "Function: " << __PRETTY_FUNCTION__ << "; "
+  #else
+    #define LOG_PF
+  #endif
   #define MON_LOG(_message,_type) \
     MON_ST_LOGGER->log(mon::lib::logger::CLogMessage(_type) MON_LOG_PREFIX LOG_FL LOG_PF << "Message: " << _message);
 #else
