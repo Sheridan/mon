@@ -24,7 +24,7 @@ void CNodes::load()
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("nodes"))
   {
     n = new CNode(folder->name());
-    addNode(n);
+    add(n);
     n->connect();
   }
 }

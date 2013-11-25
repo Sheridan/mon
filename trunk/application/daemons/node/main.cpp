@@ -27,7 +27,7 @@ int main (int argc, char* argv[])
 
   MON_ST_APPEND_MEMBER(mon::daemons::node::CCollectors);
   MON_ST_NODE_COLLECTOR_SOCKET->listen();
-  MON_ST_APPEND_MEMBER(mon::daemons::node::CSensorsManager);
+  MON_ST_APPEND_MEMBER(mon::daemons::node::CSensors);
   MON_ST_SENSORS_MANAGER->load();
 
   MON_SIGNAL_LOOP;

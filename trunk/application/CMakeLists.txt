@@ -141,8 +141,9 @@ add_mon_library(protocol
              "${mon-protocol-lib-headers}"
              "${mon-protocol-lib-sources}")
 
-# --------- node library --------------
+# --------- model library --------------
 SET(mon-model-lib-headers
+    libraryes/model/citems.h
     libraryes/model/csensor.h
     libraryes/model/cnode.h
     libraryes/model/cnodes.h
@@ -150,6 +151,7 @@ SET(mon-model-lib-headers
     libraryes/model/ccollectors.h
     )
 SET(mon-model-lib-sources
+    libraryes/model/citems.cpp
     libraryes/model/csensor.cpp
     libraryes/model/cnode.cpp
     libraryes/model/cnodes.cpp

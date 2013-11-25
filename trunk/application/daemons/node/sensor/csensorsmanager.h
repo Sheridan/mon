@@ -13,11 +13,11 @@ namespace node
 {
 
 //! Менеджер сенсоров ноды
-class CSensorsManager : public mon::lib::base::CSingletonMember
+class CSensors : public mon::lib::base::CSingletonMember
 {
   public:
-    CSensorsManager();
-    ~CSensorsManager();
+    CSensors();
+    ~CSensors();
     void load();
     std::string getGensorsNamesList(const char &delimiter);
     CSensor *sensor(const std::string &name);

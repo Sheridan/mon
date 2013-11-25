@@ -5,6 +5,7 @@
 #include "defines/class-helper.h"
 #include "defines/mutex-helper.h"
 #include "libraryes/model/csensor.h"
+#include "libraryes/model/citems.h"
 
 namespace mon
 {
@@ -14,7 +15,7 @@ namespace model
 {
 
 //! Модель ноды
-class CNode
+class CNode : public CItems<CSensor>
 {
     MON_READONLY_PROPERTY(std::string, name)
     MON_MUTEX_DECLARE(sensors)

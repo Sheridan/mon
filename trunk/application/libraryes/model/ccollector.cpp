@@ -8,7 +8,8 @@ namespace model
 {
 
 CCollector::CCollector(const std::string &name)
-  : m_name(name)
+  : CItems<CNode>(),
+    m_name(name)
 {
 }
 

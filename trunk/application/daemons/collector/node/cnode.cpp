@@ -50,11 +50,12 @@ void CNode::onTimer()
 {
   if(isConnected())
   {
-    for(mon::lib::model::CSensor *sensor : sensors())
+    for(std::string &sensorName : names())
     {
-      for(std::string &frameName : sensor->frames())
+      mon::lib::model::CSensor *s = sensor(sensorName);
+      for(std::string &frameName : s->frames())
       {
-        requestSensorFrameStatistic(sensor->name(), frameName);
+        requestSensorFrameStatistic(sensorName, frameName);
       }
     }
   }

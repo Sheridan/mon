@@ -1,9 +1,9 @@
 #ifndef CCOLLECTOR_H_LIB
 #define CCOLLECTOR_H_LIB
-#include <list>
 #include <string>
 #include "defines/class-helper.h"
-#include "libraryes/model/cnodes.h"
+#include "libraryes/model/cnode.h"
+#include "libraryes/model/citems.h"
 
 namespace mon
 {
@@ -13,16 +13,13 @@ namespace model
 {
 
 //! Модель коллектора
-class CCollector : public CNodes
+class CCollector : public CItems<CNode>
 {
     MON_READONLY_PROPERTY(std::string, name)
   public:
     CCollector(const std::string &name);
     virtual ~CCollector();
 };
-
-//! Список коллекторов
-typedef std::list<CCollector *> TCollectors;
 
 }
 }

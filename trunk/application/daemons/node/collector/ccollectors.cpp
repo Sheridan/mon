@@ -27,7 +27,7 @@ void CCollectors::listen()
 mon::lib::network::CSocketClient * CCollectors::incommingConnection(const int &clientDescriptor, const std::string &addr_from, const int & port_from)
 {
   CCollector *c = new CCollector(clientDescriptor, addr_from, port_from);
-  addCollector(c);
+  add(c);
   return c;
 }
 

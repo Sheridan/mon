@@ -10,15 +10,15 @@ namespace daemons
 namespace node
 {
 
-CSensorsManager::CSensorsManager() : mon::lib::base::CSingletonMember(MON_SENSORS_MANAGER_ST_MEMBER_ID)
+CSensors::CSensors() : mon::lib::base::CSingletonMember(MON_SENSORS_MANAGER_ST_MEMBER_ID)
 {
 }
 
-CSensorsManager::~CSensorsManager()
+CSensors::~CSensors()
 {
 }
 
-void CSensorsManager::load()
+void CSensors::load()
 {
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("sensors"))
   {
@@ -28,7 +28,7 @@ void CSensorsManager::load()
   }
 }
 
-std::string CSensorsManager::getGensorsNamesList(const char &delimiter)
+std::string CSensors::getGensorsNamesList(const char &delimiter)
 {
   std::string result;
   for(auto &sensor : m_sensors)
@@ -38,7 +38,7 @@ std::string CSensorsManager::getGensorsNamesList(const char &delimiter)
   return result.substr(0, result.length()-1);
 }
 
-CSensor *CSensorsManager::sensor(const std::string &name)
+CSensor *CSensors::sensor(const std::string &name)
 {
   if(m_sensors.count(name) == 0)
   {

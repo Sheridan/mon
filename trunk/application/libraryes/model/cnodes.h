@@ -1,9 +1,8 @@
 #ifndef CNODES_H_LIB
 #define CNODES_H_LIB
 #include <string>
-#include "defines/class-helper.h"
-#include "defines/mutex-helper.h"
 #include "libraryes/model/cnode.h"
+#include "libraryes/model/citems.h"
 
 namespace mon
 {
@@ -13,16 +12,12 @@ namespace model
 {
 
 //! Модель нод
-class CNodes
+class CNodes : public CItems<CNode>
 {
-    MON_MUTEX_DECLARE(nodes)
   public:
     CNodes();
     virtual ~CNodes();
     CNode *node(const std::string &name);
-
-  protected:
-    void addNode(CNode *node);
 
   private:
     TNodes m_nodes;
