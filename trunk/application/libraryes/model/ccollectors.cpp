@@ -16,6 +16,11 @@ CCollectors::~CCollectors()
 {
 }
 
+CCollector *CCollectors::collector(const std::string &name)
+{
+  return static_cast<CCollector *>(item(name));
+}
+
 }
 }
 }

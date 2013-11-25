@@ -41,15 +41,16 @@ class CItems
     {
       T *result;
       MON_MUTEX_LOCK(items);
-      for(T *i : m_items)
+      for(T *tmpItem : m_items)
       {
-        if(name.compare(i->name()))
+        if(name.compare(tmpItem->name()))
         {
-          result = i;
+          result = tmpItem;
           break;
         }
       }
       MON_MUTEX_UNLOCK(items);
+      return result;
     }
 
     TNames names()

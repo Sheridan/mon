@@ -20,12 +20,12 @@ CNodes::~CNodes()
 void CNodes::load()
 {
   MON_LOG_DBG("Load nodes");
-  CNode *n;
+  CNode *tmpNode;
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("nodes"))
   {
-    n = new CNode(folder->name());
-    add(n);
-    n->connect();
+    tmpNode = new CNode(folder->name());
+    add(tmpNode);
+    tmpNode->connect();
   }
 }
 

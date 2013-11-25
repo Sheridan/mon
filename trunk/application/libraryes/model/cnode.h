@@ -26,14 +26,7 @@ class CNode : public CItems<CSensor>
 
   protected:
     void addSensor(const std::string &name, const std::string &definition);
-    TSensors &sensors();
-
-  private:
-    TSensors m_sensors;
 };
-
-//! Список нод
-typedef std::list<CNode *> TNodes;
 
 }
 }

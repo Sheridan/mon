@@ -16,6 +16,7 @@ class CCollectors : public CItems<CCollector>
   public:
     CCollectors();
     virtual ~CCollectors();
+    CCollector *collector(const std::string &name);
 };
 
 }

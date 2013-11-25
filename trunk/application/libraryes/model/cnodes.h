@@ -18,9 +18,6 @@ class CNodes : public CItems<CNode>
     CNodes();
     virtual ~CNodes();
     CNode *node(const std::string &name);
-
-  private:
-    TNodes m_nodes;
 };
 
 }

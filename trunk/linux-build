@@ -3,8 +3,9 @@
 debug="OFF"
 use_clang="OFF"
 verbose_build="OFF"
+delete_before_build=0
 opt_root_path="/tmp/mon"
-while getopts "dvchr:" opt
+while getopts "dvchmr:" opt
 do
   case $opt in
     d)
@@ -18,6 +19,9 @@ do
       ;;
     r)
       opt_root_path=${OPTARG}
+      ;;
+    m)
+      delete_before_build=1
       ;;
     h)
       echo "-d	Build debug"
@@ -53,7 +57,10 @@ function build()
   path=$1
   object_build_path="$console_build_path/$path"
   echo "------------------- Building ${path} in ${object_build_path} -------------------"
-  rm -rf ${object_build_path}
+  if (($delete_before_build == 1))
+  then
+    rm -vrf "${object_build_path}"
+  fi
   object_path="$current_path/$path"
   mkdir -p $object_build_path
   cd $object_build_path
@@ -65,6 +72,11 @@ function build()
 
 mkdir -p $console_build_path
 mkdir -p $install_path
+if (($delete_before_build == 1))
+then
+  rm -vrf "${install_path}/bin"
+  rm -vrf "${install_path}/lib"
+fi
 build "application"
 build "sensors/cpu"
 build "sensors/memory"
