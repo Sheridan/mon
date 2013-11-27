@@ -54,7 +54,7 @@ void CNode::onTimer()
     for(std::string &sensorName : names())
     {
       tmpSensor = sensor(sensorName);
-      for(std::string &frameName : tmpSensor->frames())
+      for(std::string &frameName : tmpSensor->definition()->frames())
       {
         requestSensorFrameStatistic(sensorName, frameName);
       }
@@ -120,7 +120,6 @@ void CNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *ms
 void CNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
-  MON_LOG_DBG("@@@@@@@@@@@@@@@<<<" << msg->string().substr(index+1, msg->string().length()-1))
   CSensor *s = new CSensor(this,
                            msg->string().substr(0, index),
                            msg->string().substr(index+1, msg->string().length()-1));

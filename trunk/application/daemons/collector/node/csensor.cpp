@@ -12,9 +12,7 @@ namespace collector
 
 CSensor::CSensor(CNode *parentNode, const std::string &nodeName, const std::string &nodeDefinition)
   : mon::lib::model::CSensor(parentNode, nodeName, nodeDefinition)
-{
-  MON_LOG_DBG("!!!!!!!!!!!!!!!!" << nodeDefinition)
-}
+{}
 
 CSensor::~CSensor()
 {}

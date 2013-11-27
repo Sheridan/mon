@@ -19,16 +19,18 @@ class CSensor
 {
     MON_READONLY_PROPERTY(std::string, name)
     MON_READONLY_PROPERTY(CNode *, parentNode)
-    MON_READONLY_PROPERTY(mon::lib::sensordata::CDefinition *, definition)
     MON_READONLY_PROPERTY(std::string, definitionText)
   public:
     CSensor(CNode *parent, const std::string &sensorName, const std::string &definitionText);
     CSensor(CNode *parent, const std::string &sensorName);
     virtual ~CSensor();
-    mon::lib::sensordata::TFramesNames &frames();
+    mon::lib::sensordata::CDefinition *definition();
 
   protected:
     void setDefinition(const std::string &def);
+
+  private:
+    mon::lib::sensordata::CDefinition *m_definition;
 
 };
 
