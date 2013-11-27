@@ -32,6 +32,7 @@ public:
 private:
 
   void onTimer() final;
+  CSensor *sensor(const std::string &name);
 
   //! Вызывается при успешном коннекте сокета к ноде, инициализирует обмен данными по протоколу
   void connected(const std::string &to_addr, const unsigned short &to_port) final;

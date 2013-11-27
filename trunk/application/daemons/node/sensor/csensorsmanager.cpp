@@ -24,9 +24,9 @@ void CSensors::load()
 {
   MON_OPTION_FOREACH_FOLDER(folder, MON_ST_CONFIG->folder("sensors"))
   {
-    CSensor *tmpSensor = new CSensor(this, folder->name());
-    add(tmpSensor);
-    tmpSensor->load();
+    CSensor *s = new CSensor(this, folder->name());
+    add(s);
+    s->load();
   }
 }
 

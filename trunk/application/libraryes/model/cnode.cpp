@@ -23,12 +23,6 @@ CSensor *CNode::sensor(const std::string &name)
   return static_cast<CSensor *>(item(name));
 }
 
-void CNode::addSensor(const std::string &sensorName, const std::string &definitionText)
-{
-  CSensor *s = new CSensor(this, sensorName, definitionText);
-  add(s);
-}
-
 }
 }
 }

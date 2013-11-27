@@ -47,7 +47,7 @@ class CItems
       MON_MUTEX_LOCK(items);
       for(T *tmpItem : m_items)
       {
-        MON_LOG_DBG(tmpItem->name())
+        MON_LOG_DBG("item get " << tmpItem->name())
         if(name.compare(tmpItem->name()) == 0)
         {
           result = tmpItem;
@@ -71,11 +71,12 @@ class CItems
     }
 
   protected:
-    void add(T *i)
+    void add(T *incomingItem)
     {
       MON_MUTEX_LOCK(items);
-      m_items.push_back(i);
-      m_names.push_back(i->name());
+      MON_LOG_DBG("item add " << incomingItem->name())
+      m_items.push_back(incomingItem);
+      m_names.push_back(incomingItem->name());
       MON_MUTEX_UNLOCK(items);
     }
 

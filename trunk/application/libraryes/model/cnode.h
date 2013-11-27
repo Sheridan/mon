@@ -21,9 +21,6 @@ class CNode : public CItems<CSensor>
     CNode(const std::string &name);
     virtual ~CNode();
     CSensor *sensor(const std::string &name);
-
-  protected:
-    void addSensor(const std::string &sensorName, const std::string &definitionText);
 };
 
 }

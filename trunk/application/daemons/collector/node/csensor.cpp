@@ -10,9 +10,11 @@ namespace daemons
 namespace collector
 {
 
-CSensor::CSensor(CNode *parentNode, const std::string &name, const std::string &definition)
-  : mon::lib::model::CSensor(parentNode, name, definition)
-{}
+CSensor::CSensor(CNode *parentNode, const std::string &nodeName, const std::string &nodeDefinition)
+  : mon::lib::model::CSensor(parentNode, nodeName, nodeDefinition)
+{
+  MON_LOG_DBG("!!!!!!!!!!!!!!!!" << nodeDefinition)
+}
 
 CSensor::~CSensor()
 {}

@@ -20,7 +20,7 @@ class CSensor :
     public mon::lib::model::CSensor
 {
   public:
-    CSensor(CNode *parentNode, const std::string &name, const std::string &definition);
+    CSensor(CNode *parentNode, const std::string &nodeName, const std::string &nodeDefinition);
     ~CSensor();
 
 };

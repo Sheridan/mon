@@ -50,7 +50,7 @@ void CNode::onTimer()
 {
   if(isConnected())
   {
-    mon::lib::model::CSensor *tmpSensor;
+    CSensor *tmpSensor;
     for(std::string &sensorName : names())
     {
       tmpSensor = sensor(sensorName);
@@ -60,6 +60,11 @@ void CNode::onTimer()
       }
     }
   }
+}
+
+CSensor *CNode::sensor(const std::string &name)
+{
+  return static_cast<CSensor *>(mon::lib::model::CNode::sensor(name));
 }
 
 MON_THREADED_FUNCTION_IMPLEMENT(CNode, connect)
@@ -93,7 +98,6 @@ void CNode::incomingAnswerOnConnect(lib::protocol::CNetworkMessage *msg)
   {
     MON_LOG_NFO("Connection allowed");
     requestSensorsList();
-    timerStart();
   }
   else if(msg->string().compare("f") == 0)
   {
@@ -110,18 +114,22 @@ void CNode::incomingAnswerOnRequestSensorList(lib::protocol::CNetworkMessage *ms
   {
     requestSensorDefinition(sensor_name);
   }
+  timerStart();
 }
 
 void CNode::incomingAnswerOnRequestSensorDefinition(lib::protocol::CNetworkMessage *msg)
 {
   int index   = msg->string().find(MON_PROTOCOL_DELIMITER(sensorname ,definition));
-  addSensor(msg->string().substr(0, index),
-            msg->string().substr(index+1, msg->string().length()-1));
+  MON_LOG_DBG("@@@@@@@@@@@@@@@<<<" << msg->string().substr(index+1, msg->string().length()-1))
+  CSensor *s = new CSensor(this,
+                           msg->string().substr(0, index),
+                           msg->string().substr(index+1, msg->string().length()-1));
+  add(s);
 }
 
 void CNode::incomingAnswerOnRequestSensorFrameStatistic(lib::protocol::CNetworkMessage *msg)
 {
-//  MON_LOG_DBG(msg->string());
+  MON_LOG_DBG(msg->string());
   //TODO: Парсинг и хранение статданных
 }
 

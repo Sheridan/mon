@@ -12,7 +12,7 @@ CSensor::CSensor(CNode *parent, const std::string &sensorName, const std::string
   : m_name(sensorName),
     m_parentNode(parent)
 {
-  setDefinition(m_definitionText);
+  setDefinition(definitionText);
 }
 
 CSensor::CSensor(CNode *parent, const std::string &sensorName)
