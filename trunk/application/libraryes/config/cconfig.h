@@ -19,6 +19,7 @@ public:
   virtual ~CConfig();
   void load(const std::string &filename);
   void save(const std::string &filename);
+  void load(int argc, char *argv[]);
 
   bool         containsFolder(const std::string & name) final;
   CFolder    * folder        (const std::string & name) final;

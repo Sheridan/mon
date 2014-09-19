@@ -9,6 +9,7 @@ OPTION( BUILD_NODE           "Build node"                             ON  )
 OPTION( BUILD_STORAGE        "Build storage"                          ON  )
 OPTION( BUILD_CLIENT_QT      "Build Qt client"                        OFF )
 OPTION( BUILD_CLIENT_NCURSES "Build mon-client-qt"                    OFF )
+OPTION( BUILD_UTILS          "Build non-mon utils"                    ON  )
 
 SET(LIB_PREFIX_TARGET  "lib/mon"                     )
 SET(LIB_GLOBAL_TARGET  "${LIB_PREFIX_TARGET}/global" )
@@ -49,6 +50,7 @@ SET(mon-config-lib-headers
     libraryes/config/model/pathinterface.h
     libraryes/config/rw/cconfigurationparcer.h
     libraryes/config/rw/cconfigurationgenerator.h
+    libraryes/config/rw/ccmdlineparcer.h
     libraryes/config/cconfig.h
     libraryes/config/model/cnode.h
     libraryes/config/model/cfile.h
@@ -58,6 +60,7 @@ SET(mon-config-lib-sources
     libraryes/config/main.cpp
     libraryes/config/rw/cconfigurationparcer.cpp
     libraryes/config/rw/cconfigurationgenerator.cpp
+    libraryes/config/rw/ccmdlineparcer.cpp
     libraryes/config/cconfig.cpp
     libraryes/config/model/cnode.cpp
     libraryes/config/model/cfile.cpp
@@ -236,6 +239,20 @@ IF( BUILD_DEV_TOOLS )
 #             "${mon-sensor-test-sources}")
 
 ENDIF( BUILD_DEV_TOOLS )
+
+IF( BUILD_UTILS )
+
+  SET(confgen-headers utils/confgen/main.h)
+  SET(confgen-sources utils/confgen/main.cpp)
+  SET(confgen-dependencies base config logger)
+  SET(confgen-link-libraryes "${confgen-dependencies}" dl)
+  add_tool(confgen
+             "${confgen-dependencies}"
+             "${confgen-link-libraryes}"
+             "${confgen-headers}"
+             "${confgen-sources}")
+
+ENDIF( BUILD_UTILS )
 # +++++++++++++++++++ tools +++++++++++++++++++
 # +++++++++++++++++++ daemons +++++++++++++++++++
 

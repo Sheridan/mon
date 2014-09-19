@@ -213,7 +213,13 @@ void CConfigurationParcer::includeFile(CFolder *folder)
     {
         parcerError("Include file path must be a string");
     }
-    CConfigurationParcer includeParcer(file.toString(), folder);
+    std::string includeFilename = file.toString();
+    if(!fileExists(includeFilename))
+    {
+      size_t last_slash_idx = filename().rfind('/');
+      includeFilename = filename().substr(0, last_slash_idx) + "/" + includeFilename;
+    }
+    CConfigurationParcer includeParcer(includeFilename, folder);
     includeParcer.parce();
 }
 

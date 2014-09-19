@@ -23,6 +23,9 @@ class CParcerFile : public CParcer
 
     TStdStringCharacter goOneCharacterForward() final;
     TStdStringCharacter goOneCharacterBack() final;
+
+  protected:
+    bool fileExists(const std::string &filename);
 };
 
 }

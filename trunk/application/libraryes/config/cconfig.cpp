@@ -1,6 +1,7 @@
 /* %Id% */
 #include "defines/st.h"
 #include "libraryes/config/cconfig.h"
+#include "libraryes/config/rw/ccmdlineparcer.h"
 #include "libraryes/config/rw/cconfigurationparcer.h"
 #include "libraryes/config/rw/cconfigurationgenerator.h"
 
@@ -27,6 +28,12 @@ void CConfig::load(const std::string &filename)
 {
   m_base_filename = filename;
   CConfigurationParcer p = {m_base_filename, m_root};
+  p.parce();
+}
+
+void CConfig::load(int argc, char *argv[])
+{
+  CCmdLineParcer p = {m_root->folder("@cmd"), argc, argv};
   p.parce();
 }
 

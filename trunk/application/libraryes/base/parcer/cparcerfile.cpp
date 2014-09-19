@@ -53,6 +53,16 @@ TStdStringCharacter CParcerFile::goOneCharacterBack()
   return readCharacter();
 }
 
+bool CParcerFile::fileExists(const std::string &filename)
+{
+  if (FILE *file = fopen(filename.c_str(), "r"))
+  {
+    fclose(file);
+    return true;
+  }
+  return false;
+}
+
 }
 }
 }

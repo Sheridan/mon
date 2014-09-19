@@ -15,7 +15,7 @@ function(add_sensor sources headers include_paths)
   MESSAGE( STATUS "---------- Processing `${EXECUTABLE_NAME}` sensor ----------" )
   add_custom_command(
     OUTPUT    ${GEN_PATH}/definition.h
-    COMMAND   ${CMAKE_INSTALL_PREFIX}/bin/mon-text-to-char-array
+    COMMAND   LD_LIBRARY_PATH=${MON_LIB_DIRECTORY} ${CMAKE_INSTALL_PREFIX}/bin/mon-text-to-char-array
     ARGS      ${CMAKE_SOURCE_DIR}/src/definition.txt ${SENSOR_DEFINITION} definition
     DEPENDS   ${CMAKE_SOURCE_DIR}/src/definition.txt
     COMMENT   "Convert sensor definition to C char array"
