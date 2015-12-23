@@ -24,8 +24,8 @@ public:
   virtual CFile     * file        (const std::string & name) = 0;
   virtual int         filesCount  ()                         = 0;
   virtual TFilesList  files       ()                         = 0;
-
 };
+
 }
 }
 }
