@@ -22,6 +22,7 @@ int main (int argc, char* argv[])
   MON_HANDLE_SIGNAL(SIGABRT);
   MON_ST_CNSTRUCT;
 
+  MON_CMD_LINE_INIT;
   MON_DEFAULT_APPLICATION_INIT;
 
   MON_ST_APPEND_MEMBER(mon::daemons::collector::CNodes);

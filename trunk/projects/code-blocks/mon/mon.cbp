@@ -4,33 +4,203 @@
 	<Project>
 		<Option title="mon" />
 		<Option pch_mode="2" />
-		<Option compiler="clang" />
+		<Option compiler="null" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mon" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="clang" />
+				<Option compiler="null" />
+				<Option projectCompilerOptionsRelation="0" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<ExtraCommands>
+					<Add before="../../linux-build -d -c- v" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/mon" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
-				<Option compiler="clang" />
+				<Option compiler="null" />
+				<Option projectCompilerOptionsRelation="0" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
+				<ExtraCommands>
+					<Add before="../../linux-build -c- v" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Weverything" />
 		</Compiler>
+		<Unit filename="../../../application/CMakeCompiler.cmake" />
+		<Unit filename="../../../application/CMakeDebug.cmake" />
+		<Unit filename="../../../application/CMakeLists.txt" />
+		<Unit filename="../../../application/CMakeLists.txt.user" />
+		<Unit filename="../../../application/CMakeSensor.cmake" />
+		<Unit filename="../../../application/daemons/collector/collector_st.h" />
+		<Unit filename="../../../application/daemons/collector/main.cpp" />
+		<Unit filename="../../../application/daemons/collector/node/cnode.cpp" />
+		<Unit filename="../../../application/daemons/collector/node/cnode.h" />
+		<Unit filename="../../../application/daemons/collector/node/cnodes.cpp" />
+		<Unit filename="../../../application/daemons/collector/node/cnodes.h" />
+		<Unit filename="../../../application/daemons/collector/node/csensor.cpp" />
+		<Unit filename="../../../application/daemons/collector/node/csensor.h" />
+		<Unit filename="../../../application/daemons/collector/protocol/cprotocol.cpp" />
+		<Unit filename="../../../application/daemons/collector/protocol/cprotocol.h" />
+		<Unit filename="../../../application/daemons/node/collector/ccollector.cpp" />
+		<Unit filename="../../../application/daemons/node/collector/ccollector.h" />
+		<Unit filename="../../../application/daemons/node/collector/ccollectors.cpp" />
+		<Unit filename="../../../application/daemons/node/collector/ccollectors.h" />
+		<Unit filename="../../../application/daemons/node/main.cpp" />
+		<Unit filename="../../../application/daemons/node/node_st.h" />
+		<Unit filename="../../../application/daemons/node/protocol/cprotocol.cpp" />
+		<Unit filename="../../../application/daemons/node/protocol/cprotocol.h" />
+		<Unit filename="../../../application/daemons/node/sensor/cframe.cpp" />
+		<Unit filename="../../../application/daemons/node/sensor/cframe.h" />
+		<Unit filename="../../../application/daemons/node/sensor/csensor.cpp" />
+		<Unit filename="../../../application/daemons/node/sensor/csensor.h" />
+		<Unit filename="../../../application/daemons/node/sensor/csensorsmanager.cpp" />
+		<Unit filename="../../../application/daemons/node/sensor/csensorsmanager.h" />
+		<Unit filename="../../../application/daemons/storage/cstorage.cpp" />
+		<Unit filename="../../../application/daemons/storage/cstorage.h" />
+		<Unit filename="../../../application/daemons/storage/database/cdatabase.cpp" />
+		<Unit filename="../../../application/daemons/storage/database/cdatabase.h" />
+		<Unit filename="../../../application/daemons/storage/main.cpp" />
+		<Unit filename="../../../application/daemons/storage/protocol/cprotocol.cpp" />
+		<Unit filename="../../../application/daemons/storage/protocol/cprotocol.h" />
+		<Unit filename="../../../application/daemons/storage/storage_st.h" />
+		<Unit filename="../../../application/defines/class-helper.h" />
+		<Unit filename="../../../application/defines/default-application.h" />
+		<Unit filename="../../../application/defines/file-operations-defines.h" />
+		<Unit filename="../../../application/defines/global.h" />
+		<Unit filename="../../../application/defines/infinity-cycle-helper.h" />
+		<Unit filename="../../../application/defines/logger-helper.h" />
+		<Unit filename="../../../application/defines/mutex-helper.h" />
+		<Unit filename="../../../application/defines/protocol-control.h" />
+		<Unit filename="../../../application/defines/sensor-defines.h" />
+		<Unit filename="../../../application/defines/signals-helper.h" />
+		<Unit filename="../../../application/defines/st.h" />
+		<Unit filename="../../../application/defines/threads-helper.h" />
+		<Unit filename="../../../application/libraryes/base/main.cpp" />
+		<Unit filename="../../../application/libraryes/base/parcer/cparcer.cpp" />
+		<Unit filename="../../../application/libraryes/base/parcer/cparcer.h" />
+		<Unit filename="../../../application/libraryes/base/parcer/cparcerfile.cpp" />
+		<Unit filename="../../../application/libraryes/base/parcer/cparcerfile.h" />
+		<Unit filename="../../../application/libraryes/base/parcer/cparcerstring.cpp" />
+		<Unit filename="../../../application/libraryes/base/parcer/cparcerstring.h" />
+		<Unit filename="../../../application/libraryes/base/parcer/parcer-helper.h" />
+		<Unit filename="../../../application/libraryes/base/sequrity/csystemrights.cpp" />
+		<Unit filename="../../../application/libraryes/base/sequrity/csystemrights.h" />
+		<Unit filename="../../../application/libraryes/base/singleton/csingleton.cpp" />
+		<Unit filename="../../../application/libraryes/base/singleton/csingleton.h" />
+		<Unit filename="../../../application/libraryes/base/singleton/csingletonmember.cpp" />
+		<Unit filename="../../../application/libraryes/base/singleton/csingletonmember.h" />
+		<Unit filename="../../../application/libraryes/base/string/cstringbuilder.cpp" />
+		<Unit filename="../../../application/libraryes/base/string/cstringbuilder.h" />
+		<Unit filename="../../../application/libraryes/base/string/cvariant.cpp" />
+		<Unit filename="../../../application/libraryes/base/string/cvariant.h" />
+		<Unit filename="../../../application/libraryes/base/string/stringhelper.cpp" />
+		<Unit filename="../../../application/libraryes/base/string/stringhelper.h" />
+		<Unit filename="../../../application/libraryes/base/timer/ctimer.cpp" />
+		<Unit filename="../../../application/libraryes/base/timer/ctimer.h" />
+		<Unit filename="../../../application/libraryes/config/cconfig.cpp" />
+		<Unit filename="../../../application/libraryes/config/cconfig.h" />
+		<Unit filename="../../../application/libraryes/config/config.h" />
+		<Unit filename="../../../application/libraryes/config/main.cpp" />
+		<Unit filename="../../../application/libraryes/config/model/cfile.cpp" />
+		<Unit filename="../../../application/libraryes/config/model/cfile.h" />
+		<Unit filename="../../../application/libraryes/config/model/cfolder.cpp" />
+		<Unit filename="../../../application/libraryes/config/model/cfolder.h" />
+		<Unit filename="../../../application/libraryes/config/model/cnode.cpp" />
+		<Unit filename="../../../application/libraryes/config/model/cnode.h" />
+		<Unit filename="../../../application/libraryes/config/model/pathinterface.h" />
+		<Unit filename="../../../application/libraryes/config/rw/ccmdlineparcer.cpp" />
+		<Unit filename="../../../application/libraryes/config/rw/ccmdlineparcer.h" />
+		<Unit filename="../../../application/libraryes/config/rw/cconfigurationgenerator.cpp" />
+		<Unit filename="../../../application/libraryes/config/rw/cconfigurationgenerator.h" />
+		<Unit filename="../../../application/libraryes/config/rw/cconfigurationparcer.cpp" />
+		<Unit filename="../../../application/libraryes/config/rw/cconfigurationparcer.h" />
+		<Unit filename="../../../application/libraryes/logger/clogger.cpp" />
+		<Unit filename="../../../application/libraryes/logger/clogger.h" />
+		<Unit filename="../../../application/libraryes/logger/clogmessage.cpp" />
+		<Unit filename="../../../application/libraryes/logger/clogmessage.h" />
+		<Unit filename="../../../application/libraryes/logger/logger.h" />
+		<Unit filename="../../../application/libraryes/logger/main.cpp" />
+		<Unit filename="../../../application/libraryes/model/ccollector.cpp" />
+		<Unit filename="../../../application/libraryes/model/ccollector.h" />
+		<Unit filename="../../../application/libraryes/model/ccollectors.cpp" />
+		<Unit filename="../../../application/libraryes/model/ccollectors.h" />
+		<Unit filename="../../../application/libraryes/model/citems.cpp" />
+		<Unit filename="../../../application/libraryes/model/citems.h" />
+		<Unit filename="../../../application/libraryes/model/cnode.cpp" />
+		<Unit filename="../../../application/libraryes/model/cnode.h" />
+		<Unit filename="../../../application/libraryes/model/cnodes.cpp" />
+		<Unit filename="../../../application/libraryes/model/cnodes.h" />
+		<Unit filename="../../../application/libraryes/model/csensor.cpp" />
+		<Unit filename="../../../application/libraryes/model/csensor.h" />
+		<Unit filename="../../../application/libraryes/model/main.cpp" />
+		<Unit filename="../../../application/libraryes/network/cclientsocket.cpp" />
+		<Unit filename="../../../application/libraryes/network/cclientsocket.h" />
+		<Unit filename="../../../application/libraryes/network/cserversocket.cpp" />
+		<Unit filename="../../../application/libraryes/network/cserversocket.h" />
+		<Unit filename="../../../application/libraryes/network/csocket.cpp" />
+		<Unit filename="../../../application/libraryes/network/csocket.h" />
+		<Unit filename="../../../application/libraryes/network/main.cpp" />
+		<Unit filename="../../../application/libraryes/protocol/cnetworkmessage.cpp" />
+		<Unit filename="../../../application/libraryes/protocol/cnetworkmessage.h" />
+		<Unit filename="../../../application/libraryes/protocol/cprotocol.cpp" />
+		<Unit filename="../../../application/libraryes/protocol/cprotocol.h" />
+		<Unit filename="../../../application/libraryes/protocol/main.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cdefinition.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cdefinition.h" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cfield.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cfield.h" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cframe.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cframe.h" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cfrequences.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cfrequences.h" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cfrequency.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cfrequency.h" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cstatisticcache.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cstatisticcache.h" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cstatisticdata.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/data/cstatisticdata.h" />
+		<Unit filename="../../../application/libraryes/sensordata/main.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/parcers/cdefinitiongenerator.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/parcers/cdefinitiongenerator.h" />
+		<Unit filename="../../../application/libraryes/sensordata/parcers/cdefinitionparcer.cpp" />
+		<Unit filename="../../../application/libraryes/sensordata/parcers/cdefinitionparcer.h" />
+		<Unit filename="../../../application/libraryes/sensorplugin/cframesetbuilder.cpp" />
+		<Unit filename="../../../application/libraryes/sensorplugin/cframesetbuilder.h" />
+		<Unit filename="../../../application/libraryes/sensorplugin/csensorplugin.cpp" />
+		<Unit filename="../../../application/libraryes/sensorplugin/csensorplugin.h" />
+		<Unit filename="../../../application/libraryes/sensorplugin/main.cpp" />
+		<Unit filename="../../../application/tools/mon-sensor-test/main.cpp" />
+		<Unit filename="../../../application/tools/mon-sensor-test/main.h" />
+		<Unit filename="../../../application/tools/mon-text-to-char-array/main.cpp" />
+		<Unit filename="../../../application/tools/mon-text-to-char-array/main.h" />
+		<Unit filename="../../../application/utils/confgen/example/confgen.conf" />
+		<Unit filename="../../../application/utils/confgen/example/hosts.conf" />
+		<Unit filename="../../../application/utils/confgen/main.cpp" />
+		<Unit filename="../../../application/utils/confgen/main.h" />
+		<Unit filename="../../../linux-build" />
+		<Unit filename="../../../linux-environment" />
+		<Unit filename="../../../linux-prepare" />
+		<Unit filename="../../../preprocess" />
+		<Unit filename="../../../sensors/cpu/CMakeLists.txt" />
+		<Unit filename="../../../sensors/cpu/src/definition.txt" />
+		<Unit filename="../../../sensors/cpu/src/main.cpp" />
+		<Unit filename="../../../sensors/memory/CMakeLists.txt" />
+		<Unit filename="../../../sensors/memory/src/definition.txt" />
+		<Unit filename="../../../sensors/memory/src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -16,6 +16,7 @@
   virtual _class &operator<<(const char                *val) _implement; \
   virtual _class &operator<<(const char                &val) _implement; \
   virtual _class &operator<<(const unsigned char       &val) _implement; \
+  virtual _class &operator<<(mon::lib::protocol::EProtocolMessageType &val) _implement; \
   virtual _class &operator+(const int                 &val) _implement; \
   virtual _class &operator+(const unsigned int        &val) _implement; \
   virtual _class &operator+(const unsigned long long  &val) _implement; \
@@ -26,7 +27,6 @@
   virtual _class &operator+(const char                *val) _implement; \
   virtual _class &operator+(const char                &val) _implement; \
   virtual _class &operator+(const unsigned char       &val) _implement; \
-  virtual _class &operator<<(mon::lib::protocol::EProtocolMessageType &val) _implement; \
   virtual _class &operator+(mon::lib::protocol::EProtocolMessageType &val) _implement;
 
 #define MON_STRING_BUILDER_DEFAULT_IMPLEMENT final { append(val); return *this; }

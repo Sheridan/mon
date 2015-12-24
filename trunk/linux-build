@@ -82,4 +82,14 @@ fi
 build "application"
 build "sensors/cpu"
 build "sensors/memory"
+
+for runfile in node collector storage
+do
+    cat << EOF > ${install_path}/bin/run-$runfile
+#!/bin/bash
+sudo LD_LIBRARY_PATH="../lib/mon/global" ./mon-$runfile -c ../etc/mon/$runfile.conf
+EOF
+chmod a+x ${install_path}/bin/run-$runfile
+done
+
 cd $current_path
