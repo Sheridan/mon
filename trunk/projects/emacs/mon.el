@@ -16,19 +16,7 @@
                                          (directory-dirs file))
                                    dirs)))))))
         dirs))
-(defun sheridan/ecb-hide-ecb-windows ()
-  "hide ecb and then split emacs into 2 windows that contain 2 most recent buffers"
-  (interactive)
-  (ecb-hide-ecb-windows)
-;;  (split-window-right)
-;;  (switch-to-next-buffer)
-  (other-window 1))
-(defun sheridan/ecb-show-ecb-windows ()
-  "show ecb windows and then delete all other windows except the current one"
-  (interactive)
-  (ecb-show-ecb-windows)
-  (delete-other-windows)
-  (ecb-goto-window-directories))
+
 ;; -------------------- init -------------------------
 (message "Preinit...")
 (set-language-environment "UTF-8")
@@ -52,13 +40,22 @@
 
 (message "Turning on ECB")
 (require 'ecb)
-;;(load-file (concat default-directory "projects/emacs/packages/ECB/source/ecb.el"))
 (setq ecb-auto-activate t)
 (setq ecb-show-sources-in-directories-buffer 'always)
 (setq ecb-layout-name "left15")
+(defun sheridan/ecb-hide-ecb-windows ()
+  "hide ecb and then split emacs into 2 windows that contain 2 most recent buffers"
+  (interactive)
+  (ecb-hide-ecb-windows)
+  (other-window 1))
+(defun sheridan/ecb-show-ecb-windows ()
+  "show ecb windows and then delete all other windows except the current one"
+  (interactive)
+  (ecb-show-ecb-windows)
+  (delete-other-windows)
+  (ecb-goto-window-directories))
 (global-set-key (kbd "<C-home>") 'sheridan/ecb-show-ecb-windows)
 (global-set-key (kbd "<C-end>") 'sheridan/ecb-hide-ecb-windows)
-;;(setq ecb-layout-name "left-dir-plus-speedbar")
 
 (message "Turning on Semantic")
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode t)
@@ -68,8 +65,6 @@
 (setq auto-update-methods-after-save t)
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
-;; (semantic-load-enable-minimum-features)
-;; (semantic-load-enable-code-helpers)
 (semantic-load-enable-gaudy-code-helpers)
 (semantic-load-enable-excessive-code-helpers)
 (semantic-load-enable-semantic-debugging-helpers)
@@ -77,12 +72,9 @@
 
 (message "Turning on popup")
 (require 'popup)
-;;(load-file (concat default-directory "projects/emacs/packages/popup/source/popup.el"))
 
 (message "Turning on auto-complete")
 (require 'auto-complete)
-;;(load-file (concat default-directory "projects/emacs/packages/auto-complete/source/auto-complete.el"))
-;;(add-to-list 'ac-sources 'ac-source-semantic)
 (require 'auto-complete-config)
 (ac-config-default)
 
@@ -122,18 +114,10 @@
 (set-terminal-parameter nil 'background-mode 'dark)
 (load-theme 'solarized t)
 
-
-
-;;(prin1 custom-theme-load-path)
-;;(load-theme 'solarized-dark t)
-
 (message "Loding project directoryes")
 (setq mon-src-directoryes (append ["/application"] (directory-dirs "application") (directory-dirs "sensors")))
 (setq system-include-directoryes (split-string (shell-command-to-string "echo | gcc -Wp,-v -x c++ - -fsyntax-only 2>&1 | grep \"/include$\"")))
 
-;;(setq-mode-local c++-mode semanticdb-find-default-throttle
-;;         '(project unloaded system recursive))
-;;(prin1 mon-src-directoryes)
 ;;(prin1 system-include-directoryes)
 (message "Loding project")
 (ede-cpp-root-project "mon" :directory default-directory :file "linux-build"
