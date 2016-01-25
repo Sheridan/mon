@@ -13,7 +13,7 @@
 
 //! Базовая инициализация приложения
 #define MON_DEFAULT_APPLICATION_INIT \
-  MON_CMD_LINE_ADD_OPTION("c", "config", "Load config from file", MON_CONF_FILE); \
+  MON_CMD_LINE_ADD_OPTION("c", "config", "Load config from file", std::string(MON_CONF_FILE)); \
   MON_CMD_LINE_PARCE; \
   MON_ST_CONFIG->load(MON_CMD_LINE_OPTION_VALUE("c").toString()); \
   MON_ST_CONFIG->cd(MON_ST_CONFIG->folder(MON_MODULE_NAME)); \
@@ -24,8 +24,10 @@
   MON_ST_LOGGER->enableOutToFile   (init_fldr->file("file")   ->get(true)); \
   MON_ST_LOGGER->enableOutToConsole(init_fldr->file("console")->get(true)); \
   MON_ST_LOGGER->enableOutToSyslog (init_fldr->file("syslog") ->get(true)); \
+  init_fldr = MON_ST_CONFIG->folder("runas"); \
   mon::lib::base::CSystemRights::setUserGroup( \
-                  MON_ST_CONFIG->folder("runas")->file("user" )->get(mon::lib::base::CSystemRights::currentUserName ()),  \
-                  MON_ST_CONFIG->folder("runas")->file("group")->get(mon::lib::base::CSystemRights::currentGroupName()));
+                  init_fldr->file("user" )->get(mon::lib::base::CSystemRights::currentUserName ()),  \
+                  init_fldr->file("group")->get(mon::lib::base::CSystemRights::currentGroupName())); \
+  delete init_fldr;
 
 #endif // defaulMonApplication

@@ -25,12 +25,13 @@ int main (int argc, char* argv[])
 
   MON_CMD_LINE_INIT;
   MON_DEFAULT_APPLICATION_INIT;
-
+  MON_LOG_DBG_CHECKPOINT;
   MON_ST_APPEND_MEMBER(mon::daemons::node::CCollectors);
   MON_ST_NODE_COLLECTOR_SOCKET->listen();
   MON_ST_APPEND_MEMBER(mon::daemons::node::CSensors);
   MON_ST_SENSORS_MANAGER->load();
 
+  MON_CMD_LINE_DESTROY;
   MON_SIGNAL_LOOP;
   mon_exit(EXIT_SUCCESS);
 }

@@ -5,3 +5,8 @@ trunk/doc/doxygen/*.html
 _*/
 trunk/doc/architecture/*.png
 *.txt.user*
+trunk/projects/emacs/packages
+trunk/projects/emacs/themes
+trunk/projects/emacs/semanticdb
+*#
+*~

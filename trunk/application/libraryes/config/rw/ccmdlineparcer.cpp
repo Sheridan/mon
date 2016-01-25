@@ -19,32 +19,30 @@ CCmdLineParcer::CCmdLineParcer ( int argc, char **argv )
 CCmdLineParcer::~CCmdLineParcer ()
 { }
 
-void CCmdLineParcer::parce ( )
+void CCmdLineParcer::parce ()
 {
   for ( int i = 1; i < m_argc; i++ )
   {
-//    MON_LOG_NFO(i << " -> " << m_argv[i]);
-    SCmdLineParameter *opt = findOption(m_argv[i]);
-    if(opt->isFlag)
+    SCmdLineParameter option(findOption(m_argv[i]));
+    if(option.isFlag)
     {
-      opt->value = true;
+      option.value = true;
     }
     else
     {
       i++;
       if(i>=m_argc)
       {
-        MON_LOG_ERR("Missing value for --" << opt->longName << " (" << opt->description << ")");
+        MON_LOG_ERR( "Missing value for --" << option.longName << " (" << option.description << ")");
         MON_ABORT;
       }
-      std::string value = m_argv[i];
-      if(value[0] == '-')
+      if(m_argv[i][0] == '-')
       {
-        MON_LOG_ERR("Missing value for --" << opt->longName << " (" << opt->description << ")");
+        MON_LOG_ERR( "Missing value for --" << option.longName << " (" << option.description << ")");
         MON_ABORT;
       }
-      opt->value.set(value);
-      MON_CMDLINE_LOG_DBG( opt->longName << " = " << opt->value.toString());
+      option.value.set(m_argv[i]);
+      MON_CMDLINE_LOG_DBG( option.longName << " = " << option.value.toString() << " (" << m_argv[i] << ")");
     }
   }
   if(getOption("h").toBool())
@@ -57,31 +55,38 @@ void CCmdLineParcer::parce ( )
 void CCmdLineParcer::addParametr ( const std::string &shortName, const std::string &longName, const std::string &description,
                                    const mon::lib::base::CVariant &defaultValue )
 {
-  MON_CMDLINE_LOG_DBG("New cmd parameter -" << shortName << ":--" << longName << ":" << description);
+  MON_CMDLINE_LOG_DBG("New cmd parameter -" << shortName << ":--" << longName << ":" << description << ", default: " << defaultValue.toString());
   m_parametres[shortName] = {shortName, longName, description, defaultValue, false};
 }
 
 void CCmdLineParcer::addParametr ( const std::string &shortName, const std::string &longName, const std::string &description )
 {
-  MON_CMDLINE_LOG_DBG("New cmd flag -" << shortName << ":--" << longName << ":" << description);
+  MON_CMDLINE_LOG_DBG("New cmd flag -" << shortName << ":--" << longName << ":" << description << ", default false");
   m_parametres[shortName] = {shortName, longName, description, false, true};
 }
 
-SCmdLineParameter *CCmdLineParcer::findOption ( const std::string &opt )
+SCmdLineParameter CCmdLineParcer::findOption ( const std::string &argvOptionString )
 {
   for(auto &p : m_parametres)
   {
-    MON_CMDLINE_LOG_DBG( std::string( "-" + p.second.longName));
-    if( std::string("-" + p.second.shortName).compare(opt) == 0 ||
-        std::string("--" + p.second.longName).compare(opt) == 0 )
+    MON_LOG_DBG_CHECKPOINT;
+    if(compareOptions(p.second, argvOptionString))
     {
-      MON_CMDLINE_LOG_DBG( "Found parametr " << opt << ": -" << p.second.shortName << " | --" << p.second.longName );
-      return &(p.second);
+      MON_LOG_DBG_CHECKPOINT;
+      MON_CMDLINE_LOG_DBG( "Found parametr '" << argvOptionString << "'. Interpret as [-" << p.second.shortName << "][--" << p.second.longName << "], with default '" << p.second.value.toString() << "'");
+      return p.second;
     }
   }
-  MON_LOG_ERR("Unknown command line option: " << opt);
+  MON_LOG_ERR( "Unknown command line option: " << argvOptionString );
   MON_ABORT;
-  return nullptr;
+}
+
+bool CCmdLineParcer::compareOptions ( const SCmdLineParameter &parametr, const std::string option )
+{
+  MON_LOG_DBG_CHECKPOINT;
+  if(parametr.shortName.compare(option.substr(1, option.length())) == 0) { return true; }
+  if(parametr.longName .compare(option.substr(2, option.length())) == 0) { return true; }
+  return false;
 }
 
 mon::lib::base::CVariant CCmdLineParcer::getOption ( const std::string &shortName )
@@ -102,6 +107,8 @@ void CCmdLineParcer::showHelp ()
               << std::endl;
   }
 }
+
+
 }
 }
 }

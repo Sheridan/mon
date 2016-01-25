@@ -6,9 +6,9 @@
 #include "defines/logger-helper.h"
 
 // -----------------------------------------------  debug
-//#define MON_PARCER_PRINT_CURRENT_CHAR_ENABLED
-//#define MON_PARCER_PRINT_LOOP_STATUS_ENABLED
-//#define MON_PARCER_PRINT_VARIABLES_ENABLED
+#define MON_PARCER_PRINT_CURRENT_CHAR_ENABLED
+#define MON_PARCER_PRINT_LOOP_STATUS_ENABLED
+#define MON_PARCER_PRINT_VARIABLES_ENABLED
 
 #ifdef MON_PARCER_PRINT_LOOP_STATUS_ENABLED
   #define MON_PARCER_PRINT_LOOP_STATUS(_name,_status) MON_LOG_DBG("Loop " #_name " " #_status);

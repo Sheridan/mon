@@ -19,6 +19,7 @@ public:
   CFolder *parent();
 
   bool               get(const bool               &def);
+  char               get(const char               &def);
   int                get(const int                &def);
   unsigned int       get(const unsigned int       &def);
   short              get(const short              &def);

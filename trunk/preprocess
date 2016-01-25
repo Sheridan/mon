@@ -1,6 +1,9 @@
 #!/bin/bash
 
-filelist=( application/libraryes/config/src/rw/cconfigurationparcer.cpp )
+. ./linux-environment
+
+#filelist=( application/libraryes/config/src/rw/cconfigurationparcer.cpp )
+filelist=( application/daemons/collector/main.cpp )
 include="-I application/libraryes/base/src
 	 -I application/libraryes/base/src/parcer
 	 -I application/libraryes/base/src/singleton
@@ -14,11 +17,12 @@ include="-I application/libraryes/base/src
          -I application/libraryes/sensor/src/parcers
          -I application/libraryes/protocol/src
          -I application/defines 
-         -I /tmp/mon/build/application/mon_generated_sources"
+         -I application 
+         -I /tmp/mon/build/console/application/mon_generated_sources"
           
 #echo ${include}
 
 for f in $filelist
 do
-  g++ -E $f $include
+  g++ -DMON_DEBUG -E $f $include
 done

@@ -21,6 +21,7 @@ CFolder * CFile::parent()
 }
 
 bool               CFile::get(const bool               &def) { if(!tryConvert(def)) { set(def); } return toBool  (); }
+char               CFile::get(const char               &def) { if(!tryConvert(def)) { set(def); } return toChar  (); }
 int                CFile::get(const int                &def) { if(!tryConvert(def)) { set(def); } return toInt   (); }
 unsigned int       CFile::get(const unsigned int       &def) { if(!tryConvert(def)) { set(def); } return toUInt  (); }
 short              CFile::get(const short              &def) { if(!tryConvert(def)) { set(def); } return toShort (); }

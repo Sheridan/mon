@@ -28,6 +28,7 @@ int main (int argc, char* argv[])
   MON_ST_APPEND_MEMBER(mon::daemons::collector::CNodes);
   MON_COLLECTOR_ST_NODES_MANAGER->load();
 
+  MON_CMD_LINE_DESTROY;
   MON_SIGNAL_LOOP;
   mon_exit(EXIT_SUCCESS);
 }

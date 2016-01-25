@@ -1,0 +1,94 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+my $packages = 
+{
+    'packages' =>
+    {
+	'CEDET' =>
+	{
+	    'repository' => 'http://git.code.sf.net/p/cedet/git',
+	    'build'      => { 'type' => 'inplace', 'exec' => 'make' }
+	},
+	'ECB' =>
+	{
+	    'repository' => 'https://github.com/alexott/ecb'
+	},
+	'dash' =>
+	{
+	    'repository' => 'https://github.com/magnars/dash.el'
+	},
+	'popup' =>
+	{
+	    'repository' => 'https://github.com/auto-complete/popup-el'
+	},
+#	'CMake-mode' =>
+#	{
+#	    'repository' => 'https://github.com/Kitware/CMake/tree/master/Auxiliary'
+#	},
+	'auto-complete' =>
+	{
+	    'repository' => 'https://github.com/auto-complete/auto-complete',
+	    #'build'      => { 'type' => 'inplace', 'exec' => 'make byte-compile' }
+	}
+    },
+    'themes' =>
+    {
+	'solarized' =>
+	{
+	    # 'repository' => 'https://github.com/bbatsov/solarized-emacs'
+	    'repository' => 'https://github.com/sellout/emacs-color-theme-solarized'
+	}
+    }
+};
+
+sub update_repository
+{
+    my ($url, $name, $path) = @_[0..2];
+    $path = sprintf("%s/source", $path);
+    if(! -e $path)
+    {
+	printf("Clonning %s to %s ...\n", $name, $path);
+	system(sprintf("git clone %s %s", $url, $path));
+    }
+    else
+    {
+	printf("Updating %s ...\n", $name);
+	system(sprintf("cd %s && git pull", $path));
+    }
+}
+
+sub build
+{
+    my ($name, $build, $path) = @_[0..2];
+    my $src_path = sprintf("%s/source", $path);
+    
+    if($build->{'type'} eq 'inplace')
+    {
+    	printf("Building %s ...\n", $name);
+	system(sprintf("cd %s && %s", $src_path, $build->{'exec'}));
+    }
+}
+
+
+sub update_all
+{
+    for my $type (keys(%{$packages}))
+    {
+	for my $name (keys(%{$packages->{$type}}))
+	{
+	    my $path = sprintf("%s/%s", $type, $name);
+	    if(exists($packages->{$type}{$name}{'repository'}))
+	    {
+		update_repository($packages->{$type}{$name}{'repository'}, $name, $path);		
+	    }
+	    if(exists($packages->{$type}{$name}{'build'}))
+	    {
+		build($name, $packages->{$type}{$name}{'build'}, $path);		
+	    }
+	}
+    }
+}
+
+update_all();

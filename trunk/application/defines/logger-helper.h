@@ -33,8 +33,10 @@
 
 #ifdef MON_DEBUG
   #define MON_LOG_DBG(_message) MON_LOG(_message, mon::lib::logger::pDebug);
+  #define MON_LOG_DBG_CHECKPOINT MON_LOG_DBG("[Checkpoint] Line " << __LINE__ << " in " << __FILE__)
 #else
   #define MON_LOG_DBG(_message)
+  #define MON_LOG_DBG_CHECKPOINT
 #endif
 
 #include <errno.h>

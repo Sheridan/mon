@@ -83,8 +83,10 @@ bool CSystemRights::setUser (const std::string &name)
 {
   if(name.compare(currentUserName()) != 0)
   {
+    MON_LOG_DBG_CHECKPOINT;
     if(seteuid(getUID(name)) != 0)
     {
+      MON_LOG_DBG_CHECKPOINT;
       MON_PRINT_ERRNO("Can not set effective user (" << name << ")");
       MON_ABORT;
       return false;

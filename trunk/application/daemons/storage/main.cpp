@@ -30,6 +30,7 @@ int main (int argc, char* argv[])
   //MON_ST_APPEND_MEMBER(mon::daemons::node::CSensorsManager);
   //MON_ST_SENSORS_MANAGER->load();
 
+  MON_CMD_LINE_DESTROY;
   MON_SIGNAL_LOOP;
   mon_exit(EXIT_SUCCESS);
 }
