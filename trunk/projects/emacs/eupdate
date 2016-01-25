@@ -23,6 +23,18 @@ my $packages =
 	{
 	    'repository' => 'https://github.com/auto-complete/popup-el'
 	},
+	'json-mode' =>
+	{
+	    'repository' => 'https://github.com/joshwnj/json-mode'
+	},
+	'json-reformat' =>
+	{
+	    'repository' => 'https://github.com/gongo/json-reformat'
+	},
+	'json-snatcher' =>
+	{
+	    'repository' => 'https://github.com/Sterlingg/json-snatcher'
+	},
 #	'CMake-mode' =>
 #	{
 #	    'repository' => 'https://github.com/Kitware/CMake/tree/master/Auxiliary'

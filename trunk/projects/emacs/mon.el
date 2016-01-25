@@ -32,6 +32,9 @@
 (add-to-list 'load-path (concat default-directory "projects/emacs/packages/popup/source"))
 (add-to-list 'load-path (concat default-directory "projects/emacs/packages/auto-complete/source"))
 (add-to-list 'load-path (concat default-directory "projects/emacs/packages/dash/source"))
+(add-to-list 'load-path (concat default-directory "projects/emacs/packages/json-mode/source"))
+(add-to-list 'load-path (concat default-directory "projects/emacs/packages/json-reformat/source"))
+(add-to-list 'load-path (concat default-directory "projects/emacs/packages/json-snatcher/source"))
 
 
 (message "Turning on CEDET")
@@ -105,6 +108,12 @@
 ;;(prin1 cmake-mode-el-file)
 (autoload 'cmake-mode "cmake-mode.el" t)
 
+(setq auto-mode-alist
+      (append
+       '(("\\.conf\\'" . json-mode))
+       auto-mode-alist))
+
+(autoload 'json-mode "json-mode.el" t)
 
 (message "Loading themes")
 (add-to-list 'custom-theme-load-path (concat default-directory "projects/emacs/themes/solarized/source"))
