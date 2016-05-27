@@ -35,9 +35,11 @@ struct SCmdLineParameter
     std::string description;
     mon::lib::base::CVariant value;
     bool isFlag;
+    SCmdLineParameter(std::string sn, std::string ln, std::string d, mon::lib::base::CVariant v, bool isf) :
+    shortName(sn), longName(ln), description(d), value(v), isFlag(isf) {}
 };
 
-typedef std::map<std::string, SCmdLineParameter> TCmdLineParametres;
+typedef std::map<std::string, SCmdLineParameter *> TCmdLineParametres;
 
 class CCmdLineParcer
 {
@@ -45,10 +47,9 @@ class CCmdLineParcer
     CCmdLineParcer ( int argc, char **argv );
     virtual ~CCmdLineParcer ();
 
-    void addParametr (const std::string &shortName,
-                     const std::string &longName,
-                     const std::string &description,
-                     const mon::lib::base::CVariant &defaultValue );
+    void addParametr (const std::string &shortName, const std::string &longName, const std::string &description, const std::string &defaultValue );
+    void addParametr (const std::string &shortName, const std::string &longName, const std::string &description, const int &defaultValue );
+    void addParametr (const std::string &shortName, const std::string &longName, const std::string &description, const float &defaultValue );
     void addParametr(const std::string &shortName,
                      const std::string &longName,
                      const std::string &description);
@@ -56,13 +57,13 @@ class CCmdLineParcer
     mon::lib::base::CVariant getOption(const std::string &shortName);
 
   private:
-    SCmdLineParameter findOption (const std::string &argvOptionString );
+    SCmdLineParameter* findOption (const std::string &argvOptionString );
     void showHelp();
-    bool compareOptions(const SCmdLineParameter &parametr, const std::string option);
+    bool compareOptions(const SCmdLineParameter *parametr, const std::string option);
 
-    TCmdLineParametres    m_parametres;
-    int m_argc;
-    char **m_argv;
+    TCmdLineParametres m_parametres;
+    int                m_argc;
+    char               **m_argv;
 };
 
 }

@@ -246,7 +246,7 @@ IF( BUILD_UTILS )
   SET(confgen-sources utils/confgen/main.cpp)
   SET(confgen-dependencies base config logger)
   SET(confgen-link-libraryes "${confgen-dependencies}" dl)
-  add_tool(confgen
+  add_tool(mon-confgen
              "${confgen-dependencies}"
              "${confgen-link-libraryes}"
              "${confgen-headers}"

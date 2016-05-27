@@ -1,5 +1,10 @@
-option(USE_CLANG "build application with clang" OFF)
+option(MON_EXPORT_COMPILE_COMMANDS "Export compile commands (i.g. for rtags)" ON)
+if( MON_EXPORT_COMPILE_COMMANDS )
+    set(CMAKE_GENERATOR "Ninja")
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+endif( MON_EXPORT_COMPILE_COMMANDS )
 
+option(USE_CLANG "build application with clang" ON)
 if( MON_USE_CLANG )
   MESSAGE ( STATUS "---> Build with clang" )
   set( CMAKE_C_COMPILER clang)

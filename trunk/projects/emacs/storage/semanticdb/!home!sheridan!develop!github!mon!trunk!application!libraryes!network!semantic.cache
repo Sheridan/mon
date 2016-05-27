@@ -1,0 +1,303 @@
+;; Object network/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "network/"
+  :tables
+  (list
+    (semanticdb-table "cclientsocket.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CCLIENTSOCKET_H" variable (:constant-flag t) nil [44 59])
+            ("map" include (:system-flag t) nil [60 74])
+            ("libraryes/network/csocket.h" include nil nil [75 113])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("network" type
+                               (:members 
+                                  ( ("CSocketClient" type
+                                       (:superclasses 
+                                          ( ("CSocket" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [231 238])
+                                            ("CSocketClient" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CSocketClient" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [243 259])
+                                            ("CSocketClient" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("descriptor" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [278 300])
+                                                    ("addr_from" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [301 330])
+                                                    ("port_from" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [331 353]))                                                  
+                                                :type ("CSocketClient" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [264 354])
+                                            ("CSocketClient" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [359 384])
+                                            ("connect" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("addr" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [402 426])
+                                                    ("port" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [427 454]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [389 455])
+                                            ("connect" function
+                                               (:prototype-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [460 475])
+                                            ("protected" label nil (reparse-symbol classsubparts) [479 489])
+                                            ("connected" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("to_addr" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [517 544])
+                                                    ("to_port" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [545 575]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [494 580]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [190 584])
+                                    ("TClientSockets" type
+                                       (:typedef ("std::map" type
+                                             (:template-specifier 
+                                                ( ("int" type nil nil nil)
+                                                  ("CSocketClient" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [586 640]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [148 643]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [132 645]))                  
+                :type "namespace")
+                nil [115 647]))          
+      :file "cclientsocket.h"
+      :pointmax 674
+      :fsize 688
+      :lastmodtime '(21132 47621 747432 248000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CCLIENTSOCKET_H")
+          )
+)
+    (semanticdb-table "csocket.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CSOCKET_H" variable (:constant-flag t) nil [38 47])
+            ("string" include (:system-flag t) nil [49 66])
+            ("sys/socket.h" include (:system-flag t) nil [67 90])
+            ("netinet/in.h" include (:system-flag t) nil [91 114])
+            ("defines/threads-helper.h" include nil nil [115 150])
+            ("defines/mutex-helper.h" include nil nil [151 184])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("network" type
+                               (:members 
+                                  ( ("CSocket" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [348 355])
+                                            ("CSocket" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CSocket" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [360 370])
+                                            ("CSocket" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [375 394])
+                                            ("write" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("data" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [410 434]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [399 435])
+                                            ("close" function
+                                               (:prototype-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [441 454])
+                                            ("setPortLocal" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("port" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [479 506]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [460 507])
+                                            ("setPortRemote" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("port" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [531 558]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [512 559])
+                                            ("setAddrLocal" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("addr" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [583 610]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [564 611])
+                                            ("setAddrRemote" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("addr" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [635 662]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [616 663])
+                                            ("setTimeout" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [687 714]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [668 715])
+                                            ("portLocal" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "unsigned short")
+                                                (reparse-symbol classsubparts) [720 762])
+                                            ("portRemote" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "unsigned short")
+                                                (reparse-symbol classsubparts) [767 809])
+                                            ("addrLocal" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [814 856])
+                                            ("addrRemote" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [861 903])
+                                            ("descriptor" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [908 950])
+                                            ("timeout" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [955 997])
+                                            ("isConnected" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [1002 1034])
+                                            ("isListen" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [1039 1071])
+                                            ("protected" label nil (reparse-symbol classsubparts) [1075 1085])
+                                            ("m_socketDescriptor" variable (:type "int") (reparse-symbol classsubparts) [1090 1114])
+                                            ("m_timeout" variable (:type "int") (reparse-symbol classsubparts) [1119 1134])
+                                            ("m_isListen" variable (:type "bool") (reparse-symbol classsubparts) [1139 1155])
+                                            ("m_isConnected" variable (:type "bool") (reparse-symbol classsubparts) [1160 1179])
+                                            ("incommingMessage" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("message" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1215 1242]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1185 1247])
+                                            ("private" label nil (reparse-symbol classsubparts) [1251 1259])
+                                            ("m_portLocal" variable (:type "unsigned short") (reparse-symbol classsubparts) [1264 1291])
+                                            ("m_portRemote" variable (:type "unsigned short") (reparse-symbol classsubparts) [1296 1324])
+                                            ("m_addrLocal" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1329 1356])
+                                            ("m_addrRemote" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1361 1389]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [257 1392]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [218 1395]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [202 1397]))                  
+                :type "namespace")
+                nil [186 1399]))          
+      :file "csocket.h"
+      :pointmax 1420
+      :fsize 1431
+      :lastmodtime '(21132 32045 633505 212000)
+      :unmatched-syntax '((semantic-list 338 . 345) (symbol 321 . 338) (semantic-list 306 . 316) (symbol 277 . 306))
+      :lexical-table 
+        '(("CSOCKET_H")
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!libraryes!network!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

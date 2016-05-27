@@ -1,0 +1,460 @@
+;; Object defines/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "defines/"
+  :tables
+  (list
+    (semanticdb-table "global.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("MON_GLOBAL_H" variable (:constant-flag t) nil [41 53])
+            ("MON_DEFAULT_COLLECTOR_LISTEN_PORT" variable (:constant-flag t) nil [102 135])
+            ("MON_DEFAULT_STORAGE_LISTEN_PORT" variable (:constant-flag t) nil [211 242])
+            ("MON_DEFAULT_CONNECT_TIMEOUT" variable (:constant-flag t) nil [327 354])
+            ("MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT" variable (:constant-flag t) nil [465 509])
+            ("MON_DEFAULT_PASSWORD" variable (:constant-flag t) nil [554 574])
+            ("MON_DEBUG_PATH_PREFIX" variable (:constant-flag t) nil [688 709])
+            ("MON_CONF_FILE" variable (:constant-flag t) nil [726 739])
+            ("MON_RUN_FILE" variable (:constant-flag t) nil [810 822])
+            ("MON_LOG_FILE" variable (:constant-flag t) nil [894 906]))          
+      :file "global.h"
+      :pointmax 995
+      :fsize 1165
+      :lastmodtime '(21131 796 134756 965000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("MON_DEFAULT_STORAGE_LISTEN_PORT" . ((semantic-list "((unsigned short)4949)" 249 . 271)))
+          ("MON_DEFAULT_REMOTE_NODE_DATA_REQUEST_TIMEOUT" . ((semantic-list "((float)10)" 510 . 521)))
+          ("MON_DEFAULT_COLLECTOR_LISTEN_PORT" . ((semantic-list "((unsigned short)4848)" 140 . 162)))
+          ("MON_DEBUG_PATH_PREFIX")
+          ("MON_RUN_FILE" . 
+              ((symbol "MON_DEBUG_PATH_PREFIX" 824 . 845) (string "\"/var/lib/mon/\"" 846 . 861) (symbol "MON_MODULE_NAME" 862 . 877) (string "\".conf\"" 878 . 885)))
+          ("MON_GLOBAL_H")
+          ("MON_DEFAULT_PASSWORD" . 
+              ((symbol "std" 582 . 585) (punctuation ":" 585 . 586) (punctuation ":" 586 . 587) (symbol "string" 587 . 593) (semantic-list "(\"password\")" 593 . 605)))
+          ("MON_CONF_FILE" . 
+              ((symbol "MON_DEBUG_PATH_PREFIX" 740 . 761) (string "\"/etc/mon/\"" 762 . 773) (symbol "MON_MODULE_NAME" 778 . 793) (string "\".conf\"" 794 . 801)))
+          ("MON_DEFAULT_CONNECT_TIMEOUT" . ((semantic-list "((unsigned short)30)" 365 . 385)))
+          ("MON_LOG_FILE" . 
+              ((symbol "MON_DEBUG_PATH_PREFIX" 908 . 929) (string "\"/var/log/mon/\"" 930 . 945) (symbol "MON_MODULE_NAME" 946 . 961) (string "\".log\"" 962 . 968)))
+          )
+)
+    (semanticdb-table "infinity-cycle-helper.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("INFINITYCYCLEHELPER_H" variable (:constant-flag t) nil [50 71])
+            ("MON_INFINITY_LOOP_BEGIN_LABEL_NAME" variable (:constant-flag t) nil [81 115])
+            ("MON_INFINITY_LOOP_END_LABEL_NAME" variable (:constant-flag t) nil [167 199])
+            ("MON_INFINITY_LOOP_RESTART" variable (:constant-flag t) nil [252 277])
+            ("MON_INFINITY_LOOP_BREAK" variable (:constant-flag t) nil [341 364])
+            ("MON_INFINITY_LOOP_BEGIN" variable (:constant-flag t) nil [429 452])
+            ("MON_INFINITY_LOOP_END" variable (:constant-flag t) nil [589 610]))          
+      :file "infinity-cycle-helper.h"
+      :pointmax 754
+      :fsize 753
+      :lastmodtime '(20534 24655 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("INFINITYCYCLEHELPER_H")
+          ("MON_INFINITY_LOOP_END_LABEL_NAME" (spp-arg-list ("_name") 199 . 206) . ((spp-symbol-merge ((spp-symbol-merge ((symbol "label_" 209 . 215) (symbol "_name" 217 . 222)) 209 . 222) (symbol "_infinity_loop_end" 224 . 242)) 209 . 242)))
+          ("MON_INFINITY_LOOP_BREAK" (spp-arg-list ("_name") 364 . 371) . 
+              ((symbol "goto" 374 . 378) (symbol "MON_INFINITY_LOOP_END_LABEL_NAME" 379 . 411) (semantic-list "(_name)" 411 . 418) (punctuation ";" 418 . 419)))
+          ("MON_INFINITY_LOOP_END" (spp-arg-list ("_name") 610 . 617) . 
+              ((close-paren "}" 626 . 627) (symbol "MON_INFINITY_LOOP_BREAK" 634 . 657) (semantic-list "(_name)" 657 . 664) (punctuation ";" 664 . 665) (symbol "MON_INFINITY_LOOP_END_LABEL_NAME" 672 . 704) (semantic-list "(_name)" 704 . 711) (punctuation ":" 711 . 712) (punctuation ";" 713 . 714) (close-paren "}" 719 . 720)))
+          ("MON_INFINITY_LOOP_BEGIN_LABEL_NAME" (spp-arg-list ("_name") 115 . 122) . ((spp-symbol-merge ((spp-symbol-merge ((symbol "label_" 123 . 129) (symbol "_name" 131 . 136)) 123 . 136) (symbol "_infinity_loop_begin" 138 . 158)) 123 . 158)))
+          ("MON_INFINITY_LOOP_RESTART" (spp-arg-list ("_name") 277 . 284) . 
+              ((symbol "goto" 285 . 289) (symbol "MON_INFINITY_LOOP_BEGIN_LABEL_NAME" 290 . 324) (semantic-list "(_name)" 324 . 331) (punctuation ";" 331 . 332)))
+          ("MON_INFINITY_LOOP_BEGIN" (spp-arg-list ("_name") 452 . 459) . 
+              ((open-paren "{" 464 . 465) (symbol "MON_INFINITY_LOOP_RESTART" 472 . 497) (semantic-list "(_name)" 497 . 504) (punctuation ";" 504 . 505) (symbol "MON_INFINITY_LOOP_BEGIN_LABEL_NAME" 512 . 546) (semantic-list "(_name)" 546 . 553) (punctuation ":" 553 . 554) (punctuation ";" 555 . 556) (FOR "for" 563 . 566) (semantic-list "(;;)" 566 . 570) (open-paren "{" 579 . 580)))
+          )
+)
+    (semanticdb-table "st.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("MON_ST_H" variable (:constant-flag t) nil [37 45])
+            ("defines/global.h" include nil nil [46 73])
+            ("libraryes/base/singleton/csingleton.h" include nil nil [74 122])
+            ("generated.h" include nil nil [123 145])
+            ("errno.h" include (:system-flag t) nil [146 164])
+            ("string.h" include (:system-flag t) nil [165 184])
+            ("MON_ST" variable (:constant-flag t) nil [202 208])
+            ("MON_ST_LOGGER" variable (:constant-flag t) nil [289 302])
+            ("MON_ST_CONFIG" variable (:constant-flag t) nil [359 372])
+            ("MON_ST_CNSTRUCT" variable (:constant-flag t) nil [430 445])
+            ("MON_ST_DESTRUCT" variable (:constant-flag t) nil [490 505])
+            ("logger-helper.h" include nil nil [692 718])
+            ("MON_CFOLDER" variable (:constant-flag t) nil [843 854])
+            ("MON_CFILE" variable (:constant-flag t) nil [889 898])
+            ("MON_OPTION_FOREACH_OPTION" variable (:constant-flag t) nil [931 956])
+            ("MON_OPTION_FOREACH_FOLDER" variable (:constant-flag t) nil [1069 1094])
+            ("MON_OPTION_FOREACH_FILE" variable (:constant-flag t) nil [1185 1208])
+            ("MON_COLLECTORS_MANAGER_ST_MEMBER_ID" variable (:constant-flag t) nil [1419 1454])
+            ("MON_NODES_MANAGER_ST_MEMBER_ID" variable (:constant-flag t) nil [1467 1497])
+            ("MON_SENSORS_MANAGER_ST_MEMBER_ID" variable (:constant-flag t) nil [1515 1547])
+            ("MON_STORAGE_MANAGER_ST_MEMBER_ID" variable (:constant-flag t) nil [1563 1595])
+            ("MON_ST_APPEND_MEMBER" variable (:constant-flag t) nil [1612 1632])
+            ("MON_ST_MEMBER" variable (:constant-flag t) nil [1682 1695]))          
+      :file "st.h"
+      :pointmax 1771
+      :fsize 1770
+      :lastmodtime '(21132 32594 238730 953000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("MON_OPTION_FOREACH_FILE" (spp-arg-list ("_name" "_folder") 1208 . 1223) . ((symbol "MON_OPTION_FOREACH_OPTION" 1226 . 1251) (semantic-list "(_name, _folder->files()  , TFilesList)" 1251 . 1290)))
+          ("MON_COLLECTORS_MANAGER_ST_MEMBER_ID" . ((number "1" 1457 . 1458)))
+          ("MON_ST_CNSTRUCT" . 
+              ((symbol "MON_ST" 446 . 452) (punctuation ";" 452 . 453) (symbol "MON_LOG_DBG" 454 . 465) (semantic-list "(\"App started\")" 465 . 480) (punctuation ";" 480 . 481)))
+          ("MON_ST_MEMBER" (spp-arg-list ("_type" "_id") 1695 . 1706) . ((semantic-list "(static_cast<_type *>(MON_ST->member(_id)))" 1707 . 1750)))
+          ("MON_OPTION_FOREACH_OPTION" (spp-arg-list ("_name" "_list" "_type") 956 . 975) . 
+              ((symbol "mon" 980 . 983) (punctuation ":" 983 . 984) (punctuation ":" 984 . 985) (symbol "lib" 985 . 988) (punctuation ":" 988 . 989) (punctuation ":" 989 . 990) (symbol "config" 990 . 996) (punctuation ":" 996 . 997) (punctuation ":" 997 . 998) (symbol "_type" 998 . 1003) (spp-symbol-merge ((symbol "list" 1004 . 1008) (symbol "_name" 1010 . 1015)) 1004 . 1015) (punctuation "=" 1016 . 1017) (symbol "_list" 1018 . 1023) (punctuation ";" 1023 . 1024) (FOR "for" 1029 . 1032) (semantic-list "(auto &_name : list##_name)" 1033 . 1060)))
+          ("MON_ST_CONFIG" . 
+              ((symbol "MON_ST" 373 . 379) (punctuation "-" 379 . 380) (punctuation ">" 380 . 381) (symbol "config" 381 . 387) (semantic-list "()" 387 . 389)))
+          ("MON_CFILE" . 
+              ((symbol "mon" 899 . 902) (punctuation ":" 902 . 903) (punctuation ":" 903 . 904) (symbol "lib" 904 . 907) (punctuation ":" 907 . 908) (punctuation ":" 908 . 909) (symbol "config" 909 . 915) (punctuation ":" 915 . 916) (punctuation ":" 916 . 917) (symbol "CFile" 917 . 922)))
+          ("MON_ST_DESTRUCT" . 
+              ((symbol "MON_LOG_DBG" 506 . 517) (semantic-list "(\"App destroying\")" 517 . 535) (punctuation ";" 535 . 536) (symbol "mon" 537 . 540) (punctuation ":" 540 . 541) (punctuation ":" 541 . 542) (symbol "lib" 542 . 545) (punctuation ":" 545 . 546) (punctuation ":" 546 . 547) (symbol "base" 547 . 551) (punctuation ":" 551 . 552) (punctuation ":" 552 . 553) (symbol "CSingleton" 553 . 563) (punctuation ":" 563 . 564) (punctuation ":" 564 . 565) (symbol "destroy" 565 . 572) (semantic-list "()" 572 . 574) (punctuation ";" 574 . 575)))
+          ("MON_NODES_MANAGER_ST_MEMBER_ID" . ((number "2" 1505 . 1506)))
+          ("MON_ST_H")
+          ("MON_ST_LOGGER" . 
+              ((symbol "MON_ST" 303 . 309) (punctuation "-" 309 . 310) (punctuation ">" 310 . 311) (symbol "logger" 311 . 317) (semantic-list "()" 317 . 319)))
+          ("MON_CFOLDER" . 
+              ((symbol "mon" 855 . 858) (punctuation ":" 858 . 859) (punctuation ":" 859 . 860) (symbol "lib" 860 . 863) (punctuation ":" 863 . 864) (punctuation ":" 864 . 865) (symbol "config" 865 . 871) (punctuation ":" 871 . 872) (punctuation ":" 872 . 873) (symbol "CFolder" 873 . 880)))
+          ("MON_SENSORS_MANAGER_ST_MEMBER_ID" . ((number "3" 1553 . 1554)))
+          ("MON_OPTION_FOREACH_FOLDER" (spp-arg-list ("_name" "_folder") 1094 . 1109) . ((symbol "MON_OPTION_FOREACH_OPTION" 1110 . 1135) (semantic-list "(_name, _folder->folders(), TFoldersList)" 1135 . 1176)))
+          ("MON_STORAGE_MANAGER_ST_MEMBER_ID" . ((number "4" 1601 . 1602)))
+          ("MON_ST_APPEND_MEMBER" (spp-arg-list ("_type") 1632 . 1639) . 
+              ((symbol "MON_ST" 1640 . 1646) (punctuation "-" 1646 . 1647) (punctuation ">" 1647 . 1648) (symbol "appendMember" 1648 . 1660) (semantic-list "(new _type())" 1660 . 1673)))
+          ("MON_ST" . 
+              ((symbol "mon" 218 . 221) (punctuation ":" 221 . 222) (punctuation ":" 222 . 223) (symbol "lib" 223 . 226) (punctuation ":" 226 . 227) (punctuation ":" 227 . 228) (symbol "base" 228 . 232) (punctuation ":" 232 . 233) (punctuation ":" 233 . 234) (symbol "CSingleton" 234 . 244) (punctuation ":" 244 . 245) (punctuation ":" 245 . 246) (symbol "instance" 246 . 254) (semantic-list "()" 254 . 256)))
+          )
+)
+    (semanticdb-table "threads-helper.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("THREADSHELPER_H_INCLUDED" variable (:constant-flag t) nil [53 77])
+            ("pthread.h" include (:system-flag t) nil [78 98])
+            ("defines/st.h" include nil nil [99 122])
+            ("defines/signals-helper.h" include nil nil [123 158])
+            ("MON_THREADED_FUNCTION_DISABLE_CANCEL" variable (:constant-flag t) nil [168 204])
+            ("MON_THREADED_FUNCTION_ENABLE_CANCEL" variable (:constant-flag t) nil [267 302])
+            ("MON_THREADED_IS_ACTIVE" variable (:constant-flag t) nil [365 387])
+            ("MON_THREADED_FUNCTION_DECLARE" variable (:constant-flag t) nil [430 459])
+            ("MON_THREADED_FUNCTION_INIT" variable (:constant-flag t) nil [743 769])
+            ("MON_THREADED_FUNCTION_IMPLEMENT" variable (:constant-flag t) nil [852 883])
+            ("MON_THREADED_FUNCTION_ABORT" variable (:constant-flag t) nil [2089 2116])
+            ("MON_THREADED_ABORT_IF_NEED" variable (:constant-flag t) nil [2156 2182]))          
+      :file "threads-helper.h"
+      :pointmax 2264
+      :fsize 2263
+      :lastmodtime '(21132 32571 583465 545000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("THREADSHELPER_H_INCLUDED")
+          ("MON_THREADED_FUNCTION_INIT" (spp-arg-list ("_name") 769 . 776) . 
+              ((spp-symbol-merge ((symbol "thread_is_active" 777 . 793) (symbol "_name" 795 . 800)) 777 . 800) (punctuation "=" 801 . 802) (symbol "false" 803 . 808) (punctuation ";" 808 . 809) (spp-symbol-merge ((symbol "terminate_thread" 810 . 826) (symbol "_name" 828 . 833)) 810 . 833) (punctuation "=" 834 . 835) (symbol "false" 836 . 841) (punctuation ";" 841 . 842)))
+          ("MON_THREADED_FUNCTION_ABORT" (spp-arg-list ("_name") 2116 . 2123) . 
+              ((spp-symbol-merge ((symbol "abort_thread_" 2124 . 2137) (symbol "_name" 2139 . 2144)) 2124 . 2144) (semantic-list "()" 2144 . 2146) (punctuation ";" 2146 . 2147)))
+          ("MON_THREADED_FUNCTION_DECLARE" (spp-arg-list ("_name") 459 . 466) . 
+              ((FRIEND "friend" 473 . 479) (VOID "void" 480 . 484) (punctuation "*" 485 . 486) (spp-symbol-merge ((symbol "thread_" 487 . 494) (symbol "_name" 496 . 501)) 487 . 501) (semantic-list "(void *data)" 501 . 513) (punctuation ";" 513 . 514) (PUBLIC "public" 519 . 525) (punctuation ":" 525 . 526) (VOID "void" 533 . 537) (symbol "_name" 538 . 543) (semantic-list "()" 543 . 545) (punctuation ";" 545 . 546) (PRIVATE "private" 551 . 558) (punctuation ":" 558 . 559) (VOID "void" 566 . 570) (spp-symbol-merge ((symbol "run_thread" 571 . 581) (symbol "_name" 583 . 588)) 571 . 588) (semantic-list "()" 588 . 590) (punctuation ";" 590 . 591) (BOOL "bool" 598 . 602) (spp-symbol-merge ((symbol "thread_is_active" 603 . 619) (symbol "_name" 621 . 626)) 603 . 626) (punctuation ";" 626 . 627) (BOOL "bool" 634 . 638) (spp-symbol-merge ((symbol "terminate_thread" 639 . 655) (symbol "_name" 657 . 662)) 639 . 662) (punctuation ";" 662 . 663) (symbol "pthread_t" 670 . 679) (spp-symbol-merge ((symbol "thread_id_" 680 . 690) (symbol "_name" 692 . 697)) 680 . 697) (punctuation ";" 697 . 698) (VOID "void" 705 . 709) (spp-symbol-merge ((symbol "abort_thread_" 710 . 723) (symbol "_name" 725 . 730)) 710 . 730) (semantic-list "()" 730 . 732) (punctuation ";" 732 . 733)))
+          ("MON_THREADED_IS_ACTIVE" (spp-arg-list ("_name") 387 . 394) . ((semantic-list "(thread_is_active##_name)" 395 . 420)))
+          ("MON_THREADED_FUNCTION_ENABLE_CANCEL" . 
+              ((symbol "pthread_setcancelstate" 304 . 326) (semantic-list "(PTHREAD_CANCEL_ENABLE, NULL)" 326 . 355) (punctuation ";" 355 . 356)))
+          ("MON_THREADED_FUNCTION_DISABLE_CANCEL" . 
+              ((symbol "pthread_setcancelstate" 205 . 227) (semantic-list "(PTHREAD_CANCEL_DISABLE, NULL)" 227 . 257) (punctuation ";" 257 . 258)))
+          ("MON_THREADED_FUNCTION_IMPLEMENT" (spp-arg-list ("_class" "_name") 883 . 897) . 
+              ((VOID "void" 900 . 904) (punctuation "*" 905 . 906) (spp-symbol-merge ((symbol "thread_" 907 . 914) (symbol "_name" 916 . 921)) 907 . 921) (semantic-list "(void *data)" 921 . 933) (semantic-list "{ \\
+  MON_THREADED_FUNCTION_ENABLE_CANCEL \\
+  MON_LOG_DBG(\"Thread \" #_name \" started...\"); \\
+  (reinterpret_cast<_class *>(data))->run_thread##_name(); \\
+  return NULL; \\
+}" 936 . 1108) (VOID "void" 1111 . 1115) (symbol "_class" 1116 . 1122) (punctuation ":" 1122 . 1123) (punctuation ":" 1123 . 1124) (symbol "_name" 1124 . 1129) (semantic-list "()" 1129 . 1131) (semantic-list "{ \\
+  MON_LOG_DBG(\"Thread \" #_name \" starting...\"); \\
+  errno = pthread_create(&thread_id_##_name, NULL, thread_##_name, reinterpret_cast<void *>(this)); \\
+  thread_is_active##_name = errno == 0; \\
+  if(thread_is_active##_name) \\
+  { \\
+    MON_LOG_DBG(\"Thread \" #_name \" starting done...\"); \\
+  } \\
+  else \\
+  { \\
+    MON_PRINT_ERRNO(\"Thread \" #_name \" starting failed.\") \\
+    MON_ABORT; \\
+  } \\
+}" 1134 . 1532) (VOID "void" 1535 . 1539) (symbol "_class" 1540 . 1546) (punctuation ":" 1546 . 1547) (punctuation ":" 1547 . 1548) (spp-symbol-merge ((symbol "abort_thread_" 1548 . 1561) (symbol "_name" 1563 . 1568)) 1548 . 1568) (semantic-list "()" 1568 . 1570) (semantic-list "{ \\
+  if(thread_is_active##_name) \\
+  { \\
+    terminate_thread##_name = true; \\
+    MON_LOG_DBG(\"Thread \" #_name \" terminating...\"); \\
+    sleep(1); \\
+    errno = pthread_cancel(thread_id_##_name); pthread_join(thread_id_##_name, NULL); \\
+    if(errno) { MON_PRINT_ERRNO(\"Thread \" #_name \" terminating failed.\"); } \\
+    else { MON_LOG_DBG(\"Thread \" #_name \" terminated...\"); } \\
+    return; \\
+  } \\
+  MON_LOG_DBG(\"Thread \" #_name \" not active, no need termination\"); \\
+}" 1573 . 2044) (VOID "void" 2047 . 2051) (symbol "_class" 2052 . 2058) (punctuation ":" 2058 . 2059) (punctuation ":" 2059 . 2060) (spp-symbol-merge ((symbol "run_thread" 2060 . 2070) (symbol "_name" 2072 . 2077)) 2060 . 2077) (semantic-list "()" 2077 . 2079)))
+          ("MON_THREADED_ABORT_IF_NEED" (spp-arg-list ("_name") 2182 . 2189) . 
+              ((IF "if" 2190 . 2192) (semantic-list "(terminate_thread##_name)" 2192 . 2217) (semantic-list "{return;}" 2218 . 2227)))
+          )
+)
+    (semanticdb-table "class-helper.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CLASSHELPER_H" variable (:constant-flag t) nil [42 55])
+            ("MON_READONLY_PROPERTY" variable (:constant-flag t) nil [117 138])
+            ("MON_PROPERTY" variable (:constant-flag t) nil [297 309]))          
+      :file "class-helper.h"
+      :pointmax 460
+      :fsize 541
+      :lastmodtime '(21116 59186 626898 125000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CLASSHELPER_H")
+          ("MON_PROPERTY" (spp-arg-list ("_type" "_name") 309 . 322) . 
+              ((symbol "MON_READONLY_PROPERTY" 327 . 348) (semantic-list "(_type, _name)" 348 . 362) (PUBLIC "public" 367 . 373) (punctuation ":" 373 . 374) (VOID "void" 375 . 379) (spp-symbol-merge ((symbol "set" 380 . 383) (symbol "_name" 385 . 390)) 380 . 390) (semantic-list "(const _type & value)" 390 . 411) (semantic-list "{ m_##_name = value; }" 412 . 434)))
+          ("MON_READONLY_PROPERTY" (spp-arg-list ("_type" "_name") 138 . 152) . 
+              ((PRIVATE "private" 157 . 164) (punctuation ":" 164 . 165) (symbol "_type" 166 . 171) (spp-symbol-merge ((symbol "m_" 172 . 174) (symbol "_name" 176 . 181)) 172 . 181) (punctuation ";" 181 . 182) (PUBLIC "public" 187 . 193) (punctuation ":" 193 . 194) (symbol "_type" 196 . 201) (symbol "_name" 205 . 210) (semantic-list "()" 210 . 212) (semantic-list "{ return m_##_name ; }" 213 . 235)))
+          )
+)
+    (semanticdb-table "mutex-helper.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("MUTEXHELPER_H" variable (:constant-flag t) nil [31 44])
+            ("pthread.h" include (:system-flag t) nil [45 65])
+            ("MON_MUTEX_NAME" variable (:constant-flag t) nil [75 89])
+            ("MON_MUTEX_DECLARE" variable (:constant-flag t) nil [127 144])
+            ("MON_MUTEX_INITIALIZE" variable (:constant-flag t) nil [219 239])
+            ("MON_MUTEX_DESTROY" variable (:constant-flag t) nil [305 322])
+            ("MON_MUTEX_LOCK" variable (:constant-flag t) nil [388 402])
+            ("MON_MUTEX_UNLOCK" variable (:constant-flag t) nil [470 486]))          
+      :file "mutex-helper.h"
+      :pointmax 569
+      :fsize 568
+      :lastmodtime '(22146 17097 738003 794000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("MON_MUTEX_DECLARE" (spp-arg-list ("_name") 144 . 151) . 
+              ((PRIVATE "private" 155 . 162) (punctuation ":" 162 . 163) (MUTABLE "mutable" 164 . 171) (symbol "pthread_mutex_t" 172 . 187) (symbol "MON_MUTEX_NAME" 188 . 202) (semantic-list "(_name)" 202 . 209) (punctuation ";" 209 . 210)))
+          ("MON_MUTEX_NAME" (spp-arg-list ("_name") 89 . 96) . ((spp-symbol-merge ((symbol "m_mutex_" 103 . 111) (symbol "_name" 113 . 118)) 103 . 118)))
+          ("MON_MUTEX_INITIALIZE" (spp-arg-list ("_name") 239 . 246) . 
+              ((symbol "pthread_mutex_init" 247 . 265) (semantic-list "(&MON_MUTEX_NAME(_name), NULL)" 265 . 295) (punctuation ";" 295 . 296)))
+          ("MON_MUTEX_UNLOCK" (spp-arg-list ("_name") 486 . 493) . 
+              ((symbol "pthread_mutex_unlock" 498 . 518) (semantic-list "(&MON_MUTEX_NAME(_name))" 518 . 542) (punctuation ";" 542 . 543)))
+          ("MON_MUTEX_LOCK" (spp-arg-list ("_name") 402 . 409) . 
+              ((symbol "pthread_mutex_lock" 416 . 434) (semantic-list "(&MON_MUTEX_NAME(_name))" 436 . 460) (punctuation ";" 460 . 461)))
+          ("MUTEXHELPER_H")
+          ("MON_MUTEX_DESTROY" (spp-arg-list ("_name") 322 . 329) . 
+              ((symbol "pthread_mutex_destroy" 333 . 354) (semantic-list "(&MON_MUTEX_NAME(_name))" 354 . 378) (punctuation ";" 378 . 379)))
+          )
+)
+    (semanticdb-table "logger-helper.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("LOGGERHELPER_H" variable (:constant-flag t) nil [43 57])
+            ("MON_LOG_PREFIX" variable (:constant-flag t) nil [157 171])
+            ("MON_LOG" variable (:constant-flag t) nil [708 715])
+            ("MON_LOG_NFO" variable (:constant-flag t) nil [833 844])
+            ("MON_LOG_ERR" variable (:constant-flag t) nil [907 918])
+            ("MON_LOG_WRN" variable (:constant-flag t) nil [982 993])
+            ("MON_LOG_DBG" variable (:constant-flag t) nil [1263 1274])
+            ("MON_LOG_DBG_CHECKPOINT" variable (:constant-flag t) nil [1295 1317])
+            ("errno.h" include (:system-flag t) nil [1326 1344])
+            ("string.h" include (:system-flag t) nil [1345 1364])
+            ("MON_PRINT_ERRNO" variable (:constant-flag t) nil [1373 1388])
+            ("MON_PRINT_FILEOP_ERRNO" variable (:constant-flag t) nil [1496 1518]))          
+      :file "logger-helper.h"
+      :pointmax 1635
+      :fsize 1634
+      :lastmodtime '(22146 14284 999140 258000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("MON_LOG_ERR" (spp-arg-list ("_message") 918 . 928) . 
+              ((symbol "MON_LOG" 929 . 936) (semantic-list "(_message, mon::lib::logger::pError)" 936 . 972) (punctuation ";" 972 . 973)))
+          ("MON_LOG_WRN" (spp-arg-list ("_message") 993 . 1003) . 
+              ((symbol "MON_LOG" 1004 . 1011) (semantic-list "(_message, mon::lib::logger::pWarning)" 1011 . 1049) (punctuation ";" 1049 . 1050)))
+          ("MON_LOG" (spp-arg-list ("_message" "_type") 715 . 731) . 
+              ((symbol "MON_ST_LOGGER" 732 . 745) (punctuation "-" 745 . 746) (punctuation ">" 746 . 747) (symbol "log" 747 . 750) (semantic-list "(mon::lib::logger::CLogMessage(_type) MON_LOG_PREFIX << _message)" 750 . 815) (punctuation ";" 815 . 816)))
+          ("MON_LOG_NFO" (spp-arg-list ("_message") 844 . 854) . 
+              ((symbol "MON_LOG" 855 . 862) (semantic-list "(_message, mon::lib::logger::pInfo)" 862 . 897) (punctuation ";" 897 . 898)))
+          ("MON_LOG_PREFIX")
+          ("LOGGERHELPER_H")
+          ("MON_LOG_DBG" (spp-arg-list ("_message") 1274 . 1284))
+          ("MON_LOG_DBG_CHECKPOINT")
+          ("MON_PRINT_ERRNO" (spp-arg-list ("_message") 1388 . 1398) . 
+              ((symbol "MON_LOG_ERR" 1419 . 1430) (semantic-list "(_message << \". (\" << errno << \"), \" << strerror(errno))" 1430 . 1486) (punctuation ";" 1486 . 1487)))
+          ("MON_PRINT_FILEOP_ERRNO" (spp-arg-list ("_filename" "_operation") 1518 . 1541) . 
+              ((symbol "MON_PRINT_ERRNO" 1542 . 1557) (semantic-list "(_operation \" file '\" << _filename << \"' failed\")" 1557 . 1606) (punctuation ";" 1606 . 1607)))
+          )
+)
+    (semanticdb-table "signals-helper.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("SIGHELP_H" variable (:constant-flag t) nil [38 47])
+            ("signal.h" include (:system-flag t) nil [48 67])
+            ("unistd.h" include (:system-flag t) nil [68 87])
+            ("stdlib.h" include (:system-flag t) nil [88 107])
+            ("MON_SIGNAL_HANDLER_NAME" variable (:constant-flag t) nil [117 140])
+            ("MON_SIGNAL_HANDLER" variable (:constant-flag t) nil [177 195])
+            ("MON_HANDLE_SIGNAL" variable (:constant-flag t) nil [263 280])
+            ("MON_SIGNAL_LOOP" variable (:constant-flag t) nil [356 371])
+            ("MON_ABORT" variable (:constant-flag t) nil [401 410]))          
+      :file "signals-helper.h"
+      :pointmax 473
+      :fsize 472
+      :lastmodtime '(20532 58844 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("SIGHELP_H")
+          ("MON_SIGNAL_HANDLER_NAME" (spp-arg-list ("_signal") 140 . 149) . ((spp-symbol-merge ((symbol "sig_hand_" 150 . 159) (symbol "_signal" 161 . 168)) 150 . 168)))
+          ("MON_HANDLE_SIGNAL" (spp-arg-list ("_signal") 280 . 289) . 
+              ((semantic-list "(void)" 290 . 296) (symbol "signal" 297 . 303) (semantic-list "(_signal, MON_SIGNAL_HANDLER_NAME(_signal))" 303 . 346) (punctuation ";" 346 . 347)))
+          ("MON_ABORT" . ((semantic-list "{ if(raise(SIGTERM) != 0) { abort(); } }" 411 . 451)))
+          ("MON_SIGNAL_LOOP" . 
+              ((FOR "for" 372 . 375) (semantic-list "(;;)" 375 . 379) (semantic-list "{ pause(); }" 380 . 392)))
+          ("MON_SIGNAL_HANDLER" (spp-arg-list ("_signal") 195 . 204) . 
+              ((VOID "void" 205 . 209) (symbol "MON_SIGNAL_HANDLER_NAME" 210 . 233) (semantic-list "(_signal)" 233 . 242) (semantic-list "(int signal)" 242 . 254)))
+          )
+)
+    (semanticdb-table "protocol-control.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("PROTOCOLCONTROLCHARACTERS_H" variable (:constant-flag t) nil [45 72])
+            ("limits" include (:system-flag t) nil [73 90])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("protocol" type
+                               (:members 
+                                  ( ("MON_PROTO_DELIMITER" variable (:constant-flag t) (reparse-symbol namespacesubparts) [154 173])
+                                    ("MON_PROTOCOL_DELIMITER" variable (:constant-flag t) (reparse-symbol namespacesubparts) [214 236])
+                                    ("MON_DECLARE_PROTOCOL_DELIMITER" variable (:constant-flag t) (reparse-symbol namespacesubparts) [313 343])
+                                    ("PDtypemessage" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(type       ,message    ,'^' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [439 500])
+                                    ("PDidtype" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(id         ,type       ,'@' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [559 620])
+                                    ("PDendline" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(end        ,line       ,'\\n')"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [670 731])
+                                    ("PDdateframeset" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(date       ,frameset   ,'*' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [753 814])
+                                    ("PDsensornameframename" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,framename  ,'$' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [857 918])
+                                    ("PDframenameframeset" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(framename  ,frameset   ,'!' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [965 1026])
+                                    ("PDframenumberframefields" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(framenumber,framefields,'#' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [1069 1130])
+                                    ("PDframeframe" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(frame      ,frame      ,'|' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [1191 1252])
+                                    ("PDfieldfield" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(field      ,field      ,':' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [1290 1351])
+                                    ("PDsensornamesensorname" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,sensorname ,':' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [1382 1443])
+                                    ("PDsensornamedefinition" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(sensorname ,definition ,'#' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [1488 1549])
+                                    ("PDframenamestatistic" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(framename  ,statistic  ,'!' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [1596 1657])
+                                    ("PDstatisticstatistic" variable
+                                       (:typemodifiers ("static")
+                                        :constant-flag t
+                                        :default-value "MON_DECLARE_PROTOCOL_DELIMITER(statistic  ,statistic  ,'~' )"
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [1719 1780])
+                                    ("EProtocolMessageType" type
+                                       (:members 
+                                          ( ("mtAnswer" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [1927 1936])
+                                            ("mtConnect" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [2069 2079])
+                                            ("mtRequestSensorsList" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [2192 2213])
+                                            ("mtRequestSensorDefinition" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [2361 2387])
+                                            ("mtRequestSensorFrameStatistic" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [2509 2540]))                                          
+                                        :type "enum")
+                                        (reparse-symbol namespacesubparts) [1832 2541])
+                                    ("MON_PROTOCOL_MESSAGE_ID_TYPE" variable (:constant-flag t) (reparse-symbol namespacesubparts) [2551 2579])
+                                    ("MON_PROTOCOL_MESSAGE_ID_MAX" variable (:constant-flag t) (reparse-symbol namespacesubparts) [2641 2668]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [124 2730]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [108 2732]))                  
+                :type "namespace")
+                nil [92 2734]))          
+      :file "protocol-control.h"
+      :pointmax 2773
+      :fsize 3535
+      :lastmodtime '(21129 39389 290230 242000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("MON_PROTO_DELIMITER" (spp-arg-list ("_left" "_right") 173 . 187) . ((spp-symbol-merge ((spp-symbol-merge ((symbol "PD" 188 . 190) (symbol "_left" 192 . 197)) 188 . 197) (symbol "_right" 199 . 205)) 188 . 205)))
+          ("MON_PROTOCOL_MESSAGE_ID_MAX" . ((semantic-list "(std::numeric_limits<MON_PROTOCOL_MESSAGE_ID_TYPE>::max())" 2669 . 2727)))
+          ("MON_DECLARE_PROTOCOL_DELIMITER" (spp-arg-list ("_left" "_right" "_delimiter") 343 . 368) . 
+              ((STATIC "static" 373 . 379) (CONST "const" 380 . 385) (CHAR "char" 386 . 390) (symbol "MON_PROTO_DELIMITER" 391 . 410) (semantic-list "(_left,_right)" 410 . 424) (punctuation "=" 425 . 426) (symbol "_delimiter" 427 . 437)))
+          ("MON_PROTOCOL_DELIMITER" (spp-arg-list ("_left" "_right") 236 . 250) . 
+              ((symbol "mon" 251 . 254) (punctuation ":" 254 . 255) (punctuation ":" 255 . 256) (symbol "lib" 256 . 259) (punctuation ":" 259 . 260) (punctuation ":" 260 . 261) (symbol "protocol" 261 . 269) (punctuation ":" 269 . 270) (punctuation ":" 270 . 271) (symbol "MON_PROTO_DELIMITER" 271 . 290) (semantic-list "(_left,_right)" 290 . 304)))
+          ("PROTOCOLCONTROLCHARACTERS_H")
+          ("MON_PROTOCOL_MESSAGE_ID_TYPE" . 
+              ((UNSIGNED "unsigned" 2580 . 2588) (LONG "long" 2589 . 2593) (LONG "long" 2594 . 2598)))
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!defines!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

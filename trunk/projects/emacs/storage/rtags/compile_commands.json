@@ -1,0 +1,342 @@
+[
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/singleton/csingletonmember.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/singleton/csingletonmember.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/singleton/csingletonmember.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/singleton/csingleton.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/singleton/csingleton.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/singleton/csingleton.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/string/cvariant.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/string/cvariant.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/string/cvariant.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/timer/ctimer.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/timer/ctimer.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/timer/ctimer.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/sequrity/csystemrights.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/sequrity/csystemrights.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/sequrity/csystemrights.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/string/cstringbuilder.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/string/cstringbuilder.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/string/cstringbuilder.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/parcer/cparcer.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/parcer/cparcer.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/parcer/cparcer.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/parcer/cparcerfile.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/parcer/cparcerfile.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/parcer/cparcerfile.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/parcer/cparcerstring.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/parcer/cparcerstring.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/parcer/cparcerstring.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dbase_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/base.dir/libraryes/base/string/stringhelper.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/base/string/stringhelper.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/base/string/stringhelper.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/rw/cconfigurationparcer.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/rw/cconfigurationparcer.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/rw/cconfigurationparcer.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/rw/cconfigurationgenerator.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/rw/cconfigurationgenerator.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/rw/cconfigurationgenerator.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/rw/ccmdlineparcer.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/rw/ccmdlineparcer.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/rw/ccmdlineparcer.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/cconfig.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/cconfig.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/cconfig.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/model/cnode.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/model/cnode.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/model/cnode.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/model/cfile.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/model/cfile.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/model/cfile.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dconfig_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/config.dir/libraryes/config/model/cfolder.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/config/model/cfolder.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/config/model/cfolder.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dlogger_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/logger.dir/libraryes/logger/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/logger/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/logger/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dlogger_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/logger.dir/libraryes/logger/clogmessage.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/logger/clogmessage.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/logger/clogmessage.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dlogger_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/logger.dir/libraryes/logger/clogger.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/logger/clogger.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/logger/clogger.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmodel_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/model.dir/libraryes/model/citems.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/model/citems.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/model/citems.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmodel_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/model.dir/libraryes/model/csensor.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/model/csensor.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/model/csensor.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmodel_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/model.dir/libraryes/model/cnode.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/model/cnode.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/model/cnode.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmodel_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/model.dir/libraryes/model/cnodes.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/model/cnodes.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/model/cnodes.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmodel_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/model.dir/libraryes/model/ccollector.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/model/ccollector.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/model/ccollector.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmodel_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/model.dir/libraryes/model/ccollectors.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/model/ccollectors.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/model/ccollectors.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmodel_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/model.dir/libraryes/model/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/model/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/model/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-collector.dir/daemons/collector/node/cnode.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/collector/node/cnode.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/collector/node/cnode.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-collector.dir/daemons/collector/node/csensor.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/collector/node/csensor.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/collector/node/csensor.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-collector.dir/daemons/collector/node/cnodes.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/collector/node/cnodes.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/collector/node/cnodes.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-collector.dir/daemons/collector/protocol/cprotocol.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/collector/protocol/cprotocol.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/collector/protocol/cprotocol.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-collector.dir/daemons/collector/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/collector/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/collector/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-confgen.dir/utils/confgen/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/utils/confgen/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/utils/confgen/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-node.dir/daemons/node/collector/ccollectors.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/node/collector/ccollectors.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/node/collector/ccollectors.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-node.dir/daemons/node/collector/ccollector.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/node/collector/ccollector.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/node/collector/ccollector.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-node.dir/daemons/node/protocol/cprotocol.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/node/protocol/cprotocol.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/node/protocol/cprotocol.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-node.dir/daemons/node/sensor/csensor.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/node/sensor/csensor.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/node/sensor/csensor.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-node.dir/daemons/node/sensor/cframe.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/node/sensor/cframe.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/node/sensor/cframe.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-node.dir/daemons/node/sensor/csensorsmanager.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/node/sensor/csensorsmanager.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/node/sensor/csensorsmanager.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-node.dir/daemons/node/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/node/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/node/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-storage.dir/daemons/storage/cstorage.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/storage/cstorage.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/storage/cstorage.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-storage.dir/daemons/storage/protocol/cprotocol.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/storage/protocol/cprotocol.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/storage/protocol/cprotocol.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-storage.dir/daemons/storage/database/cdatabase.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/storage/database/cdatabase.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/storage/database/cdatabase.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-storage.dir/daemons/storage/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/daemons/storage/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/daemons/storage/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -g -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/mon-text-to-char-array.dir/tools/mon-text-to-char-array/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/tools/mon-text-to-char-array/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/tools/mon-text-to-char-array/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dnetwork_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/network.dir/libraryes/network/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/network/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/network/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dnetwork_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/network.dir/libraryes/network/csocket.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/network/csocket.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/network/csocket.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dnetwork_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/network.dir/libraryes/network/cserversocket.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/network/cserversocket.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/network/cserversocket.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dnetwork_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/network.dir/libraryes/network/cclientsocket.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/network/cclientsocket.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/network/cclientsocket.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dprotocol_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/protocol.dir/libraryes/protocol/cprotocol.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/protocol/cprotocol.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/protocol/cprotocol.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dprotocol_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/protocol.dir/libraryes/protocol/cnetworkmessage.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/protocol/cnetworkmessage.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/protocol/cnetworkmessage.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dprotocol_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/protocol.dir/libraryes/protocol/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/protocol/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/protocol/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/data/cdefinition.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cdefinition.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cdefinition.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/data/cframe.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cframe.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cframe.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/data/cfrequency.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cfrequency.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cfrequency.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/data/cfield.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cfield.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cfield.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/data/cstatisticcache.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cstatisticcache.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cstatisticcache.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/data/cstatisticdata.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cstatisticdata.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/data/cstatisticdata.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/parcers/cdefinitionparcer.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/parcers/cdefinitionparcer.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/parcers/cdefinitionparcer.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/parcers/cdefinitiongenerator.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/parcers/cdefinitiongenerator.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/parcers/cdefinitiongenerator.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensordata_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensordata.dir/libraryes/sensordata/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensordata/main.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensorplugin_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensorplugin.dir/libraryes/sensorplugin/csensorplugin.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensorplugin/csensorplugin.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensorplugin/csensorplugin.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensorplugin_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensorplugin.dir/libraryes/sensorplugin/cframesetbuilder.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensorplugin/cframesetbuilder.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensorplugin/cframesetbuilder.cpp"
+},
+{
+  "directory": "/tmp/mon/build/console/application",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dsensorplugin_EXPORTS -g -fPIC -I/tmp/mon/build/console/application/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/application/mon -I/home/sheridan/develop/github/mon/trunk/application/.    -std=c++11 -g -Wall -o CMakeFiles/sensorplugin.dir/libraryes/sensorplugin/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/application/libraryes/sensorplugin/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/application/libraryes/sensorplugin/main.cpp"
+}
+,{
+  "directory": "/tmp/mon/build/console/sensors/cpu",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dcpu_EXPORTS -g -fPIC -I/tmp/mon/root/include/mon -I/tmp/mon/build/console/sensors/cpu/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/sensors/cpu/src    -std=c++11 -g -Wall -o CMakeFiles/cpu.dir/src/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/sensors/cpu/src/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/sensors/cpu/src/main.cpp"
+}
+,{
+  "directory": "/tmp/mon/build/console/sensors/memory",
+  "command": "/usr/bin/clang++   -DMON_DEBUG -Dmemory_EXPORTS -g -fPIC -I/tmp/mon/root/include/mon -I/tmp/mon/build/console/sensors/memory/mon_generated_sources -I/home/sheridan/develop/github/mon/trunk/sensors/memory/src    -std=c++11 -g -Wall -o CMakeFiles/memory.dir/src/main.cpp.o -c /home/sheridan/develop/github/mon/trunk/sensors/memory/src/main.cpp",
+  "file": "/home/sheridan/develop/github/mon/trunk/sensors/memory/src/main.cpp"
+}
+,]

@@ -1,0 +1,179 @@
+;; Object singleton/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "singleton/"
+  :tables
+  (list
+    (semanticdb-table "csingleton.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("LIB_SINGLETON_H" variable (:constant-flag t) nil [44 59])
+            ("assert.h" include (:system-flag t) nil [60 79])
+            ("libraryes/config/config.h" include nil nil [80 116])
+            ("libraryes/logger/logger.h" include nil nil [117 153])
+            ("libraryes/base/singleton/csingletonmember.h" include nil nil [154 208])
+            ("MON_ST_ATOMIC_VNAME" variable (:constant-flag t) nil [218 237])
+            ("MON_ST_ATOMIC" variable (:constant-flag t) nil [263 276])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("base" type
+                               (:members 
+                                  ( ("CSingleton" type
+                                       (:members 
+                                          ( ("private" label nil (reparse-symbol classsubparts) [581 629])
+                                            ("m_lib" variable
+                                               (:pointer 1
+                                                :type ("mon" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [581 629])
+                                            ("public" label nil (reparse-symbol classsubparts) [581 629])
+                                            ("lib" function
+                                               (:pointer 1
+                                                :type ("mon" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [581 629])
+                                            ("private" label nil (reparse-symbol classsubparts) [634 682])
+                                            ("m_lib" variable
+                                               (:pointer 1
+                                                :type ("mon" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [634 682])
+                                            ("public" label nil (reparse-symbol classsubparts) [634 682])
+                                            ("lib" function
+                                               (:pointer 1
+                                                :type ("mon" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [634 682])
+                                            ("private" label nil (reparse-symbol classsubparts) [685 693])
+                                            ("CSingleton" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CSingleton" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [698 711])
+                                            ("CSingleton" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [716 730])
+                                            ("m_members" variable (:type ("TSingletonMembers" type (:type "class") nil nil)) (reparse-symbol classsubparts) [735 763])
+                                            ("public" label nil (reparse-symbol classsubparts) [767 774])
+                                            ("appendMember" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("member" variable
+                                                       (:pointer 1
+                                                        :type ("CSingletonMember" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [797 822]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [779 823])
+                                            ("member" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("id" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("TSingletonMemberID" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [853 882]))                                                  
+                                                :type ("CSingletonMember" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [828 883])
+                                            ("instance" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :typemodifiers ("static")
+                                                :type ("CSingleton" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [888 918])
+                                            ("destroy" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("static")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [923 945]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [558 948]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [504 951]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [488 953]))                  
+                :type "namespace")
+                nil [472 955]))          
+      :file "csingleton.h"
+      :pointmax 983
+      :fsize 1011
+      :lastmodtime '(21132 47623 35443 653000)
+      :unmatched-syntax '((punctuation ";" 634 . 682) (punctuation ";" 581 . 629))
+      :lexical-table 
+        '(("LIB_SINGLETON_H")
+          ("MON_ST_ATOMIC_VNAME" (spp-arg-list ("_name") 237 . 244) . ((spp-symbol-merge ((symbol "m_" 245 . 247) (symbol "_name" 249 . 254)) 245 . 254)))
+          ("MON_ST_ATOMIC" (spp-arg-list ("_interface" "_name") 276 . 294) . 
+              ((PRIVATE "private" 299 . 306) (punctuation ":" 306 . 307) (symbol "_interface" 308 . 318) (punctuation "*" 319 . 320) (symbol "MON_ST_ATOMIC_VNAME" 321 . 340) (semantic-list "(_name)" 340 . 347) (punctuation ";" 347 . 348) (PUBLIC "public" 353 . 359) (punctuation ":" 360 . 361) (symbol "_interface" 362 . 372) (punctuation "*" 373 . 374) (symbol "_name" 375 . 380) (semantic-list "()" 380 . 382) (semantic-list "{ assert(MON_ST_ATOMIC_VNAME(_name) != nullptr); return MON_ST_ATOMIC_VNAME(_name); }" 383 . 468) (punctuation ";" 468 . 469)))
+          )
+)
+    (semanticdb-table "csingletonmember.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CSINGLETONMEMBER_H" variable (:constant-flag t) nil [47 65])
+            ("map" include (:system-flag t) nil [66 80])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("base" type
+                               (:members 
+                                  ( ("TSingletonMemberID" type
+                                       (:typedef ("unsigned short")
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [132 174])
+                                    ("CSingletonMember" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [263 270])
+                                            ("CSingletonMember" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("memberID" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("TSingletonMemberID" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [290 325]))                                                  
+                                                :type ("CSingletonMember" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [273 326])
+                                            ("CSingletonMember" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [329 357])
+                                            ("id" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type ("TSingletonMemberID" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [360 396])
+                                            ("private" label nil (reparse-symbol classsubparts) [397 405])
+                                            ("m_id" variable (:type ("TSingletonMemberID" type (:type "class") nil nil)) (reparse-symbol classsubparts) [408 432]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [238 435])
+                                    ("TSingletonMembers" type
+                                       (:typedef ("std::map" type
+                                             (:template-specifier 
+                                                ( ("TSingletonMemberID" type nil nil nil)
+                                                  ("CSingletonMember" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [437 512]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [114 515]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [98 517]))                  
+                :type "namespace")
+                nil [82 519]))          
+      :file "csingletonmember.h"
+      :pointmax 550
+      :fsize 599
+      :lastmodtime '(21116 58384 439948 306000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CSINGLETONMEMBER_H")
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!libraryes!base!singleton!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

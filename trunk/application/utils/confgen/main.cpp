@@ -35,6 +35,7 @@ int main(int argc, char **argv)
   MON_CMD_LINE_PARCE;
 
 //  MON_ST_CONFIG->load(pcmdl, argc, argv);
+  MON_LOG_NFO(MON_CMD_LINE_OPTION_VALUE("c").toString());
   MON_ST_CONFIG->load(MON_CMD_LINE_OPTION_VALUE("c").toString());
 
 

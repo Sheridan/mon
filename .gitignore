@@ -8,5 +8,6 @@ trunk/doc/architecture/*.png
 trunk/projects/emacs/packages
 trunk/projects/emacs/themes
 trunk/projects/emacs/semanticdb
+trunk/projects/emacs/storage
 *#
 *~

@@ -1,0 +1,585 @@
+;; Object model/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "model/"
+  :tables
+  (list
+    (semanticdb-table "cfile.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CVALUE_H" variable (:constant-flag t) nil [37 45])
+            ("libraryes/config/model/cnode.h" include nil nil [46 87])
+            ("libraryes/base/string/cvariant.h" include nil nil [88 131])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("config" type
+                               (:members 
+                                  ( ("CFile" type
+                                       (:superclasses 
+                                          ( ("CNode" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil)
+                                            ("mon::lib::base::CVariant" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [292 299])
+                                            ("CFile" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("nodeName" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [308 336])
+                                                    ("parentNode" variable
+                                                       (:pointer 1
+                                                        :type ("CNode" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [337 355]))                                                  
+                                                :type ("CFile" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [302 356])
+                                            ("CFile" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [359 368])
+                                            ("parent" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :type ("CFolder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [371 389])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) [416 446]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [393 447])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [473 503]))                                                  
+                                                :type "char")
+                                                (reparse-symbol classsubparts) [450 504])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [530 560]))                                                  
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [507 561])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) [587 617]))                                                  
+                                                :type "unsigned int")
+                                                (reparse-symbol classsubparts) [564 618])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "short")
+                                                        (reparse-symbol arg-sub-list) [644 674]))                                                  
+                                                :type "short")
+                                                (reparse-symbol classsubparts) [621 675])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [701 731]))                                                  
+                                                :type "unsigned short")
+                                                (reparse-symbol classsubparts) [678 732])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long")
+                                                        (reparse-symbol arg-sub-list) [758 788]))                                                  
+                                                :type "long")
+                                                (reparse-symbol classsubparts) [735 789])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long")
+                                                        (reparse-symbol arg-sub-list) [815 845]))                                                  
+                                                :type "unsigned long")
+                                                (reparse-symbol classsubparts) [792 846])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long long")
+                                                        (reparse-symbol arg-sub-list) [872 902]))                                                  
+                                                :type "long long")
+                                                (reparse-symbol classsubparts) [849 903])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) [929 959]))                                                  
+                                                :type "unsigned long long")
+                                                (reparse-symbol classsubparts) [906 960])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [986 1016]))                                                  
+                                                :type "float")
+                                                (reparse-symbol classsubparts) [963 1017])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [1043 1073]))                                                  
+                                                :type "double")
+                                                (reparse-symbol classsubparts) [1020 1074])
+                                            ("get" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("def" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1100 1130]))                                                  
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1077 1131]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [230 1134]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [165 1137]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [149 1139]))                  
+                :type "namespace")
+                nil [133 1141]))          
+      :file "cfile.h"
+      :pointmax 1161
+      :fsize 1196
+      :lastmodtime '(22147 45636 332439 645000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CVALUE_H")
+          )
+)
+    (semanticdb-table "cfolder.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CFOLDER_H" variable (:constant-flag t) nil [38 47])
+            ("defines/mutex-helper.h" include nil nil [48 81])
+            ("libraryes/config/model/cnode.h" include nil nil [82 123])
+            ("libraryes/config/model/pathinterface.h" include nil nil [124 173])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("config" type
+                               (:members 
+                                  ( ("CFolder" type
+                                       (:superclasses 
+                                          ( ("CNode" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil)
+                                            ("IPathInterface" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [357 364])
+                                            ("CFolder" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CFolder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [367 377])
+                                            ("CFolder" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("nodeName" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [388 416])
+                                                    ("parentNode" variable
+                                                       (:pointer 1
+                                                        :type ("CNode" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [417 435]))                                                  
+                                                :type ("CFolder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [380 436])
+                                            ("CFolder" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [439 450])
+                                            ("containsFolder" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [482 507]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [454 514])
+                                            ("folder" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [545 570]))                                                  
+                                                :type ("CFolder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [517 577])
+                                            ("foldersCount" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [580 616])
+                                            ("folders" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :type ("TFoldersList" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [619 655])
+                                            ("containsFile" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [685 710]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [659 717])
+                                            ("file" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [746 771]))                                                  
+                                                :type ("CFile" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [720 778])
+                                            ("filesCount" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [781 815])
+                                            ("files" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :type ("TFilesList" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [818 852])
+                                            ("parent" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :type ("CFolder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [856 877])
+                                            ("private" label nil (reparse-symbol classsubparts) [879 887])
+                                            ("m_folders" variable (:type ("TFoldersMap" type (:type "class") nil nil)) (reparse-symbol classsubparts) [890 912])
+                                            ("m_files" variable (:type ("TFilesMap" type (:type "class") nil nil)) (reparse-symbol classsubparts) [915 935]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [245 938]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [207 941]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [191 943]))                  
+                :type "namespace")
+                nil [175 945]))          
+      :file "cfolder.h"
+      :pointmax 966
+      :fsize 977
+      :lastmodtime '(21132 47622 802441 590000)
+      :unmatched-syntax '((thing 350 . 356) (thing 333 . 350) (thing 320 . 328) (thing 303 . 320))
+      :lexical-table 
+        '(("CFOLDER_H")
+          )
+)
+    (semanticdb-table "cnode.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CNODE_H" variable (:constant-flag t) nil [36 43])
+            ("map" include (:system-flag t) nil [44 58])
+            ("list" include (:system-flag t) nil [59 74])
+            ("string" include (:system-flag t) nil [75 92])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("config" type
+                               (:members 
+                                  ( ("CFolder" type
+                                       (:prototype t
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [146 160])
+                                    ("TFolderPair" type
+                                       (:typedef ("std::pair" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil)
+                                                  ("CFolder" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [161 215])
+                                    ("TFoldersMap" type
+                                       (:typedef ("std::map" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil)
+                                                  ("CFolder" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [216 270])
+                                    ("TFoldersList" type
+                                       (:typedef ("std::list" type
+                                             (:template-specifier 
+                                                ( ("CFolder" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [271 326])
+                                    ("CFile" type
+                                       (:prototype t
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [328 340])
+                                    ("TFilePair" type
+                                       (:typedef ("std::pair" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil)
+                                                  ("CFile" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [341 393])
+                                    ("TFilesMap" type
+                                       (:typedef ("std::map" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil)
+                                                  ("CFile" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [394 446])
+                                    ("TFilesList" type
+                                       (:typedef ("std::list" type
+                                             (:template-specifier 
+                                                ( ("CFile" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [447 500])
+                                    ("CNode" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [542 549])
+                                            ("CNode" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("nodeName" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [558 586])
+                                                    ("parentNode" variable
+                                                       (:pointer 1
+                                                        :type ("CNode" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [587 605]))                                                  
+                                                :type ("CNode" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [552 606])
+                                            ("CNode" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [609 626])
+                                            ("name" function
+                                               (:prototype-flag t
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [630 656])
+                                            ("level" function
+                                               (:prototype-flag t
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [659 671])
+                                            ("protected" label nil (reparse-symbol classsubparts) [673 683])
+                                            ("parent" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :type ("CNode" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [686 702])
+                                            ("private" label nil (reparse-symbol classsubparts) [704 712])
+                                            ("m_name" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol classsubparts) [715 734])
+                                            ("m_parent" variable
+                                               (:pointer 1
+                                                :type ("CNode" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [737 753]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [528 756]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [126 759]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [110 761]))                  
+                :type "namespace")
+                nil [94 763]))          
+      :file "cnode.h"
+      :pointmax 782
+      :fsize 800
+      :lastmodtime '(21116 58383 705941 36000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CNODE_H")
+          )
+)
+    (semanticdb-table "pathinterface.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("PATHINTERFACE_H_INCLUDED" variable (:constant-flag t) nil [53 77])
+            ("libraryes/config/model/cnode.h" include nil nil [78 119])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("config" type
+                               (:members 
+                                  ( ("IPathInterface" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [238 245])
+                                            ("containsFolder" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [285 310]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [249 315])
+                                            ("folder" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :pointer 1
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [354 379]))                                                  
+                                                :type ("CFolder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [318 384])
+                                            ("foldersCount" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [387 453])
+                                            ("folders" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :type ("TFoldersList" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [456 522])
+                                            ("containsFile" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [559 584]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [526 589])
+                                            ("file" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :pointer 1
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [625 650]))                                                  
+                                                :type ("CFile" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [592 655])
+                                            ("filesCount" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [658 721])
+                                            ("files" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :type ("TFilesList" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [724 787]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [215 790]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [153 793]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [137 795]))                  
+                :type "namespace")
+                nil [121 797]))          
+      :file "pathinterface.h"
+      :pointmax 833
+      :fsize 865
+      :lastmodtime '(22138 17842 975404 139000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("PATHINTERFACE_H_INCLUDED")
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!libraryes!config!model!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

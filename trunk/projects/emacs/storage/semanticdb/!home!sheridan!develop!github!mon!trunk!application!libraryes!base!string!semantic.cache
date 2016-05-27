@@ -1,0 +1,1670 @@
+;; Object string/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "string/"
+  :tables
+  (list
+    (semanticdb-table "stringhelper.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("STRINGHELPER_H" variable (:constant-flag t) nil [32 46])
+            ("string" include (:system-flag t) nil [47 64])
+            ("list" include (:system-flag t) nil [65 80])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("base" type
+                               (:members 
+                                  ( ("split" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("s" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [163 184])
+                                            ("delim" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "char")
+                                                (reparse-symbol arg-sub-list) [185 203])
+                                            ("elems" variable
+                                               (:reference 1
+                                                :type ("std::list" type
+                                                     (:template-specifier 
+                                                        ( ("std::string" type nil nil nil))                                                        
+                                                      :type "class")
+                                                      nil nil))
+                                                (reparse-symbol arg-sub-list) [204 234]))                                          
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [132 235])
+                                    ("split" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("s" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [265 286])
+                                            ("delim" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "char")
+                                                (reparse-symbol arg-sub-list) [287 305]))                                          
+                                        :type ("std::list" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil))
+                                        (reparse-symbol namespacesubparts) [236 306]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [114 393]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [98 395]))                  
+                :type "namespace")
+                nil [82 397]))          
+      :file "stringhelper.h"
+      :pointmax 424
+      :fsize 423
+      :lastmodtime '(21125 41154 892704 426000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("STRINGHELPER_H")
+          )
+)
+    (semanticdb-table "cvariant.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CVARIANT_H" variable (:constant-flag t) nil [39 49])
+            ("string" include (:system-flag t) nil [50 67])
+            ("defines/mutex-helper.h" include nil nil [68 101])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("base" type
+                               (:members 
+                                  ( ("toBool" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"false\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [181 233]))                                          
+                                        :type "bool")
+                                        (reparse-symbol namespacesubparts) [153 235])
+                                    ("toChar" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [264 312]))                                          
+                                        :type "char")
+                                        (reparse-symbol namespacesubparts) [236 318])
+                                    ("toInt" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [347 395]))                                          
+                                        :type "int")
+                                        (reparse-symbol namespacesubparts) [319 401])
+                                    ("toUInt" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [430 478]))                                          
+                                        :type "unsigned int")
+                                        (reparse-symbol namespacesubparts) [402 484])
+                                    ("toShort" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [513 561]))                                          
+                                        :type "short")
+                                        (reparse-symbol namespacesubparts) [485 567])
+                                    ("toUShort" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [596 644]))                                          
+                                        :type "unsigned short")
+                                        (reparse-symbol namespacesubparts) [568 650])
+                                    ("toLong" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [679 727]))                                          
+                                        :type "long")
+                                        (reparse-symbol namespacesubparts) [651 733])
+                                    ("toULong" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [762 810]))                                          
+                                        :type "unsigned long")
+                                        (reparse-symbol namespacesubparts) [734 816])
+                                    ("toLLong" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [845 893]))                                          
+                                        :type "long long")
+                                        (reparse-symbol namespacesubparts) [817 899])
+                                    ("toULLong" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [928 976]))                                          
+                                        :type "unsigned long long")
+                                        (reparse-symbol namespacesubparts) [900 982])
+                                    ("toFloat" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [1011 1059]))                                          
+                                        :type "float")
+                                        (reparse-symbol namespacesubparts) [983 1065])
+                                    ("toDouble" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :default-value "std::string(\"0\")"
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [1094 1142]))                                          
+                                        :type "double")
+                                        (reparse-symbol namespacesubparts) [1066 1148])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "int")
+                                                (reparse-symbol arg-sub-list) [1177 1207]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1149 1208])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "bool")
+                                                (reparse-symbol arg-sub-list) [1237 1267]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1209 1268])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "char")
+                                                (reparse-symbol arg-sub-list) [1297 1327]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1269 1328])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "float")
+                                                (reparse-symbol arg-sub-list) [1357 1387]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1329 1388])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [1417 1447]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1389 1448])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "unsigned int")
+                                                (reparse-symbol arg-sub-list) [1477 1507]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1449 1508])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "short")
+                                                (reparse-symbol arg-sub-list) [1537 1567]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1509 1568])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "unsigned short")
+                                                (reparse-symbol arg-sub-list) [1597 1627]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1569 1628])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "long")
+                                                (reparse-symbol arg-sub-list) [1657 1687]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1629 1688])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "unsigned long")
+                                                (reparse-symbol arg-sub-list) [1717 1747]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1689 1748])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "long long")
+                                                (reparse-symbol arg-sub-list) [1777 1807]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1749 1808])
+                                    ("toString" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "unsigned long long")
+                                                (reparse-symbol arg-sub-list) [1837 1867]))                                          
+                                        :type ("std::string" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [1809 1868])
+                                    ("EContentType" type (:type "class") (reparse-symbol namespacesubparts) [1905 2407])
+                                    ("UContent" type
+                                       (:members 
+                                          ( ("m_bool" variable
+                                               (:pointer 1
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [2477 2507])
+                                            ("m_char" variable
+                                               (:pointer 1
+                                                :type "char")
+                                                (reparse-symbol classsubparts) [2510 2540])
+                                            ("m_int" variable
+                                               (:pointer 1
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [2543 2573])
+                                            ("m_uint" variable
+                                               (:pointer 1
+                                                :type "unsigned int")
+                                                (reparse-symbol classsubparts) [2576 2606])
+                                            ("m_short" variable
+                                               (:pointer 1
+                                                :type "short")
+                                                (reparse-symbol classsubparts) [2609 2639])
+                                            ("m_ushort" variable
+                                               (:pointer 1
+                                                :type "unsigned short")
+                                                (reparse-symbol classsubparts) [2642 2672])
+                                            ("m_long" variable
+                                               (:pointer 1
+                                                :type "long")
+                                                (reparse-symbol classsubparts) [2675 2705])
+                                            ("m_ulong" variable
+                                               (:pointer 1
+                                                :type "unsigned long")
+                                                (reparse-symbol classsubparts) [2708 2738])
+                                            ("m_llong" variable
+                                               (:pointer 1
+                                                :type "long long")
+                                                (reparse-symbol classsubparts) [2741 2771])
+                                            ("m_ullong" variable
+                                               (:pointer 1
+                                                :type "unsigned long long")
+                                                (reparse-symbol classsubparts) [2774 2804])
+                                            ("m_float" variable
+                                               (:pointer 1
+                                                :type "float")
+                                                (reparse-symbol classsubparts) [2807 2837])
+                                            ("m_double" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol classsubparts) [2840 2870])
+                                            ("m_string" variable
+                                               (:pointer 1
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [2873 2903]))                                          
+                                        :type "union")
+                                        (reparse-symbol namespacesubparts) [2458 2906])
+                                    ("CVariant" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [2990 2997])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3002 3069])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) [3083 3113]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3074 3141])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [3155 3185]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3146 3213])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [3227 3257]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3218 3285])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) [3299 3329]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3290 3357])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "short")
+                                                        (reparse-symbol arg-sub-list) [3371 3401]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3362 3429])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [3443 3473]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3434 3501])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long")
+                                                        (reparse-symbol arg-sub-list) [3515 3545]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3506 3573])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long")
+                                                        (reparse-symbol arg-sub-list) [3587 3617]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3578 3645])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long long")
+                                                        (reparse-symbol arg-sub-list) [3659 3689]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3650 3717])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) [3731 3761]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3722 3789])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [3803 3833]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3794 3861])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [3875 3905]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3866 3933])
+                                            ("CVariant" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [3947 3977]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3938 4005])
+                                            ("CVariant" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("CVariant" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [4019 4049]))                                                  
+                                                :type ("CVariant" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [4010 4050])
+                                            ("CVariant" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4055 4075])
+                                            ("reset" function
+                                               (:prototype-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4081 4094])
+                                            ("isEmpty" function
+                                               (:prototype-flag t
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [4099 4114])
+                                            ("toBool" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [4120 4166])
+                                            ("toChar" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "char")
+                                                (reparse-symbol classsubparts) [4171 4217])
+                                            ("toInt" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "int")
+                                                (reparse-symbol classsubparts) [4222 4268])
+                                            ("toUInt" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "unsigned int")
+                                                (reparse-symbol classsubparts) [4273 4319])
+                                            ("toShort" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "short")
+                                                (reparse-symbol classsubparts) [4324 4370])
+                                            ("toUShort" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "unsigned short")
+                                                (reparse-symbol classsubparts) [4375 4421])
+                                            ("toLong" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "long")
+                                                (reparse-symbol classsubparts) [4426 4472])
+                                            ("toULong" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "unsigned long")
+                                                (reparse-symbol classsubparts) [4477 4523])
+                                            ("toLLong" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "long long")
+                                                (reparse-symbol classsubparts) [4528 4574])
+                                            ("toULLong" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "unsigned long long")
+                                                (reparse-symbol classsubparts) [4579 4625])
+                                            ("toFloat" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "float")
+                                                (reparse-symbol classsubparts) [4630 4676])
+                                            ("toDouble" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type "double")
+                                                (reparse-symbol classsubparts) [4681 4727])
+                                            ("toString" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [4732 4778])
+                                            ("contentType" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type ("EContentType" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [4784 4830])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "true"
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) [4845 4881]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4836 4883])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [4897 4930]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4888 4932])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [4946 4979]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4937 4981])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) [4995 5028]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4986 5030])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "short")
+                                                        (reparse-symbol arg-sub-list) [5044 5077]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5035 5079])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [5093 5126]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5084 5128])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "long")
+                                                        (reparse-symbol arg-sub-list) [5142 5175]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5133 5177])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "unsigned long")
+                                                        (reparse-symbol arg-sub-list) [5191 5224]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5182 5226])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "long long")
+                                                        (reparse-symbol arg-sub-list) [5240 5273]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5231 5275])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) [5289 5322]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5280 5324])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [5338 5371]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5329 5373])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "0"
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [5387 5420]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5378 5422])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "std::string(\" \")"
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [5436 5484]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5427 5486])
+                                            ("set" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:pointer 1
+                                                        :constant-flag t
+                                                        :default-value "\" \""
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [5500 5535]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5491 5537])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) [5559 5589]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5543 5590])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [5611 5641]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5595 5642])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [5663 5693]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5647 5694])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) [5715 5745]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5699 5746])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "short")
+                                                        (reparse-symbol arg-sub-list) [5767 5797]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5751 5798])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [5819 5849]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5803 5850])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long")
+                                                        (reparse-symbol arg-sub-list) [5871 5901]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5855 5902])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long")
+                                                        (reparse-symbol arg-sub-list) [5923 5953]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5907 5954])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long long")
+                                                        (reparse-symbol arg-sub-list) [5975 6005]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [5959 6006])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) [6027 6057]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [6011 6058])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [6079 6109]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [6063 6110])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [6131 6161]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [6115 6162])
+                                            ("tryConvert" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [6183 6213]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [6167 6214])
+                                            ("protected" label nil (reparse-symbol classsubparts) [6218 6228])
+                                            ("m_contentType" variable (:type ("EContentType" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6233 6260])
+                                            ("m_value" variable (:type ("UContent" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6265 6286])
+                                            ("private" label nil (reparse-symbol classsubparts) [6290 6298])
+                                            ("initialize" function
+                                               (:prototype-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [6303 6321]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [2940 6324]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [135 6327]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [119 6329]))                  
+                :type "namespace")
+                nil [103 6331]))          
+      :file "cvariant.h"
+      :pointmax 6353
+      :fsize 6657
+      :lastmodtime '(22147 47410 258353 581000)
+      :unmatched-syntax '((semantic-list 2978 . 2987) (symbol 2961 . 2978) (symbol 2375 . 2382) (punctuation 2358 . 2359) (symbol 2352 . 2358) (punctuation 2300 . 2301) (symbol 2294 . 2300) (punctuation 2258 . 2259) (symbol 2253 . 2258) (punctuation 2211 . 2212) (symbol 2205 . 2211) (punctuation 2174 . 2175) (symbol 2169 . 2174) (punctuation 2132 . 2133) (symbol 2127 . 2132) (punctuation 2101 . 2102) (symbol 2097 . 2101) (punctuation 2063 . 2064) (symbol 2057 . 2063) (punctuation 2034 . 2035) (symbol 2029 . 2034) (punctuation 1999 . 2000) (symbol 1995 . 1999) (punctuation 1976 . 1977) (symbol 1973 . 1976) (punctuation 1954 . 1955) (symbol 1950 . 1954) (punctuation 1932 . 1933) (symbol 1928 . 1932) (ENUM 1900 . 1904))
+      :lexical-table 
+        '(("CVARIANT_H")
+          )
+)
+    (semanticdb-table "cstringbuilder.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CSTRINGBUILDER_H" variable (:constant-flag t) nil [45 61])
+            ("string" include (:system-flag t) nil [62 79])
+            ("defines/protocol-control.h" include nil nil [80 117])
+            ("MON_STRING_BUILDER_BASE" variable (:constant-flag t) nil [127 150])
+            ("MON_STRING_BUILDER_DEFAULT_IMPLEMENT" variable (:constant-flag t) nil [1860 1896])
+            ("MON_STRING_BUILDER" variable (:constant-flag t) nil [1942 1960])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("base" type
+                               (:members 
+                                  ( ("CStringBuilderBase" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [3609 3655])
+                                            ("public" label nil (reparse-symbol classsubparts) [3658 3665])
+                                            ("CStringBuilderBase" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("init" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "\"\""
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [3689 3717]))                                                  
+                                                :type ("CStringBuilderBase" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [3670 3719])
+                                            ("CStringBuilderBase" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [3724 3754])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [3780 3811]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [3760 3812])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) [3837 3868]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [3817 3869])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "short")
+                                                        (reparse-symbol arg-sub-list) [3894 3925]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [3874 3926])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [3951 3982]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [3931 3983])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long")
+                                                        (reparse-symbol arg-sub-list) [4008 4039]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [3988 4040])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long")
+                                                        (reparse-symbol arg-sub-list) [4065 4096]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4045 4097])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long long")
+                                                        (reparse-symbol arg-sub-list) [4122 4153]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4102 4154])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) [4179 4210]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4159 4211])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [4236 4267]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4216 4268])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [4293 4324]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4273 4325])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) [4350 4381]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4330 4382])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [4407 4438]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4387 4439])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:pointer 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [4464 4495]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4444 4496])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [4521 4552]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4501 4553])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned char")
+                                                        (reparse-symbol arg-sub-list) [4578 4609]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4558 4610])
+                                            ("append" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("mon::lib::protocol::EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [4635 4687]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4615 4688])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [4715 4746]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4694 4747])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) [4773 4804]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4752 4805])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "short")
+                                                        (reparse-symbol arg-sub-list) [4831 4862]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4810 4863])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [4889 4920]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4868 4921])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long")
+                                                        (reparse-symbol arg-sub-list) [4947 4978]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4926 4979])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long")
+                                                        (reparse-symbol arg-sub-list) [5005 5036]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [4984 5037])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "long long")
+                                                        (reparse-symbol arg-sub-list) [5063 5094]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5042 5095])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) [5121 5152]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5100 5153])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [5179 5210]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5158 5211])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [5237 5268]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5216 5269])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) [5295 5326]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5274 5327])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [5353 5384]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5332 5385])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:pointer 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [5411 5442]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5390 5443])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) [5469 5500]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5448 5501])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned char")
+                                                        (reparse-symbol arg-sub-list) [5527 5558]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5506 5559])
+                                            ("preface" function
+                                               (:prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("mon::lib::protocol::EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [5585 5637]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5564 5638])
+                                            ("removeLast" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("characters" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "1"
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) [5660 5685]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5644 5687])
+                                            ("string" function
+                                               (:prototype-flag t
+                                                :methodconst-flag t
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5693 5727])
+                                            ("private" label nil (reparse-symbol classsubparts) [5731 5739])
+                                            ("m_string" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5744 5765]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [3578 5768])
+                                    ("CStringBuilder" type
+                                       (:superclasses 
+                                          ( ("CStringBuilderBase" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:pointer 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned char")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("<<" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :type ("mon::lib::protocol::EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "int")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned int")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned long long")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "bool")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:pointer 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "char")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned char")
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("+" function
+                                               (:prototype-flag t
+                                                :operator-flag t
+                                                :typemodifiers ("virtual")
+                                                :arguments 
+                                                  ( ("val" variable
+                                                       (:reference 1
+                                                        :type ("mon::lib::protocol::EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) nil))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5825 5859])
+                                            ("public" label nil (reparse-symbol classsubparts) [5862 5869])
+                                            ("CStringBuilder" function
+                                               (:constructor-flag t
+                                                :arguments 
+                                                  ( ("init" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :default-value "\"\""
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [5891 5919]))                                                  
+                                                :type ("CStringBuilder" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [5876 5950])
+                                            ("CStringBuilder" function
+                                               (:destructor-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [5956 5976]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [5770 5979]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [3522 5982]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [3506 5984]))                  
+                :type "namespace")
+                nil [3490 5986]))          
+      :file "cstringbuilder.h"
+      :pointmax 6014
+      :fsize 6042
+      :lastmodtime '(22139 34809 266401 436000)
+      :unmatched-syntax '((punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(mon::lib::protocol::EProtocolMessageType &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const unsigned char       &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const char                &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const char                *val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const std::string         &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const bool                &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const float               &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const double              &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const unsigned long long  &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const unsigned int        &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const int                 &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "+" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(mon::lib::protocol::EProtocolMessageType &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const unsigned char       &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const char                &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const char                *val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const std::string         &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const bool                &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const float               &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const double              &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const unsigned long long  &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const unsigned int        &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655) (punctuation ";" 3609 . 3655) (number "0" 3609 . 3655) (semantic-list #("(const int                 &val)" 0 1 (macros (("_implement" number "0" 3653 . 3654) ("_class" symbol "CStringBuilderBase" 3633 . 3651)))) 3609 . 3655) (punctuation "<" 3609 . 3655) (punctuation "<" 3609 . 3655) (OPERATOR "operator" 3609 . 3655) (punctuation "&" 3609 . 3655) (symbol "CStringBuilderBase" 3609 . 3655) (VIRTUAL "virtual" 3609 . 3655))
+      :lexical-table 
+        '(("MON_STRING_BUILDER" (spp-arg-list ("_class") 1960 . 1968) . ((symbol "MON_STRING_BUILDER_BASE" 1969 . 1992) (semantic-list "(_class, MON_STRING_BUILDER_DEFAULT_IMPLEMENT)" 1992 . 2038)))
+          ("MON_STRING_BUILDER_DEFAULT_IMPLEMENT" . ((FINAL "final" 1897 . 1902) (semantic-list "{ append(val); return *this; }" 1903 . 1933)))
+          ("CSTRINGBUILDER_H")
+          ("MON_STRING_BUILDER_BASE" (spp-arg-list ("_class" "_implement") 150 . 169) . 
+              ((PUBLIC "public" 174 . 180) (punctuation ":" 180 . 181) (VIRTUAL "virtual" 186 . 193) (symbol "_class" 194 . 200) (punctuation "&" 201 . 202) (OPERATOR "operator" 202 . 210) (punctuation "<" 210 . 211) (punctuation "<" 211 . 212) (semantic-list "(const int                 &val)" 212 . 244) (symbol "_implement" 245 . 255) (punctuation ";" 255 . 256) (VIRTUAL "virtual" 261 . 268) (symbol "_class" 269 . 275) (punctuation "&" 276 . 277) (OPERATOR "operator" 277 . 285) (punctuation "<" 285 . 286) (punctuation "<" 286 . 287) (semantic-list "(const unsigned int        &val)" 287 . 319) (symbol "_implement" 320 . 330) (punctuation ";" 330 . 331) (VIRTUAL "virtual" 336 . 343) (symbol "_class" 344 . 350) (punctuation "&" 351 . 352) (OPERATOR "operator" 352 . 360) (punctuation "<" 360 . 361) (punctuation "<" 361 . 362) (semantic-list "(const unsigned long long  &val)" 362 . 394) (symbol "_implement" 395 . 405) (punctuation ";" 405 . 406) (VIRTUAL "virtual" 411 . 418) (symbol "_class" 419 . 425) (punctuation "&" 426 . 427) (OPERATOR "operator" 427 . 435) (punctuation "<" 435 . 436) (punctuation "<" 436 . 437) (semantic-list "(const double              &val)" 437 . 469) (symbol "_implement" 470 . 480) (punctuation ";" 480 . 481) (VIRTUAL "virtual" 486 . 493) (symbol "_class" 494 . 500) (punctuation "&" 501 . 502) (OPERATOR "operator" 502 . 510) (punctuation "<" 510 . 511) (punctuation "<" 511 . 512) (semantic-list "(const float               &val)" 512 . 544) (symbol "_implement" 545 . 555) (punctuation ";" 555 . 556) (VIRTUAL "virtual" 561 . 568) (symbol "_class" 569 . 575) (punctuation "&" 576 . 577) (OPERATOR "operator" 577 . 585) (punctuation "<" 585 . 586) (punctuation "<" 586 . 587) (semantic-list "(const bool                &val)" 587 . 619) (symbol "_implement" 620 . 630) (punctuation ";" 630 . 631) (VIRTUAL "virtual" 636 . 643) (symbol "_class" 644 . 650) (punctuation "&" 651 . 652) (OPERATOR "operator" 652 . 660) (punctuation "<" 660 . 661) (punctuation "<" 661 . 662) (semantic-list "(const std::string         &val)" 662 . 694) (symbol "_implement" 695 . 705) (punctuation ";" 705 . 706) (VIRTUAL "virtual" 711 . 718) (symbol "_class" 719 . 725) (punctuation "&" 726 . 727) (OPERATOR "operator" 727 . 735) (punctuation "<" 735 . 736) (punctuation "<" 736 . 737) (semantic-list "(const char                *val)" 737 . 769) (symbol "_implement" 770 . 780) (punctuation ";" 780 . 781) (VIRTUAL "virtual" 786 . 793) (symbol "_class" 794 . 800) (punctuation "&" 801 . 802) (OPERATOR "operator" 802 . 810) (punctuation "<" 810 . 811) (punctuation "<" 811 . 812) (semantic-list "(const char                &val)" 812 . 844) (symbol "_implement" 845 . 855) (punctuation ";" 855 . 856) (VIRTUAL "virtual" 861 . 868) (symbol "_class" 869 . 875) (punctuation "&" 876 . 877) (OPERATOR "operator" 877 . 885) (punctuation "<" 885 . 886) (punctuation "<" 886 . 887) (semantic-list "(const unsigned char       &val)" 887 . 919) (symbol "_implement" 920 . 930) (punctuation ";" 930 . 931) (VIRTUAL "virtual" 936 . 943) (symbol "_class" 944 . 950) (punctuation "&" 951 . 952) (OPERATOR "operator" 952 . 960) (punctuation "<" 960 . 961) (punctuation "<" 961 . 962) (semantic-list "(mon::lib::protocol::EProtocolMessageType &val)" 962 . 1009) (symbol "_implement" 1010 . 1020) (punctuation ";" 1020 . 1021) (VIRTUAL "virtual" 1026 . 1033) (symbol "_class" 1034 . 1040) (punctuation "&" 1041 . 1042) (OPERATOR "operator" 1042 . 1050) (punctuation "+" 1050 . 1051) (semantic-list "(const int                 &val)" 1051 . 1083) (symbol "_implement" 1084 . 1094) (punctuation ";" 1094 . 1095) (VIRTUAL "virtual" 1100 . 1107) (symbol "_class" 1108 . 1114) (punctuation "&" 1115 . 1116) (OPERATOR "operator" 1116 . 1124) (punctuation "+" 1124 . 1125) (semantic-list "(const unsigned int        &val)" 1125 . 1157) (symbol "_implement" 1158 . 1168) (punctuation ";" 1168 . 1169) (VIRTUAL "virtual" 1174 . 1181) (symbol "_class" 1182 . 1188) (punctuation "&" 1189 . 1190) (OPERATOR "operator" 1190 . 1198) (punctuation "+" 1198 . 1199) (semantic-list "(const unsigned long long  &val)" 1199 . 1231) (symbol "_implement" 1232 . 1242) (punctuation ";" 1242 . 1243) (VIRTUAL "virtual" 1248 . 1255) (symbol "_class" 1256 . 1262) (punctuation "&" 1263 . 1264) (OPERATOR "operator" 1264 . 1272) (punctuation "+" 1272 . 1273) (semantic-list "(const double              &val)" 1273 . 1305) (symbol "_implement" 1306 . 1316) (punctuation ";" 1316 . 1317) (VIRTUAL "virtual" 1322 . 1329) (symbol "_class" 1330 . 1336) (punctuation "&" 1337 . 1338) (OPERATOR "operator" 1338 . 1346) (punctuation "+" 1346 . 1347) (semantic-list "(const float               &val)" 1347 . 1379) (symbol "_implement" 1380 . 1390) (punctuation ";" 1390 . 1391) (VIRTUAL "virtual" 1396 . 1403) (symbol "_class" 1404 . 1410) (punctuation "&" 1411 . 1412) (OPERATOR "operator" 1412 . 1420) (punctuation "+" 1420 . 1421) (semantic-list "(const bool                &val)" 1421 . 1453) (symbol "_implement" 1454 . 1464) (punctuation ";" 1464 . 1465) (VIRTUAL "virtual" 1470 . 1477) (symbol "_class" 1478 . 1484) (punctuation "&" 1485 . 1486) (OPERATOR "operator" 1486 . 1494) (punctuation "+" 1494 . 1495) (semantic-list "(const std::string         &val)" 1495 . 1527) (symbol "_implement" 1528 . 1538) (punctuation ";" 1538 . 1539) (VIRTUAL "virtual" 1544 . 1551) (symbol "_class" 1552 . 1558) (punctuation "&" 1559 . 1560) (OPERATOR "operator" 1560 . 1568) (punctuation "+" 1568 . 1569) (semantic-list "(const char                *val)" 1569 . 1601) (symbol "_implement" 1602 . 1612) (punctuation ";" 1612 . 1613) (VIRTUAL "virtual" 1618 . 1625) (symbol "_class" 1626 . 1632) (punctuation "&" 1633 . 1634) (OPERATOR "operator" 1634 . 1642) (punctuation "+" 1642 . 1643) (semantic-list "(const char                &val)" 1643 . 1675) (symbol "_implement" 1676 . 1686) (punctuation ";" 1686 . 1687) (VIRTUAL "virtual" 1692 . 1699) (symbol "_class" 1700 . 1706) (punctuation "&" 1707 . 1708) (OPERATOR "operator" 1708 . 1716) (punctuation "+" 1716 . 1717) (semantic-list "(const unsigned char       &val)" 1717 . 1749) (symbol "_implement" 1750 . 1760) (punctuation ";" 1760 . 1761) (VIRTUAL "virtual" 1766 . 1773) (symbol "_class" 1774 . 1780) (punctuation "&" 1781 . 1782) (OPERATOR "operator" 1782 . 1790) (punctuation "+" 1790 . 1791) (semantic-list "(mon::lib::protocol::EProtocolMessageType &val)" 1791 . 1838) (symbol "_implement" 1839 . 1849) (punctuation ";" 1849 . 1850)))
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!libraryes!base!string!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

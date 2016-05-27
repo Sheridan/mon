@@ -4,8 +4,10 @@ debug="OFF"
 use_clang="OFF"
 verbose_build="OFF"
 delete_before_build=0
+export_compile_cmds="OFF"
+export_compile_cmds_file="projects/emacs/storage/rtags/compile_commands.json"
 opt_root_path="/tmp/mon"
-while getopts "dvchmr:" opt
+while getopts "edvchmr:" opt
 do
   case $opt in
     d)
@@ -13,6 +15,9 @@ do
       ;;
     c)
       use_clang="ON"
+      ;;
+    e)
+      export_compile_cmds="ON"
       ;;
     v)
       verbose_build="ON"
@@ -27,6 +32,8 @@ do
       echo "-d	Build debug"
       echo "-v	Verbode build"
       echo "-c	Build with clang"
+      echo "-e	Export compile commands"
+      echo "-m	Clean before build"
       echo "-r=/root/path	Setting root path for install and build"
       echo "-h	This"
       ;;
@@ -66,9 +73,14 @@ function build()
   cd $object_build_path
   #LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${install_path}/lib/mon/global:${install_path}/lib/mon"
   #export $LD_LIBRARY_PATH
-  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='$install_path' -DMON_VERBOSE_BUILD=$verbose_build -DBUILD_DEBUG=$debug -DMON_USE_CLANG=$use_clang  $object_path"
+  run_cmd "CMake" "cmake -DCMAKE_INSTALL_PREFIX='$install_path' -DMON_VERBOSE_BUILD=$verbose_build -DBUILD_DEBUG=$debug -DMON_USE_CLANG=$use_clang -DMON_EXPORT_COMPILE_COMMANDS=$export_compile_cmds  $object_path"
   run_cmd "make" "make -j$build_threads"
   run_cmd "install" "make install"
+  if [ "$export_compile_cmds" == "ON" ]
+  then
+    cat "${object_build_path}/compile_commands.json" | tail -n+2 | head -n -1 >> "$current_path/$export_compile_cmds_file"
+    echo -n "," >> "$current_path/$export_compile_cmds_file"
+  fi
   cd $build_path
 }
 
@@ -79,11 +91,22 @@ then
   rm -vrf "${install_path}/bin"
   rm -vrf "${install_path}/lib"
 fi
+
+if [ "$export_compile_cmds" == "ON" ]
+then
+    echo "[" > "$current_path/$export_compile_cmds_file"
+fi
+
 build "application"
 build "sensors/cpu"
 build "sensors/memory"
 
-for runfile in node collector storage
+if [ "$export_compile_cmds" == "ON" ]
+then
+    echo "]" >> "$current_path/$export_compile_cmds_file"
+fi
+
+for runfile in node collector storage confgen
 do
     cat << EOF > ${install_path}/bin/run-$runfile
 #!/bin/bash

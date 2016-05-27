@@ -27,8 +27,6 @@ int main (int argc, char* argv[])
 
   MON_ST_APPEND_MEMBER(mon::daemons::storage::CStorage);
   MON_ST_STORAGE_MANAGER->listen();
-  //MON_ST_APPEND_MEMBER(mon::daemons::node::CSensorsManager);
-  //MON_ST_SENSORS_MANAGER->load();
 
   MON_CMD_LINE_DESTROY;
   MON_SIGNAL_LOOP;

@@ -9,7 +9,7 @@ my $packages =
 	'CEDET' =>
 	{
 	    'repository' => 'http://git.code.sf.net/p/cedet/git',
-	    'build'      => { 'type' => 'inplace', 'exec' => 'make' }
+	    'build'      => { 'type' => 'inplace', 'exec' => 'make -j8' }
 	},
 	'ECB' =>
 	{
@@ -19,9 +19,29 @@ my $packages =
 	{
 	    'repository' => 'https://github.com/magnars/dash.el'
 	},
+	'which-key' =>
+	{
+	    'repository' => 'https://github.com/justbur/emacs-which-key'
+	},
+	'auto-complete-clang' =>
+	{
+	    'repository' => 'https://github.com/brianjcj/auto-complete-clang.git'
+	},
 	'popup' =>
 	{
 	    'repository' => 'https://github.com/auto-complete/popup-el'
+	},
+	'company' =>
+	{
+	    'repository' => 'https://github.com/company-mode/company-mode'
+	},
+	'yasnippet' =>
+	{
+	    'repository' => 'https://github.com/capitaomorte/yasnippet'
+	},
+	'linum-higlite-current-line' =>
+	{
+	    'repository' => 'git@gist.github.com:1a378156c4b14ea83b79.git'
 	},
 	'json-mode' =>
 	{
@@ -34,6 +54,15 @@ my $packages =
 	'json-snatcher' =>
 	{
 	    'repository' => 'https://github.com/Sterlingg/json-snatcher'
+	},
+	'rtags' =>
+	{
+	    'repository' => 'https://github.com/Andersbakken/rtags',
+	    'build'      => { 'type' => 'inplace', 'exec' => 'git submodule init && git submodule update && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 . && make -j8' }
+	},
+	'color-theme-approximate' =>
+	{
+	    'repository' => 'https://github.com/tungd/color-theme-approximate'
 	},
 #	'CMake-mode' =>
 #	{
@@ -62,7 +91,7 @@ sub update_repository
     if(! -e $path)
     {
 	printf("Clonning %s to %s ...\n", $name, $path);
-	system(sprintf("git clone %s %s", $url, $path));
+	system(sprintf("git clone --recursive %s %s", $url, $path));
     }
     else
     {

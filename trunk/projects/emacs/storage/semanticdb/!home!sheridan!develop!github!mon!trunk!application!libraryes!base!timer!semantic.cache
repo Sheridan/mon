@@ -1,0 +1,81 @@
+;; Object timer/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "timer/"
+  :tables
+  (list
+    (semanticdb-table "ctimer.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CTIMER_H" variable (:constant-flag t) nil [26 34])
+            ("defines/class-helper.h" include nil nil [35 68])
+            ("defines/threads-helper.h" include nil nil [69 104])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("base" type
+                               (:members 
+                                  ( ("CTimer" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [297 304])
+                                            ("CTimer" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("timeout" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [316 337]))                                                  
+                                                :type ("CTimer" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [309 338])
+                                            ("CTimer" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CTimer" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [343 352])
+                                            ("CTimer" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [357 375])
+                                            ("protected" label nil (reparse-symbol classsubparts) [379 389])
+                                            ("timerStop" function
+                                               (:prototype-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [394 411])
+                                            ("timerStart" function
+                                               (:prototype-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [416 434])
+                                            ("timerActive" function
+                                               (:prototype-flag t
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [439 458])
+                                            ("onTimer" function
+                                               (:pure-virtual-flag t
+                                                :prototype-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [463 490]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [167 525]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [138 528]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [122 530]))                  
+                :type "namespace")
+                nil [106 532]))          
+      :file "ctimer.h"
+      :pointmax 552
+      :fsize 605
+      :lastmodtime '(21132 31906 878023 205000)
+      :unmatched-syntax '((semantic-list 239 . 255) (symbol 227 . 239) (semantic-list 215 . 222) (symbol 186 . 215))
+      :lexical-table 
+        '(("CTIMER_H")
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!libraryes!base!timer!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

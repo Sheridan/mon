@@ -1,0 +1,458 @@
+;; Object data/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "data/"
+  :tables
+  (list
+    (semanticdb-table "cfrequency.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CFREQUENCY_H" variable (:constant-flag t) nil [38 50])
+            ("string" include (:system-flag t) nil [51 68])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("sensordata" type
+                               (:members 
+                                  ( ("EFrequencyPurpose" type
+                                       (:members 
+                                          ( ("fpMax" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [185 191])
+                                            ("fpDefault" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [224 262]))                                          
+                                        :type "enum")
+                                        (reparse-symbol namespacesubparts) [158 263])
+                                    ("EFrequencyMeasurment" type (:type "class") (reparse-symbol namespacesubparts) [286 407])
+                                    ("SPP2Hz" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable (:type "float") (reparse-symbol arg-sub-list) [422 432]))                                          
+                                        :type "float")
+                                        (reparse-symbol namespacesubparts) [409 433])
+                                    ("Hz2SPP" function
+                                       (:prototype-flag t
+                                        :arguments 
+                                          ( ("val" variable (:type "float") (reparse-symbol arg-sub-list) [447 457]))                                          
+                                        :type "float")
+                                        (reparse-symbol namespacesubparts) [434 458])
+                                    ("CFrequency" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [515 522])
+                                            ("CFrequency" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("i_measurment" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFrequencyMeasurment" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [538 579])
+                                                    ("i_frequency" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [580 605]))                                                  
+                                                :type ("CFrequency" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [527 606])
+                                            ("asHz" function
+                                               (:prototype-flag t
+                                                :type "float")
+                                                (reparse-symbol classsubparts) [611 625])
+                                            ("asSPP" function
+                                               (:prototype-flag t
+                                                :type "float")
+                                                (reparse-symbol classsubparts) [630 644])
+                                            ("private" label nil (reparse-symbol classsubparts) [648 656])
+                                            ("m_measurment" variable (:type ("EFrequencyMeasurment" type (:type "class") nil nil)) (reparse-symbol classsubparts) [661 696])
+                                            ("m_frequency" variable (:type "float") (reparse-symbol classsubparts) [701 735]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [494 738]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [102 741]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [86 743]))                  
+                :type "namespace")
+                nil [70 745]))          
+      :file "cfrequency.h"
+      :pointmax 769
+      :fsize 905
+      :lastmodtime '(21125 63218 989734 437000)
+      :unmatched-syntax '((symbol 355 . 358) (punctuation 319 . 320) (symbol 317 . 319) (ENUM 281 . 285))
+      :lexical-table 
+        '(("CFREQUENCY_H")
+          )
+)
+    (semanticdb-table "cdefinition.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CDEFINITION_H" variable (:constant-flag t) nil [42 55])
+            ("libraryes/sensordata/data/cframe.h" include nil nil [56 101])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("sensordata" type
+                               (:members 
+                                  ( ("CDefinition" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [202 209])
+                                            ("CDefinition" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CDefinition" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [214 228])
+                                            ("CDefinition" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [233 256])
+                                            ("addFrame" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [275 299])
+                                                    ("frame" variable
+                                                       (:pointer 1
+                                                        :type ("CFrame" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [300 314]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [261 315])
+                                            ("frame" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [335 359]))                                                  
+                                                :type ("CFrame" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [320 360])
+                                            ("frames" function
+                                               (:prototype-flag t
+                                                :type ("TFramesNames" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [365 388])
+                                            ("private" label nil (reparse-symbol classsubparts) [392 400])
+                                            ("m_frames" variable (:type ("TFramesMap" type (:type "class") nil nil)) (reparse-symbol classsubparts) [405 425])
+                                            ("m_names" variable (:type ("TFramesNames" type (:type "class") nil nil)) (reparse-symbol classsubparts) [451 472]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [180 494]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [135 497]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [119 499]))                  
+                :type "namespace")
+                nil [103 501]))          
+      :file "cdefinition.h"
+      :pointmax 526
+      :fsize 565
+      :lastmodtime '(21132 47622 407438 93000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CDEFINITION_H")
+          )
+)
+    (semanticdb-table "cframe.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("COBJECT_H" variable (:constant-flag t) nil [38 47])
+            ("set" include (:system-flag t) nil [48 62])
+            ("map" include (:system-flag t) nil [63 77])
+            ("list" include (:system-flag t) nil [78 93])
+            ("string" include (:system-flag t) nil [94 111])
+            ("defines/class-helper.h" include nil nil [112 145])
+            ("libraryes/sensordata/data/cfrequency.h" include nil nil [146 195])
+            ("libraryes/sensordata/data/cfield.h" include nil nil [196 241])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("sensordata" type
+                               (:members 
+                                  ( ("EFrameFlags" type
+                                       (:members 
+                                          ( ("ffAggregated" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [337 350])
+                                            ("ffCalculateTotal" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [449 541]))                                          
+                                        :type "enum")
+                                        (reparse-symbol namespacesubparts) [316 542])
+                                    ("EFrameType" type
+                                       (:members 
+                                          ( ("ftInformation" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [580 594])
+                                            ("ftStatistic" variable
+                                               (:constant-flag t
+                                                :type "int")
+                                                (reparse-symbol enumsubparts) [708 750]))                                          
+                                        :type "enum")
+                                        (reparse-symbol namespacesubparts) [560 751])
+                                    ("TFlags" type
+                                       (:typedef ("std::set" type
+                                             (:template-specifier 
+                                                ( ("EFrameFlags" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [753 791])
+                                    ("TTags" type
+                                       (:typedef ("std::set" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [792 829])
+                                    ("CFrame" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [1299 1306])
+                                            ("CFrame" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CFrame" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1311 1320])
+                                            ("CFrame" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1325 1335])
+                                            ("setFrequency" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("purpose" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFrequencyPurpose" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1358 1391])
+                                                    ("measurment" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFrequencyMeasurment" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1392 1431])
+                                                    ("value" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "float")
+                                                        (reparse-symbol arg-sub-list) [1432 1451]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1340 1452])
+                                            ("frequency" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("purpose" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFrequencyPurpose" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1479 1512]))                                                  
+                                                :type ("CFrequency" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1457 1513])
+                                            ("addField" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1536 1560])
+                                                    ("label" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1561 1586])
+                                                    ("type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFieldDataType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1587 1614])
+                                                    ("description" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1615 1646]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1518 1647])
+                                            ("addFlag" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("flag" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFrameFlags" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1670 1694]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1652 1695])
+                                            ("hasFlag" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("flag" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFrameFlags" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1718 1742]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [1700 1743])
+                                            ("addTag" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("tag" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1766 1789]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1748 1790])
+                                            ("hasTag" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("tag" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1813 1836]))                                                  
+                                                :type "bool")
+                                                (reparse-symbol classsubparts) [1795 1837])
+                                            ("private" label nil (reparse-symbol classsubparts) [1841 1849])
+                                            ("m_frequences" variable
+                                               (:pointer 1
+                                                :dereference 1
+                                                :type ("CFrequency" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1854 1882]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [849 1922])
+                                    ("TFramesMap" type
+                                       (:typedef ("std::map" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil)
+                                                  ("CFrame" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [1924 1975])
+                                    ("TFramesNames" type
+                                       (:typedef ("std::list" type
+                                             (:template-specifier 
+                                                ( ("std::string" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [1976 2020])
+                                    ("TFrames" type
+                                       (:typedef ("std::list" type
+                                             (:template-specifier 
+                                                ( ("CFrame" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [2021 2057]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [275 2060]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [259 2062]))                  
+                :type "namespace")
+                nil [243 2064]))          
+      :file "cframe.h"
+      :pointmax 2085
+      :fsize 2438
+      :lastmodtime '(21132 47621 705431 876000)
+      :unmatched-syntax '((semantic-list 1249 . 1278) (symbol 1228 . 1249) (semantic-list 1177 . 1206) (symbol 1156 . 1177) (semantic-list 1104 . 1133) (symbol 1083 . 1104) (semantic-list 1024 . 1062) (symbol 1012 . 1024) (semantic-list 953 . 991) (symbol 941 . 953) (semantic-list 880 . 918) (symbol 868 . 880))
+      :lexical-table 
+        '(("COBJECT_H")
+          )
+)
+    (semanticdb-table "cfield.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CFIELD_H" variable (:constant-flag t) nil [26 34])
+            ("list" include (:system-flag t) nil [35 50])
+            ("string" include (:system-flag t) nil [51 68])
+            ("defines/class-helper.h" include nil nil [69 102])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("sensordata" type
+                               (:members 
+                                  ( ("EFieldDataType" type (:type "class") (reparse-symbol namespacesubparts) [192 464])
+                                    ("CField" type
+                                       (:members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [770 777])
+                                            ("CField" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CField" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [782 791])
+                                            ("CField" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [803 827])
+                                                    ("label" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [828 853])
+                                                    ("type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EFieldDataType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [854 881])
+                                                    ("description" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [882 913]))                                                  
+                                                :type ("CField" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [796 914])
+                                            ("CField" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [919 937]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [482 940])
+                                    ("TFields" type
+                                       (:typedef ("std::list" type
+                                             (:template-specifier 
+                                                ( ("CField" type (:pointer 1) nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [942 978]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [136 981]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [120 983]))                  
+                :type "namespace")
+                nil [104 985]))          
+      :file "cfield.h"
+      :pointmax 1005
+      :fsize 1081
+      :lastmodtime '(21132 32532 868011 650000)
+      :unmatched-syntax '((semantic-list 722 . 748) (symbol 701 . 722) (semantic-list 656 . 678) (symbol 635 . 656) (semantic-list 588 . 608) (symbol 567 . 588) (semantic-list 522 . 541) (symbol 501 . 522) (symbol 441 . 447) (punctuation 424 . 425) (symbol 419 . 424) (punctuation 394 . 395) (symbol 389 . 394) (punctuation 368 . 369) (symbol 364 . 368) (punctuation 339 . 340) (symbol 335 . 339) (punctuation 318 . 319) (symbol 315 . 318) (punctuation 290 . 291) (symbol 284 . 290) (punctuation 267 . 268) (symbol 262 . 267) (punctuation 245 . 246) (symbol 241 . 245) (punctuation 224 . 225) (symbol 217 . 224) (ENUM 187 . 191))
+      :lexical-table 
+        '(("CFIELD_H")
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!libraryes!sensordata!data!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

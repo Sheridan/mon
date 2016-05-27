@@ -1,0 +1,298 @@
+;; Object protocol/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "protocol/"
+  :tables
+  (list
+    (semanticdb-table "cprotocol.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CPROTOCOL_H" variable (:constant-flag t) nil [40 51])
+            ("map" include (:system-flag t) nil [52 66])
+            ("defines/protocol-control.h" include nil nil [67 104])
+            ("libraryes/network/csocket.h" include nil nil [105 143])
+            ("libraryes/protocol/cnetworkmessage.h" include nil nil [144 191])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("protocol" type
+                               (:members 
+                                  ( ("CProtocol" type
+                                       (:prototype t
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [246 262])
+                                    ("TReplyMap" type
+                                       (:typedef ("std::map" type
+                                             (:template-specifier 
+                                                ( ("MON_PROTOCOL_MESSAGE_ID_TYPE" type nil nil nil)
+                                                  ("TMessageCallback" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [348 422])
+                                    ("TInterceptMap" type
+                                       (:typedef ("std::map" type
+                                             (:template-specifier 
+                                                ( ("EProtocolMessageType" type nil nil nil)
+                                                  ("TMessageCallback" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol namespacesubparts) [423 493])
+                                    ("CProtocol" type
+                                       (:members 
+                                          ( ("CNetworkMessage" friend nil (reparse-symbol classsubparts) [561 590])
+                                            ("public" label nil (reparse-symbol classsubparts) [591 598])
+                                            ("CProtocol" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("socket" variable
+                                                       (:pointer 1
+                                                        :type ("mon::lib::network::CSocket" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [611 646]))                                                  
+                                                :type ("CProtocol" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [601 647])
+                                            ("CProtocol" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [650 671])
+                                            ("newMessage" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("callback" variable (:type ("TMessageCallback" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [703 729])
+                                                    ("i_type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [730 765]))                                                  
+                                                :type ("CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [674 766])
+                                            ("newMessage" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("callback" variable (:type ("TMessageCallback" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [798 824])
+                                                    ("i_type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [825 860])
+                                                    ("i_text" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [861 888]))                                                  
+                                                :type ("CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [769 889])
+                                            ("sendMessage" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("callback" variable (:type ("TMessageCallback" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [909 935])
+                                                    ("i_type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [936 971])
+                                                    ("i_text" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [972 999]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [892 1000])
+                                            ("sendMessage" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("callback" variable (:type ("TMessageCallback" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1020 1046])
+                                                    ("i_type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1047 1082]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1003 1083])
+                                            ("sendReply" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("requestMessage" variable
+                                                       (:pointer 1
+                                                        :type ("CNetworkMessage" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1101 1133])
+                                                    ("i_text" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1134 1161]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1086 1162])
+                                            ("protected" label nil (reparse-symbol classsubparts) [1164 1174])
+                                            ("incommingMessage" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("i_incoming" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1199 1229]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1177 1230])
+                                            ("registerIntercept" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1256 1289])
+                                                    ("callback" variable (:type ("TMessageCallback" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1290 1316]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1233 1317])
+                                            ("sendMessage" function
+                                               (:prototype-flag t
+                                                :arguments 
+                                                  ( ("msg" variable
+                                                       (:pointer 1
+                                                        :type ("CNetworkMessage" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1337 1358]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1320 1359])
+                                            ("private" label nil (reparse-symbol classsubparts) [1361 1369])
+                                            ("m_socket" variable
+                                               (:pointer 1
+                                                :type ("mon::lib::network::CSocket" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1372 1409])
+                                            ("m_currentID" variable (:type ("MON_PROTOCOL_MESSAGE_ID_TYPE" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1412 1453])
+                                            ("m_replyCallbackMap" variable (:type ("TReplyMap" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1546 1575])
+                                            ("m_interceptCallbackMap" variable (:type ("TInterceptMap" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1628 1665])
+                                            ("getID" function
+                                               (:prototype-flag t
+                                                :type ("MON_PROTOCOL_MESSAGE_ID_TYPE" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1711 1748]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [541 1811]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [225 1814]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [209 1816]))                  
+                :type "namespace")
+                nil [193 1818]))          
+      :file "cprotocol.h"
+      :pointmax 1841
+      :fsize 2052
+      :lastmodtime '(21132 47621 922433 798000)
+      :unmatched-syntax '((punctuation 346 . 347) (semantic-list 307 . 346) (semantic-list 276 . 306) (VOID 271 . 275) (TYPEDEF 263 . 270))
+      :lexical-table 
+        '(("CPROTOCOL_H")
+          )
+)
+    (semanticdb-table "cnetworkmessage.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CMESSAGE_H" variable (:constant-flag t) nil [39 49])
+            ("defines/class-helper.h" include nil nil [50 83])
+            ("defines/protocol-control.h" include nil nil [84 121])
+            ("libraryes/base/string/cstringbuilder.h" include nil nil [122 171])
+            ("libraryes/network/csocket.h" include nil nil [172 210])
+            ("mon" type
+               (:members 
+                  ( ("lib" type
+                       (:members 
+                          ( ("protocol" type
+                               (:members 
+                                  ( ("CProtocol" type
+                                       (:prototype t
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [266 282])
+                                    ("CNetworkMessage" type
+                                       (:superclasses 
+                                          ( ("mon::lib::base::CStringBuilderBase" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("CProtocol" friend nil (reparse-symbol classsubparts) [542 565])
+                                            ("public" label nil (reparse-symbol classsubparts) [568 575])
+                                            ("CNetworkMessage" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("id" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("MON_PROTOCOL_MESSAGE_ID_TYPE" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [686 725])
+                                                    ("i_type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [726 761]))                                                  
+                                                :type ("CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [670 762])
+                                            ("CNetworkMessage" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("id" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("MON_PROTOCOL_MESSAGE_ID_TYPE" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [878 917])
+                                                    ("i_type" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("EProtocolMessageType" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [918 953])
+                                                    ("i_text" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [954 981]))                                                  
+                                                :type ("CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [862 982])
+                                            ("CNetworkMessage" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("i_incoming" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1087 1118]))                                                  
+                                                :type ("CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1071 1119])
+                                            ("CNetworkMessage" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1124 1151])
+                                            ("protected" label nil (reparse-symbol classsubparts) [1155 1165])
+                                            ("preparedText" function
+                                               (:prototype-flag t
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [1170 1204]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [317 1207]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [244 1211]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [228 1213]))                  
+                :type "namespace")
+                nil [212 1215]))          
+      :file "cnetworkmessage.h"
+      :pointmax 1237
+      :fsize 1472
+      :lastmodtime '(21132 47622 161435 914000)
+      :unmatched-syntax '((semantic-list 504 . 538) (symbol 483 . 504) (semantic-list 450 . 478) (symbol 429 . 450) (semantic-list 407 . 424) (symbol 389 . 407))
+      :lexical-table 
+        '(("CMESSAGE_H")
+          )
+))
+  :file "!home!sheridan!develop!github!mon!trunk!application!libraryes!protocol!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

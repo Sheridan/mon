@@ -1,0 +1,501 @@
+;; Object node/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "node/"
+  :tables
+  (list
+    (semanticdb-table "cnode.cpp"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("defines/global.h" include nil nil [12 39])
+            ("defines/infinity-cycle-helper.h" include nil nil [40 82])
+            ("daemons/collector/collector_st.h" include nil nil [83 126])
+            ("daemons/collector/node/cnode.h" include nil nil [127 168])
+            ("libraryes/base/string/stringhelper.h" include nil nil [169 216])
+            ("libraryes/sensordata/data/cfrequency.h" include nil nil [217 266])
+            ("mon" type
+               (:members 
+                  ( ("daemons" type
+                       (:members 
+                          ( ("collector" type
+                               (:members 
+                                  ( ("CNode" function
+                                       (:constructor-flag t
+                                        :parent "CNode"
+                                        :arguments 
+                                          ( ("nodeName" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [340 368]))                                          
+                                        :type ("CNode" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [327 1616])
+                                    ("CNode" function
+                                       (:destructor-flag t
+                                        :parent "CNode"
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [1618 1691])
+                                    ("onTimer" function
+                                       (:parent "CNode"
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [1693 2009])
+                                    ("sensor" function
+                                       (:pointer 1
+                                        :parent "CNode"
+                                        :arguments 
+                                          ( ("name" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [2034 2058]))                                          
+                                        :type ("CSensor" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [2011 2133])
+                                    ("MON_THREADED_FUNCTION_IMPLEMENT" function
+                                       (:arguments 
+                                          ( ("" variable (:type ("CNode" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2167 2173])
+                                            ("" variable (:type ("connect" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2174 2182]))                                          
+                                        :type "int")
+                                        (reparse-symbol namespacesubparts) [2135 2500])
+                                    ("connected" function
+                                       (:parent "CNode"
+                                        :arguments 
+                                          ( ("to_addr" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [2524 2551])
+                                            ("to_port" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type "unsigned short")
+                                                (reparse-symbol arg-sub-list) [2552 2582]))                                          
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [2502 2772])
+                                    ("incommingMessage" function
+                                       (:parent "CNode"
+                                        :arguments 
+                                          ( ("message" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [2803 2830]))                                          
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [2774 2894])
+                                    ("incomingAnswerOnConnect" function
+                                       (:parent "CNode"
+                                        :arguments 
+                                          ( ("msg" variable
+                                               (:pointer 1
+                                                :type ("lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [2932 2968]))                                          
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [2896 3187])
+                                    ("incomingAnswerOnRequestSensorList" function
+                                       (:parent "CNode"
+                                        :arguments 
+                                          ( ("msg" variable
+                                               (:pointer 1
+                                                :type ("lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [3235 3271]))                                          
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [3189 3486])
+                                    ("incomingAnswerOnRequestSensorDefinition" function
+                                       (:parent "CNode"
+                                        :arguments 
+                                          ( ("msg" variable
+                                               (:pointer 1
+                                                :type ("lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [3540 3576]))                                          
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [3488 3851])
+                                    ("incomingAnswerOnRequestSensorFrameStatistic" function
+                                       (:parent "CNode"
+                                        :arguments 
+                                          ( ("msg" variable
+                                               (:pointer 1
+                                                :type ("lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [3909 3945]))                                          
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [3853 4019]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [304 4023]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [284 4025]))                  
+                :type "namespace")
+                nil [268 4027]))          
+      :file "cnode.cpp"
+      :pointmax 4028
+      :fsize 4053
+      :lastmodtime '(21141 38296 617186 777000)
+      :unmatched-syntax nil)
+    (semanticdb-table "cnode.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CREMOTEMONNODE_H" variable (:constant-flag t) nil [45 61])
+            ("list" include (:system-flag t) nil [62 77])
+            ("string" include (:system-flag t) nil [78 95])
+            ("defines/threads-helper.h" include nil nil [96 131])
+            ("defines/class-helper.h" include nil nil [132 165])
+            ("defines/mutex-helper.h" include nil nil [166 199])
+            ("daemons/collector/protocol/cprotocol.h" include nil nil [200 249])
+            ("daemons/collector/node/csensor.h" include nil nil [250 293])
+            ("libraryes/base/timer/ctimer.h" include nil nil [294 334])
+            ("libraryes/network/cclientsocket.h" include nil nil [335 379])
+            ("libraryes/model/cnode.h" include nil nil [380 414])
+            ("mon" type
+               (:members 
+                  ( ("daemons" type
+                       (:members 
+                          ( ("collector" type
+                               (:members 
+                                  ( ("CNode" type
+                                       (:superclasses 
+                                          ( ("lib::model::CNode" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil)
+                                            ("mon::lib::network::CSocketClient" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil)
+                                            ("CProtocol" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil)
+                                            ("mon::lib::base::CTimer" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [708 715])
+                                            ("CNode" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("nodeName" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [724 752]))                                                  
+                                                :type ("CNode" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [718 753])
+                                            ("CNode" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [756 773])
+                                            ("private" label nil (reparse-symbol classsubparts) [774 782])
+                                            ("onTimer" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [786 807])
+                                            ("sensor" function
+                                               (:prototype-flag t
+                                                :pointer 1
+                                                :arguments 
+                                                  ( ("name" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [826 850]))                                                  
+                                                :type ("CSensor" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [810 851])
+                                            ("connected" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("to_addr" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [966 993])
+                                                    ("to_port" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type "unsigned short")
+                                                        (reparse-symbol arg-sub-list) [994 1024]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [951 1031])
+                                            ("incommingMessage" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("message" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1103 1130]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1081 1137])
+                                            ("incomingAnswerOnConnect" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("msg" variable
+                                                       (:pointer 1
+                                                        :type ("lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1220 1256]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1191 1263])
+                                            ("incomingAnswerOnRequestSensorList" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("msg" variable
+                                                       (:pointer 1
+                                                        :type ("lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1359 1395]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1320 1402])
+                                            ("incomingAnswerOnRequestSensorDefinition" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("msg" variable
+                                                       (:pointer 1
+                                                        :type ("mon::lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1505 1546]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1460 1553])
+                                            ("incomingAnswerOnRequestSensorFrameStatistic" function
+                                               (:prototype-flag t
+                                                :final-flag t
+                                                :arguments 
+                                                  ( ("msg" variable
+                                                       (:pointer 1
+                                                        :type ("lib::protocol::CNetworkMessage" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [1669 1705]))                                                  
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [1620 1712]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [494 1715]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [452 1718]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [432 1720]))                  
+                :type "namespace")
+                nil [416 1722]))          
+      :file "cnode.h"
+      :pointmax 1751
+      :fsize 2047
+      :lastmodtime '(21141 29243 738715 674000)
+      :unmatched-syntax '((thing 698 . 707) (thing 669 . 698))
+      :lexical-table 
+        '(("CREMOTEMONNODE_H")
+          )
+)
+    (semanticdb-table "csensor.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CREMOTENODESENSOR_H" variable (:constant-flag t) nil [37 56])
+            ("list" include (:system-flag t) nil [57 72])
+            ("string" include (:system-flag t) nil [73 90])
+            ("defines/class-helper.h" include nil nil [91 124])
+            ("libraryes/sensordata/data/cdefinition.h" include nil nil [125 175])
+            ("libraryes/model/csensor.h" include nil nil [176 212])
+            ("mon" type
+               (:members 
+                  ( ("daemons" type
+                       (:members 
+                          ( ("collector" type
+                               (:members 
+                                  ( ("CNode" type
+                                       (:prototype t
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [273 285])
+                                    ("CSensor" type
+                                       (:superclasses 
+                                          ( ("mon::lib::model::CSensor" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [369 376])
+                                            ("CSensor" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :arguments 
+                                                  ( ("parentNode" variable
+                                                       (:pointer 1
+                                                        :type ("CNode" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [389 407])
+                                                    ("nodeName" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [408 436])
+                                                    ("nodeDefinition" variable
+                                                       (:reference 1
+                                                        :constant-flag t
+                                                        :type ("std::string" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [437 471]))                                                  
+                                                :type ("CSensor" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [381 472])
+                                            ("CSensor" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [477 488]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [313 492]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [250 495]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [230 497]))                  
+                :type "namespace")
+                nil [214 499]))          
+      :file "csensor.h"
+      :pointmax 530
+      :fsize 548
+      :lastmodtime '(21141 29645 774069 7000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CREMOTENODESENSOR_H")
+          )
+)
+    (semanticdb-table "csensor.cpp"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("daemons/collector/node/csensor.h" include nil nil [1 44])
+            ("daemons/collector/node/cnode.h" include nil nil [45 86])
+            ("daemons/collector/collector_st.h" include nil nil [87 130])
+            ("libraryes/sensordata/parcers/cdefinitionparcer.h" include nil nil [131 190])
+            ("mon" type
+               (:members 
+                  ( ("daemons" type
+                       (:members 
+                          ( ("collector" type
+                               (:members 
+                                  ( ("CSensor" function
+                                       (:constructor-flag t
+                                        :parent "CSensor"
+                                        :arguments 
+                                          ( ("parentNode" variable
+                                               (:pointer 1
+                                                :type ("CNode" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [268 286])
+                                            ("nodeName" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [287 315])
+                                            ("nodeDefinition" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("std::string" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [316 350]))                                          
+                                        :type ("CSensor" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [251 420])
+                                    ("CSensor" function
+                                       (:destructor-flag t
+                                        :parent "CSensor"
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [422 444]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [228 447]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [208 449]))                  
+                :type "namespace")
+                nil [192 451]))          
+      :file "csensor.cpp"
+      :pointmax 452
+      :fsize 451
+      :lastmodtime '(21141 37678 796018 80000)
+      :unmatched-syntax nil)
+    (semanticdb-table "cnodes.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CMONNODESMANAGER_H" variable (:constant-flag t) nil [47 65])
+            ("daemons/collector/node/cnode.h" include nil nil [66 107])
+            ("libraryes/model/cnodes.h" include nil nil [108 143])
+            ("libraryes/base/singleton/csingletonmember.h" include nil nil [144 198])
+            ("mon" type
+               (:members 
+                  ( ("daemons" type
+                       (:members 
+                          ( ("collector" type
+                               (:members 
+                                  ( ("CNodes" type
+                                       (:superclasses 
+                                          ( ("mon::lib::model::CNodes" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil)
+                                            ("mon::lib::base::CSingletonMember" type
+                                               (:protection "public"
+                                                :type "class")
+                                                nil nil))                                          
+                                        :members 
+                                          ( ("public" label nil (reparse-symbol classsubparts) [384 391])
+                                            ("CNodes" function
+                                               (:prototype-flag t
+                                                :constructor-flag t
+                                                :type ("CNodes" type (:type "class") nil nil))
+                                                (reparse-symbol classsubparts) [394 403])
+                                            ("CNodes" function
+                                               (:prototype-flag t
+                                                :destructor-flag t
+                                                :typemodifiers ("virtual")
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [406 424])
+                                            ("load" function
+                                               (:prototype-flag t
+                                                :type "void")
+                                                (reparse-symbol classsubparts) [506 518]))                                          
+                                        :type "class")
+                                        (reparse-symbol namespacesubparts) [287 521]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [236 524]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [216 526]))                  
+                :type "namespace")
+                nil [200 528]))          
+      :file "cnodes.h"
+      :pointmax 558
+      :fsize 642
+      :lastmodtime '(21134 58167 561309 767000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CMONNODESMANAGER_H")
+          )
+)
+    (semanticdb-table "cnodes.cpp"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("daemons/collector/collector_st.h" include nil nil [12 55])
+            ("daemons/collector/node/cnodes.h" include nil nil [56 98])
+            ("mon" type
+               (:members 
+                  ( ("daemons" type
+                       (:members 
+                          ( ("collector" type
+                               (:members 
+                                  ( ("CNodes" function
+                                       (:constructor-flag t
+                                        :parent "CNodes"
+                                        :type ("CNodes" type (:type "class") nil nil))
+                                        (reparse-symbol namespacesubparts) [159 278])
+                                    ("CNodes" function
+                                       (:destructor-flag t
+                                        :parent "CNodes"
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [280 300])
+                                    ("load" function
+                                       (:parent "CNodes"
+                                        :type "void")
+                                        (reparse-symbol namespacesubparts) [302 531]))                                  
+                                :type "namespace")
+                                (reparse-symbol namespacesubparts) [136 535]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [116 537]))                  
+                :type "namespace")
+                nil [100 539]))          
+      :file "cnodes.cpp"
+      :pointmax 540
+      :fsize 539
+      :lastmodtime '(21139 13525 96113 209000)
+      :unmatched-syntax nil))
+  :file "!home!sheridan!develop!github!mon!trunk!application!daemons!collector!node!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")
