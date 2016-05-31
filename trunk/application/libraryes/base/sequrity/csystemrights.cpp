@@ -17,7 +17,7 @@
   _name##getpwResult = _function(_id_or_name, &_name##pwgr, _name##bufer, _name##bufferSize, &_name##tmppwgr); \
   if (_name##tmppwgr == NULL) \
   { \
-  if (_name##getpwResult == 0) { MON_LOG_ERR("Requested " #_pwgr_type " (" << _id_or_name << ") not found"); } \
+    if (_name##getpwResult == 0) { MON_LOG_ERR("Requested " #_pwgr_type " (" << _id_or_name << ") not found"); } \
     else { errno = _name##getpwResult; MON_PRINT_ERRNO("Can not get " #_pwgr_type " (" << _id_or_name << ")"); } \
     MON_ABORT; \
   } \
@@ -47,28 +47,32 @@ std::string CSystemRights::currentGroupName() { return getGName(currentGID()); }
 
 bool CSystemRights::setUserGroup(const std::string &user, const std::string &group)
 {
-  return setGroup(group) && setUser(user);
+  return setUser(user) && setGroup(group);
 }
 
-std::string CSystemRights::getUName(const uid_t &id)
+std::string CSystemRights::getUName(const uid_t &uid)
 {
   std::string userName;
-  MON_GET_GID_UID_TEMPLATE(getUName,passwd,getpwuid_r,_SC_GETPW_R_SIZE_MAX,id,userName,pw_name);
+  MON_GET_GID_UID_TEMPLATE(getUName,passwd,getpwuid_r,_SC_GETPW_R_SIZE_MAX,uid,userName,pw_name);
+  MON_LOG_DBG("Name for UID " << uid << " is " << userName);
   return userName;
 }
 
-std::string CSystemRights::getGName(const gid_t &id)
+std::string CSystemRights::getGName(const gid_t &gid)
 {
   std::string groupName;
-  MON_GET_GID_UID_TEMPLATE(getGName,group,getgrgid_r,_SC_GETGR_R_SIZE_MAX,id,groupName,gr_name);
-
+  MON_GET_GID_UID_TEMPLATE(getGName,group,getgrgid_r,_SC_GETGR_R_SIZE_MAX,gid,groupName,gr_name);
+  MON_LOG_DBG("Name for GID " << gid << " is " << groupName);
   return groupName;
 }
 
 uid_t CSystemRights::getUID(const std::string &name)
 {
   uid_t uid;
+  MON_LOG_DBG_CHECKPOINT;
   MON_GET_GID_UID_TEMPLATE(getUID,passwd,getpwnam_r,_SC_GETPW_R_SIZE_MAX,name.c_str(),uid,pw_uid);
+  MON_LOG_DBG_CHECKPOINT;
+  MON_LOG_DBG("UID for " << name << " is " << uid);
   return uid;
 }
 
@@ -76,69 +80,56 @@ gid_t CSystemRights::getGID(const std::string &name)
 {
   gid_t gid;
   MON_GET_GID_UID_TEMPLATE(getGID,group,getgrnam_r,_SC_GETGR_R_SIZE_MAX,name.c_str(),gid,gr_gid);
+  MON_LOG_DBG("GID for " << name << " is " << gid);
   return gid;
 }
 
 bool CSystemRights::setUser (const std::string &name)
 {
-  if(name.compare(currentUserName()) != 0)
-  {
-    MON_LOG_DBG_CHECKPOINT;
-    if(seteuid(getUID(name)) != 0)
-    {
-      MON_LOG_DBG_CHECKPOINT;
-      MON_PRINT_ERRNO("Can not set effective user (" << name << ")");
-      MON_ABORT;
-      return false;
-    }
-    MON_LOG_NFO("Effective user changed to " << name);
-  }
-  return true;
+  MON_LOG_DBG("Try change user name to " << name);
+  return(name.compare(currentUserName()) == 0) || setUID(getUID(name));
 }
 
 bool CSystemRights::setGroup(const std::string &name)
 {
-  if(name.compare(currentGroupName()) != 0)
+  MON_LOG_DBG("Try change group name to " << name);
+  return (name.compare(currentGroupName()) == 0) || setGID(getGID(name));
+}
+
+bool CSystemRights::setUID(const uid_t &uid)
+{
+  MON_LOG_DBG("Try change user id to " << uid);
+  if(seteuid(uid) != 0)
   {
-    if(setegid(getGID(name)) != 0)
-    {
-      MON_PRINT_ERRNO("Can not set effective group (" << name << ")");
-      MON_ABORT;
-      return false;
-    }
-    MON_LOG_NFO("Effective group changed to " << name);
+    MON_PRINT_ERRNO("Can not set effective user to " << getUName(uid) << " [" << uid << "]");
+    MON_ABORT;
+    return false;
   }
+  MON_LOG_NFO("Effective user changed to " << getUName(uid) << " [" << uid << "]");
+  return true;
+}
+
+bool CSystemRights::setGID(const gid_t &gid)
+{
+  MON_LOG_DBG("Try change group id to " << gid);
+  if(setegid(gid) != 0)
+  {
+    MON_PRINT_ERRNO("Can not set effective group to " << getGName(gid) << " [" << gid << "]");
+    MON_ABORT;
+    return false;
+  }
+  MON_LOG_NFO("Effective group changed to " << getGName(gid) << " [" << gid << "]");
   return true;
 }
 
 bool CSystemRights::resetUser()
 {
-  if(m_startupUID != currentUID())
-  {
-    if(seteuid(m_startupUID) != 0)
-    {
-      MON_PRINT_ERRNO("Can not set effective user (" << getUName(m_startupUID) << ")");
-      MON_ABORT;
-      return false;
-    }
-    MON_LOG_NFO("Effective user changed to " << getUName(m_startupUID));
-  }
-  return true;
+  return (m_startupUID == currentUID()) || setUID(m_startupUID);
 }
 
 bool CSystemRights::resetGroup()
 {
-  if(m_startupGID != currentGID())
-  {
-    if(setegid(m_startupGID) != 0)
-    {
-      MON_PRINT_ERRNO("Can not set effective group (" << getGName(m_startupGID) << ")");
-      MON_ABORT;
-      return false;
-    }
-    MON_LOG_NFO("Effective group changed to " << getUName(m_startupGID));
-  }
-  return true;
+  return (m_startupGID == currentGID()) || setGID(m_startupGID);
 }
 
 bool CSystemRights::resetUserGroup()

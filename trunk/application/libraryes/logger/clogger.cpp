@@ -2,6 +2,9 @@
 #include <string.h>
 #include <syslog.h>
 #include <time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+//#include <fcntl.h>
 #include "libraryes/logger/clogger.h"
 #include "libraryes/logger/clogmessage.h"
 
@@ -58,9 +61,14 @@ void CLogger::log(const std::string &message, EPriority priority)
 
 void CLogger::logToFile   (const std::string &message, const EPriority &priority)
 {
+//  int fd = open(m_filename.c_str(), O_CREAT | O_APPEND, DEFFILEMODE);
+//  umask(DEFFILEMODE);
   FILE *stream = fopen(m_filename.c_str(), "a");
   logToStream(message, priority, stream);
+  fflush(stream);
   fclose(stream);
+  chmod(m_filename.c_str(), DEFFILEMODE);
+//  close(fd);
 }
 
 void CLogger::logToConsole(const std::string &message, const EPriority &priority)

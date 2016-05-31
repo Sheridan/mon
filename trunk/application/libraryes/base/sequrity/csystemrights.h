@@ -30,16 +30,13 @@ class CSystemRights
   private:
     uid_t m_startupUID;
     gid_t m_startupGID;
-    static std::string getUName(const uid_t &id);
-    static std::string getGName(const gid_t &id);
+    static std::string getUName(const uid_t &uid);
+    static std::string getGName(const gid_t &gid);
     static uid_t getUID(const std::string &name);
     static gid_t getGID(const std::string &name);
+    static bool setUID(const uid_t &uid);
+    static bool setGID(const gid_t &gid);
 };
-
-
-
-
-
 }
 }
 }
