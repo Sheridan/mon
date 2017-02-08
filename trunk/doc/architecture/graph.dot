@@ -7,16 +7,16 @@ digraph G
     node [shape=Msquare, color=coral3];
     mon_client [label="Client"];
     node [shape=component, color=goldenrod3];
-    mon_plugin [label="Plugin"];
+    mon_sensor [label="Sensor"];
     node [shape=doublecircle, color=lightblue4];
     database [label="Database"];
 
     // collector to nodes
     edge [color=green, style=filled];
     mon_collector -> mon_node;
-    mon_node -> mon_plugin;
+    mon_node -> mon_sensor;
     edge [style=dashed];
-    mon_plugin -> mon_node;
+    mon_sensor -> mon_node;
     mon_node -> mon_collector;
     mon_collector -> database;
 
